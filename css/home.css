@@ -1,0 +1,392 @@
+
+
+@media screen and (max-width: 920px) {
+  .home {
+    padding: 5rem 0;
+  }
+}
+
+/**************
+* Hero, Top of the Fold
+**************/
+
+.hero {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: calc(35% - 100px);
+  overflow: hidden;
+}
+
+.hero-wrapper {
+  width: 45%;
+}
+
+.hero-wrapper h2 {
+  margin-top: 0;
+}
+
+.hero-wrapper a {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 1120px) {
+  .hero-wrapper {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .hero {
+    background-position: calc(35% - 100px);
+  }
+
+  .hero-wrapper {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 0 10px;
+    background-color: rgba(255, 255, 255, .5);
+  }
+}
+  
+/**************
+* Services
+**************/
+
+.services-wrapper {
+  margin-top: 5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5em 0;
+}
+
+.card {
+  width: 330px;
+  min-height: 250px;
+  padding: 0 20px;
+  border-right: 1px dashed var(--dd-black);
+}
+@media screen and (max-width: 710px) {
+  .card {
+    border-right: none;
+  }
+}
+
+.card:last-child {
+  border-right: none;
+}
+  
+.service-icon {
+  background-color: var(--dd-black);
+  width: 100px;
+  height: 100px;
+  padding: 20px;
+  margin: auto;
+  border-radius: 50px;
+}
+
+.service-icon img {
+  width: 100%;
+}
+
+.card a {
+  color: var(--dd-black);
+  text-decoration: none;
+}
+
+.card a i {
+  color: var(--dd-yellow);
+  font-size: 18px;
+  padding: 0 5px;
+  transition: all ease-in-out .3s;
+}
+
+.card a:hover i {
+  transform: translateX(10px);
+}
+
+.card h4 {
+  margin: 20px;
+  height: 70px;
+}
+
+.card .text {
+  min-height: 100px;
+}
+  
+/**************
+* About
+**************/
+
+.about-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+  
+.about-img {
+  position: relative;
+  width: 50%;
+}
+
+.about-img img {
+  width: 500px;
+  height: 550px;
+  border: 8px solid var(--dd-black);
+  z-index: 1;
+  position: relative;
+  background-color: var(--dd-white);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.img-orange-border {
+  width: 500px;
+  height: 550px;
+  border: 8px solid var(--dd-yellow);
+  position: absolute;
+  top: 0;
+  transform: translate(2em, -2em);
+  z-index: 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.about-text {
+  width: 50%;
+  min-width: 560px;
+}
+
+@media screen and (max-width: 1300px) {
+  .about-img, .about-text {
+    width: 100%;
+  }
+
+  .about-text {
+    order: 1;
+    margin-bottom: 3em;
+    min-width: 0;
+  }
+
+  .about-img {
+    order: 2;
+  }
+
+  .about-img img, .img-orange-border {
+    width: 400px;
+    height: 450px;
+  }
+}
+  
+/**************
+* Skills
+**************/
+
+.outer-skills {
+  padding: 5rem 0;
+}
+  
+.skills {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: var(--dd-black);
+  position: relative;
+}
+
+section.skills::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 0;
+}
+
+.skills-wrapper, .skills h3 {
+  z-index: 1;
+  color: var(--dd-white);
+}
+
+.skills-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5em 0;
+  justify-content: space-evenly;
+  align-items: top;
+  text-align: left;
+}
+
+.skill {
+  height: auto !important;
+  border-right: none !important;
+  width: 50% !important;
+}
+
+.skill-lvl {
+  margin: 1rem auto;
+}
+
+.lvl {
+  position: relative;
+  background-color: var(--dd-black);
+  border-radius: 20px;
+}
+.lvl div {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  background-color: var(--dd-yellow);
+}
+
+#lvl-color {
+  animation: color-fill 2s forwards;
+}
+@keyframes color-fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30%;
+  }
+}
+
+#lvl-micro {
+  animation: micro-fill 2s forwards;
+}
+@keyframes micro-fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 50%;
+  }
+}
+
+#lvl-user {
+  animation: user-fill 2s forwards;
+}
+@keyframes user-fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 70%;
+  }
+}
+
+#lvl-ux {
+  animation: ux-fill 2s forwards;
+}
+@keyframes ux-fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 80%;
+  }
+}
+
+#lvl-detail {
+  animation: detail-fill 2s forwards;
+}
+@keyframes detail-fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+  
+/**************
+* Portfolio
+**************/
+.portfolio {
+  width: 100%;
+}
+
+.post-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3rem auto;
+}
+
+.portfolio-post {
+  position: relative;
+  width: 25%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.post-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+}
+
+.post-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease-in-out .2s;
+}
+
+
+.post-content.active {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.inner-post-content a {
+  color: var(--dd-white) !important;
+  text-decoration: none !important;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all ease-in-out .3s;
+  transition-delay: .2s;
+}
+
+.inner-post-content ul {
+  list-style: none !important;
+  padding: 0 !important;
+  text-align: center !important;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all ease-in-out .3s;
+  transition-delay: .3s;
+}
+
+.inner-post-content hr {
+  color: var(--dd-yellow) !important;
+  width: 30px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all ease-in-out .3s;
+  transition-delay: .4s;
+}
+
+.portfolio-post:hover .inner-post-content hr, .portfolio-post:hover .inner-post-content ul, .portfolio-post:hover .inner-post-content a {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.portfolio-post:hover .post-content {
+  background-color: rgba(0,0,0,0.8);
+}

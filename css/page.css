@@ -1,0 +1,25 @@
+.page-container {
+    margin: 10rem 0 5rem 0;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 1440px) {
+    .page-container {
+        margin: 15rem 0 5rem 0;
+    }
+}
+
+.page-title {
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+@media screen and (max-width: 920px) {
+    .page-container {
+        margin: 7rem 0 5rem 0;
+    }
+
+    .page-title {
+        font-size: 30px;
+    }  
+}

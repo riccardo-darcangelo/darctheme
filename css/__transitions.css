@@ -1,0 +1,29 @@
+.transition-1, .transition-2 {
+    transition: all ease-out .5s;
+}
+
+.transition-1.active-trans {
+    opacity: 0;
+}
+
+.transition-2.active-trans {
+    transform: translateX(0);
+}
+
+.transition-2.active-trans {
+    transform: translateX(100%);
+}
+
+@media screen and (max-width: 920px) {
+    .transition-1.active-trans {
+        opacity: 0;
+    }
+    
+    .transition-2.active-trans {
+        transform: translateX(0);
+    }
+    
+    .transition-2.active-trans {
+        transform: translateX(100%);
+    }
+}

@@ -1,0 +1,258 @@
+.page-section {
+    width: 1300px;
+}
+
+/******************
+* App Dev Template 
+*******************/
+.app-dev .hero {
+    background-color: var(--dd-lightgray);
+    justify-content: center;
+}
+
+.app-dev .outer-hero {
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-dev .hero-wrapper {
+    width: 40%;
+    margin: auto;
+}
+
+.app-dev .hero img {
+    width: 100%;
+}
+
+.app-dev .hero h2 {
+    font-size: 1.5em;
+}
+
+.about-app img {
+    max-width: 550px;
+}
+
+.about-app .card {
+    border-right: none;
+    text-align: left;
+}
+
+.about-app .card h4 {
+    margin: 0;
+}
+
+.card-boxed {
+    width: 25% !important;
+    min-width: 200px;
+}
+
+.about-app .card h4 bdi {
+    color: var(--dd-yellow);
+    border-right: 1px dotted var(--dd-black);
+    padding-right: 5px;
+}
+
+/* Application For */
+.application-for {
+    background-color: var(--dd-black);
+    color: var(--dd-white);
+    overflow: hidden;
+    position: relative;
+}
+
+.application-for-wrapper {
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.for-android, .for-html {
+    padding: 5em 5em 5em 0;
+    border-right: 1px dashed var(--dd-yellow);
+    width: 50%;
+}
+
+.for-android p, .for-android h4, .for-ios p, .for-ios h4 {
+    position: relative;
+    z-index: 1;
+}
+
+.for-android::before {
+    font-family: FontAwesome;
+    content: "\f17b";
+    font-weight: 900;
+    position: absolute;
+    top: 20%;
+    left: 1rem;
+    font-size: 400px;
+    color: #303030;
+    z-index: 0;
+}
+
+.for-ios, .for-vue {
+    padding-left: 5em;
+    width: 50%;
+}
+
+.for-ios::before {
+    font-family: FontAwesome;
+    content: "\f135";
+    font-weight: 900;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    font-size: 400px;
+    color: #303030;
+    z-index: 0;
+}
+
+.for-html::before {
+    font-family: FontAwesome;
+    content: "\f13b";
+    font-weight: 900;
+    position: absolute;
+    top: 20%;
+    left: 1rem;
+    font-size: 400px;
+    color: #5b5b5b;
+    z-index: 0;
+}
+
+.for-vue::before {
+    font-family: FontAwesome;
+    content: "\f3b9";
+    font-weight: 900;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    font-size: 400px;
+    color: #5b5b5b;
+    z-index: 0;
+}
+
+.appl-feature {
+    color: var(--dd-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.appl-feature img {
+    width: 300px;
+}
+
+.appl-feature .first {
+    text-align: right;
+}
+
+/******************
+* Web Dev Template 
+*******************/
+
+.web-dev .hero {
+    text-align: center;
+    position: relative;
+}
+
+.web-dev .hero-wrapper {
+    width: 100%;
+    z-index: 5;
+}
+
+.web-dev .hero img {
+    position: absolute;
+}
+
+.web-dev #pc {
+    top: 30%;
+    left: -20%;
+    transform: rotateZ(-20deg);
+}
+.web-dev #dots {
+    top: 0;
+    left: 35%;
+    right: 30%;
+    bottom: 10%;
+    z-index: 1;
+    height: 100%;
+    width: 30%;
+}
+
+.web-dev #tablet {
+    top: 30%;
+    right: 10%;
+}
+
+.web-dev #pen {
+    top: 50%;
+    right: 30%;
+}
+
+.web-dev #phone {
+    top: 60%;
+    right: 10%;
+    transform: rotateZ(45deg);
+}
+
+@media (max-width: 1450px) {
+    #phone, #pen, #tablet, #dots {
+        display: none;
+    }
+}
+
+.responsive img {
+    width: 100%;
+}
+
+#wp-hero {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.wp-hero-img img {
+    width: 100%;
+}
+
+.boxed-wrapper {
+    padding: 0 5rem;
+}
+
+/*********************
+* eCommerce Template
+*********************/
+
+.ec-img-wrapper {
+    position: relative;
+}
+
+#ec-h1, #ec-h2, #ec-a {
+    transition: all ease-in-out;
+}
+
+#ec-h1 {
+    animation: fade-up-text 3s;
+}
+
+#ec-h2 {
+    animation: fade-up-text 4s;
+}
+
+
+#ec-a {
+    animation: fade-up-text 4.5s;
+}
+
+#ec-phone {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 20%;
+    width: 400px;
+    transform: translateY(-20%);
+    animation: fade-up 1s;
+}

@@ -1,0 +1,29 @@
+.nf-page {
+    margin: 5rem;
+    padding-top: 5rem;
+    min-height: 500px;
+}
+
+.nf-wrapper {
+    margin: auto;
+    text-align: center;
+}
+
+.nf-wrapper input {
+    padding: 10px;
+    border: 1px solid var(--dg-purple);
+    border-radius: 20px;
+}
+  
+.nf-wrapper .search-submit {
+    background-color: var(--dg-purple);
+    color: var(--dg-white);
+    transition: all ease-in-out .3s;
+}
+  
+.nf-wrapper .search-submit:hover {
+    background-color: var(--dg-white);
+    color: var(--dg-purple);
+    cursor: pointer;
+    transition: all ease-in-out .3s;
+}

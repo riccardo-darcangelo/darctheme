@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "name": "Contact Form 7",
+        "path": "/contact-form-7/wp-contact-form-7.php",
+        "class": "WPCF7",
+        "url": "https://downloads.wordpress.org/plugin/contact-form-7.5.7.4.zip"
+    },
+    {
+        "id": "2",
+        "name": "WooCommerce",
+        "path": "/woocommerce/woocommerce.php",
+        "class": "WooCommerce",
+        "url": "https://downloads.wordpress.org/plugin/woocommerce.7.4.1.zip"
+    },
+    {
+        "id": "3",
+        "name": "WC Variations Radio Buttons",
+        "path": "/wc-variations-radio-buttons/wc-variations-radio-buttons.php",
+        "class": "WC_Radio_Buttons",
+        "url": "https://downloads.wordpress.org/plugin/wc-variations-radio-buttons.2.0.5.zip"
+    }
+]

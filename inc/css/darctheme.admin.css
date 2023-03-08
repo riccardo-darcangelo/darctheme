@@ -1,0 +1,62 @@
+@import '../../css/colors.css';
+
+.setup_wizard_wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setup_wizard_inner {
+    width: auto;
+    max-width: 1000px;
+    border-radius: 20px;
+    background-color: var(--dd-white);
+    margin: auto;
+    padding: 2rem;
+}
+
+.setup_wizard_titles {
+    text-align: center;
+}
+
+.single-plugin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.single-plugin table {
+    text-align: left;
+}
+
+.single-plugin table th, .single-plugin table td {
+    text-align: left;
+    padding: 0 2rem;
+}
+.single-plugin form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setup-plugin-inactive {
+    color: red; 
+    font-weight: 600;
+}
+
+.single-plugin input {
+    color: green;
+    padding: 5px 10px;
+    border: 1px solid green;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: auto 1rem;
+    background-color: var(--dd-white);
+}
+
+.setup-plugin-active {
+    color: green;
+    font-weight: 600;
+}
