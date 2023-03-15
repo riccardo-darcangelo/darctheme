@@ -158,14 +158,18 @@
             <hr>
         </div>
         <div>
-            <div class="post-wrapper">
+            <div class="cards-new">
             <?php while ( have_posts() ) : the_post(); // standard WordPress loop. ?>
 
-                <article class="portfolio-post" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <article class="card-new" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                    <style>
+                        .card--1 .card__img--hover, .card--1 .card__img {
+                            background-image: url(<?php echo the_post_thumbnail_url(); ?>);
+                        }
+                    </style>
+                    <div class="card__info-hover"></div>
+                    <div class="card__img" style="background-image: url(<?php echo the_post_thumbnail_url(); ?>);"></div>
                     <a href="<?php the_permalink();?>">
-                        <div class="post-img">
-                            <?php the_post_thumbnail(); ?>
-                        </div>
                         <div class="post-content">
                             <div class="inner-post-content">
                                 <h4><?php the_title(); ?></h4>
@@ -180,5 +184,39 @@
             </div>
         </div>
     </section>
+
+    <div class="cards-new">
+<div class="card-new card--1">
+  <div class="card__info-hover"></div>
+  <div class="card__img"></div>
+  <a href="#" class="card_link">
+     <div class="card__img--hover"></div>
+   </a>
+  <div class="card__info">
+    <span class="card__category"> Recipe</span>
+    <h3 class="card__title">Crisp Spanish tortilla Matzo brei</h3>
+    <span class="card__by">by <a href="#" class="card__author" title="author">Celeste Mills</a></span>
+  </div>
+</div>
+  
+  
+<div class="card-new card--2">
+  <div class="card__info-hover">
+    
+  </div>
+  <div class="card__img"></div>
+  <a href="#" class="card_link">
+     <div class="card__img--hover"></div>
+   </a>
+  <div class="card__info">
+    <span class="card__category"> Travel</span>
+    <h3 class="card__title">Discover the sea</h3>
+    <span class="card__by">by <a href="#" class="card__author" title="author">John Doe</a></span>
+  </div>
+</div>  
+  
+  
+  
+  </div>
 </div>
 <?php get_footer(); ?>
