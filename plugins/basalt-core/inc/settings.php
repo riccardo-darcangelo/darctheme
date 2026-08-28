@@ -40,6 +40,15 @@ function basalt_core_defaults(): array {
 		// Off by default: a floating control is the site owner's decision to make.
 		'preferences_enabled'  => false,
 		'preferences_position' => 'right',
+		// Login screen branding, also opt in.
+		'login_enabled'          => false,
+		'login_logo'             => 0,
+		'login_logo_width'       => 320,
+		'login_background'       => '',
+		'login_form_background'  => '',
+		'login_accent'           => '',
+		'login_background_image' => 0,
+		'login_generic_errors'   => false,
 	);
 }
 
@@ -154,6 +163,24 @@ function basalt_core_sanitize( $input ): array {
 
 	$out['preferences_enabled']  = ! empty( $input['preferences_enabled'] );
 	$out['preferences_position'] = 'left' === ( $input['preferences_position'] ?? '' ) ? 'left' : 'right';
+
+	$out['login_enabled']        = ! empty( $input['login_enabled'] );
+	$out['login_generic_errors'] = ! empty( $input['login_generic_errors'] );
+
+	$out['login_logo']             = absint( $input['login_logo'] ?? 0 );
+	$out['login_background_image'] = absint( $input['login_background_image'] ?? 0 );
+
+	// Clamped rather than rejected: an out of range width is a typo, not an attack.
+	$out['login_logo_width'] = min( 480, max( 80, absint( $input['login_logo_width'] ?? 320 ) ) );
+
+	/*
+	 * Anything that is not a plain hex colour becomes an empty string, and the
+	 * login module falls back to its default. That is what keeps arbitrary text
+	 * out of the stylesheet this option feeds.
+	 */
+	foreach ( array( 'login_background', 'login_form_background', 'login_accent' ) as $key ) {
+		$out[ $key ] = basalt_core_hex_color( $input[ $key ] ?? '' );
+	}
 
 	return $out;
 }
@@ -321,6 +348,32 @@ function basalt_core_render_settings(): void {
 				);
 				?>
 			</table>
+
+			<h2><?php esc_html_e( 'Login screen', 'basalt-core' ); ?></h2>
+			<p class="description" style="max-width:60em">
+				<?php esc_html_e( 'Replaces the WordPress logo and the default colours on the login page with the site\'s own.', 'basalt-core' ); ?>
+			</p>
+			<?php basalt_core_login_contrast_notice(); ?>
+			<table class="form-table" role="presentation">
+				<?php
+				basalt_core_field( 'login_enabled', __( 'Brand the login screen', 'basalt-core' ), 'checkbox' );
+				basalt_core_field( 'login_logo', __( 'Logo, attachment ID', 'basalt-core' ), 'number', array( 'description' => __( 'Leave at 0 to keep the WordPress logo. A wide logo on a transparent background works best.', 'basalt-core' ) ) );
+				basalt_core_field( 'login_logo_width', __( 'Logo width in pixels', 'basalt-core' ), 'number', array( 'description' => __( 'Between 80 and 480.', 'basalt-core' ) ) );
+				basalt_core_field( 'login_background', __( 'Page background', 'basalt-core' ), 'text', array( 'description' => __( 'Hex colour, for example #f4f5f7. Anything else is ignored.', 'basalt-core' ) ) );
+				basalt_core_field( 'login_form_background', __( 'Form background', 'basalt-core' ), 'text', array( 'description' => __( 'Hex colour. The label and field text switches between dark and light automatically, whichever reads better on it.', 'basalt-core' ) ) );
+				basalt_core_field( 'login_accent', __( 'Button and focus colour', 'basalt-core' ), 'text', array( 'description' => __( 'Hex colour. Also used for the focus ring.', 'basalt-core' ) ) );
+				basalt_core_field( 'login_background_image', __( 'Background image, attachment ID', 'basalt-core' ), 'number', array( 'description' => __( 'Optional. Covers the page behind the form.', 'basalt-core' ) ) );
+				basalt_core_field(
+					'login_generic_errors',
+					__( 'Do not reveal whether a username exists', 'basalt-core' ),
+					'checkbox',
+					array( 'description' => __( 'Recommended. The default messages say whether the account exists, which lets an attacker confirm real usernames before trying any passwords. The cost: someone who mistypes their username no longer learns that it was the username.', 'basalt-core' ) )
+				);
+				?>
+			</table>
+			<p class="description" style="max-width:60em">
+				<?php esc_html_e( 'There is deliberately no custom CSS box and no option to move the login URL. Moving wp-login.php stops some automated noise and no actual attacker, and it breaks integrations that post to the known address; a site that needs it needs a plugin dedicated to that job.', 'basalt-core' ); ?>
+			</p>
 
 			<?php submit_button(); ?>
 		</form>

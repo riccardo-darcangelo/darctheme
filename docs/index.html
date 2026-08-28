@@ -115,6 +115,7 @@
 		<li><a href="#performance">Performance</a></li>
 		<li><a href="#accessibility">Accessibility</a></li>
 		<li><a href="#preferences">Visitor display settings</a></li>
+		<li><a href="#login">Login screen</a></li>
 		<li><a href="#child">Child themes</a></li>
 		<li><a href="#hooks">Hooks reference</a></li>
 		<li><a href="#translate">Translation</a></li>
@@ -618,6 +619,78 @@
 		visitor would watch the text jump on every page load. A very small
 		inline script in the head is the honest trade, and it is the only
 		JavaScript on the page that is not deferred.
+	</p>
+</section>
+
+<section id="login">
+	<h2>Login screen</h2>
+	<p>
+		Basalt Core can replace the WordPress logo and the default colours on
+		<code>wp-login.php</code> with the site's own. Switch it on under
+		<strong>Settings &rarr; Search &amp; Schema &rarr; Login screen</strong>.
+	</p>
+	<table>
+		<tr><th>Setting</th><th>Notes</th></tr>
+		<tr><td>Logo and logo width</td><td>Attachment ID and a width between 80 and 480 pixels. The heading keeps the site name as text for assistive technology, so the logo is applied as a background image rather than by replacing the markup.</td></tr>
+		<tr><td>Page background</td><td>Hex colour. Anything that is not a hex colour is ignored.</td></tr>
+		<tr><td>Form background</td><td>Hex colour. Label and field text switches between dark and light automatically, whichever reads better against it.</td></tr>
+		<tr><td>Button and focus colour</td><td>Hex colour, also used for the focus ring.</td></tr>
+		<tr><td>Background image</td><td>Optional, covers the page behind the form.</td></tr>
+		<tr><td>Do not reveal whether a username exists</td><td>Recommended. See below.</td></tr>
+	</table>
+	<p>
+		The settings screen checks the colours you choose against WCAG AA and
+		warns when the form text, the button text, the focus ring or the links
+		below the form fall below the threshold. A colour picker that lets you
+		build an unreadable login screen without saying so is a poor tool, and
+		the login form is the one page where a user who cannot read the
+		interface has no way around it.
+	</p>
+
+	<h3>Username enumeration</h3>
+	<p>
+		WordPress tells an anonymous visitor whether an account exists. Enter a
+		username that is not registered and the login form says so by name;
+		enter one that is and it complains about the password instead. That
+		turns the form into a lookup service: an attacker confirms which
+		accounts are real before spending any effort on passwords.
+	</p>
+	<p>
+		Switching this on makes both answers identical, on the login form and on
+		the lost password form. The cost is real and worth knowing: someone who
+		mistypes their username no longer learns that it was the username.
+	</p>
+	<div class="note">
+		<p><strong>One case still differs</strong></p>
+		<p>
+			If the account exists but the site cannot send mail, WordPress
+			reports that failure, and the two cases become distinguishable
+			again. Hiding it would mean a site with a broken mailer telling
+			every visitor their reset link is on the way while nothing is sent.
+			A broken mailer is a misconfiguration to fix, not to mask.
+		</p>
+	</div>
+
+	<h3>What is deliberately not here</h3>
+	<p>
+		There is no custom CSS box. An administrator can already do more damage
+		elsewhere, so this is not about privilege: a free-form CSS field on the
+		login screen is a large surface for a small benefit, and it turns every
+		future change to this page into a guess about what somebody pasted in.
+	</p>
+	<p>
+		There is no option to move the login URL either. Renaming
+		<code>wp-login.php</code> quietens automated traffic in the logs and
+		stops no attacker who looks at the REST API or an author archive, while
+		reliably breaking integrations that post to the known address. A site
+		that genuinely needs it needs a plugin dedicated to that job.
+	</p>
+	<p>
+		The login page is also given a <code>main</code> landmark, which core
+		does not provide. That closes the only two accessibility violations the
+		page reports, both of them core's rather than ours. It follows the
+		branding switch, because it changes core markup and a site with custom
+		login CSS written against a direct child selector would notice.
 	</p>
 </section>
 
