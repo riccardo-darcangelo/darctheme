@@ -33,6 +33,16 @@ define( 'BASALT_URI', trailingslashit( get_template_directory_uri() ) );
  * @return void
  */
 function basalt_load_module( string $module ): void {
+	/*
+	 * The module list is filterable, so the value reaching this function is not
+	 * necessarily one of the strings below. Constraining it to the characters a
+	 * module name can contain means a filter cannot turn this into an arbitrary
+	 * include, whether by mistake or otherwise.
+	 */
+	if ( ! preg_match( '#^[a-z0-9-]+(/[a-z0-9-]+)*$#', $module ) ) {
+		return;
+	}
+
 	$path = BASALT_DIR . 'inc/' . $module . '.php';
 
 	if ( is_readable( $path ) ) {

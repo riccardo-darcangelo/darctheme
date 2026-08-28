@@ -151,7 +151,7 @@ function basalt_core_preferences_boot_script(): void {
 	 * already asked for reduced motion or more contrast should not have to ask
 	 * again here, and the panel only overrides it once they touch that control.
 	 */
-	function system( query ) {
+	function systemPrefers( query ) {
 		try {
 			return window.matchMedia( query ).matches;
 		} catch ( e ) {
@@ -159,11 +159,11 @@ function basalt_core_preferences_boot_script(): void {
 		}
 	}
 
-	if ( ! ( 'motion' in stored ) && system( '(prefers-reduced-motion: reduce)' ) ) {
+	if ( ! ( 'motion' in stored ) && systemPrefers( "(prefers-reduced-motion: reduce)" ) ) {
 		stored.motion = '1';
 	}
 
-	if ( ! ( 'contrast' in stored ) && system( '(prefers-contrast: more)' ) ) {
+	if ( ! ( 'contrast' in stored ) && systemPrefers( "(prefers-contrast: more)" ) ) {
 		stored.contrast = '1';
 	}
 

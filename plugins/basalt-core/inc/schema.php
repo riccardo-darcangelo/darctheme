@@ -30,12 +30,34 @@ function basalt_core_schema_graph(): void {
 		return;
 	}
 
+	/*
+	 * The escaping flags here are a security control, not a formatting choice.
+	 *
+	 * This JSON is embedded in an HTML <script> element, and the HTML parser
+	 * ends that element at the first literal "</script>" regardless of JSON
+	 * quoting. A post title or term name containing one therefore closes the
+	 * block early: what follows is parsed as HTML and runs, and the structured
+	 * data is left invalid, so a search engine discards the entire graph.
+	 *
+	 * JSON_HEX_TAG encodes < and > as < and >. That is valid JSON,
+	 * every consumer reads it identically, and it makes the breakout impossible
+	 * by construction rather than by remembering to sanitise each field.
+	 * HEX_AMP, HEX_APOS and HEX_QUOT close the same class of hole for other
+	 * embedding contexts. Slashes stay escaped too, which is why
+	 * JSON_UNESCAPED_SLASHES is deliberately absent.
+	 */
+	$flags = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE;
+
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		$flags |= JSON_PRETTY_PRINT;
+	}
+
 	$json = wp_json_encode(
 		array(
 			'@context' => 'https://schema.org',
 			'@graph'   => $graph,
 		),
-		JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? JSON_PRETTY_PRINT : 0 )
+		$flags
 	);
 
 	if ( false === $json ) {
@@ -44,7 +66,7 @@ function basalt_core_schema_graph(): void {
 
 	printf(
 		'<script type="application/ld+json">%s</script>' . "\n",
-		$json // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_json_encode output inside a JSON-LD script tag.
+		$json // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- encoded above with JSON_HEX_TAG, which neutralises the only characters able to escape this context.
 	);
 }
 add_action( 'wp_head', 'basalt_core_schema_graph', 20 );
@@ -308,7 +330,9 @@ function basalt_core_schema_breadcrumb_node( string $url ): ?array {
 		$elements[] = array(
 			'@type'    => 'ListItem',
 			'position' => $index + 1,
-			'name'     => $item['name'],
+			// Stripped as well as encoded. A title with markup in it is not a
+			// breadcrumb label, whatever the encoding does about safety.
+			'name'     => wp_strip_all_tags( $item['name'] ),
 			'item'     => $item['url'],
 		);
 	}
@@ -394,7 +418,7 @@ function basalt_core_schema_article_node( string $page_id, string $entity_id ): 
 	$tags = get_the_tags( $post_id );
 
 	if ( is_array( $tags ) ) {
-		$node['keywords'] = wp_list_pluck( $tags, 'name' );
+		$node['keywords'] = array_map( 'wp_strip_all_tags', wp_list_pluck( $tags, 'name' ) );
 	}
 
 	return $node;

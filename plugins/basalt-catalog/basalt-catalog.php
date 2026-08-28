@@ -197,7 +197,19 @@ function basalt_catalog_register(): void {
 				'sanitize_callback' => 'number' === $spec['type']
 					? static fn( $value ): float => (float) $value
 					: 'sanitize_text_field',
-				'auth_callback'     => static fn(): bool => current_user_can( 'edit_posts' ),
+				/*
+				 * Scoped to the post being edited, not a blanket edit_posts.
+				 * The callback is handed the object id, and the per-post
+				 * capability is what decides whether this user may edit this
+				 * entry: a contributor may edit their own drafts and nothing
+				 * else, and the meta has to follow the same rule as the post it
+				 * belongs to. A blanket check would let any contributor write
+				 * specification values onto somebody else's published entry
+				 * through the REST API.
+				 */
+				'auth_callback'     => static function ( $allowed, $meta_key, $object_id ): bool {
+					return current_user_can( 'edit_post', (int) $object_id );
+				},
 			)
 		);
 	}
