@@ -15,13 +15,31 @@ under `legacy/` for reference and is no longer maintained.
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
 | `examples/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
+| `dev/` | Throwaway WordPress in Docker, with a seed script for demo content. |
 | `tools/` | POT generation, static preview, packaging. Node only, no dependencies. |
 | `legacy/` | The pre-2.0 theme. Not maintained. |
 
 ## Requirements
 
-WordPress 6.6, PHP 8.1, Node 20 for the tooling. The theme itself needs no
-Node, no Composer and no plugins.
+WordPress 6.6, PHP 8.1, Node 20 for the tooling, Docker for the sandbox. The
+theme itself needs no Node, no Composer and no plugins.
+
+## Running it
+
+```bash
+npm run dev:up
+npm run dev:seed
+```
+
+<http://localhost:8088>, `admin` / `basalt-demo-pw`. `npm run dev:down` removes
+everything including the database.
+
+Use it. Static checks do not find the interesting failures: a fatal error from
+an internal PHP function used as a `register_post_meta` sanitize callback, a
+self-referencing breadcrumb on a static front page, missing canonicals on every
+archive, sidebar headings at 48 pixels because block based widgets ignore the
+registered `before_title` markup. All four were caught here and none of them
+were visible to linting or to the static preview. See `dev/README.md`.
 
 ## Working on the theme
 

@@ -1,0 +1,83 @@
+# Throwaway WordPress for looking at the theme and testing against a real
+# install. Not part of the product: nothing in dev/ ships, because the release
+# ZIP is built from the basalt/ directory alone.
+#
+#   docker compose -f dev/compose.yaml up -d
+#   docker compose -f dev/compose.yaml exec -T cli sh /seed/seed.sh
+#   open http://localhost:8088   (admin / basalt-demo-pw)
+#   docker compose -f dev/compose.yaml down -v   to throw it all away
+#
+# Paths are relative to this file, so it works from any clone location.
+#
+# The theme, the child theme and the companion plugin are bind mounted from the
+# repository rather than copied, so an edit is live on the next reload. WordPress
+# core and the database live in named volumes, which keeps the repository clean
+# and makes "down -v" a complete reset.
+
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    # Unpinned on purpose: the point of this environment is to catch what
+    # breaks on the current WordPress release. Pin it when reproducing a bug
+    # against a specific version.
+    image: wordpress:php8.3-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8088:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+      # Errors go to wp-content/debug.log rather than into the markup, so a
+      # notice cannot quietly corrupt the page being inspected.
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'SCRIPT_DEBUG', true );
+    volumes:
+      - wp:/var/www/html
+      - ../basalt:/var/www/html/wp-content/themes/basalt
+      - ../examples/basalt-child:/var/www/html/wp-content/themes/basalt-child
+      - ../examples/basalt-catalog:/var/www/html/wp-content/plugins/basalt-catalog
+
+  # WP-CLI, kept alive so commands can be run against the same volume:
+  #   docker compose -f dev/compose.yaml exec -T cli wp plugin list
+  cli:
+    image: wordpress:cli-php8.3
+    depends_on:
+      - wordpress
+    user: "33:33"
+    entrypoint: [ "tail", "-f", "/dev/null" ]
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp:/var/www/html
+      - ../basalt:/var/www/html/wp-content/themes/basalt
+      - ../examples/basalt-child:/var/www/html/wp-content/themes/basalt-child
+      - ../examples/basalt-catalog:/var/www/html/wp-content/plugins/basalt-catalog
+      - ./:/seed:ro
+
+volumes:
+  db:
+  wp:

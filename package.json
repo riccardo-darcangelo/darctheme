@@ -14,6 +14,11 @@
     "serve": "node tools/preview-server.mjs 4321",
     "package": "npm run pot && node tools/package.mjs",
     "package:market": "npm run pot && node tools/package.mjs --market",
-    "lint:php": "phpcs --standard=phpcs.xml"
+    "lint:php": "phpcs --standard=phpcs.xml",
+    "dev:up": "docker compose -f dev/compose.yaml up -d",
+    "dev:seed": "docker compose -f dev/compose.yaml exec -T cli sh /seed/seed.sh",
+    "dev:down": "docker compose -f dev/compose.yaml down -v",
+    "dev:cli": "docker compose -f dev/compose.yaml exec -T cli wp",
+    "dev:log": "docker compose -f dev/compose.yaml exec -T cli sh -c \"cat /var/www/html/wp-content/debug.log 2>/dev/null || echo (clean)\""
   }
 }
