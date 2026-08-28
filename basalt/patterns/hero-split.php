@@ -18,9 +18,9 @@ defined( 'ABSPATH' ) || exit;
 	<div class="wp-block-columns alignwide are-vertically-aligned-center">
 		<!-- wp:column {"verticalAlignment":"center","width":"52%"} -->
 		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:52%">
-			<!-- wp:heading {"level":6,"className":"is-style-eyebrow"} -->
-			<h6 class="wp-block-heading is-style-eyebrow"><?php echo esc_html_x( 'Since 1998', 'Pattern placeholder', 'basalt' ); ?></h6>
-			<!-- /wp:heading -->
+			<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+			<p class="is-style-eyebrow"><?php echo esc_html_x( 'Since 1998', 'Pattern placeholder', 'basalt' ); ?></p>
+			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":1,"fontSize":"display"} -->
 			<h1 class="wp-block-heading has-display-font-size"><?php echo esc_html_x( 'Equipment that arrives on time and works on site', 'Pattern placeholder', 'basalt' ); ?></h1>

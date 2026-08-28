@@ -57,12 +57,26 @@ function basalt_register_block_styles(): void {
 		),
 		'core/heading'   => array(
 			array(
+				'name'  => 'underlined',
+				'label' => __( 'Underlined', 'basalt' ),
+			),
+		),
+		/*
+		 * The eyebrow is a paragraph style, not a heading style, and that is a
+		 * correctness decision rather than a preference. An eyebrow is a label
+		 * above a heading; as an h6 before an h2 it skips heading levels, and it
+		 * puts an entry in the document outline for something that is not a
+		 * section. Screen reader users navigating by heading land on "Why us"
+		 * and find no section under it.
+		 */
+		'core/paragraph' => array(
+			array(
 				'name'  => 'eyebrow',
 				'label' => __( 'Eyebrow', 'basalt' ),
 			),
 			array(
-				'name'  => 'underlined',
-				'label' => __( 'Underlined', 'basalt' ),
+				'name'  => 'lead',
+				'label' => __( 'Lead paragraph', 'basalt' ),
 			),
 		),
 		'core/separator' => array(

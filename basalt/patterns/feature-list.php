@@ -26,9 +26,9 @@ defined( 'ABSPATH' ) || exit;
 
 		<!-- wp:column {"verticalAlignment":"center"} -->
 		<div class="wp-block-column is-vertically-aligned-center">
-			<!-- wp:heading {"level":6,"className":"is-style-eyebrow"} -->
-			<h6 class="wp-block-heading is-style-eyebrow"><?php echo esc_html_x( 'Why us', 'Pattern placeholder', 'basalt' ); ?></h6>
-			<!-- /wp:heading -->
+			<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+			<p class="is-style-eyebrow"><?php echo esc_html_x( 'Why us', 'Pattern placeholder', 'basalt' ); ?></p>
+			<!-- /wp:paragraph -->
 
 			<!-- wp:heading -->
 			<h2 class="wp-block-heading"><?php echo esc_html_x( 'The part that actually matters', 'Pattern placeholder', 'basalt' ); ?></h2>

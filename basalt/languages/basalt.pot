@@ -90,25 +90,25 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
+#. translators: %s: post title.
+#: inc/accessibility.php:158
+msgid "about %s"
+msgstr ""
+
 #: inc/accessibility.php:22
 msgid "Skip to content"
 msgstr ""
 
-#: inc/accessibility.php:56
+#: inc/accessibility.php:84 inc/accessibility.php:71
 msgid "Search this site"
 msgstr ""
 
-#: inc/accessibility.php:57
+#: inc/accessibility.php:85
 msgid "Search…"
 msgstr ""
 
-#: inc/accessibility.php:59
+#: inc/accessibility.php:87 inc/accessibility.php:120
 msgid "Search"
-msgstr ""
-
-#. translators: %s: post title.
-#: inc/accessibility.php:90
-msgid "about %s"
 msgstr ""
 
 #: inc/admin/notices.php:105
@@ -252,67 +252,75 @@ msgstr ""
 msgid "Three things get a new site to a good starting point. Everything else is optional."
 msgstr ""
 
-#: inc/assets.php:131
+#: inc/assets.php:142
 msgid "Open menu"
 msgstr ""
 
-#: inc/assets.php:132
+#: inc/assets.php:143
 msgid "Close menu"
 msgstr ""
 
-#: inc/assets.php:133
+#: inc/assets.php:144
 msgid "Open submenu"
 msgstr ""
 
-#: inc/assets.php:134
+#: inc/assets.php:145
 msgid "Close submenu"
 msgstr ""
 
-#: inc/blocks.php:116
+#: inc/blocks.php:103
+msgid "Specifications"
+msgstr ""
+
+#: inc/blocks.php:109
+msgid "FAQ item"
+msgstr ""
+
+#: inc/blocks.php:130
 msgid "Basalt: hero"
 msgstr ""
 
-#: inc/blocks.php:117
+#: inc/blocks.php:131
 msgid "Opening sections for landing and home pages."
 msgstr ""
 
-#: inc/blocks.php:120
+#: inc/blocks.php:134
 msgid "Basalt: content"
 msgstr ""
 
-#: inc/blocks.php:121
+#: inc/blocks.php:135
 msgid "Text, media and feature sections."
 msgstr ""
 
-#: inc/blocks.php:124
+#: inc/blocks.php:138
 msgid "Basalt: catalog"
 msgstr ""
 
-#: inc/blocks.php:125
+#: inc/blocks.php:139
 msgid "Grids and cards for products, services or projects."
 msgstr ""
 
-#: inc/blocks.php:128
+#: inc/blocks.php:142
 msgid "Basalt: call to action"
 msgstr ""
 
-#: inc/blocks.php:129
+#: inc/blocks.php:143
 msgid "Conversion sections and contact prompts."
 msgstr ""
 
-#: inc/blocks.php:132
+#: inc/blocks.php:146
 msgid "Basalt: FAQ"
 msgstr ""
 
-#: inc/blocks.php:133
+#: inc/blocks.php:147
 msgid "Question and answer sections that emit FAQ structured data."
 msgstr ""
 
-#: inc/blocks.php:136
+#: inc/blocks.php:150
 msgid "Basalt: full pages"
 msgstr ""
 
-#: inc/blocks.php:137
+#: inc/blocks.php:151
 msgid "Complete page layouts to start from."
 msgstr ""
 
@@ -345,31 +353,27 @@ msgid "No markers"
 msgstr ""
 
 #: inc/blocks.php:61
-msgid "Eyebrow"
-msgstr ""
-
-#: inc/blocks.php:65
 msgid "Underlined"
 msgstr ""
 
-#: inc/blocks.php:71
+#: inc/blocks.php:75
+msgid "Eyebrow"
+msgstr ""
+
+#: inc/blocks.php:79
+msgid "Lead paragraph"
+msgstr ""
+
+#: inc/blocks.php:85
 msgid "Thick"
 msgstr ""
 
-#: inc/blocks.php:77
+#: inc/blocks.php:91
 msgid "Testimonial"
 msgstr ""
 
-#: inc/blocks.php:83
+#: inc/blocks.php:97
 msgid "Tight gap"
-msgstr ""
-
-#: inc/blocks.php:89
-msgid "Specifications"
-msgstr ""
-
-#: inc/blocks.php:95
-msgid "FAQ item"
 msgstr ""
 
 #. translators: 1: required PHP version, 2: required WordPress version, 3: current PHP version, 4: current WordPress version.

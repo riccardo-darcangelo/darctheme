@@ -43,8 +43,36 @@ function basalt_search_form( $form ) {
 	$action = esc_url( home_url( '/' ) );
 	$value  = esc_attr( get_search_query() );
 
+	/*
+	 * Only the first search form on a page is a landmark.
+	 *
+	 * A page commonly renders this form twice: once in the header and once from
+	 * a search widget. Landmarks of the same type need distinct accessible
+	 * names, and there is no honest way to invent one from inside this filter,
+	 * because it cannot know where it is being rendered. Numbering them
+	 * ("Search this site 2") satisfies a checker and tells the user nothing.
+	 *
+	 * So the first form carries role="search" and a name, and later ones are
+	 * plain forms. Nothing is lost: every field keeps its visible label, the
+	 * form still submits, and a screen reader user looking for search finds the
+	 * one landmark instead of choosing between two identical ones.
+	 */
+	$is_landmark = 1 === $instance;
+
+	/**
+	 * Filter whether this search form is exposed as a landmark.
+	 *
+	 * @param bool $is_landmark Whether to emit role="search".
+	 * @param int  $instance    1 for the first form rendered on this request.
+	 */
+	$is_landmark = (bool) apply_filters( 'basalt_search_form_is_landmark', $is_landmark, $instance );
+
+	$role = $is_landmark
+		? sprintf( ' role="search" aria-label="%s"', esc_attr__( 'Search this site', 'basalt' ) )
+		: '';
+
 	return sprintf(
-		'<form role="search" method="get" class="search-form" action="%1$s">
+		'<form%7$s method="get" class="search-form" action="%1$s">
 			<label class="search-form__label" for="%2$s">%3$s</label>
 			<div class="search-form__row">
 				<input type="search" id="%2$s" class="search-form__field" placeholder="%4$s" value="%5$s" name="s" autocomplete="off" />
@@ -56,10 +84,50 @@ function basalt_search_form( $form ) {
 		esc_html__( 'Search this site', 'basalt' ),
 		esc_attr__( 'Search…', 'basalt' ),
 		$value,
-		esc_html__( 'Search', 'basalt' )
+		esc_html__( 'Search', 'basalt' ),
+		$role
 	);
 }
 add_filter( 'get_search_form', 'basalt_search_form' );
+
+/**
+ * Give the core search block an accessible name.
+ *
+ * core/search renders a form with role="search" and no label. On a page that
+ * also contains the theme's own search form that produces two identically
+ * named landmarks, which is a WCAG 1.3.1 failure in practice: navigating by
+ * landmark gives the user two entries called "search" and no way to choose.
+ *
+ * The block's own label text is reused as the name, so a site that renames its
+ * widget gets a name that matches what is on screen.
+ *
+ * @param string               $content Rendered block markup.
+ * @param array<string, mixed> $block   Parsed block.
+ * @return string
+ */
+function basalt_name_search_block( $content, $block ) {
+	if ( ( $block['blockName'] ?? '' ) !== 'core/search' ) {
+		return $content;
+	}
+
+	if ( false !== strpos( (string) $content, 'aria-label=' ) ) {
+		return $content;
+	}
+
+	$label = trim( (string) ( $block['attrs']['label'] ?? '' ) );
+
+	if ( '' === $label ) {
+		$label = __( 'Search', 'basalt' );
+	}
+
+	return (string) preg_replace(
+		'/(<form[^>]*role=("|\')search\2)/',
+		'$1 aria-label="' . esc_attr( $label ) . '"',
+		(string) $content,
+		1
+	);
+}
+add_filter( 'render_block', 'basalt_name_search_block', 10, 2 );
 
 /**
  * Remove the title attribute WordPress puts on the archive widget links.

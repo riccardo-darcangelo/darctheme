@@ -48,9 +48,9 @@ cat > /tmp/home.html <<'HTML'
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"backgroundColor":"surface","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide"} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"52%"} -->
-<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:52%"><!-- wp:heading {"level":6,"className":"is-style-eyebrow"} -->
-<h6 class="wp-block-heading is-style-eyebrow">Since 1998</h6>
-<!-- /wp:heading -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:52%"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+<p class="is-style-eyebrow">Since 1998</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":1,"fontSize":"display"} -->
 <h1 class="wp-block-heading has-display-font-size">Equipment that arrives on time and works on site</h1>
@@ -82,9 +82,9 @@ cat > /tmp/home.html <<'HTML'
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:columns {"verticalAlignment":"center","align":"wide"} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"level":6,"className":"is-style-eyebrow"} -->
-<h6 class="wp-block-heading is-style-eyebrow">Why us</h6>
-<!-- /wp:heading -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+<p class="is-style-eyebrow">Why us</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Twenty eight years on building sites</h2>
@@ -124,9 +124,9 @@ cat > /tmp/home.html <<'HTML'
 <!-- /wp:group -->
 
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"backgroundColor":"surface","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":6,"className":"is-style-eyebrow"} -->
-<h6 class="wp-block-heading is-style-eyebrow">FAQ</h6>
-<!-- /wp:heading -->
+<div class="wp-block-group alignfull has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+<p class="is-style-eyebrow">FAQ</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Questions we get asked</h2>
@@ -321,6 +321,14 @@ wp menu location assign main primary >/dev/null
 wp menu location assign legal legal >/dev/null
 
 # ----------------------------------------------------------------- widgets
+#
+# wp site empty clears posts and terms but leaves widget options untouched, so
+# without this reset a second run stacks a second copy of every widget. That is
+# not just untidy: two widgets with the same title produce two navigation
+# landmarks with the same accessible name, which fails an accessibility audit
+# and looks like a theme defect.
+
+wp widget reset --all >/dev/null 2>&1 || true
 
 wp widget add search sidebar-1 --title="Search" >/dev/null 2>&1 || true
 wp widget add recent-posts sidebar-1 --title="Latest from the journal" >/dev/null 2>&1 || true

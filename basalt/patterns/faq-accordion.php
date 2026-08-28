@@ -18,9 +18,9 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
-	<!-- wp:heading {"level":6,"className":"is-style-eyebrow"} -->
-	<h6 class="wp-block-heading is-style-eyebrow"><?php echo esc_html_x( 'FAQ', 'Pattern placeholder', 'basalt' ); ?></h6>
-	<!-- /wp:heading -->
+	<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+	<p class="is-style-eyebrow"><?php echo esc_html_x( 'FAQ', 'Pattern placeholder', 'basalt' ); ?></p>
+	<!-- /wp:paragraph -->
 
 	<!-- wp:heading -->
 	<h2 class="wp-block-heading"><?php echo esc_html_x( 'Questions we get asked', 'Pattern placeholder', 'basalt' ); ?></h2>
