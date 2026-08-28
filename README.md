@@ -1,39 +1,95 @@
-# darctheme
+# Basalt
 
-## Wordpress Basic-Theme 4 Wordpress Theme Development
+A fast, accessible and SEO-first hybrid WordPress theme. Classic PHP templates
+for exact control over markup and structured data, a `theme.json` design system
+for everything visual. No build step, no dependencies, no external requests.
 
-=== DarcTheme ===
+Formerly *DarcTheme*. Version 2.0.0 is a rewrite; the previous theme is kept
+under `legacy/` for reference and is no longer maintained.
 
-Contributors: DARCDESIGN
-Tags: e-commerce, jewlery, perfume, shop
+## Repository layout
 
-Requires at least: 4.0
-Tested up to: 4.7.2
-Stable tag: 2.0.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+| Path | Contents |
+| --- | --- |
+| `basalt/` | The theme. This folder is what ships. |
+| `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
+| `examples/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
+| `docs/` | Buyer documentation, shipped with the marketplace bundle. |
+| `tools/` | POT generation, static preview, packaging. Node only, no dependencies. |
+| `legacy/` | The pre-2.0 theme. Not maintained. |
 
-== Description ==
+## Requirements
 
-DarcTheme is a free premium one page WordPress theme.
+WordPress 6.6, PHP 8.1, Node 20 for the tooling. The theme itself needs no
+Node, no Composer and no plugins.
 
-== Installation ==
-	
-1. In your admin panel, go to Appearance > Themes and click the Add New button.
-2. Click Upload and Choose File, then select the theme's .zip file. Click Install Now.
-3. Click Activate to use your new theme right away.
+## Working on the theme
 
-= License =
-DarcTheme WordPress theme, Copyright (C) 2023 DARCDESIGN
-DarcTheme WordPress theme is licensed under the GPL3.
+Regenerate the translation template after changing any string:
 
-Unless otherwise specified, all the theme files, scripts and images are licensed under GNU General Public License.
-The exceptions to this license are as follows:
+```bash
+npm run pot
+```
 
-* Bootstrap v3.3.6 (http://getbootstrap.com):
-    Copyright 2011-2014 Twitter, Inc.
-    Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+Render a static preview from the real stylesheets, with the `theme.json` tokens
+resolved the way WordPress resolves them:
 
-* Images:
-	All images are from Unsplash (	www.unsplash.com	) and Pixabay( www.pixabay.com	)
-	License under Creative Commons Zero.
+```bash
+npm run preview
+```
+
+Serve it, then open `http://localhost:4321/dist/preview/`:
+
+```bash
+npm run serve
+```
+
+The preview reproduces the selectors WordPress generates from `theme.json`,
+including the `:root :where(...)` wrappers. That matters: their specificity is
+what decides whether a component rule wins, so a simplified preview would hide
+exactly the bugs it exists to catch.
+
+Build the distributable ZIP, with the pre-flight audit:
+
+```bash
+npm run package
+```
+
+Build the marketplace bundle as well:
+
+```bash
+npm run package:market
+```
+
+Check coding standards, if PHP_CodeSniffer with WPCS is installed:
+
+```bash
+npm run lint:php
+```
+
+## Architecture notes
+
+**Hybrid, not full site editing.** Templates are PHP so the heading order,
+landmarks and structured data are determined in code rather than assembled in
+an editor. `block-template-parts` support is deliberately off: it would create
+a second, editable source of header and footer markup next to `header.php` and
+`footer.php`, and two sources for one region is how heading order gets lost.
+
+**No cascade layers in the theme CSS.** WordPress prints the CSS generated from
+`theme.json` unlayered, and an unlayered rule beats every layered rule
+regardless of specificity. Component styles inside `@layer` therefore lose every
+collision with `theme.json`. See the note at the top of
+`basalt/assets/css/base.css`.
+
+**Data structure belongs in a plugin.** Post types, taxonomies and custom
+fields are registered by `examples/basalt-catalog/`, never by the theme.
+A theme that registers them takes the customer's content with it when they
+switch.
+
+**The theme stands down for SEO plugins.** Meta tags, structured data and
+breadcrumbs are emitted only when no SEO plugin owns them. Detection lives in
+`basalt/inc/integrations/seo-plugins.php`.
+
+## Licence
+
+GPL-2.0-or-later. See `LICENSE.md`.

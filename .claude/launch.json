@@ -1,0 +1,11 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "theme-preview",
+			"runtimeExecutable": "node",
+			"runtimeArgs": [ "tools/preview-server.mjs", "4321" ],
+			"port": 4321
+		}
+	]
+}

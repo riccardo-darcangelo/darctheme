@@ -1,0 +1,139 @@
+/**
+ * Editor styles.
+ *
+ * Loaded through add_editor_style() into the iframed post editor and enqueued
+ * again for the site editor. It only contains the block style variations, so
+ * what the editor shows matches the front end. Colour, type and spacing come
+ * from theme.json and are already applied by WordPress.
+ *
+ * @package Basalt
+ */
+
+.editor-styles-wrapper {
+	--color-base: var(--wp--preset--color--base, #ffffff);
+	--color-surface: var(--wp--preset--color--surface, #f4f5f7);
+	--color-ink: var(--wp--preset--color--contrast, #16191d);
+	--color-ink-soft: var(--wp--preset--color--contrast-soft, #5b6672);
+	--color-accent: var(--wp--preset--color--accent, #c2410c);
+	--color-accent-soft: var(--wp--preset--color--accent-soft, #fdf1e9);
+	--color-border: var(--wp--preset--color--border, #dbe0e6);
+
+	--space-2: var(--wp--preset--spacing--20, 1rem);
+	--space-3: var(--wp--preset--spacing--30, 1.5rem);
+	--space-6: var(--wp--preset--spacing--60, clamp(4rem, 9vw, 7rem));
+
+	--radius-md: var(--wp--custom--radius--md, 0.5rem);
+	--radius-lg: var(--wp--custom--radius--lg, 1rem);
+	--radius-pill: var(--wp--custom--radius--pill, 999px);
+	--shadow-sm: var(--wp--preset--shadow--sm, 0 1px 2px rgb(22 25 29 / 6%));
+}
+
+/* Block style variations, mirrored from blocks.css. */
+
+.editor-styles-wrapper .wp-block-group.is-style-card {
+	padding: var(--space-3);
+	background-color: var(--color-base);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-sm);
+}
+
+.editor-styles-wrapper .wp-block-group.is-style-bordered {
+	padding: var(--space-3);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+}
+
+.editor-styles-wrapper .wp-block-group.is-style-section {
+	padding-block: var(--space-6);
+}
+
+.editor-styles-wrapper .wp-block-image.is-style-rounded-lg img {
+	border-radius: var(--radius-lg);
+}
+
+.editor-styles-wrapper .wp-block-image.is-style-frame img {
+	padding: 0.5rem;
+	background-color: var(--color-base);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+}
+
+.editor-styles-wrapper .wp-block-list.is-style-checklist,
+.editor-styles-wrapper .wp-block-list.is-style-plain {
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+.editor-styles-wrapper .wp-block-list.is-style-checklist li {
+	position: relative;
+	padding-inline-start: 1.75rem;
+}
+
+.editor-styles-wrapper .wp-block-list.is-style-checklist li::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: 0;
+	inset-block-start: 0.45em;
+	inline-size: 0.5rem;
+	block-size: 0.85rem;
+	border-inline-end: 2px solid var(--color-accent);
+	border-block-end: 2px solid var(--color-accent);
+	transform: rotate(45deg);
+}
+
+.editor-styles-wrapper .wp-block-heading.is-style-eyebrow {
+	color: var(--color-accent);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.editor-styles-wrapper .wp-block-heading.is-style-underlined {
+	display: inline-block;
+	padding-block-end: 0.5rem;
+	border-block-end: 3px solid var(--color-accent);
+}
+
+.editor-styles-wrapper .wp-block-separator.is-style-thick {
+	border: 0;
+	block-size: 3px;
+	max-inline-size: 4rem;
+	margin-inline: 0;
+	background-color: var(--color-ink);
+	opacity: 1;
+}
+
+.editor-styles-wrapper .wp-block-quote.is-style-testimonial {
+	padding: var(--space-3);
+	border: 0;
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+}
+
+.editor-styles-wrapper .wp-block-columns.is-style-tight {
+	gap: var(--space-2);
+}
+
+.editor-styles-wrapper .wp-block-table.is-style-specs :is(th, td) {
+	border: 0;
+	border-block-end: 1px solid var(--color-border);
+}
+
+.editor-styles-wrapper .wp-block-table.is-style-specs tr :first-child {
+	inline-size: 40%;
+	color: var(--color-ink-soft);
+	font-weight: 600;
+}
+
+.editor-styles-wrapper .wp-block-details.is-style-faq summary {
+	font-size: var(--wp--preset--font-size--large, 1.375rem);
+	font-weight: 600;
+}
+
+.editor-styles-wrapper .wp-block-details {
+	padding: var(--space-2) 0;
+	border-block-end: 1px solid var(--color-border);
+}

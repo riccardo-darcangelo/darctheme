@@ -1,0 +1,22 @@
+/*
+Theme Name: Basalt
+Theme URI: https://darcdesign.de/themes/basalt/
+Author: Riccardo D'Arcangelo
+Author URI: https://darcdesign.de/
+Description: Basalt is a fast, accessible and SEO-first hybrid WordPress theme. It combines the full control of classic PHP templates with a theme.json design system, block patterns and block styles. Built mobile first, shipped without external requests, and tuned for Core Web Vitals.
+Version: 2.0.0
+Requires at least: 6.6
+Tested up to: 6.9
+Requires PHP: 8.1
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: basalt
+Domain Path: /languages
+Tags: blog, portfolio, business, one-column, two-columns, block-patterns, block-styles, custom-colors, custom-logo, custom-menu, editor-style, featured-images, full-width-template, right-sidebar, rtl-language-support, sticky-post, template-editing, threaded-comments, translation-ready, wide-blocks, accessibility-ready
+
+Basalt is distributed under the terms of the GNU GPL v2 or later.
+
+All stylesheets live in assets/css/ and are loaded through assets/css/main.css.
+This file exists for the WordPress theme header and for child-theme overrides only.
+Do not add styles here; they would load after everything else and break the cascade layers.
+*/

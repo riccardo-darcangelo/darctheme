@@ -1,0 +1,255 @@
+/**
+ * Blocks: the block style variations registered in inc/blocks.php, plus
+ * the handful of core blocks that need theme specific handling.
+ *
+ * Nothing here restyles a core block wholesale. Colour, type and spacing come
+ * from theme.json so they stay editable in the site editor.
+ *
+ * @package Basalt
+ */
+
+/* Group ---------------------------------------------------------------- */
+
+.wp-block-group.is-style-card {
+	padding: var(--space-3);
+	background-color: var(--color-base);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-sm);
+}
+
+.wp-block-group.is-style-bordered {
+	padding: var(--space-3);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+}
+
+.wp-block-group.is-style-section {
+	padding-block: var(--space-6);
+}
+
+/* Image ---------------------------------------------------------------- */
+
+.wp-block-image.is-style-rounded-lg img {
+	border-radius: var(--radius-lg);
+}
+
+.wp-block-image.is-style-frame img {
+	padding: 0.5rem;
+	background-color: var(--color-base);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+}
+
+/* Lists ---------------------------------------------------------------- */
+
+.wp-block-list.is-style-checklist {
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+.wp-block-list.is-style-checklist li {
+	position: relative;
+	padding-inline-start: 1.75rem;
+}
+
+.wp-block-list.is-style-checklist li + li {
+	margin-block-start: 0.5rem;
+}
+
+.wp-block-list.is-style-checklist li::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: 0;
+	inset-block-start: 0.45em;
+	inline-size: 0.5rem;
+	block-size: 0.85rem;
+	border-inline-end: 2px solid var(--color-accent);
+	border-block-end: 2px solid var(--color-accent);
+	transform: rotate(45deg);
+}
+
+.wp-block-list.is-style-plain {
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+/* Headings ------------------------------------------------------------- */
+
+.wp-block-heading.is-style-eyebrow {
+	color: var(--color-accent);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.wp-block-heading.is-style-underlined {
+	padding-block-end: 0.5rem;
+	border-block-end: 3px solid var(--color-accent);
+	display: inline-block;
+}
+
+/* Separator ------------------------------------------------------------ */
+
+.wp-block-separator.is-style-thick {
+	border: 0;
+	block-size: 3px;
+	background-color: var(--color-ink);
+	max-inline-size: 4rem;
+	margin-inline: 0;
+	opacity: 1;
+}
+
+/* Quote ---------------------------------------------------------------- */
+
+.wp-block-quote.is-style-testimonial {
+	padding: var(--space-3);
+	border: 0;
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+}
+
+.wp-block-quote.is-style-testimonial cite {
+	display: block;
+	margin-block-start: var(--space-2);
+	color: var(--color-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	font-style: normal;
+}
+
+/* Columns -------------------------------------------------------------- */
+
+.wp-block-columns.is-style-tight {
+	gap: var(--space-2);
+}
+
+/* Table ---------------------------------------------------------------- */
+
+.wp-block-table table {
+	border: 1px solid var(--color-border);
+}
+
+.wp-block-table :is(th, td) {
+	padding: 0.65rem 0.85rem;
+	border: 1px solid var(--color-border);
+	text-align: start;
+}
+
+.wp-block-table th {
+	background-color: var(--color-surface);
+}
+
+/*
+ * A specifications table reads as a key/value list. On phones the two
+ * column layout collapses to stacked rows with the header as a label, so a
+ * data sheet stays readable without horizontal scrolling.
+ */
+.wp-block-table.is-style-specs table {
+	border: 0;
+}
+
+.wp-block-table.is-style-specs :is(th, td) {
+	border: 0;
+	border-block-end: 1px solid var(--color-border);
+}
+
+.wp-block-table.is-style-specs tr :first-child {
+	inline-size: 40%;
+	color: var(--color-ink-soft);
+	font-weight: 600;
+}
+
+@media (max-width: 34rem) {
+	.wp-block-table.is-style-specs :is(td, th) {
+		display: block;
+		inline-size: 100% !important;
+	}
+
+	.wp-block-table.is-style-specs tr :first-child {
+		padding-block-end: 0;
+		border-block-end: 0;
+	}
+}
+
+/* Details, used for FAQ sections --------------------------------------- */
+
+.wp-block-details {
+	padding: var(--space-2) 0;
+	border-block-end: 1px solid var(--color-border);
+}
+
+.wp-block-details summary {
+	cursor: pointer;
+	font-weight: 600;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-2);
+	min-block-size: 44px;
+}
+
+.wp-block-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.wp-block-details summary::after {
+	content: "";
+	flex-shrink: 0;
+	inline-size: 0.55rem;
+	block-size: 0.55rem;
+	border-inline-end: 2px solid currentColor;
+	border-block-end: 2px solid currentColor;
+	transform: rotate(45deg);
+	transition: transform var(--transition-fast) var(--easing);
+}
+
+.wp-block-details[open] summary::after {
+	transform: rotate(-135deg);
+}
+
+.wp-block-details.is-style-faq {
+	border-block-end: 1px solid var(--color-border);
+}
+
+.wp-block-details.is-style-faq summary {
+	font-size: var(--wp--preset--font-size--large, 1.375rem);
+}
+
+/* Core blocks that need a nudge ---------------------------------------- */
+
+.wp-block-cover {
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+}
+
+.alignfull > .wp-block-cover,
+.wp-block-cover.alignfull {
+	border-radius: 0;
+}
+
+.wp-block-embed iframe {
+	max-inline-size: 100%;
+}
+
+.wp-block-search .wp-block-search__input {
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	padding: 0.6rem 0.75rem;
+}
+
+.wp-block-navigation a:where(:not(.wp-element-button)) {
+	text-decoration: none;
+}
+
+.wp-block-post-terms a,
+.wp-block-tag-cloud a {
+	display: inline-block;
+	padding: 0.25rem 0.6rem;
+	background-color: var(--color-surface);
+	border-radius: var(--radius-pill);
+	font-size: var(--wp--preset--font-size--x-small, 0.8125rem) !important;
+	text-decoration: none;
+}

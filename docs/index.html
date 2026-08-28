@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basalt — Documentation</title>
+<style>
+	:root {
+		color-scheme: light dark;
+		--bg: #ffffff;
+		--surface: #f4f5f7;
+		--ink: #16191d;
+		--ink-soft: #5b6672;
+		--accent: #c2410c;
+		--border: #dbe0e6;
+		--radius: 8px;
+		--mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg: #14171a;
+			--surface: #1c2126;
+			--ink: #e8ebed;
+			--ink-soft: #9aa5ae;
+			--accent: #f97316;
+			--border: #2c333a;
+		}
+	}
+
+	* { box-sizing: border-box; }
+
+	body {
+		margin: 0;
+		background: var(--bg);
+		color: var(--ink);
+		font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	}
+
+	.layout { display: grid; grid-template-columns: 1fr; }
+
+	@media (min-width: 62rem) {
+		.layout { grid-template-columns: 17rem 1fr; }
+		.toc { position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid var(--border); }
+	}
+
+	.toc { padding: 2rem 1.5rem; background: var(--surface); }
+	.toc__brand { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 0.25rem; }
+	.toc__version { margin: 0 0 1.5rem; color: var(--ink-soft); font-size: 0.875rem; }
+	.toc ol { margin: 0; padding: 0; list-style: none; counter-reset: section; }
+	.toc li { margin-bottom: 0.35rem; }
+	.toc a { color: var(--ink); text-decoration: none; display: block; padding: 0.3rem 0; font-size: 0.9375rem; }
+	.toc a:hover, .toc a:focus-visible { color: var(--accent); }
+
+	main { padding: 2.5rem 1.5rem 6rem; max-width: 54rem; }
+	section { scroll-margin-top: 1.5rem; }
+	section + section { margin-top: 3.5rem; }
+
+	h1 { font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
+	h2 { font-size: 1.625rem; letter-spacing: -0.015em; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+	h3 { font-size: 1.125rem; margin: 2rem 0 0.5rem; }
+	p, li { max-width: 68ch; }
+	a { color: var(--accent); }
+
+	code { font-family: var(--mono); font-size: 0.875em; background: var(--surface); padding: 0.1em 0.35em; border-radius: 4px; }
+	pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; overflow-x: auto; }
+	pre code { background: none; padding: 0; font-size: 0.8125rem; line-height: 1.6; }
+
+	table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9375rem; }
+	th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+	th { background: var(--surface); font-weight: 600; }
+	td code { white-space: nowrap; }
+
+	.lead { font-size: 1.125rem; color: var(--ink-soft); max-width: 60ch; }
+
+	.note {
+		margin: 1.25rem 0;
+		padding: 1rem 1.25rem;
+		border-left: 3px solid var(--accent);
+		background: var(--surface);
+		border-radius: 0 var(--radius) var(--radius) 0;
+	}
+	.note p { margin: 0; }
+	.note p + p { margin-top: 0.5rem; }
+	.note strong { display: block; margin-bottom: 0.25rem; }
+
+	.steps { counter-reset: step; padding: 0; list-style: none; }
+	.steps li { counter-increment: step; position: relative; padding-left: 2.5rem; margin-bottom: 1rem; }
+	.steps li::before {
+		content: counter(step);
+		position: absolute; left: 0; top: 0;
+		width: 1.75rem; height: 1.75rem;
+		display: grid; place-items: center;
+		background: var(--accent); color: #fff;
+		border-radius: 50%; font-size: 0.8125rem; font-weight: 700;
+	}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc" aria-label="Contents">
+	<p class="toc__brand">Basalt</p>
+	<p class="toc__version">Version 2.0.0 · Documentation</p>
+	<ol>
+		<li><a href="#requirements">Requirements</a></li>
+		<li><a href="#install">Installation</a></li>
+		<li><a href="#start">First steps</a></li>
+		<li><a href="#design">Design system</a></li>
+		<li><a href="#templates">Templates</a></li>
+		<li><a href="#menus">Menus and widgets</a></li>
+		<li><a href="#patterns">Patterns and block styles</a></li>
+		<li><a href="#seo">SEO and structured data</a></li>
+		<li><a href="#performance">Performance</a></li>
+		<li><a href="#accessibility">Accessibility</a></li>
+		<li><a href="#child">Child themes</a></li>
+		<li><a href="#hooks">Hooks reference</a></li>
+		<li><a href="#translate">Translation</a></li>
+		<li><a href="#troubleshooting">Troubleshooting</a></li>
+	</ol>
+</nav>
+
+<main>
+
+<h1>Basalt</h1>
+<p class="lead">
+	A hybrid WordPress theme: classic PHP templates for exact control over markup
+	and structured data, a <code>theme.json</code> design system for everything
+	visual. No build step, no dependencies, no external requests.
+</p>
+
+<section id="requirements">
+	<h2>Requirements</h2>
+	<table>
+		<tr><th>WordPress</th><td>6.6 or newer</td></tr>
+		<tr><th>PHP</th><td>8.1 or newer</td></tr>
+		<tr><th>Browsers</th><td>Any browser from 2023 onwards. The theme uses CSS logical properties, <code>:has()</code> and <code>aspect-ratio</code>.</td></tr>
+		<tr><th>Plugins</th><td>None required.</td></tr>
+	</table>
+	<p>
+		If the site runs below these versions the theme still renders, but an
+		admin notice appears and nothing below the minimum has been tested.
+	</p>
+</section>
+
+<section id="install">
+	<h2>Installation</h2>
+	<ol class="steps">
+		<li>In WordPress go to <strong>Appearance → Themes → Add New → Upload Theme</strong>.</li>
+		<li>Choose <code>basalt.zip</code> from the download and select <strong>Install Now</strong>.</li>
+		<li>Select <strong>Activate</strong>.</li>
+	</ol>
+	<div class="note">
+		<p><strong>Uploading the wrong file</strong></p>
+		<p>
+			If WordPress reports a missing <code>style.css</code>, the full
+			download archive was uploaded rather than the theme. Unpack it first
+			and upload only <code>basalt.zip</code>.
+		</p>
+	</div>
+</section>
+
+<section id="start">
+	<h2>First steps</h2>
+	<p>
+		<strong>Appearance → Basalt</strong> lists the three settings that
+		matter on a new site and links straight to each.
+	</p>
+
+	<h3>1. Identity</h3>
+	<p>
+		Upload the logo and set the site title and tagline under
+		<strong>Appearance → Customize → Site Identity</strong>. Write the
+		tagline as a full sentence: it is used as the fallback meta description,
+		so it can end up in search results.
+	</p>
+
+	<h3>2. Structured data</h3>
+	<p>
+		Under <strong>Customize → Theme options → Search engines: structured
+		data</strong>, enter the business name, address, phone and opening
+		hours. This is what produces knowledge panels and local results. Leave a
+		field empty rather than guessing; wrong structured data is worse than
+		none.
+	</p>
+
+	<h3>3. Menus</h3>
+	<p>
+		Assign a menu to the <strong>Primary menu</strong> location under
+		<strong>Appearance → Menus</strong>. Until you do, the header lists the
+		top level pages so the site stays navigable.
+	</p>
+</section>
+
+<section id="design">
+	<h2>Design system</h2>
+	<p>
+		Every colour, font size and spacing step is defined once in
+		<code>theme.json</code> and used everywhere: front end, editor,
+		patterns and block styles. Change a value and all four follow.
+	</p>
+	<p>
+		Edit them visually under <strong>Appearance → Editor → Styles</strong>,
+		or in <code>theme.json</code> for a permanent change in a child theme.
+	</p>
+
+	<h3>Colours</h3>
+	<table>
+		<tr><th>Slug</th><th>Default</th><th>Used for</th></tr>
+		<tr><td><code>base</code></td><td>#ffffff</td><td>Page background</td></tr>
+		<tr><td><code>surface</code></td><td>#f4f5f7</td><td>Section backgrounds, cards, footer</td></tr>
+		<tr><td><code>surface-strong</code></td><td>#e6e9ed</td><td>Image placeholders, dividers with weight</td></tr>
+		<tr><td><code>contrast</code></td><td>#16191d</td><td>Body text and headings</td></tr>
+		<tr><td><code>contrast-soft</code></td><td>#5b6672</td><td>Secondary text, meta lines</td></tr>
+		<tr><td><code>primary</code></td><td>#2a3a47</td><td>Dark sections, button hover</td></tr>
+		<tr><td><code>accent</code></td><td>#c2410c</td><td>Links, buttons, focus rings</td></tr>
+		<tr><td><code>border</code></td><td>#dbe0e6</td><td>Rules and outlines</td></tr>
+	</table>
+
+	<div class="note">
+		<p><strong>Contrast when changing the accent</strong></p>
+		<p>
+			The accent carries white button text and is used for the focus ring.
+			Pick a value with at least 4.5:1 against white for the text and 3:1
+			against the page background for the ring, or the theme stops meeting
+			WCAG AA.
+		</p>
+	</div>
+
+	<h3>Type scale</h3>
+	<p>
+		Seven steps from <code>x-small</code> to <code>display</code>. Everything
+		from <code>medium</code> upwards is fluid: it scales with the viewport
+		between a minimum and a maximum, so no breakpoints are involved.
+	</p>
+
+	<h3>Spacing</h3>
+	<p>
+		Seven steps, <code>10</code> through <code>70</code>. The larger steps
+		are fluid as well, which is why a section that breathes on a desktop
+		does not waste half a phone screen.
+	</p>
+
+	<h3>Writing CSS</h3>
+	<p>
+		The stylesheets are plain CSS in <code>assets/css/</code> and are loaded
+		in this order: <code>base</code>, <code>layout</code>,
+		<code>components</code>, <code>blocks</code>, then a child theme's
+		<code>style.css</code>. The theme's own <code>style.css</code> contains
+		no rules, so a child theme always loads last.
+	</p>
+	<div class="note">
+		<p><strong>Do not wrap theme CSS in <code>@layer</code></strong></p>
+		<p>
+			WordPress prints the CSS generated from <code>theme.json</code>
+			without a cascade layer, and an unlayered rule beats every layered
+			rule regardless of specificity. Component styles placed in a layer
+			lose every collision with <code>theme.json</code>: navigation links,
+			the site title and buttons all fall back to the global link colour.
+		</p>
+		<p>
+			Where a rule has to win against a <code>theme.json</code> element
+			style it needs a specificity above <code>(0,1,0)</code>, because
+			WordPress emits the link colour as
+			<code>:root :where(a:where(:not(.wp-element-button)))</code>. That is
+			why the theme writes <code>a.button</code> rather than
+			<code>.button</code> in those places.
+		</p>
+	</div>
+</section>
+
+<section id="templates">
+	<h2>Templates</h2>
+	<p>Three page templates ship with the theme, selectable in the editor sidebar under Template.</p>
+	<table>
+		<tr><th>Template</th><th>Behaviour</th><th>Use for</th></tr>
+		<tr>
+			<td><strong>Default</strong></td>
+			<td>Title, featured image, content at reading width, breadcrumb bar.</td>
+			<td>Ordinary pages and posts.</td>
+		</tr>
+		<tr>
+			<td><strong>Full width</strong></td>
+			<td>Content spans the wide width, no sidebar. Title is kept.</td>
+			<td>Overview pages, galleries, wide tables.</td>
+		</tr>
+		<tr>
+			<td><strong>Landing page</strong></td>
+			<td>No title, no featured image, no breadcrumb bar, no width limit.</td>
+			<td>Campaign and product pages built from patterns. The first pattern supplies the H1.</td>
+		</tr>
+		<tr>
+			<td><strong>With sidebar</strong></td>
+			<td>Forces the sidebar on, which pages do not have by default.</td>
+			<td>Documentation pages, anything needing in-page navigation.</td>
+		</tr>
+	</table>
+	<div class="note">
+		<p><strong>One H1 per page</strong></p>
+		<p>
+			The Landing page template deliberately omits the page title, because
+			the pattern at the top of the page already contains a heading. If you
+			add a second H1 in the content on any other template, the page has
+			two, which weakens both.
+		</p>
+	</div>
+</section>
+
+<section id="menus">
+	<h2>Menus and widget areas</h2>
+	<h3>Menu locations</h3>
+	<table>
+		<tr><th>Location</th><th>Where it appears</th></tr>
+		<tr><td>Primary menu</td><td>Header. Supports three levels; submenus open with a real button, so they work by keyboard and on touch.</td></tr>
+		<tr><td>Footer menu</td><td>Footer widget area.</td></tr>
+		<tr><td>Social links</td><td>Footer bar.</td></tr>
+		<tr><td>Legal menu</td><td>Footer bar next to the copyright.</td></tr>
+	</table>
+
+	<h3>Widget areas</h3>
+	<p>
+		One sidebar and four footer columns. Empty footer columns are skipped
+		entirely, so the grid adapts to how many you fill: use two and you get
+		two columns, not two plus two gaps.
+	</p>
+
+	<h3>Header layouts</h3>
+	<p>Under <strong>Customize → Theme options → Header</strong>:</p>
+	<ul>
+		<li><strong>Logo left, menu right</strong> — the default.</li>
+		<li><strong>Logo centred, menu below</strong> — for wordmark-led brands.</li>
+		<li><strong>Logo left, menu behind a button</strong> — a toggle at every width, for sites with a deep menu.</li>
+	</ul>
+	<p>
+		The sticky header uses CSS <code>position: sticky</code>. No scroll
+		listener runs on the main thread, which is why scrolling stays smooth on
+		low end phones.
+	</p>
+</section>
+
+<section id="patterns">
+	<h2>Patterns and block styles</h2>
+	<p>
+		Patterns are in the block inserter under the <strong>Basalt</strong>
+		categories. They are ordinary core blocks, so they keep working if you
+		switch theme later.
+	</p>
+	<table>
+		<tr><th>Pattern</th><th>Contains</th></tr>
+		<tr><td>Hero, text and image</td><td>Eyebrow, H1, paragraph, two buttons, image.</td></tr>
+		<tr><td>Text with a checklist</td><td>Image beside heading, paragraph and ticked list.</td></tr>
+		<tr><td>Catalog grid, three cards</td><td>Three linked cards with image, title and description.</td></tr>
+		<tr><td>Technical specifications</td><td>Two column table that collapses to stacked rows on phones.</td></tr>
+		<tr><td>FAQ with structured data</td><td>Expandable questions that also emit FAQPage structured data.</td></tr>
+		<tr><td>Call to action with contact details</td><td>Dark section with a button, phone and email links.</td></tr>
+		<tr><td>Product or service landing page</td><td>All of the above in the order a visitor asks their questions.</td></tr>
+	</table>
+
+	<h3>Block styles</h3>
+	<p>
+		Selectable in the Styles tab of a block's sidebar: Card, Bordered and
+		Section for groups; Rounded and Framed for images; Checklist and No
+		markers for lists; Eyebrow and Underlined for headings; Testimonial for
+		quotes; Specifications for tables; FAQ item for details blocks.
+	</p>
+</section>
+
+<section id="seo">
+	<h2>SEO and structured data</h2>
+	<p>
+		The theme produces correct meta tags, breadcrumbs and Schema.org data
+		without any plugin. If you install one, the theme detects it and stops
+		emitting its own, so nothing is ever duplicated.
+	</p>
+
+	<h3>Detected plugins</h3>
+	<p>
+		Rank Math, Yoast SEO, SEOPress, All in One SEO, Slim SEO and Squirrly.
+		When one of these is active the theme hands over meta tags, structured
+		data and breadcrumbs.
+	</p>
+
+	<h3>What the theme emits on its own</h3>
+	<table>
+		<tr><th>Output</th><th>Detail</th></tr>
+		<tr><td>Title</td><td>Handled by WordPress core through <code>title-tag</code> support.</td></tr>
+		<tr><td>Description</td><td>Excerpt, else term description, else tagline. Trimmed to 160 characters at a word boundary.</td></tr>
+		<tr><td>Open Graph and Twitter</td><td>Title, description, URL, type, locale, image with width and height.</td></tr>
+		<tr><td>Robots</td><td><code>noindex, follow</code> on search results and paginated comments. <code>max-image-preview:large</code> everywhere else.</td></tr>
+		<tr><td>Canonical</td><td>WordPress core. The theme never adds a second one.</td></tr>
+	</table>
+
+	<h3>The structured data graph</h3>
+	<p>
+		One <code>@graph</code> with cross referenced <code>@id</code> values,
+		which is what Google recommends. Nodes reference each other instead of
+		repeating the same publisher data on every page.
+	</p>
+	<table>
+		<tr><th>Node</th><th>When</th></tr>
+		<tr><td><code>Organization</code> / <code>LocalBusiness</code> / <code>Person</code></td><td>Every page. Type chosen in the customizer.</td></tr>
+		<tr><td><code>WebSite</code> with <code>SearchAction</code></td><td>Every page.</td></tr>
+		<tr><td><code>WebPage</code> / <code>CollectionPage</code> / <code>ItemPage</code></td><td>Every page, type derived from the view.</td></tr>
+		<tr><td><code>BreadcrumbList</code></td><td>Any page with a trail of more than one level.</td></tr>
+		<tr><td><code>BlogPosting</code></td><td>Single posts only. Pages are not articles.</td></tr>
+		<tr><td><code>FAQPage</code></td><td>Any page containing details blocks styled as FAQ item.</td></tr>
+	</table>
+
+	<h3>FAQ structured data</h3>
+	<p>
+		Add a <strong>Details</strong> block, set its style to
+		<strong>FAQ item</strong>, put the question in the summary and the
+		answer inside. The theme reads the saved content and emits the matching
+		<code>FAQPage</code> data. No shortcode and no custom block, so the
+		content survives a theme switch as a plain accordion.
+	</p>
+	<div class="note">
+		<p><strong>Answer the question in the first sentence</strong></p>
+		<p>
+			Search engines quote the opening of an answer. An answer that starts
+			with background and reaches the point in sentence four is quoted from
+			the background.
+		</p>
+	</div>
+
+	<h3>Verifying</h3>
+	<p>
+		Paste a URL into Google's Rich Results Test and the Schema Markup
+		Validator. Both should show the graph with no errors. If you see two
+		<code>Organization</code> nodes, an SEO plugin is emitting its own and
+		was not detected: switch off structured data under
+		<strong>Customize → Theme options</strong>.
+	</p>
+</section>
+
+<section id="performance">
+	<h2>Performance</h2>
+	<p>What the theme does by default:</p>
+	<ul>
+		<li>No web fonts. The system font stack renders instantly and costs zero requests. Add fonts through the WordPress Font Library if a brand requires them, and expect to pay for it in LCP.</li>
+		<li>No JavaScript framework, no jQuery. Two small deferred files, both observer based, with no scroll listener anywhere.</li>
+		<li>Core block styles load per block instead of one combined stylesheet.</li>
+		<li>The comment stylesheet loads only where comments render; the WooCommerce stylesheet only on shop views.</li>
+		<li>The featured image of a singular view is preloaded with <code>fetchpriority="high"</code>, because it is usually the LCP element and core cannot see it in the template.</li>
+		<li>The emoji polyfill and its request to <code>s.w.org</code> are removed.</li>
+		<li>Speculative loading excludes carts, checkouts, account pages and any URL carrying a nonce.</li>
+	</ul>
+	<p>
+		Every one of these is filterable. See the hooks reference below if a
+		specific site needs different behaviour.
+	</p>
+	<div class="note">
+		<p><strong>What the theme deliberately does not do</strong></p>
+		<p>
+			Page caching, image conversion, database cleanup and CDN handling
+			are plugin work. A theme that took them over would take them away
+			again the day you switch theme.
+		</p>
+	</div>
+</section>
+
+<section id="accessibility">
+	<h2>Accessibility</h2>
+	<p>Basalt targets WCAG 2.2 level AA.</p>
+	<ul>
+		<li>Skip link as the first focusable element.</li>
+		<li>Visible focus ring on every interactive element, drawn outside the element so it is never clipped.</li>
+		<li>Submenus open with a real <code>&lt;button&gt;</code> carrying <code>aria-expanded</code>, so they work by keyboard and on touch.</li>
+		<li>Escape closes the menu and returns focus to the button that opened it. Focus stays inside the menu while it covers the screen.</li>
+		<li>Controls are at least 44 by 44 pixels.</li>
+		<li><code>prefers-reduced-motion</code> is honoured.</li>
+		<li>Landmarks: one <code>banner</code>, one <code>main</code>, one <code>contentinfo</code>, and a <code>complementary</code> only when the sidebar has content.</li>
+		<li>Cards are not wrapped in a single large link. The heading is the link, and the image is hidden from assistive technology so it is not announced twice.</li>
+	</ul>
+	<p>
+		Two things remain the site owner's responsibility: alternative text on
+		images, and keeping contrast above the threshold after changing colours.
+	</p>
+</section>
+
+<section id="child">
+	<h2>Child themes</h2>
+	<p>
+		A ready child theme is included in <code>examples/basalt-child/</code>
+		with its own README. Copy the folder, rename it, keep
+		<code>Template: basalt</code>.
+	</p>
+	<p>
+		The parent already enqueues the child's <code>style.css</code> last, so
+		there is no enqueue boilerplate to write.
+	</p>
+	<p>
+		Prefer <code>theme.json</code> in the child over CSS for anything
+		visual: values defined there stay editable in the site editor, CSS does
+		not.
+	</p>
+
+	<h3>Overriding a template</h3>
+	<p>
+		Copy the file into the child theme at the same path. Template parts are
+		loaded with <code>get_template_part()</code>, so
+		<code>template-parts/content/content.php</code> can be replaced on its
+		own without copying <code>archive.php</code>.
+	</p>
+
+	<h3>Replacing a whole module</h3>
+	<pre><code>add_filter( 'basalt_modules', function ( $modules ) {
+    // Let a plugin own every meta tag instead.
+    return array_values( array_diff( $modules, array( 'seo' ) ) );
+} );</code></pre>
+</section>
+
+<section id="hooks">
+	<h2>Hooks reference</h2>
+
+	<h3>Actions</h3>
+	<table>
+		<tr><th>Hook</th><th>Fires</th></tr>
+		<tr><td><code>basalt_after_header</code></td><td>After the site header, before the breadcrumb bar.</td></tr>
+		<tr><td><code>basalt_before_footer</code></td><td>Before the site footer.</td></tr>
+	</table>
+
+	<h3>Layout filters</h3>
+	<table>
+		<tr><th>Filter</th><th>Default</th><th>Controls</th></tr>
+		<tr><td><code>basalt_modules</code></td><td>array of module slugs</td><td>Which files in <code>inc/</code> load.</td></tr>
+		<tr><td><code>basalt_has_sidebar</code></td><td>context dependent</td><td>Whether the sidebar renders.</td></tr>
+		<tr><td><code>basalt_show_breadcrumbs</code></td><td><code>! is_front_page()</code></td><td>Whether the breadcrumb bar renders.</td></tr>
+		<tr><td><code>basalt_show_page_header</code></td><td><code>true</code></td><td>Whether a page renders its title.</td></tr>
+		<tr><td><code>basalt_excerpt_length</code></td><td><code>28</code></td><td>Excerpt length in words.</td></tr>
+		<tr><td><code>basalt_words_per_minute</code></td><td><code>220</code></td><td>Reading time calculation.</td></tr>
+		<tr><td><code>basalt_option_defaults</code></td><td>array</td><td>Default value of every theme option.</td></tr>
+	</table>
+
+	<h3>SEO filters</h3>
+	<table>
+		<tr><th>Filter</th><th>Controls</th></tr>
+		<tr><td><code>basalt_output_meta</code></td><td>Whether meta tags are emitted.</td></tr>
+		<tr><td><code>basalt_output_schema</code></td><td>Whether the JSON-LD graph is emitted.</td></tr>
+		<tr><td><code>basalt_meta_description</code></td><td>The description string.</td></tr>
+		<tr><td><code>basalt_meta_tags</code></td><td>The complete tag list before printing.</td></tr>
+		<tr><td><code>basalt_schema_graph</code></td><td>The complete graph. The place to add a Product, Service or Event node.</td></tr>
+		<tr><td><code>basalt_schema_entity_node</code></td><td>The Organization, LocalBusiness or Person node.</td></tr>
+		<tr><td><code>basalt_schema_entity_types</code></td><td>The types offered in the customizer.</td></tr>
+		<tr><td><code>basalt_schema_article_post_types</code></td><td>Which post types are marked up as articles.</td></tr>
+		<tr><td><code>basalt_breadcrumb_items</code></td><td>The breadcrumb trail, used by both the visible trail and the JSON-LD.</td></tr>
+		<tr><td><code>basalt_primary_term_taxonomies</code></td><td>Which taxonomy supplies the breadcrumb term.</td></tr>
+		<tr><td><code>basalt_seo_plugin_handles</code></td><td>Whether an SEO plugin owns a given responsibility.</td></tr>
+	</table>
+
+	<h3>Performance filters</h3>
+	<table>
+		<tr><th>Filter</th><th>Default</th></tr>
+		<tr><td><code>basalt_separate_core_block_assets</code></td><td><code>true</code></td></tr>
+		<tr><td><code>basalt_disable_emoji</code></td><td><code>true</code></td></tr>
+		<tr><td><code>basalt_disable_oembed_discovery</code></td><td><code>true</code></td></tr>
+		<tr><td><code>basalt_enable_view_transitions</code></td><td><code>true</code></td></tr>
+		<tr><td><code>basalt_load_remote_block_patterns</code></td><td><code>false</code></td></tr>
+		<tr><td><code>basalt_speculation_exclusions</code></td><td>cart, checkout, account, nonce URLs</td></tr>
+	</table>
+
+	<h3>Adding a node to the graph</h3>
+	<pre><code>add_filter( 'basalt_schema_graph', function ( $graph, $page_id ) {
+    if ( ! is_singular( 'event' ) ) {
+        return $graph;
+    }
+
+    $graph[] = array(
+        '@type'            => 'Event',
+        '@id'              => $page_id . '#event',
+        'mainEntityOfPage' => array( '@id' => $page_id ),
+        'name'             => get_the_title(),
+        'startDate'        => get_post_meta( get_the_ID(), 'start_date', true ),
+    );
+
+    return $graph;
+}, 10, 2 );</code></pre>
+</section>
+
+<section id="translate">
+	<h2>Translation</h2>
+	<p>
+		The theme is fully translatable. <code>languages/basalt.pot</code>
+		contains every string.
+	</p>
+	<ol class="steps">
+		<li>Open the POT file in Poedit and create a translation for your language.</li>
+		<li>Save it into <code>languages/</code> as <code>de_DE.po</code> and <code>de_DE.mo</code>, matching your site's locale.</li>
+		<li>Set the site language under <strong>Settings → General</strong>.</li>
+	</ol>
+	<p>
+		Put translations in a child theme's <code>languages/</code> folder to
+		keep them safe from theme updates. WordPress loads a child theme's
+		translations before the parent's.
+	</p>
+	<p>
+		Right to left languages need no separate stylesheet. The theme uses CSS
+		logical properties throughout, so the layout mirrors on its own.
+	</p>
+</section>
+
+<section id="troubleshooting">
+	<h2>Troubleshooting</h2>
+
+	<h3>Menu links are the wrong colour after changing Styles</h3>
+	<p>
+		The link colour under Styles applies to every link on the site,
+		including the header. Set the navigation colour separately, or override
+		<code>.menu-item &gt; a</code> in a child theme's stylesheet.
+	</p>
+
+	<h3>Two sets of meta tags in the page source</h3>
+	<p>
+		An SEO plugin is active that the theme does not recognise. Switch off
+		the theme's own output under <strong>Customize → Theme options →
+		Search engines</strong>, or add the plugin to the detection list with
+		the <code>basalt_seo_plugin_handles</code> filter.
+	</p>
+
+	<h3>Custom post type archive returns 404</h3>
+	<p>
+		Rewrite rules have not been flushed. Open
+		<strong>Settings → Permalinks</strong> and save without changing
+		anything.
+	</p>
+
+	<h3>The sidebar does not appear on a page</h3>
+	<p>
+		Pages have no sidebar by default. Select the <strong>With
+		sidebar</strong> template, and make sure the Sidebar widget area is not
+		empty.
+	</p>
+
+	<h3>Structured data warnings about missing fields</h3>
+	<p>
+		Google reports optional fields as warnings, not errors. Warnings about
+		<code>aggregateRating</code> or <code>offers</code> on a Product mean
+		those fields are absent, which is correct when the site does not publish
+		prices or reviews. Do not invent values to silence them; fabricated
+		structured data earns a manual action.
+	</p>
+</section>
+
+</main>
+</div>
+</body>
+</html>

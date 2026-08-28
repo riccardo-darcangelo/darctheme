@@ -1,0 +1,85 @@
+/**
+ * Print styles.
+ *
+ * A printed page has no navigation and no colour budget. What matters is that
+ * the content is complete, that link targets are visible, and that a heading
+ * does not sit alone at the bottom of a sheet.
+ *
+ * @package Basalt
+ */
+
+@page {
+	margin: 18mm 16mm;
+}
+
+:where(
+	.site-header,
+	.breadcrumbs-bar,
+	.sidebar,
+	.site-footer__widgets,
+	.back-to-top,
+	.skip-link,
+	.comments,
+	.post-nav,
+	.pagination,
+	.search-form,
+	.entry__edit-link
+) {
+	display: none !important;
+}
+
+body {
+	background: #fff !important;
+	color: #000 !important;
+	font-size: 11pt;
+	line-height: 1.5;
+}
+
+.container,
+.site-main,
+.entry__content > *,
+.entry__header {
+	max-inline-size: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	break-after: avoid;
+	page-break-after: avoid;
+}
+
+img,
+figure,
+table,
+blockquote,
+pre {
+	break-inside: avoid;
+	page-break-inside: avoid;
+	max-inline-size: 100% !important;
+}
+
+a {
+	color: #000 !important;
+	text-decoration: underline;
+}
+
+/* Show where a link actually goes, but not for anchors and internal jumps. */
+.entry__content a[href^="http"]::after {
+	content: " (" attr(href) ")";
+	font-size: 9pt;
+	word-break: break-all;
+}
+
+.entry__content abbr[title]::after {
+	content: " (" attr(title) ")";
+}
+
+.site-footer__bar {
+	border-block-start: 1px solid #000;
+	padding-block-start: 6pt;
+	font-size: 9pt;
+}

@@ -1,0 +1,234 @@
+/**
+ * Layout: containers, the page shell, the content/sidebar split.
+ *
+ * @package Basalt
+ */
+
+.site-wrap {
+	display: flex;
+	flex-direction: column;
+	min-block-size: 100vb;
+}
+
+/*
+ * The container owns the horizontal page padding. theme.json deliberately
+ * does not set root padding, so there is exactly one place that decides how
+ * far content sits from the viewport edge.
+ */
+.container {
+	inline-size: 100%;
+	max-inline-size: var(--wide-width);
+	margin-inline: auto;
+	padding-inline: var(--space-3);
+}
+
+.container--wide {
+	max-inline-size: min(96rem, 100%);
+}
+
+.container--narrow {
+	max-inline-size: calc(var(--content-width) + var(--space-3) * 2);
+}
+
+/* Site header ---------------------------------------------------------- */
+
+.site-header {
+	position: relative;
+	z-index: 20;
+	background-color: var(--color-base);
+	border-block-end: 1px solid var(--color-border);
+}
+
+.site-header--sticky {
+	position: sticky;
+	inset-block-start: 0;
+}
+
+.site-header.is-scrolled {
+	box-shadow: var(--shadow-sm);
+}
+
+.site-header__inner {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	min-block-size: var(--header-height);
+}
+
+.site-header--split .site-header__inner {
+	justify-content: space-between;
+}
+
+.site-header--stacked .site-header__inner {
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--space-2);
+	padding-block: var(--space-2);
+}
+
+.header-sentinel {
+	block-size: 1px;
+	margin-block-end: -1px;
+}
+
+/* Main and sidebar ----------------------------------------------------- */
+
+.site-main {
+	flex: 1;
+	padding-block: var(--space-5);
+}
+
+.site-main--narrow {
+	max-inline-size: var(--content-width);
+	margin-inline: auto;
+}
+
+.site-main--landing {
+	padding-block: 0;
+}
+
+/*
+ * On views with a sidebar the container becomes the grid. Below the
+ * breakpoint the sidebar simply follows the content in source order, which
+ * is also the order a screen reader announces.
+ */
+.has-sidebar .container:has(.sidebar) {
+	display: grid;
+	gap: var(--space-4);
+	grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 62rem) {
+	.has-sidebar .container:has(.sidebar) {
+		grid-template-columns: minmax(0, 1fr) 20rem;
+		gap: var(--space-5);
+		align-items: start;
+	}
+
+	.sidebar {
+		position: sticky;
+		inset-block-start: calc(var(--header-height) + var(--space-3));
+		padding-block: var(--space-5);
+	}
+}
+
+.sidebar {
+	display: grid;
+	gap: var(--space-4);
+}
+
+/*
+ * Content measure. Long form text is capped, but anything the editor marks
+ * as wide or full breaks out, which is how the block editor's alignment
+ * model expects a theme to behave.
+ */
+.entry__content > *,
+.page-header > * {
+	max-inline-size: var(--content-width);
+	margin-inline: auto;
+}
+
+.entry__content > .alignwide {
+	max-inline-size: var(--wide-width);
+}
+
+.entry__content > .alignfull {
+	max-inline-size: none;
+	margin-inline: calc(50% - 50vw);
+	inline-size: 100vw;
+}
+
+.has-sidebar .entry__content > .alignfull {
+	/* Inside a grid column, full width means the column, not the viewport. */
+	margin-inline: 0;
+	inline-size: 100%;
+}
+
+.entry__content > .alignleft {
+	float: inline-start;
+	margin-inline-end: var(--space-3);
+	margin-block-end: var(--space-2);
+}
+
+.entry__content > .alignright {
+	float: inline-end;
+	margin-inline-start: var(--space-3);
+	margin-block-end: var(--space-2);
+}
+
+.entry__content::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.entry__content > * + * {
+	margin-block-start: var(--space-3);
+}
+
+.entry__content > :is(h2, h3, h4) {
+	margin-block-start: var(--space-4);
+}
+
+/* Archive listings ----------------------------------------------------- */
+
+.entry-list {
+	display: grid;
+	gap: var(--space-4);
+}
+
+.entry-list--grid {
+	grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
+}
+
+.entry-list--list {
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--space-3);
+}
+
+/* Site footer ---------------------------------------------------------- */
+
+.site-footer {
+	margin-block-start: auto;
+	background-color: var(--color-surface);
+	border-block-start: 1px solid var(--color-border);
+}
+
+.site-footer__widgets {
+	padding-block: var(--space-5);
+}
+
+.site-footer__grid {
+	display: grid;
+	gap: var(--space-4);
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(min(16rem, 100%), 1fr)
+	);
+}
+
+.site-footer__bar {
+	border-block-start: 1px solid var(--color-border);
+	padding-block: var(--space-3);
+}
+
+.site-footer__bar-inner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-2);
+}
+
+/* Breadcrumb bar ------------------------------------------------------- */
+
+.breadcrumbs-bar {
+	padding-block: var(--space-2);
+	border-block-end: 1px solid var(--color-border);
+	background-color: var(--color-base);
+}
+
+.breadcrumbs-bar:empty,
+.breadcrumbs-bar:not(:has(.breadcrumbs)) {
+	display: none;
+}

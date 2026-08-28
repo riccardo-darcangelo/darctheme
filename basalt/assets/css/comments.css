@@ -1,0 +1,109 @@
+/**
+ * Comments. Loaded only where comments are rendered.
+ *
+ * @package Basalt
+ */
+
+.comments {
+	max-inline-size: var(--content-width);
+	margin: var(--space-6) auto 0;
+	padding-block-start: var(--space-4);
+	border-block-start: 1px solid var(--color-border);
+}
+
+.comments__title {
+	margin-block-end: var(--space-3);
+	font-size: var(--wp--preset--font-size--x-large, 1.875rem);
+}
+
+.comments__list,
+.comments__list .children {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.comments__list .children {
+	margin-block-start: var(--space-3);
+	padding-inline-start: var(--space-3);
+	border-inline-start: 2px solid var(--color-border);
+}
+
+.comments__list > li + li {
+	margin-block-start: var(--space-3);
+	padding-block-start: var(--space-3);
+	border-block-start: 1px solid var(--color-border);
+}
+
+.comment-body {
+	display: grid;
+	gap: 0.5rem;
+}
+
+.comment-author {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-weight: 600;
+}
+
+.comment-author img {
+	border-radius: var(--radius-pill);
+}
+
+.comment-meta {
+	color: var(--color-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+}
+
+.comment-meta a {
+	color: inherit;
+}
+
+.comment.bypostauthor > .comment-body .comment-author::after {
+	content: attr(data-author-label);
+	padding: 0.15rem 0.5rem;
+	background-color: var(--color-accent-soft);
+	border-radius: var(--radius-pill);
+	font-size: var(--wp--preset--font-size--x-small, 0.8125rem);
+	font-weight: 600;
+}
+
+.comment-awaiting-moderation {
+	color: var(--color-accent);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+}
+
+.comment-form {
+	display: grid;
+	gap: var(--space-2);
+	margin-block-start: var(--space-4);
+}
+
+.comment-form__notes,
+.comment-notes {
+	margin: 0;
+	color: var(--color-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+}
+
+.comment-form .comment-form-cookies-consent {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+.comment-form .comment-form-cookies-consent input {
+	inline-size: auto;
+	margin-block-start: 0.35rem;
+}
+
+.comment-form .comment-form-cookies-consent label {
+	margin: 0;
+	font-weight: 400;
+}
+
+.comments__closed {
+	margin-block-start: var(--space-3);
+	color: var(--color-ink-soft);
+}

@@ -1,0 +1,1002 @@
+# Copyright (C) 2026 Riccardo D'Arcangelo
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Basalt 2.0.0\n"
+"Report-Msgid-Bugs-To: https://darcdesign.de/themes/basalt/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: basalt\n"
+
+#: 404.php:20
+msgid "Error 404"
+msgstr ""
+
+#: 404.php:21
+msgid "This page does not exist"
+msgstr ""
+
+#: 404.php:23
+msgid "The address may have changed, or the page may have been removed. Try a search or one of the links below."
+msgstr ""
+
+#: 404.php:44
+msgid "Recent posts"
+msgstr ""
+
+#: 404.php:73
+msgid "Main pages"
+msgstr ""
+
+#. translators: %d: comment count.
+#: comments.php:29
+msgid "%d comment"
+msgid_plural "%d comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:51
+msgid "Older comments"
+msgstr ""
+
+#: comments.php:52
+msgid "Newer comments"
+msgstr ""
+
+#: comments.php:58
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:66
+msgid "Leave a comment"
+msgstr ""
+
+#: comments.php:67
+msgid "Reply to %s"
+msgstr ""
+
+#: comments.php:68
+msgid "Cancel reply"
+msgstr ""
+
+#: comments.php:69
+msgid "Post comment"
+msgstr ""
+
+#: comments.php:73
+msgid "Your email address will not be published. Required fields are marked with an asterisk."
+msgstr ""
+
+#: footer.php:49
+msgid "Legal"
+msgstr ""
+
+#: footer.php:55 inc/setup.php:104
+msgid "Social links"
+msgstr ""
+
+#: footer.php:64
+msgid "Back to top"
+msgstr ""
+
+#: header.php:40
+msgid "Menu"
+msgstr ""
+
+#: header.php:46
+msgid "Primary"
+msgstr ""
+
+#: inc/accessibility.php:22
+msgid "Skip to content"
+msgstr ""
+
+#: inc/accessibility.php:56
+msgid "Search this site"
+msgstr ""
+
+#: inc/accessibility.php:57
+msgid "Search…"
+msgstr ""
+
+#: inc/accessibility.php:59
+msgid "Search"
+msgstr ""
+
+#. translators: %s: post title.
+#: inc/accessibility.php:90
+msgid "about %s"
+msgstr ""
+
+#: inc/admin/notices.php:105
+msgid "Search engines are blocked."
+msgstr ""
+
+#: inc/admin/notices.php:106
+msgid "This site is set to discourage indexing, so none of the SEO output has any effect."
+msgstr ""
+
+#: inc/admin/notices.php:108
+msgid "Change it in Reading settings"
+msgstr ""
+
+#: inc/admin/notices.php:45
+msgid "Basalt is active."
+msgstr ""
+
+#: inc/admin/notices.php:46
+msgid "Three short steps get the site to a solid starting point."
+msgstr ""
+
+#: inc/admin/notices.php:50 inc/admin/theme-page.php:253
+msgid "Getting started"
+msgstr ""
+
+#: inc/admin/notices.php:53
+msgid "Dismiss"
+msgstr ""
+
+#: inc/admin/theme-page.php:101
+msgid "1. Identity"
+msgstr ""
+
+#: inc/admin/theme-page.php:102
+msgid "Upload the logo and set the site title and tagline. The tagline is used as the fallback meta description, so write it as a sentence a search engine could show."
+msgstr ""
+
+#: inc/admin/theme-page.php:105
+msgid "Open site identity"
+msgstr ""
+
+#: inc/admin/theme-page.php:111
+msgid "2. Structured data"
+msgstr ""
+
+#: inc/admin/theme-page.php:112
+msgid "Tell search engines who is behind the site: business name, address, phone and opening hours. This is what produces the knowledge panel and local results."
+msgstr ""
+
+#: inc/admin/theme-page.php:115
+msgid "Open structured data"
+msgstr ""
+
+#: inc/admin/theme-page.php:121
+msgid "3. Menus"
+msgstr ""
+
+#: inc/admin/theme-page.php:122
+msgid "Assign a primary menu. Until you do, the header lists your top level pages so the site stays navigable."
+msgstr ""
+
+#: inc/admin/theme-page.php:125
+msgid "Open menus"
+msgstr ""
+
+#: inc/admin/theme-page.php:131
+msgid "Design tokens"
+msgstr ""
+
+#: inc/admin/theme-page.php:133
+msgid "Colours, type scale and spacing come from theme.json. Change them in the site editor under Styles and every template, block and pattern follows. Editing CSS by hand is only needed for layout work."
+msgstr ""
+
+#: inc/admin/theme-page.php:137
+msgid "Open styles"
+msgstr ""
+
+#: inc/admin/theme-page.php:141
+msgid "Plugins that fit"
+msgstr ""
+
+#: inc/admin/theme-page.php:142
+msgid "Basalt requires none of these. Install what the project actually needs."
+msgstr ""
+
+#: inc/admin/theme-page.php:147
+msgid "Plugin"
+msgstr ""
+
+#: inc/admin/theme-page.php:148
+msgid "What it adds"
+msgstr ""
+
+#: inc/admin/theme-page.php:149
+msgid "Status"
+msgstr ""
+
+#: inc/admin/theme-page.php:192
+msgid "Activate"
+msgstr ""
+
+#: inc/admin/theme-page.php:198
+msgid "Active"
+msgstr ""
+
+#: inc/admin/theme-page.php:205
+msgid "Not installed"
+msgstr ""
+
+#: inc/admin/theme-page.php:215
+msgid "View and install"
+msgstr ""
+
+#: inc/admin/theme-page.php:23 inc/admin/theme-page.php:24
+msgid "Basalt"
+msgstr ""
+
+#: inc/admin/theme-page.php:51
+msgid "Editorial control over titles, descriptions and redirects. Basalt detects it and steps out of the way for meta tags, structured data and breadcrumbs."
+msgstr ""
+
+#: inc/admin/theme-page.php:56
+msgid "Contact and enquiry forms. Styled by the theme out of the box, and it loads its assets only on pages that contain a form."
+msgstr ""
+
+#: inc/admin/theme-page.php:61
+msgid "Structured fields for custom post types, for example technical specifications on a product page."
+msgstr ""
+
+#: inc/admin/theme-page.php:66
+msgid "Faster translation loading on non-English sites. Measurable on every request."
+msgstr ""
+
+#. translators: %s: theme version.
+#: inc/admin/theme-page.php:89
+msgid "Basalt %s"
+msgstr ""
+
+#: inc/admin/theme-page.php:96
+msgid "Three things get a new site to a good starting point. Everything else is optional."
+msgstr ""
+
+#: inc/assets.php:131
+msgid "Open menu"
+msgstr ""
+
+#: inc/assets.php:132
+msgid "Close menu"
+msgstr ""
+
+#: inc/assets.php:133
+msgid "Open submenu"
+msgstr ""
+
+#: inc/assets.php:134
+msgid "Close submenu"
+msgstr ""
+
+#: inc/blocks.php:116
+msgid "Basalt: hero"
+msgstr ""
+
+#: inc/blocks.php:117
+msgid "Opening sections for landing and home pages."
+msgstr ""
+
+#: inc/blocks.php:120
+msgid "Basalt: content"
+msgstr ""
+
+#: inc/blocks.php:121
+msgid "Text, media and feature sections."
+msgstr ""
+
+#: inc/blocks.php:124
+msgid "Basalt: catalog"
+msgstr ""
+
+#: inc/blocks.php:125
+msgid "Grids and cards for products, services or projects."
+msgstr ""
+
+#: inc/blocks.php:128
+msgid "Basalt: call to action"
+msgstr ""
+
+#: inc/blocks.php:129
+msgid "Conversion sections and contact prompts."
+msgstr ""
+
+#: inc/blocks.php:132
+msgid "Basalt: FAQ"
+msgstr ""
+
+#: inc/blocks.php:133
+msgid "Question and answer sections that emit FAQ structured data."
+msgstr ""
+
+#: inc/blocks.php:136
+msgid "Basalt: full pages"
+msgstr ""
+
+#: inc/blocks.php:137
+msgid "Complete page layouts to start from."
+msgstr ""
+
+#: inc/blocks.php:27 inc/setup.php:132
+msgid "Card"
+msgstr ""
+
+#: inc/blocks.php:31
+msgid "Bordered"
+msgstr ""
+
+#: inc/blocks.php:35
+msgid "Section"
+msgstr ""
+
+#: inc/blocks.php:41
+msgid "Rounded"
+msgstr ""
+
+#: inc/blocks.php:45
+msgid "Framed"
+msgstr ""
+
+#: inc/blocks.php:51
+msgid "Checklist"
+msgstr ""
+
+#: inc/blocks.php:55
+msgid "No markers"
+msgstr ""
+
+#: inc/blocks.php:61
+msgid "Eyebrow"
+msgstr ""
+
+#: inc/blocks.php:65
+msgid "Underlined"
+msgstr ""
+
+#: inc/blocks.php:71
+msgid "Thick"
+msgstr ""
+
+#: inc/blocks.php:77
+msgid "Testimonial"
+msgstr ""
+
+#: inc/blocks.php:83
+msgid "Tight gap"
+msgstr ""
+
+#: inc/blocks.php:89
+msgid "Specifications"
+msgstr ""
+
+#: inc/blocks.php:95
+msgid "FAQ item"
+msgstr ""
+
+#. translators: 1: required PHP version, 2: required WordPress version, 3: current PHP version, 4: current WordPress version.
+#: inc/compat.php:48
+msgid "Basalt requires PHP %1$s and WordPress %2$s or newer. This site runs PHP %3$s and WordPress %4$s. Please update before reporting problems."
+msgstr ""
+
+#: inc/customizer.php:110
+msgid "Theme options"
+msgstr ""
+
+#: inc/customizer.php:122
+msgid "Header"
+msgstr ""
+
+#: inc/customizer.php:133
+msgid "Layout"
+msgstr ""
+
+#: inc/customizer.php:137
+msgid "Logo left, menu right"
+msgstr ""
+
+#: inc/customizer.php:138
+msgid "Logo centred, menu below"
+msgstr ""
+
+#: inc/customizer.php:139
+msgid "Logo left, menu behind a button"
+msgstr ""
+
+#: inc/customizer.php:150
+msgid "Keep the header visible while scrolling"
+msgstr ""
+
+#: inc/customizer.php:151
+msgid "Uses CSS position: sticky. No scroll listener runs on the main thread."
+msgstr ""
+
+#: inc/customizer.php:163
+msgid "Show the search field in the header"
+msgstr ""
+
+#: inc/customizer.php:176
+msgid "Blog and archives"
+msgstr ""
+
+#: inc/customizer.php:187
+msgid "Archive layout"
+msgstr ""
+
+#: inc/customizer.php:191
+msgid "Card grid"
+msgstr ""
+
+#: inc/customizer.php:192
+msgid "List"
+msgstr ""
+
+#: inc/customizer.php:198
+msgid "Show excerpts on archives"
+msgstr ""
+
+#: inc/customizer.php:199
+msgid "Show date and author on archives"
+msgstr ""
+
+#: inc/customizer.php:200
+msgid "Show the author box on single posts"
+msgstr ""
+
+#: inc/customizer.php:201
+msgid "Show estimated reading time"
+msgstr ""
+
+#: inc/customizer.php:223
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer.php:234
+msgid "Copyright line"
+msgstr ""
+
+#: inc/customizer.php:235
+msgid "Leave empty to use the site title and the current year. {year} is replaced with the current year."
+msgstr ""
+
+#: inc/customizer.php:256
+msgid "Show the legal menu next to the copyright"
+msgstr ""
+
+#: inc/customizer.php:269
+msgid "Search engines: meta tags"
+msgstr ""
+
+#: inc/customizer.php:270
+msgid "Basalt only emits these when no SEO plugin is active, so nothing is ever duplicated."
+msgstr ""
+
+#: inc/customizer.php:281
+msgid "Emit description, Open Graph and Twitter tags"
+msgstr ""
+
+#: inc/customizer.php:300
+msgid "Fallback sharing image"
+msgstr ""
+
+#: inc/customizer.php:301
+msgid "Used when a page has no featured image. 1200 by 630 pixels works everywhere."
+msgstr ""
+
+#: inc/customizer.php:314
+msgid "X / Twitter handle"
+msgstr ""
+
+#: inc/customizer.php:315
+msgid "Without the @."
+msgstr ""
+
+#: inc/customizer.php:328
+msgid "Search engines: structured data"
+msgstr ""
+
+#: inc/customizer.php:329
+msgid "Feeds the Schema.org JSON-LD graph. Rich results in Google depend on these being accurate, so leave a field empty rather than guessing."
+msgstr ""
+
+#: inc/customizer.php:340
+msgid "Emit structured data"
+msgstr ""
+
+#: inc/customizer.php:341
+msgid "Switched off automatically while an SEO plugin outputs its own graph."
+msgstr ""
+
+#: inc/customizer.php:353
+msgid "The site represents"
+msgstr ""
+
+#: inc/customizer.php:366
+msgid "Legal or business name"
+msgstr ""
+
+#: inc/customizer.php:367
+msgid "Leave empty to use the site title."
+msgstr ""
+
+#: inc/customizer.php:386
+msgid "Logo for search results"
+msgstr ""
+
+#: inc/customizer.php:387
+msgid "Leave empty to use the site logo. Google wants at least 112 pixels on the shorter side."
+msgstr ""
+
+#: inc/customizer.php:395
+msgid "Phone"
+msgstr ""
+
+#: inc/customizer.php:396
+msgid "Email"
+msgstr ""
+
+#: inc/customizer.php:397
+msgid "Street and number"
+msgstr ""
+
+#: inc/customizer.php:398
+msgid "Postal code"
+msgstr ""
+
+#: inc/customizer.php:399
+msgid "City"
+msgstr ""
+
+#: inc/customizer.php:400
+msgid "Region or state"
+msgstr ""
+
+#: inc/customizer.php:401
+msgid "Country code, for example DE"
+msgstr ""
+
+#: inc/customizer.php:402
+msgid "Price range, for example €€"
+msgstr ""
+
+#: inc/customizer.php:425
+msgid "Opening hours"
+msgstr ""
+
+#: inc/customizer.php:426
+msgid "One rule per line, in Schema.org notation: Mo-Fr 08:00-18:00"
+msgstr ""
+
+#: inc/customizer.php:438
+msgid "Profile URLs"
+msgstr ""
+
+#: inc/customizer.php:439
+msgid "One URL per line. Emitted as sameAs, which is how search engines connect the site to its social profiles."
+msgstr ""
+
+#: inc/customizer.php:489
+msgid "Organization"
+msgstr ""
+
+#: inc/customizer.php:490
+msgid "Local business"
+msgstr ""
+
+#: inc/customizer.php:491
+msgid "Construction or trade business"
+msgstr ""
+
+#: inc/customizer.php:492
+msgid "Professional service"
+msgstr ""
+
+#: inc/customizer.php:493
+msgid "Store"
+msgstr ""
+
+#: inc/customizer.php:494
+msgid "Person"
+msgstr ""
+
+#. translators: 1: year, 2: site title.
+#: inc/customizer.php:607
+msgid "© %1$s %2$s"
+msgstr ""
+
+#. translators: %s: parent menu item title.
+#: inc/navigation.php:115
+msgid "Show submenu of %s"
+msgstr ""
+
+#: inc/navigation.php:196
+msgid "Set up your menu"
+msgstr ""
+
+#: inc/setup.php:102
+msgid "Primary menu"
+msgstr ""
+
+#: inc/setup.php:103
+msgid "Footer menu"
+msgstr ""
+
+#: inc/setup.php:105
+msgid "Legal menu"
+msgstr ""
+
+#: inc/setup.php:133
+msgid "Hero"
+msgstr ""
+
+#: inc/setup.php:134
+msgid "Square thumbnail"
+msgstr ""
+
+#: inc/setup.php:148 sidebar.php:18
+msgid "Sidebar"
+msgstr ""
+
+#: inc/setup.php:150
+msgid "Shown next to posts and on pages using the \"With sidebar\" template."
+msgstr ""
+
+#. translators: %d: footer column number.
+#: inc/setup.php:163
+msgid "Footer column %d"
+msgstr ""
+
+#: inc/setup.php:167
+msgid "Empty columns are skipped, so the footer grid adapts to how many you fill."
+msgstr ""
+
+#: inc/template-tags.php:103
+msgid "Categories"
+msgstr ""
+
+#: inc/template-tags.php:111
+msgid "Tags"
+msgstr ""
+
+#: inc/template-tags.php:178
+msgid "Previous"
+msgstr ""
+
+#: inc/template-tags.php:179
+msgid "Next"
+msgstr ""
+
+#: inc/template-tags.php:187
+msgid "Posts pagination"
+msgstr ""
+
+#: inc/template-tags.php:209
+msgid "Continue reading"
+msgstr ""
+
+#: inc/template-tags.php:215
+msgid "Previous post"
+msgstr ""
+
+#: inc/template-tags.php:224
+msgid "Next post"
+msgstr ""
+
+#: inc/template-tags.php:288 inc/template-tags.php:298
+msgid "Breadcrumb"
+msgstr ""
+
+#: inc/template-tags.php:332
+msgid "Home"
+msgstr ""
+
+#. translators: %s: last update date.
+#: inc/template-tags.php:39
+msgid "Updated %s"
+msgstr ""
+
+#. translators: %s: search query.
+#: inc/template-tags.php:410 search.php:21
+msgid "Search results for %s"
+msgstr ""
+
+#: inc/template-tags.php:417
+msgid "Page not found"
+msgstr ""
+
+#: inc/template-tags.php:55
+msgid "By"
+msgstr ""
+
+#: patterns/catalog-grid.php:17
+msgctxt "Pattern placeholder"
+msgid "First item"
+msgstr ""
+
+#: patterns/catalog-grid.php:18
+msgctxt "Pattern placeholder"
+msgid "One sentence on what it is and one on who it suits. Put the model name in the heading, that is what people search for."
+msgstr ""
+
+#: patterns/catalog-grid.php:21
+msgctxt "Pattern placeholder"
+msgid "Second item"
+msgstr ""
+
+#: patterns/catalog-grid.php:22
+msgctxt "Pattern placeholder"
+msgid "Keep the descriptions the same length across cards, otherwise the grid looks unfinished."
+msgstr ""
+
+#: patterns/catalog-grid.php:25
+msgctxt "Pattern placeholder"
+msgid "Third item"
+msgstr ""
+
+#: patterns/catalog-grid.php:26
+msgctxt "Pattern placeholder"
+msgid "Link every card to its own page. A page per item is what makes the long tail of search work."
+msgstr ""
+
+#: patterns/catalog-grid.php:33
+msgctxt "Pattern placeholder"
+msgid "What we offer"
+msgstr ""
+
+#: patterns/catalog-grid.php:56
+msgctxt "Pattern placeholder"
+msgid "Details"
+msgstr ""
+
+#: patterns/cta-contact.php:18
+msgctxt "Pattern placeholder"
+msgid "Tell us what you need"
+msgstr ""
+
+#: patterns/cta-contact.php:22
+msgctxt "Pattern placeholder"
+msgid "Send us the project and we will come back with a quote, usually the same working day."
+msgstr ""
+
+#: patterns/cta-contact.php:28
+msgctxt "Pattern placeholder"
+msgid "Send an enquiry"
+msgstr ""
+
+#: patterns/cta-contact.php:34
+msgctxt "Pattern placeholder"
+msgid "+49 000 0000000"
+msgstr ""
+
+#: patterns/faq-accordion.php:22
+msgctxt "Pattern placeholder"
+msgid "FAQ"
+msgstr ""
+
+#: patterns/faq-accordion.php:26
+msgctxt "Pattern placeholder"
+msgid "Questions we get asked"
+msgstr ""
+
+#: patterns/faq-accordion.php:30
+msgctxt "Pattern placeholder"
+msgid "Write the question the way a customer would ask it out loud, and answer it in the first sentence. Search engines quote that first sentence."
+msgstr ""
+
+#: patterns/faq-accordion.php:34 patterns/faq-accordion.php:33
+msgctxt "Pattern placeholder"
+msgid "How quickly can you deliver?"
+msgstr ""
+
+#: patterns/faq-accordion.php:36
+msgctxt "Pattern placeholder"
+msgid "Answer in two or three sentences. Give the concrete number first, then the condition it depends on."
+msgstr ""
+
+#: patterns/faq-accordion.php:42 patterns/faq-accordion.php:41
+msgctxt "Pattern placeholder"
+msgid "Which areas do you cover?"
+msgstr ""
+
+#: patterns/faq-accordion.php:44
+msgctxt "Pattern placeholder"
+msgid "Name the regions explicitly. A place name in an answer is one of the few things that reliably helps a local search."
+msgstr ""
+
+#: patterns/faq-accordion.php:50 patterns/faq-accordion.php:49
+msgctxt "Pattern placeholder"
+msgid "What does it cost?"
+msgstr ""
+
+#: patterns/faq-accordion.php:52
+msgctxt "Pattern placeholder"
+msgid "Even a range beats \"on request\". A page that answers the price question keeps the visitor from leaving to find it elsewhere."
+msgstr ""
+
+#: patterns/feature-list.php:30
+msgctxt "Pattern placeholder"
+msgid "Why us"
+msgstr ""
+
+#: patterns/feature-list.php:34
+msgctxt "Pattern placeholder"
+msgid "The part that actually matters"
+msgstr ""
+
+#: patterns/feature-list.php:38
+msgctxt "Pattern placeholder"
+msgid "Say the thing a competitor cannot copy. Numbers, years, names of places: anything specific outperforms an adjective."
+msgstr ""
+
+#: patterns/feature-list.php:44
+msgctxt "Pattern placeholder"
+msgid "A concrete promise, not a slogan"
+msgstr ""
+
+#: patterns/feature-list.php:48
+msgctxt "Pattern placeholder"
+msgid "A second one, same length"
+msgstr ""
+
+#: patterns/feature-list.php:52
+msgctxt "Pattern placeholder"
+msgid "Three to five points, no more"
+msgstr ""
+
+#: patterns/hero-split.php:22
+msgctxt "Pattern placeholder"
+msgid "Since 1998"
+msgstr ""
+
+#: patterns/hero-split.php:26
+msgctxt "Pattern placeholder"
+msgid "Equipment that arrives on time and works on site"
+msgstr ""
+
+#: patterns/hero-split.php:30
+msgctxt "Pattern placeholder"
+msgid "Describe in two sentences what you offer and who it is for. Keep the words your customers would type into a search box, and put the most important one near the front."
+msgstr ""
+
+#: patterns/hero-split.php:36
+msgctxt "Pattern placeholder"
+msgid "Request a quote"
+msgstr ""
+
+#: patterns/hero-split.php:40
+msgctxt "Pattern placeholder"
+msgid "See the range"
+msgstr ""
+
+#: patterns/specs-table.php:16
+msgctxt "Pattern placeholder"
+msgid "Load capacity"
+msgstr ""
+
+#: patterns/specs-table.php:16
+msgctxt "Pattern placeholder"
+msgid "200 kg"
+msgstr ""
+
+#: patterns/specs-table.php:17
+msgctxt "Pattern placeholder"
+msgid "Maximum height"
+msgstr ""
+
+#: patterns/specs-table.php:17
+msgctxt "Pattern placeholder"
+msgid "30 m"
+msgstr ""
+
+#: patterns/specs-table.php:18
+msgctxt "Pattern placeholder"
+msgid "Lifting speed"
+msgstr ""
+
+#: patterns/specs-table.php:18
+msgctxt "Pattern placeholder"
+msgid "30 m/min"
+msgstr ""
+
+#: patterns/specs-table.php:19
+msgctxt "Pattern placeholder"
+msgid "Power supply"
+msgstr ""
+
+#: patterns/specs-table.php:19
+msgctxt "Pattern placeholder"
+msgid "230 V"
+msgstr ""
+
+#: patterns/specs-table.php:20
+msgctxt "Pattern placeholder"
+msgid "Weight"
+msgstr ""
+
+#: patterns/specs-table.php:20
+msgctxt "Pattern placeholder"
+msgid "85 kg"
+msgstr ""
+
+#: patterns/specs-table.php:26
+msgctxt "Pattern placeholder"
+msgid "Technical data"
+msgstr ""
+
+#: patterns/specs-table.php:41
+msgctxt "Pattern placeholder"
+msgid "Subject to change. Values are for the standard configuration."
+msgstr ""
+
+#. translators: %d: number of results.
+#: search.php:32
+msgid "%d result"
+msgid_plural "%d results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: template-parts/components/author-box.php:22
+msgid "About the author"
+msgstr ""
+
+#: template-parts/components/author-box.php:28
+msgid "Written by"
+msgstr ""
+
+#: template-parts/components/page-header.php:20
+msgid "Blog"
+msgstr ""
+
+#: template-parts/components/page-header.php:30
+msgid "Category"
+msgstr ""
+
+#: template-parts/components/page-header.php:32
+msgid "Tag"
+msgstr ""
+
+#: template-parts/components/page-header.php:34
+msgid "Author"
+msgstr ""
+
+#: template-parts/content/content-none.php:15
+msgid "Nothing matched that search"
+msgstr ""
+
+#: template-parts/content/content-none.php:16
+msgid "Try fewer words, or a different spelling."
+msgstr ""
+
+#: template-parts/content/content-none.php:21
+msgid "Nothing published yet"
+msgstr ""
+
+#: template-parts/content/content-none.php:24
+msgid "Write the first post"
+msgstr ""
+
+#: template-parts/content/content-none.php:30
+msgid "Nothing here yet"
+msgstr ""
+
+#: template-parts/content/content-none.php:31
+msgid "There is no content in this section at the moment. A search might help."
+msgstr ""
+
+#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:46
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:46
+msgid "Page"
+msgstr ""
+
+#. translators: %s: page title.
+#: template-parts/content/content-page.php:55
+msgid "Edit %s"
+msgstr ""
+
+#. translators: %d: reading time in minutes.
+#: template-parts/content/content-single.php:28 template-parts/content/content.php:36
+msgid "%d min read"
+msgid_plural "%d min read"
+msgstr[0] ""
+msgstr[1] ""

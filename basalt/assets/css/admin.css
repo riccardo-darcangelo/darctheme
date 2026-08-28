@@ -1,0 +1,67 @@
+/**
+ * Styles for the "Getting started" screen under Appearance.
+ *
+ * Uses the WordPress admin's own colour variables where they exist, so the
+ * screen follows the user's admin colour scheme instead of fighting it.
+ *
+ * @package Basalt
+ */
+
+.basalt-admin__intro {
+	max-width: 60ch;
+	font-size: 14px;
+}
+
+.basalt-admin__grid {
+	display: grid;
+	gap: 16px;
+	grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+	margin: 20px 0 32px;
+}
+
+.basalt-admin__card {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+.basalt-admin__card h2 {
+	margin-top: 0;
+	font-size: 15px;
+}
+
+.basalt-admin__card p:last-child {
+	margin-top: auto;
+	margin-bottom: 0;
+	padding-top: 12px;
+}
+
+.basalt-admin__plugins {
+	margin-top: 12px;
+	max-width: 60rem;
+}
+
+.basalt-admin__plugins td,
+.basalt-admin__plugins th {
+	padding: 12px;
+	vertical-align: top;
+}
+
+.basalt-admin__status {
+	color: #646970;
+}
+
+.basalt-admin__status.is-active {
+	color: #007017;
+	font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+	.basalt-admin__card {
+		background: #1e1e1e;
+		border-color: #3c434a;
+	}
+}
