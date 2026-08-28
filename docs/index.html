@@ -114,6 +114,7 @@
 		<li><a href="#seo">SEO and structured data</a></li>
 		<li><a href="#performance">Performance</a></li>
 		<li><a href="#accessibility">Accessibility</a></li>
+		<li><a href="#preferences">Visitor display settings</a></li>
 		<li><a href="#child">Child themes</a></li>
 		<li><a href="#hooks">Hooks reference</a></li>
 		<li><a href="#translate">Translation</a></li>
@@ -565,6 +566,59 @@
 			not.
 		</p>
 	</div>
+</section>
+
+<section id="preferences">
+	<h2>Visitor display settings</h2>
+	<p>
+		Basalt Core can add a small button to the front end that lets a visitor
+		adjust how the site is presented to them. Their choice is stored in their
+		browser and applies on the next visit. Switch it on under
+		<strong>Settings &rarr; Search &amp; Schema &rarr; Visitor display
+		settings</strong>; it is off by default, because a floating control is
+		the site owner's decision to make.
+	</p>
+	<table>
+		<tr><th>Setting</th><th>What it does</th></tr>
+		<tr><td>Text size</td><td>Scales the root font size to 115, 130 or 150 percent. Every size in the theme is relative, so the whole layout follows.</td></tr>
+		<tr><td>More space between lines</td><td>Raises line height and paragraph spacing.</td></tr>
+		<tr><td>More space between letters and words</td><td>Applies the values from WCAG 1.4.12. Helps when letters appear to run together.</td></tr>
+		<tr><td>Underline every link</td><td>Makes links identifiable without relying on colour.</td></tr>
+		<tr><td>Higher contrast</td><td>Applies the same values as the High contrast style variation.</td></tr>
+		<tr><td>Reduce motion</td><td>Stops transitions and animations.</td></tr>
+		<tr><td>Do not keep the header on screen</td><td>Unsticks the header, which matters at high magnification where a sticky bar can take a third of the viewport.</td></tr>
+	</table>
+	<div class="note">
+		<p><strong>This is not an accessibility overlay</strong></p>
+		<p>
+			Overlays that promise automatic conformance are widely rejected by
+			the accessibility community. They rewrite the DOM and inject ARIA at
+			runtime, which interferes with the assistive technology a visitor has
+			already configured, and they let a site owner believe the underlying
+			problems are solved when they are not.
+		</p>
+		<p>
+			This panel changes presentation only. It adds no ARIA, rewrites no
+			markup, and makes no claim about conformance. Everything it offers is
+			something a visitor could also set in their operating system; it
+			exists because many people do not know those settings are there.
+		</p>
+		<p>
+			The system settings win by default:
+			<code>prefers-reduced-motion</code> and <code>prefers-contrast</code>
+			are read as the starting values, and the panel departs from them only
+			when the visitor asks it to.
+		</p>
+	</div>
+	<h3>Why there is an inline script</h3>
+	<p>
+		The preferences live in the visitor's browser, so they can only be
+		applied once JavaScript has read them. A deferred script would apply
+		them after the page has already painted at the default size, and the
+		visitor would watch the text jump on every page load. A very small
+		inline script in the head is the honest trade, and it is the only
+		JavaScript on the page that is not deferred.
+	</p>
 </section>
 
 <section id="child">

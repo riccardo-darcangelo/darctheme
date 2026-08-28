@@ -37,6 +37,9 @@ function basalt_core_defaults(): array {
 		'opening_hours'      => '',
 		'price_range'        => '',
 		'profiles'           => '',
+		// Off by default: a floating control is the site owner's decision to make.
+		'preferences_enabled'  => false,
+		'preferences_position' => 'right',
 	);
 }
 
@@ -148,6 +151,9 @@ function basalt_core_sanitize( $input ): array {
 	}
 
 	$out['profiles'] = implode( "\n", $urls );
+
+	$out['preferences_enabled']  = ! empty( $input['preferences_enabled'] );
+	$out['preferences_position'] = 'left' === ( $input['preferences_position'] ?? '' ) ? 'left' : 'right';
 
 	return $out;
 }
@@ -287,6 +293,32 @@ function basalt_core_render_settings(): void {
 				basalt_core_field( 'meta_enabled', __( 'Emit description, Open Graph and Twitter tags', 'basalt-core' ), 'checkbox' );
 				basalt_core_field( 'meta_twitter_site', __( 'X / Twitter handle', 'basalt-core' ), 'text', array( 'description' => __( 'Without the @.', 'basalt-core' ) ) );
 				basalt_core_field( 'meta_default_image', __( 'Fallback sharing image ID', 'basalt-core' ), 'number', array( 'description' => __( 'Attachment ID of the image used when a page has no featured image. 1200 by 630 pixels works everywhere.', 'basalt-core' ) ) );
+				?>
+			</table>
+
+			<h2><?php esc_html_e( 'Visitor display settings', 'basalt-core' ); ?></h2>
+			<p class="description" style="max-width:60em">
+				<?php esc_html_e( 'Adds a small button to the front end that lets a visitor adjust text size, spacing, contrast and motion for themselves. The choice is stored in their browser and applies on their next visit.', 'basalt-core' ); ?>
+			</p>
+			<p class="description" style="max-width:60em">
+				<strong><?php esc_html_e( 'This is not an accessibility overlay.', 'basalt-core' ); ?></strong>
+				<?php esc_html_e( 'It changes presentation only. It adds no ARIA, rewrites no markup, and does not make a site conformant. Overlays that claim otherwise are rejected by the accessibility community, and rightly so.', 'basalt-core' ); ?>
+			</p>
+			<table class="form-table" role="presentation">
+				<?php
+				basalt_core_field( 'preferences_enabled', __( 'Show the display settings button', 'basalt-core' ), 'checkbox' );
+				basalt_core_field(
+					'preferences_position',
+					__( 'Button position', 'basalt-core' ),
+					'select',
+					array(
+						'choices'     => array(
+							'right' => __( 'Bottom right', 'basalt-core' ),
+							'left'  => __( 'Bottom left', 'basalt-core' ),
+						),
+						'description' => __( 'Move it to the side that does not collide with a cookie banner or a chat widget.', 'basalt-core' ),
+					)
+				);
 				?>
 			</table>
 

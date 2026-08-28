@@ -1,0 +1,401 @@
+/**
+ * Display preferences: the panel, and the preferences it applies.
+ *
+ * Written to work under any theme. It reads the Basalt design tokens when they
+ * exist and falls back to plain values when they do not, so the panel is usable
+ * on a site running something else entirely.
+ *
+ * @package BasaltCore
+ */
+
+/* -------------------------------------------------------------------------
+ * The preferences themselves
+ *
+ * Each one is a single attribute on <html>, set by the boot script before the
+ * first paint. Nothing here depends on JavaScript having finished.
+ * ---------------------------------------------------------------------- */
+
+/*
+ * Text size scales the root, so every rem based size follows. Fluid sizes that
+ * use viewport units scale only in their rem part, which is intended: text
+ * that is already viewport sized does not need to grow as much.
+ */
+html[data-a11y-text-size="115"] { font-size: 115%; }
+html[data-a11y-text-size="130"] { font-size: 130%; }
+html[data-a11y-text-size="150"] { font-size: 150%; }
+
+html[data-a11y-line-height] body {
+	line-height: 1.9;
+}
+
+html[data-a11y-line-height] :is(p, li, dd, dt, figcaption) {
+	line-height: 1.9;
+}
+
+html[data-a11y-line-height] p {
+	margin-block-end: 1.5em;
+}
+
+/*
+ * The values follow WCAG 1.4.12, which asks that content stay usable at
+ * 0.12em letter spacing and 0.16em word spacing.
+ */
+html[data-a11y-letter-spacing] body {
+	letter-spacing: 0.12em;
+	word-spacing: 0.16em;
+}
+
+html[data-a11y-letter-spacing] :is(h1, h2, h3, h4, h5, h6) {
+	letter-spacing: 0.06em;
+}
+
+html[data-a11y-underline] a {
+	text-decoration: underline !important;
+	text-underline-offset: 0.2em;
+}
+
+/*
+ * Higher contrast reuses the values from the theme's High contrast style
+ * variation, so the two agree. Under another theme these simply darken the
+ * text and borders that theme already uses.
+ */
+html[data-a11y-contrast] {
+	--wp--preset--color--contrast: #000000;
+	--wp--preset--color--contrast-soft: #333333;
+	--wp--preset--color--border: #4d4d4d;
+	--wp--preset--color--accent: #8a2b00;
+	--wp--custom--focus--width: 3px;
+}
+
+html[data-a11y-contrast] a {
+	text-decoration: underline;
+}
+
+html[data-a11y-contrast] :is(input, textarea, select, button) {
+	border-color: #4d4d4d;
+}
+
+/*
+ * Motion is reduced, not removed. A transition of exactly zero can break
+ * scripts that wait for transitionend.
+ */
+html[data-a11y-motion] *,
+html[data-a11y-motion] *::before,
+html[data-a11y-motion] *::after {
+	animation-duration: 0.01ms !important;
+	animation-iteration-count: 1 !important;
+	transition-duration: 0.01ms !important;
+	scroll-behavior: auto !important;
+}
+
+/*
+ * Unsticking the header matters most at high magnification, where a sticky bar
+ * can occupy a third of the viewport. The selector covers the theme's header
+ * and any other sticky element in the page shell.
+ */
+html[data-a11y-unstick] :is(.site-header, .wp-site-blocks > header, header.wp-block-template-part) {
+	position: static !important;
+}
+
+/* -------------------------------------------------------------------------
+ * The panel
+ * ---------------------------------------------------------------------- */
+
+.basalt-a11y {
+	--basalt-a11y-ink: var(--wp--preset--color--contrast, #16191d);
+	--basalt-a11y-bg: var(--wp--preset--color--base, #ffffff);
+	--basalt-a11y-surface: var(--wp--preset--color--surface, #f4f5f7);
+	--basalt-a11y-border: var(--wp--preset--color--border, #dbe0e6);
+	--basalt-a11y-accent: var(--wp--preset--color--accent, #c2410c);
+}
+
+/*
+ * The trigger stays hidden until the boot script has run. A control that does
+ * nothing is worse than no control, and this is the one case where hiding
+ * something from everyone, including assistive technology, is correct: without
+ * JavaScript the panel genuinely cannot work.
+ */
+.basalt-a11y__trigger {
+	display: none;
+}
+
+.basalt-a11y-ready .basalt-a11y__trigger {
+	position: fixed;
+	inset-block-end: 1rem;
+	z-index: 999;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-block-size: 44px;
+	padding: 0.5rem 0.9rem;
+	border: 1px solid var(--basalt-a11y-border);
+	border-radius: 999px;
+	background-color: var(--basalt-a11y-bg);
+	color: var(--basalt-a11y-ink);
+	font: inherit;
+	font-size: 0.9375rem;
+	line-height: 1.2;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 8px 24px rgb(0 0 0 / 10%);
+	cursor: pointer;
+}
+
+.basalt-a11y--right .basalt-a11y__trigger {
+	inset-inline-end: 1rem;
+}
+
+.basalt-a11y--left .basalt-a11y__trigger {
+	inset-inline-start: 1rem;
+}
+
+.basalt-a11y__trigger:hover {
+	border-color: var(--basalt-a11y-ink);
+}
+
+/*
+ * A person, drawn with two shapes. An icon font or an inline SVG would both
+ * work; this costs no request and no markup.
+ */
+.basalt-a11y__icon {
+	position: relative;
+	inline-size: 1.25rem;
+	block-size: 1.25rem;
+	flex-shrink: 0;
+	border-radius: 50%;
+	border: 2px solid currentColor;
+}
+
+.basalt-a11y__icon::before {
+	content: "";
+	position: absolute;
+	inset-block-start: 3px;
+	inset-inline-start: 50%;
+	inline-size: 2px;
+	block-size: 2px;
+	border-radius: 50%;
+	background-color: currentColor;
+	transform: translateX(-50%);
+	box-shadow: 0 4px 0 0 currentColor;
+}
+
+@media (max-width: 30rem) {
+	.basalt-a11y__trigger-label {
+		position: absolute;
+		clip-path: inset(50%);
+		inline-size: 1px;
+		block-size: 1px;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.basalt-a11y-ready .basalt-a11y__trigger {
+		padding: 0.6rem;
+		min-inline-size: 44px;
+		justify-content: center;
+	}
+}
+
+.basalt-a11y__panel {
+	inline-size: min(26rem, calc(100vw - 2rem));
+	max-block-size: min(40rem, calc(100vh - 2rem));
+	padding: 0;
+	border: 1px solid var(--basalt-a11y-border);
+	border-radius: 12px;
+	background-color: var(--basalt-a11y-bg);
+	color: var(--basalt-a11y-ink);
+	box-shadow: 0 8px 16px rgb(0 0 0 / 8%), 0 24px 64px rgb(0 0 0 / 18%);
+}
+
+.basalt-a11y__panel::backdrop {
+	background-color: rgb(0 0 0 / 45%);
+}
+
+.basalt-a11y__form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	padding: 1.25rem;
+	max-block-size: inherit;
+	overflow-y: auto;
+}
+
+.basalt-a11y__head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.basalt-a11y__title {
+	margin: 0;
+	font-size: 1.25rem;
+	line-height: 1.2;
+}
+
+.basalt-a11y__close {
+	display: grid;
+	place-items: center;
+	inline-size: 44px;
+	block-size: 44px;
+	flex-shrink: 0;
+	margin: -0.5rem -0.5rem 0 0;
+	padding: 0;
+	border: 0;
+	border-radius: 8px;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+}
+
+.basalt-a11y__close:hover {
+	background-color: var(--basalt-a11y-surface);
+}
+
+.basalt-a11y__close-icon {
+	position: relative;
+	inline-size: 1rem;
+	block-size: 1rem;
+}
+
+.basalt-a11y__close-icon::before,
+.basalt-a11y__close-icon::after {
+	content: "";
+	position: absolute;
+	inset-block-start: 50%;
+	inset-inline-start: 0;
+	inline-size: 100%;
+	block-size: 2px;
+	background-color: currentColor;
+}
+
+.basalt-a11y__close-icon::before {
+	transform: rotate(45deg);
+}
+
+.basalt-a11y__close-icon::after {
+	transform: rotate(-45deg);
+}
+
+.basalt-a11y__intro {
+	margin: 0;
+	color: var(--wp--preset--color--contrast-soft, #5b6672);
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+.basalt-a11y__group {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.basalt-a11y__legend {
+	padding: 0;
+	margin-block-end: 0.5rem;
+	font-weight: 600;
+}
+
+.basalt-a11y__choices {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.basalt-a11y__choice {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	min-block-size: 44px;
+	padding: 0.4rem 0.75rem;
+	border: 1px solid var(--basalt-a11y-border);
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.basalt-a11y__choice:has(input:checked) {
+	border-color: var(--basalt-a11y-accent);
+	background-color: var(--basalt-a11y-surface);
+	font-weight: 600;
+}
+
+.basalt-a11y__row + .basalt-a11y__row {
+	border-block-start: 1px solid var(--basalt-a11y-border);
+}
+
+.basalt-a11y__switch {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+	padding-block: 0.75rem;
+	cursor: pointer;
+}
+
+.basalt-a11y__switch input {
+	inline-size: 1.25rem;
+	block-size: 1.25rem;
+	margin: 0.15rem 0 0;
+	flex-shrink: 0;
+	accent-color: var(--basalt-a11y-accent);
+}
+
+.basalt-a11y__switch-name {
+	display: block;
+	font-weight: 600;
+}
+
+.basalt-a11y__help {
+	display: block;
+	margin-block-start: 0.15rem;
+	color: var(--wp--preset--color--contrast-soft, #5b6672);
+	font-size: 0.875rem;
+	line-height: 1.4;
+}
+
+.basalt-a11y__actions {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.basalt-a11y__reset {
+	min-block-size: 44px;
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--basalt-a11y-border);
+	border-radius: 8px;
+	background-color: transparent;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+}
+
+.basalt-a11y__reset:hover {
+	background-color: var(--basalt-a11y-surface);
+}
+
+.basalt-a11y__status {
+	margin: 0;
+	min-block-size: 1.25em;
+	color: var(--wp--preset--color--contrast-soft, #5b6672);
+	font-size: 0.875rem;
+}
+
+/* Printing a floating control makes no sense. */
+@media print {
+	.basalt-a11y {
+		display: none;
+	}
+}
+
+/*
+ * The plugin cannot assume a theme defines this. Scoped to the panel so it
+ * never collides with a theme's own definition.
+ */
+.basalt-a11y .screen-reader-text {
+	position: absolute !important;
+	clip-path: inset(50%);
+	inline-size: 1px;
+	block-size: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	white-space: nowrap;
+}
