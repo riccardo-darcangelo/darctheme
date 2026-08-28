@@ -90,15 +90,26 @@ function basalt_enqueue_assets(): void {
 	);
 
 	/*
-	 * The theme's own style.css carries no rules; it is enqueued last so that a
-	 * child theme's style.css loads after every parent stylesheet.
+	 * A child theme's style.css is enqueued last, so anything it defines wins
+	 * on source order.
+	 *
+	 * With no child theme active this is skipped. The parent's style.css holds
+	 * the theme header and nothing else, so loading it would cost a
+	 * render-blocking round trip for a file that is pure comment. Buyers who
+	 * want custom CSS have a child theme or Additional CSS; the file header
+	 * says as much.
 	 */
-	wp_enqueue_style(
-		'basalt-style',
-		get_stylesheet_uri(),
-		array( 'basalt-blocks' ),
-		basalt_asset_version( 'style.css' )
-	);
+	if ( get_template_directory() !== get_stylesheet_directory() ) {
+		$child_stylesheet = get_stylesheet_directory() . '/style.css';
+
+		wp_enqueue_style(
+			'basalt-child-style',
+			get_stylesheet_uri(),
+			array( 'basalt-blocks' ),
+			// The child's own timestamp, not the parent's.
+			is_readable( $child_stylesheet ) ? (string) filemtime( $child_stylesheet ) : BASALT_VERSION
+		);
+	}
 
 	// Navigation: menu toggle, submenu handling, focus management.
 	wp_enqueue_script(
