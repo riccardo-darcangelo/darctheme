@@ -9,14 +9,19 @@ License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, portfolio, business, one-column, block-patterns, block-styles, custom-colors, custom-logo, custom-menu, editor-style, featured-images, rtl-language-support, sticky-post, threaded-comments, translation-ready, wide-blocks, accessibility-ready
 
-A fast, accessible and SEO-first hybrid WordPress theme.
+A fast, accessible, SEO-first WordPress block theme.
 
 == Description ==
 
-Basalt combines classic PHP templates with a theme.json design system. The
-templates give exact control over markup, headings and structured data; the
-design tokens are defined once in theme.json and apply to the front end, the
-editor, the patterns and the block styles at once.
+Basalt is a block theme with four complete style variations that switch the
+whole look in one click, including a high contrast variation where every text
+and control colour clears WCAG AAA. The design tokens are defined once in
+theme.json and apply to the front end, the editor, the patterns and the block
+styles at once.
+
+Structured data, meta tags, breadcrumbs and the accessibility corrections for
+core blocks come from the bundled Basalt Core plugin, so a site keeps them when
+it changes theme.
 
 What it does out of the box:
 
@@ -51,10 +56,9 @@ duplicated.
 
 = How do I change the colours and the type scale? =
 
-In theme.json, best from a child theme. Basalt uses classic PHP templates, so
-WordPress does not offer the site editor here; there is no visual panel for
-these values. Both the front end and the block editor follow the file. Editing
-CSS by hand is only needed for layout work.
+Under Appearance > Editor > Styles, or in theme.json from a child theme for a
+change that survives a reset. Both the front end and the block editor follow.
+Editing CSS by hand is only needed for layout work.
 
 = Where do I put custom CSS? =
 
@@ -76,8 +80,26 @@ theme can replace a single part instead of a whole template.
 
 == Changelog ==
 
+= 3.0.0 =
+* Converted to a block theme. Templates and template parts are HTML in
+  templates/ and parts/, editable in the site editor.
+* Added four style variations, including High contrast where every text and
+  control colour clears WCAG AAA and the focus ring widens to 3px.
+* Moved structured data, meta tags, breadcrumbs and the accessibility
+  corrections for core blocks into the bundled Basalt Core plugin, so a site
+  keeps them across a theme change. Settings moved from theme mods to options
+  for the same reason.
+* Breadcrumbs are now a server rendered block, reading from the same data as
+  the BreadcrumbList structured data.
+* The theme ships no JavaScript.
+* Accessibility: eyebrow labels are paragraphs rather than headings, the posts
+  page has an H1, submenu toggles meet the WCAG 2.2 target size, and
+  navigation and search landmarks carry accessible names.
+* Audited with axe-core across nine templates at three widths: zero
+  violations, no horizontal overflow.
+
 = 2.0.0 =
-* Rewritten from the ground up as a hybrid theme.
+* Rewritten from the ground up.
 * Added theme.json v3 with colour, type, spacing and shadow tokens.
 * Added Schema.org JSON-LD graph with automatic FAQPage detection.
 * Added Open Graph and Twitter Card output with SEO plugin detection.

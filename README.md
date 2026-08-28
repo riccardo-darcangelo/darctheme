@@ -1,19 +1,26 @@
 # Basalt
 
-A fast, accessible and SEO-first hybrid WordPress theme. Classic PHP templates
-for exact control over markup and structured data, a `theme.json` design system
-for everything visual. No build step, no dependencies, no external requests.
+A fast, accessible, SEO-first WordPress block theme, with the structured data
+and accessibility layer in a companion plugin so a customer keeps it when they
+change theme.
 
-Formerly *DarcTheme*. Version 2.0.0 is a rewrite; the previous theme is kept
-under `legacy/` for reference and is no longer maintained.
+Four style variations switch the whole look in one click, including a high
+contrast variation where every text and control colour clears WCAG AAA. No build
+step, no dependencies, no external requests, and the theme itself ships no
+JavaScript at all.
+
+Formerly *DarcTheme*. Version 3.0.0 converted the theme from classic templates
+to a block theme; the pre-2.0 theme is kept under `legacy/` for reference and is
+not maintained.
 
 ## Repository layout
 
 | Path | Contents |
 | --- | --- |
-| `basalt/` | The theme. This folder is what ships. |
+| `basalt/` | The theme. A block theme; this folder is what ships as the theme. |
+| `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, breadcrumb block, accessibility corrections for core blocks. |
+| `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
-| `examples/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
 | `dev/` | Throwaway WordPress in Docker, with a seed script for demo content. |
 | `tools/` | POT generation, static preview, packaging. Node only, no dependencies. |
@@ -87,11 +94,17 @@ npm run lint:php
 
 ## Architecture notes
 
-**Hybrid, not full site editing.** Templates are PHP so the heading order,
-landmarks and structured data are determined in code rather than assembled in
-an editor. `block-template-parts` support is deliberately off: it would create
-a second, editable source of header and footer markup next to `header.php` and
-`footer.php`, and two sources for one region is how heading order gets lost.
+**A block theme, because customizability needs a surface.** The 2.x theme had
+`theme.json` but classic templates, and WordPress offers the site editor and its
+Styles panel only to block themes: `wp_is_block_theme()` returned false, so
+there was no visual way to change a single colour. Style variations, the
+mechanism behind the one-click looks, are unreachable from a classic theme.
+
+**Markup control survived the move.** It was the reason to stay classic, and it
+is preserved where it matters. The breadcrumb is a server rendered block, so it
+still emits a nav landmark, an ordered list and `aria-current` from the same
+data as the BreadcrumbList JSON-LD. Where a core block emits markup that fails
+an audit, a `render_block` filter corrects it rather than a template fork.
 
 **No cascade layers in the theme CSS.** WordPress prints the CSS generated from
 `theme.json` unlayered, and an unlayered rule beats every layered rule
@@ -99,14 +112,19 @@ regardless of specificity. Component styles inside `@layer` therefore lose every
 collision with `theme.json`. See the note at the top of
 `basalt/assets/css/base.css`.
 
-**Data structure belongs in a plugin.** Post types, taxonomies and custom
-fields are registered by `examples/basalt-catalog/`, never by the theme.
-A theme that registers them takes the customer's content with it when they
-switch.
+**Data structure and site identity belong in plugins.** Post types, taxonomies
+and custom fields are registered by `plugins/basalt-catalog/`; the Schema.org
+graph, meta tags, breadcrumbs and the accessibility corrections for core blocks
+live in `plugins/basalt-core/`. A theme that owns any of it takes the customer's
+content and their search presence with it when they switch.
 
-**The theme stands down for SEO plugins.** Meta tags, structured data and
+The settings are options rather than theme mods, and that fixes a real defect:
+WordPress stores theme mods per stylesheet, so under 2.x switching from the
+parent to the child theme silently wiped every business detail.
+
+**The plugin stands down for SEO plugins.** Meta tags, structured data and
 breadcrumbs are emitted only when no SEO plugin owns them. Detection lives in
-`basalt/inc/integrations/seo-plugins.php`.
+`plugins/basalt-core/inc/seo-plugins.php`.
 
 ## Licence
 
