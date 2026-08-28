@@ -198,6 +198,20 @@ function basalt_render_plugin_action( string $slug ): void {
 			return;
 		}
 
+		/*
+		 * The screen itself only requires edit_theme_options, which does not
+		 * imply the right to activate a plugin. On multisite a site
+		 * administrator has the former and not the latter unless the network
+		 * allows it. Core would reject the request anyway, so this is not a
+		 * privilege boundary; offering a link that leads to a permission error
+		 * is simply a bug.
+		 */
+		if ( ! current_user_can( 'activate_plugin', $plugin_file ) ) {
+			printf( '<span class="basalt-admin__status">%s</span>', esc_html__( 'Installed, not active', 'basalt' ) );
+
+			return;
+		}
+
 		printf(
 			'<a href="%1$s">%2$s</a>',
 			esc_url(

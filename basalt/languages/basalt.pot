@@ -103,19 +103,23 @@ msgstr ""
 msgid "Basalt"
 msgstr ""
 
-#: inc/admin/theme-page.php:209
+#: inc/admin/theme-page.php:210
+msgid "Installed, not active"
+msgstr ""
+
+#: inc/admin/theme-page.php:223
 msgid "Activate"
 msgstr ""
 
-#: inc/admin/theme-page.php:216
+#: inc/admin/theme-page.php:230
 msgid "Not installed"
 msgstr ""
 
-#: inc/admin/theme-page.php:226
+#: inc/admin/theme-page.php:240
 msgid "View and install"
 msgstr ""
 
-#: inc/admin/theme-page.php:263
+#: inc/admin/theme-page.php:277
 msgid "Getting started"
 msgstr ""
 
