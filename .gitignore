@@ -1,1 +1,16 @@
-.
+# Build output and generated previews.
+/dist/
+
+# Dependencies. The theme itself ships without any.
+/node_modules/
+/vendor/
+
+# Editors and operating systems.
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db
+
+# Local tooling caches.
+.phpcs-cache
+.phpunit.result.cache

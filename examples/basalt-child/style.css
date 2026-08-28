@@ -1,0 +1,72 @@
+/*
+Theme Name: Basalt Child
+Theme URI: https://darcdesign.de/themes/basalt/
+Template: basalt
+Author: Riccardo D'Arcangelo
+Author URI: https://darcdesign.de/
+Description: Starting point for a project built on Basalt. Shows the three things a real project needs: templates for a custom post type, structured data for it, and design token overrides. Copy the folder, rename it, and build from here.
+Version: 1.0.0
+Requires PHP: 8.1
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: basalt-child
+*/
+
+/*
+ * The parent enqueues this file last, so anything written here wins on source
+ * order. For colours, type and spacing prefer theme.json in this folder: those
+ * values stay editable in the site editor, CSS written here does not.
+ */
+
+.catalog-specs {
+	margin-block: var(--space-4);
+	border-block-start: 1px solid var(--color-border);
+}
+
+.catalog-specs__row {
+	display: grid;
+	grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+	gap: var(--space-2);
+	padding-block: 0.75rem;
+	border-block-end: 1px solid var(--color-border);
+}
+
+.catalog-specs__label {
+	color: var(--color-ink-soft);
+	font-weight: 600;
+}
+
+.catalog-specs__value {
+	margin: 0;
+}
+
+@media (max-width: 34rem) {
+	.catalog-specs__row {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.25rem;
+	}
+}
+
+.catalog-terms {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-block: var(--space-2);
+	padding: 0;
+	list-style: none;
+}
+
+.catalog-terms a {
+	display: inline-block;
+	padding: 0.25rem 0.75rem;
+	background-color: var(--color-surface);
+	border-radius: var(--radius-pill);
+	color: var(--color-ink);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	text-decoration: none;
+}
+
+.catalog-terms a:hover,
+.catalog-terms a:focus-visible {
+	background-color: var(--color-accent-soft);
+}

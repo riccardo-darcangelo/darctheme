@@ -1,0 +1,19 @@
+{
+  "name": "basalt-theme",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Build tooling for the Basalt WordPress theme. The theme itself ships without dependencies.",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "pot": "node tools/make-pot.mjs basalt basalt/languages/basalt.pot",
+    "preview": "node tools/make-preview.mjs",
+    "serve": "node tools/preview-server.mjs 4321",
+    "package": "npm run pot && node tools/package.mjs",
+    "package:market": "npm run pot && node tools/package.mjs --market",
+    "lint:php": "phpcs --standard=phpcs.xml"
+  }
+}
