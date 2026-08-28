@@ -379,9 +379,41 @@ if ( process.argv.includes( '--market' ) ) {
 
 	/*
 	 * The layout Envato expects: the installable theme at the top level, the
-	 * documentation in its own folder, the licence beside them.
+	 * plugins in their own folder, the documentation in another, the licence
+	 * beside them.
 	 */
 	const contents = [ { path: themeZip, name: basename( themeZip ) } ];
+
+	/*
+	 * The plugins are part of the product, not optional extras. Basalt Core
+	 * carries the structured data and the accessibility corrections, so a
+	 * bundle without it ships a theme that silently does less than the item
+	 * description promises.
+	 */
+	for ( const plugin of readdirSync( 'plugins' ) ) {
+		const pluginFiles = collect( join( 'plugins', plugin ) );
+
+		if ( ! pluginFiles.length ) {
+			continue;
+		}
+
+		const pluginZip = join( distDir, `${ plugin }.zip` );
+
+		zip(
+			pluginZip,
+			pluginFiles.map( ( path ) => ( {
+				path,
+				// Strip the plugins/ prefix: WordPress wants the plugin folder at the root.
+				name: path.split( sep ).join( '/' ).replace( /^plugins\//, '' ),
+			} ) )
+		);
+
+		verifyArchive( pluginZip );
+
+		contents.push( { path: pluginZip, name: `plugins/${ plugin }.zip` } );
+
+		console.log( `Plugin package: ${ pluginZip } (${ pluginFiles.length } files)` );
+	}
 
 	for ( const doc of collect( 'docs' ) ) {
 		contents.push( { path: doc, name: doc.replace( /^docs\//, 'documentation/' ) } );
