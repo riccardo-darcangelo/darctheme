@@ -44,7 +44,7 @@ function basalt_asset_version( string $relative_path ): string {
  * @return void
  */
 function basalt_enqueue_assets(): void {
-	// Base layer: cascade layer order, reset, element defaults, typography.
+	// Reset, element defaults, tokens and the accessibility utilities.
 	wp_enqueue_style(
 		'basalt-base',
 		BASALT_URI . 'assets/css/base.css',
