@@ -11,262 +11,137 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: basalt\n"
 
-#: 404.php:20
-msgid "Error 404"
-msgstr ""
-
-#: 404.php:21
-msgid "This page does not exist"
-msgstr ""
-
-#: 404.php:23
-msgid "The address may have changed, or the page may have been removed. Try a search or one of the links below."
-msgstr ""
-
-#: 404.php:44
-msgid "Recent posts"
-msgstr ""
-
-#: 404.php:73
-msgid "Main pages"
-msgstr ""
-
-#. translators: %d: comment count.
-#: comments.php:29
-msgid "%d comment"
-msgid_plural "%d comments"
-msgstr[0] ""
-msgstr[1] ""
-
-#: comments.php:51
-msgid "Older comments"
-msgstr ""
-
-#: comments.php:52
-msgid "Newer comments"
-msgstr ""
-
-#: comments.php:58
-msgid "Comments are closed."
-msgstr ""
-
-#: comments.php:66
-msgid "Leave a comment"
-msgstr ""
-
-#: comments.php:67
-msgid "Reply to %s"
-msgstr ""
-
-#: comments.php:68
-msgid "Cancel reply"
-msgstr ""
-
-#: comments.php:69
-msgid "Post comment"
-msgstr ""
-
-#: comments.php:73
-msgid "Your email address will not be published. Required fields are marked with an asterisk."
-msgstr ""
-
-#: footer.php:49
-msgid "Legal"
-msgstr ""
-
-#: footer.php:55 inc/setup.php:104
-msgid "Social links"
-msgstr ""
-
-#: footer.php:64
-msgid "Back to top"
-msgstr ""
-
-#: header.php:40
-msgid "Menu"
-msgstr ""
-
-#: header.php:46
-msgid "Primary"
-msgstr ""
-
-#. translators: %s: post title.
-#: inc/accessibility.php:158
-msgid "about %s"
-msgstr ""
-
-#: inc/accessibility.php:22
+#: inc/accessibility.php:29
 msgid "Skip to content"
 msgstr ""
 
-#: inc/accessibility.php:84 inc/accessibility.php:71
-msgid "Search this site"
-msgstr ""
-
-#: inc/accessibility.php:85
-msgid "Search…"
-msgstr ""
-
-#: inc/accessibility.php:87 inc/accessibility.php:120
-msgid "Search"
-msgstr ""
-
-#: inc/admin/notices.php:105
-msgid "Search engines are blocked."
-msgstr ""
-
-#: inc/admin/notices.php:106
-msgid "This site is set to discourage indexing, so none of the SEO output has any effect."
-msgstr ""
-
-#: inc/admin/notices.php:108
-msgid "Change it in Reading settings"
-msgstr ""
-
-#: inc/admin/notices.php:45
-msgid "Basalt is active."
-msgstr ""
-
-#: inc/admin/notices.php:46
-msgid "Three short steps get the site to a solid starting point."
-msgstr ""
-
-#: inc/admin/notices.php:50 inc/admin/theme-page.php:257
-msgid "Getting started"
-msgstr ""
-
-#: inc/admin/notices.php:53
-msgid "Dismiss"
-msgstr ""
-
-#: inc/admin/theme-page.php:101
-msgid "1. Identity"
+#: inc/admin/theme-page.php:100
+msgid "1. Pick a style"
 msgstr ""
 
 #: inc/admin/theme-page.php:102
-msgid "Upload the logo and set the site title and tagline. The tagline is used as the fallback meta description, so write it as a sentence a search engine could show."
+msgid "Basalt ships four complete looks, including a high contrast variation where every colour clears WCAG AAA. Switching one changes colours, type and spacing everywhere at once."
 msgstr ""
 
-#: inc/admin/theme-page.php:105
-msgid "Open site identity"
-msgstr ""
-
-#: inc/admin/theme-page.php:111
-msgid "2. Structured data"
+#: inc/admin/theme-page.php:106
+msgid "Open styles"
 msgstr ""
 
 #: inc/admin/theme-page.php:112
-msgid "Tell search engines who is behind the site: business name, address, phone and opening hours. This is what produces the knowledge panel and local results."
+msgid "2. Identity"
 msgstr ""
 
-#: inc/admin/theme-page.php:115
-msgid "Open structured data"
+#: inc/admin/theme-page.php:113
+msgid "Set the site title, tagline and logo. The tagline is the fallback meta description, so write it as a sentence a search engine could show."
 msgstr ""
 
-#: inc/admin/theme-page.php:121
-msgid "3. Menus"
+#: inc/admin/theme-page.php:116
+msgid "Site settings"
 msgstr ""
 
 #: inc/admin/theme-page.php:122
-msgid "Assign a primary menu. Until you do, the header lists your top level pages so the site stays navigable."
+msgid "3. Header and footer"
 msgstr ""
 
-#: inc/admin/theme-page.php:125
-msgid "Open menus"
+#: inc/admin/theme-page.php:123
+msgid "Both are template parts. Edit them once in the site editor and every template follows, including the navigation menu."
 msgstr ""
 
-#: inc/admin/theme-page.php:131
-msgid "Design tokens"
+#: inc/admin/theme-page.php:126
+msgid "Edit template parts"
+msgstr ""
+
+#: inc/admin/theme-page.php:132
+msgid "4. Who is behind the site"
 msgstr ""
 
 #: inc/admin/theme-page.php:133
-msgid "Colours, the type scale and the spacing steps are defined once in theme.json and apply to the front end, the block editor, the patterns and the block styles at the same time."
+msgid "Business name, address, phone and opening hours. This is what produces the knowledge panel and local results."
 msgstr ""
 
-#. translators: %s: the theme.json file name, wrapped in a code element.
-#: inc/admin/theme-page.php:139
-msgid "Basalt uses classic PHP templates, so WordPress does not offer the site editor here and there is no visual panel for these values. Edit %s in a child theme; the block editor picks the change up immediately."
+#: inc/admin/theme-page.php:137
+msgid "Search and schema settings"
 msgstr ""
 
-#: inc/admin/theme-page.php:145
-msgid "Plugins that fit"
+#: inc/admin/theme-page.php:140
+msgid "Install and activate Basalt Core to reach these settings."
 msgstr ""
 
 #: inc/admin/theme-page.php:146
-msgid "Basalt requires none of these. Install what the project actually needs."
+msgid "Design tokens"
+msgstr ""
+
+#: inc/admin/theme-page.php:148
+msgid "Colours, the type scale and the spacing steps come from theme.json. Change them under Styles and the front end, the editor, the patterns and the block styles all follow. A child theme can override the same file for a permanent change."
 msgstr ""
 
 #: inc/admin/theme-page.php:151
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin/theme-page.php:155
 msgid "Plugin"
 msgstr ""
 
-#: inc/admin/theme-page.php:152
+#: inc/admin/theme-page.php:156
 msgid "What it adds"
 msgstr ""
 
-#: inc/admin/theme-page.php:153
+#: inc/admin/theme-page.php:157
 msgid "Status"
 msgstr ""
 
-#: inc/admin/theme-page.php:196
-msgid "Activate"
+#: inc/admin/theme-page.php:166
+msgid "Bundled"
 msgstr ""
 
-#: inc/admin/theme-page.php:202
+#: inc/admin/theme-page.php:196
 msgid "Active"
 msgstr ""
 
-#: inc/admin/theme-page.php:209
-msgid "Not installed"
-msgstr ""
-
-#: inc/admin/theme-page.php:219
-msgid "View and install"
-msgstr ""
-
-#: inc/admin/theme-page.php:23 inc/admin/theme-page.php:24
+#: inc/admin/theme-page.php:20 inc/admin/theme-page.php:21
 msgid "Basalt"
 msgstr ""
 
-#: inc/admin/theme-page.php:51
-msgid "Editorial control over titles, descriptions and redirects. Basalt detects it and steps out of the way for meta tags, structured data and breadcrumbs."
+#: inc/admin/theme-page.php:209
+msgid "Activate"
 msgstr ""
 
-#: inc/admin/theme-page.php:56
+#: inc/admin/theme-page.php:216
+msgid "Not installed"
+msgstr ""
+
+#: inc/admin/theme-page.php:226
+msgid "View and install"
+msgstr ""
+
+#: inc/admin/theme-page.php:263
+msgid "Getting started"
+msgstr ""
+
+#: inc/admin/theme-page.php:46
+msgid "Structured data, meta tags, breadcrumbs and the accessibility corrections for core blocks. Ships with the theme. Without it the templates still render, but the breadcrumb block is missing and no structured data is emitted."
+msgstr ""
+
+#: inc/admin/theme-page.php:52
+msgid "Editorial control over titles, descriptions and redirects. Basalt Core detects it and steps out of the way, so nothing is emitted twice."
+msgstr ""
+
+#: inc/admin/theme-page.php:58
 msgid "Contact and enquiry forms. Styled by the theme out of the box, and it loads its assets only on pages that contain a form."
 msgstr ""
 
-#: inc/admin/theme-page.php:61
-msgid "Structured fields for custom post types, for example technical specifications on a product page."
-msgstr ""
-
-#: inc/admin/theme-page.php:66
+#: inc/admin/theme-page.php:64
 msgid "Faster translation loading on non-English sites. Measurable on every request."
 msgstr ""
 
 #. translators: %s: theme version.
-#: inc/admin/theme-page.php:89
+#: inc/admin/theme-page.php:88
 msgid "Basalt %s"
 msgstr ""
 
-#: inc/admin/theme-page.php:96
-msgid "Three things get a new site to a good starting point. Everything else is optional."
-msgstr ""
-
-#: inc/assets.php:142
-msgid "Open menu"
-msgstr ""
-
-#: inc/assets.php:143
-msgid "Close menu"
-msgstr ""
-
-#: inc/assets.php:144
-msgid "Open submenu"
-msgstr ""
-
-#: inc/assets.php:145
-msgid "Close submenu"
+#: inc/admin/theme-page.php:95
+msgid "Four things get a new site to a good starting point. Everything else is optional."
 msgstr ""
 
 #: inc/blocks.php:103
@@ -325,7 +200,7 @@ msgstr ""
 msgid "Complete page layouts to start from."
 msgstr ""
 
-#: inc/blocks.php:27 inc/setup.php:132
+#: inc/blocks.php:27 inc/setup.php:66
 msgid "Card"
 msgstr ""
 
@@ -382,333 +257,16 @@ msgstr ""
 msgid "Basalt requires PHP %1$s and WordPress %2$s or newer. This site runs PHP %3$s and WordPress %4$s. Please update before reporting problems."
 msgstr ""
 
-#: inc/customizer.php:110
-msgid "Theme options"
-msgstr ""
-
-#: inc/customizer.php:122
-msgid "Header"
-msgstr ""
-
-#: inc/customizer.php:133
-msgid "Layout"
-msgstr ""
-
-#: inc/customizer.php:137
-msgid "Logo left, menu right"
-msgstr ""
-
-#: inc/customizer.php:138
-msgid "Logo centred, menu below"
-msgstr ""
-
-#: inc/customizer.php:139
-msgid "Logo left, menu behind a button"
-msgstr ""
-
-#: inc/customizer.php:150
-msgid "Keep the header visible while scrolling"
-msgstr ""
-
-#: inc/customizer.php:151
-msgid "Uses CSS position: sticky. No scroll listener runs on the main thread."
-msgstr ""
-
-#: inc/customizer.php:163
-msgid "Show the search field in the header"
-msgstr ""
-
-#: inc/customizer.php:176
-msgid "Blog and archives"
-msgstr ""
-
-#: inc/customizer.php:187
-msgid "Archive layout"
-msgstr ""
-
-#: inc/customizer.php:191
-msgid "Card grid"
-msgstr ""
-
-#: inc/customizer.php:192
-msgid "List"
-msgstr ""
-
-#: inc/customizer.php:198
-msgid "Show excerpts on archives"
-msgstr ""
-
-#: inc/customizer.php:199
-msgid "Show date and author on archives"
-msgstr ""
-
-#: inc/customizer.php:200
-msgid "Show the author box on single posts"
-msgstr ""
-
-#: inc/customizer.php:201
-msgid "Show estimated reading time"
-msgstr ""
-
-#: inc/customizer.php:223
-msgid "Footer"
-msgstr ""
-
-#: inc/customizer.php:234
-msgid "Copyright line"
-msgstr ""
-
-#: inc/customizer.php:235
-msgid "Leave empty to use the site title and the current year. {year} is replaced with the current year."
-msgstr ""
-
-#: inc/customizer.php:256
-msgid "Show the legal menu next to the copyright"
-msgstr ""
-
-#: inc/customizer.php:269
-msgid "Search engines: meta tags"
-msgstr ""
-
-#: inc/customizer.php:270
-msgid "Basalt only emits these when no SEO plugin is active, so nothing is ever duplicated."
-msgstr ""
-
-#: inc/customizer.php:281
-msgid "Emit description, Open Graph and Twitter tags"
-msgstr ""
-
-#: inc/customizer.php:300
-msgid "Fallback sharing image"
-msgstr ""
-
-#: inc/customizer.php:301
-msgid "Used when a page has no featured image. 1200 by 630 pixels works everywhere."
-msgstr ""
-
-#: inc/customizer.php:314
-msgid "X / Twitter handle"
-msgstr ""
-
-#: inc/customizer.php:315
-msgid "Without the @."
-msgstr ""
-
-#: inc/customizer.php:328
-msgid "Search engines: structured data"
-msgstr ""
-
-#: inc/customizer.php:329
-msgid "Feeds the Schema.org JSON-LD graph. Rich results in Google depend on these being accurate, so leave a field empty rather than guessing."
-msgstr ""
-
-#: inc/customizer.php:340
-msgid "Emit structured data"
-msgstr ""
-
-#: inc/customizer.php:341
-msgid "Switched off automatically while an SEO plugin outputs its own graph."
-msgstr ""
-
-#: inc/customizer.php:353
-msgid "The site represents"
-msgstr ""
-
-#: inc/customizer.php:366
-msgid "Legal or business name"
-msgstr ""
-
-#: inc/customizer.php:367
-msgid "Leave empty to use the site title."
-msgstr ""
-
-#: inc/customizer.php:386
-msgid "Logo for search results"
-msgstr ""
-
-#: inc/customizer.php:387
-msgid "Leave empty to use the site logo. Google wants at least 112 pixels on the shorter side."
-msgstr ""
-
-#: inc/customizer.php:395
-msgid "Phone"
-msgstr ""
-
-#: inc/customizer.php:396
-msgid "Email"
-msgstr ""
-
-#: inc/customizer.php:397
-msgid "Street and number"
-msgstr ""
-
-#: inc/customizer.php:398
-msgid "Postal code"
-msgstr ""
-
-#: inc/customizer.php:399
-msgid "City"
-msgstr ""
-
-#: inc/customizer.php:400
-msgid "Region or state"
-msgstr ""
-
-#: inc/customizer.php:401
-msgid "Country code, for example DE"
-msgstr ""
-
-#: inc/customizer.php:402
-msgid "Price range, for example €€"
-msgstr ""
-
-#: inc/customizer.php:425
-msgid "Opening hours"
-msgstr ""
-
-#: inc/customizer.php:426
-msgid "One rule per line, in Schema.org notation: Mo-Fr 08:00-18:00"
-msgstr ""
-
-#: inc/customizer.php:438
-msgid "Profile URLs"
-msgstr ""
-
-#: inc/customizer.php:439
-msgid "One URL per line. Emitted as sameAs, which is how search engines connect the site to its social profiles."
-msgstr ""
-
-#: inc/customizer.php:489
-msgid "Organization"
-msgstr ""
-
-#: inc/customizer.php:490
-msgid "Local business"
-msgstr ""
-
-#: inc/customizer.php:491
-msgid "Construction or trade business"
-msgstr ""
-
-#: inc/customizer.php:492
-msgid "Professional service"
-msgstr ""
-
-#: inc/customizer.php:493
-msgid "Store"
-msgstr ""
-
-#: inc/customizer.php:494
-msgid "Person"
-msgstr ""
-
-#. translators: 1: year, 2: site title.
-#: inc/customizer.php:607
-msgid "© %1$s %2$s"
-msgstr ""
-
-#. translators: %s: parent menu item title.
-#: inc/navigation.php:115
-msgid "Show submenu of %s"
-msgstr ""
-
-#: inc/navigation.php:196
-msgid "Set up your menu"
-msgstr ""
-
-#: inc/setup.php:102
-msgid "Primary menu"
-msgstr ""
-
-#: inc/setup.php:103
-msgid "Footer menu"
-msgstr ""
-
-#: inc/setup.php:105
-msgid "Legal menu"
-msgstr ""
-
-#: inc/setup.php:133
+#: inc/setup.php:67
 msgid "Hero"
 msgstr ""
 
-#: inc/setup.php:134
+#: inc/setup.php:68
 msgid "Square thumbnail"
 msgstr ""
 
-#: inc/setup.php:148 sidebar.php:18
-msgid "Sidebar"
-msgstr ""
-
-#: inc/setup.php:150
-msgid "Shown next to posts and on pages using the \"With sidebar\" template."
-msgstr ""
-
-#. translators: %d: footer column number.
-#: inc/setup.php:163
-msgid "Footer column %d"
-msgstr ""
-
-#: inc/setup.php:167
-msgid "Empty columns are skipped, so the footer grid adapts to how many you fill."
-msgstr ""
-
-#: inc/template-tags.php:124
-msgid "Categories"
-msgstr ""
-
-#: inc/template-tags.php:132
-msgid "Tags"
-msgstr ""
-
-#: inc/template-tags.php:208
-msgid "Previous"
-msgstr ""
-
-#: inc/template-tags.php:209
-msgid "Next"
-msgstr ""
-
-#: inc/template-tags.php:217
-msgid "Posts pagination"
-msgstr ""
-
-#: inc/template-tags.php:239
-msgid "Continue reading"
-msgstr ""
-
-#: inc/template-tags.php:245
-msgid "Previous post"
-msgstr ""
-
-#: inc/template-tags.php:254
-msgid "Next post"
-msgstr ""
-
-#: inc/template-tags.php:318 inc/template-tags.php:328
-msgid "Breadcrumb"
-msgstr ""
-
-#: inc/template-tags.php:362
-msgid "Home"
-msgstr ""
-
-#. translators: %s: last update date.
-#: inc/template-tags.php:39
-msgid "Updated %s"
-msgstr ""
-
-#. translators: %s: search query.
-#: inc/template-tags.php:451 search.php:21
-msgid "Search results for %s"
-msgstr ""
-
-#: inc/template-tags.php:458
-msgid "Page not found"
-msgstr ""
-
-#: inc/template-tags.php:72
-msgid "By"
+#: inc/template-functions.php:84
+msgid "Table, scrollable"
 msgstr ""
 
 #: patterns/catalog-grid.php:17
@@ -930,78 +488,3 @@ msgstr ""
 msgctxt "Pattern placeholder"
 msgid "Subject to change. Values are for the standard configuration."
 msgstr ""
-
-#. translators: %d: number of results.
-#: search.php:32
-msgid "%d result"
-msgid_plural "%d results"
-msgstr[0] ""
-msgstr[1] ""
-
-#: template-parts/components/author-box.php:22
-msgid "About the author"
-msgstr ""
-
-#: template-parts/components/author-box.php:28
-msgid "Written by"
-msgstr ""
-
-#: template-parts/components/page-header.php:20
-msgid "Blog"
-msgstr ""
-
-#: template-parts/components/page-header.php:30
-msgid "Category"
-msgstr ""
-
-#: template-parts/components/page-header.php:32
-msgid "Tag"
-msgstr ""
-
-#: template-parts/components/page-header.php:34
-msgid "Author"
-msgstr ""
-
-#: template-parts/content/content-none.php:15
-msgid "Nothing matched that search"
-msgstr ""
-
-#: template-parts/content/content-none.php:16
-msgid "Try fewer words, or a different spelling."
-msgstr ""
-
-#: template-parts/content/content-none.php:21
-msgid "Nothing published yet"
-msgstr ""
-
-#: template-parts/content/content-none.php:24
-msgid "Write the first post"
-msgstr ""
-
-#: template-parts/content/content-none.php:30
-msgid "Nothing here yet"
-msgstr ""
-
-#: template-parts/content/content-none.php:31
-msgid "There is no content in this section at the moment. A search might help."
-msgstr ""
-
-#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:51
-msgid "Pages:"
-msgstr ""
-
-#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:51
-msgid "Page"
-msgstr ""
-
-#. translators: %s: page title.
-#: template-parts/content/content-page.php:55
-msgid "Edit %s"
-msgstr ""
-
-#. translators: %d: reading time in minutes.
-#: template-parts/content/content-single.php:32 template-parts/content/content.php:36
-msgid "%d min read"
-msgid_plural "%d min read"
-msgstr[0] ""
-msgstr[1] ""

@@ -2,12 +2,16 @@
 /**
  * Asset loading.
  *
- * Plain CSS, no build step, so a buyer can edit a file and see the result.
+ * Plain CSS, no build step, so a buyer can edit a file and see the result. The
+ * dependency chain below is what establishes the cascade order: base, layout,
+ * components, blocks, then a child theme's style.css.
  *
- * The dependency chain below is what establishes the cascade order: base,
- * layout, components, blocks, then a child theme's style.css. Cascade layers
- * are deliberately not used; see the note at the top of assets/css/base.css for
- * why they lose every collision with the CSS that theme.json generates.
+ * Cascade layers are deliberately not used; see the note at the top of
+ * assets/css/base.css for why they lose every collision with the CSS that
+ * theme.json generates.
+ *
+ * The theme ships no JavaScript. The block editor supplies what the navigation
+ * overlay needs, and it is loaded only on pages that actually use one.
  *
  * @package Basalt
  */
@@ -17,9 +21,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Cache buster for a theme asset.
  *
- * Uses the file modification time while debugging so local edits show up
- * immediately, and the theme version in production so the value is stable
- * across servers and CDN nodes.
+ * The file modification time while debugging, so local edits show up at once;
+ * the theme version in production, so the value is stable across servers and
+ * CDN nodes.
  *
  * @param string $relative_path Path relative to the theme root.
  * @return string
@@ -39,67 +43,57 @@ function basalt_asset_version( string $relative_path ): string {
 }
 
 /**
- * Front end styles and scripts.
+ * The theme's stylesheets, in cascade order.
+ *
+ * @return array<string, array{deps: string[], media?: string, conditional?: callable}>
+ */
+function basalt_stylesheets(): array {
+	return array(
+		'base'       => array( 'deps' => array() ),
+		'layout'     => array( 'deps' => array( 'basalt-base' ) ),
+		'components' => array( 'deps' => array( 'basalt-layout' ) ),
+		'blocks'     => array( 'deps' => array( 'basalt-components' ) ),
+		'comments'   => array(
+			'deps'        => array( 'basalt-components' ),
+			// Only where comments actually render.
+			'conditional' => static fn(): bool => is_singular() && ( comments_open() || get_comments_number() > 0 ),
+		),
+		'print'      => array(
+			'deps'  => array( 'basalt-base' ),
+			'media' => 'print',
+		),
+	);
+}
+
+/**
+ * Enqueue the front end styles.
  *
  * @return void
  */
 function basalt_enqueue_assets(): void {
-	// Reset, element defaults, tokens and the accessibility utilities.
-	wp_enqueue_style(
-		'basalt-base',
-		BASALT_URI . 'assets/css/base.css',
-		array(),
-		basalt_asset_version( 'assets/css/base.css' )
-	);
+	foreach ( basalt_stylesheets() as $slug => $config ) {
+		if ( isset( $config['conditional'] ) && ! ( $config['conditional'] )() ) {
+			continue;
+		}
 
-	wp_enqueue_style(
-		'basalt-layout',
-		BASALT_URI . 'assets/css/layout.css',
-		array( 'basalt-base' ),
-		basalt_asset_version( 'assets/css/layout.css' )
-	);
+		$path = 'assets/css/' . $slug . '.css';
 
-	wp_enqueue_style(
-		'basalt-components',
-		BASALT_URI . 'assets/css/components.css',
-		array( 'basalt-layout' ),
-		basalt_asset_version( 'assets/css/components.css' )
-	);
-
-	wp_enqueue_style(
-		'basalt-blocks',
-		BASALT_URI . 'assets/css/blocks.css',
-		array( 'basalt-components' ),
-		basalt_asset_version( 'assets/css/blocks.css' )
-	);
-
-	// Only loaded where comments are actually rendered.
-	if ( is_singular() && ( comments_open() || get_comments_number() ) ) {
 		wp_enqueue_style(
-			'basalt-comments',
-			BASALT_URI . 'assets/css/comments.css',
-			array( 'basalt-components' ),
-			basalt_asset_version( 'assets/css/comments.css' )
+			'basalt-' . $slug,
+			BASALT_URI . $path,
+			$config['deps'],
+			basalt_asset_version( $path ),
+			$config['media'] ?? 'all'
 		);
 	}
-
-	wp_enqueue_style(
-		'basalt-print',
-		BASALT_URI . 'assets/css/print.css',
-		array( 'basalt-base' ),
-		basalt_asset_version( 'assets/css/print.css' ),
-		'print'
-	);
 
 	/*
 	 * A child theme's style.css is enqueued last, so anything it defines wins
 	 * on source order.
 	 *
-	 * With no child theme active this is skipped. The parent's style.css holds
+	 * With no child theme active this is skipped: the parent's style.css holds
 	 * the theme header and nothing else, so loading it would cost a
-	 * render-blocking round trip for a file that is pure comment. Buyers who
-	 * want custom CSS have a child theme or Additional CSS; the file header
-	 * says as much.
+	 * render-blocking round trip for a file that is pure comment.
 	 */
 	if ( get_template_directory() !== get_stylesheet_directory() ) {
 		$child_stylesheet = get_stylesheet_directory() . '/style.css';
@@ -112,79 +106,20 @@ function basalt_enqueue_assets(): void {
 			is_readable( $child_stylesheet ) ? (string) filemtime( $child_stylesheet ) : BASALT_VERSION
 		);
 	}
-
-	// Navigation: menu toggle, submenu handling, focus management.
-	wp_enqueue_script(
-		'basalt-navigation',
-		BASALT_URI . 'assets/js/navigation.js',
-		array(),
-		basalt_asset_version( 'assets/js/navigation.js' ),
-		array(
-			'strategy'  => 'defer',
-			'in_footer' => true,
-		)
-	);
-
-	// Progressive enhancements: sticky header state, back to top, reveal.
-	wp_enqueue_script(
-		'basalt-interactions',
-		BASALT_URI . 'assets/js/interactions.js',
-		array(),
-		basalt_asset_version( 'assets/js/interactions.js' ),
-		array(
-			'strategy'  => 'defer',
-			'in_footer' => true,
-		)
-	);
-
-	wp_localize_script(
-		'basalt-navigation',
-		'basaltNavStrings',
-		array(
-			'openMenu'     => __( 'Open menu', 'basalt' ),
-			'closeMenu'    => __( 'Close menu', 'basalt' ),
-			'openSubmenu'  => __( 'Open submenu', 'basalt' ),
-			'closeSubmenu' => __( 'Close submenu', 'basalt' ),
-		)
-	);
-
-	if ( is_singular() && comments_open() && (bool) get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
 }
 add_action( 'wp_enqueue_scripts', 'basalt_enqueue_assets' );
 
 /**
- * Editor assets.
+ * Mark the stylesheets as RTL aware.
  *
- * add_editor_style() in setup.php handles the iframed post editor. This adds
- * the same variables to the block editor chrome. The site editor is not part
- * of this: WordPress offers it only to block themes.
- *
- * @return void
- */
-function basalt_enqueue_editor_assets(): void {
-	wp_enqueue_style(
-		'basalt-editor',
-		BASALT_URI . 'assets/css/editor.css',
-		array(),
-		basalt_asset_version( 'assets/css/editor.css' )
-	);
-}
-add_action( 'enqueue_block_editor_assets', 'basalt_enqueue_editor_assets' );
-
-/**
- * Mark the theme stylesheets as safe to load with logical properties in RTL.
- *
- * Basalt uses CSS logical properties (margin-inline, padding-block, inset-*)
- * throughout, so no separate rtl.css is needed. Telling WordPress that the
- * stylesheets are already RTL aware prevents it from looking for -rtl files.
+ * Basalt uses CSS logical properties throughout, so no separate rtl.css is
+ * needed. Telling WordPress that prevents it from looking for -rtl files.
  *
  * @return void
  */
 function basalt_declare_rtl_support(): void {
-	foreach ( array( 'basalt-base', 'basalt-layout', 'basalt-components', 'basalt-blocks' ) as $handle ) {
-		wp_style_add_data( $handle, 'rtl', 'no-conflict' );
+	foreach ( array_keys( basalt_stylesheets() ) as $slug ) {
+		wp_style_add_data( 'basalt-' . $slug, 'rtl', 'no-conflict' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'basalt_declare_rtl_support', 20 );
@@ -193,9 +128,9 @@ add_action( 'wp_enqueue_scripts', 'basalt_declare_rtl_support', 20 );
  * Preload the featured image of the current singular view.
  *
  * WordPress sets fetchpriority="high" on the first large image it finds in the
- * content, but the featured image is usually rendered by the template above the
- * content, so core cannot see it in time. Preloading it improves LCP measurably
- * on post and product style layouts.
+ * content, but a template that renders the featured image above the content
+ * defeats that heuristic. Preloading it is measurable on LCP for post and
+ * product style layouts.
  *
  * @return void
  */
@@ -204,14 +139,13 @@ function basalt_preload_featured_image(): void {
 		return;
 	}
 
-	$id = (int) get_post_thumbnail_id();
-
-	$src = wp_get_attachment_image_src( $id, 'basalt-hero' );
+	$src = wp_get_attachment_image_src( (int) get_post_thumbnail_id(), 'basalt-hero' );
 
 	if ( ! $src ) {
 		return;
 	}
 
+	$id     = (int) get_post_thumbnail_id();
 	$srcset = wp_get_attachment_image_srcset( $id, 'basalt-hero' );
 	$sizes  = wp_get_attachment_image_sizes( $id, 'basalt-hero' );
 

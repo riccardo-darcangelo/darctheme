@@ -1,0 +1,28 @@
+/**
+ * Editor-only accessibility hints.
+ *
+ * A visible marker in the editor is worth more than a report after launch: the
+ * person who can fix it is already standing here.
+ *
+ * @package BasaltCore
+ */
+
+/*
+ * An image with no alt attribute at all. An intentionally decorative image has
+ * alt="", which is a different thing and is not flagged.
+ */
+.block-editor-block-list__layout .wp-block-image img:not([alt]) {
+	outline: 3px dashed #b32d2e;
+	outline-offset: 2px;
+}
+
+.block-editor-block-list__layout .wp-block-image:has(img:not([alt]))::after {
+	content: attr(data-basalt-alt-warning);
+	display: block;
+	margin-block-start: 0.5rem;
+	padding: 0.35rem 0.6rem;
+	background: #fcf0f1;
+	border-left: 3px solid #b32d2e;
+	color: #8a1f21;
+	font-size: 13px;
+}

@@ -2,10 +2,10 @@
 /**
  * Structured data for the catalog post type.
  *
- * This is the whole point of the parent theme's basalt_schema_graph filter: the
- * child adds one node, and the existing graph supplies the publisher, the page
- * identity and the breadcrumb trail through @id references. No duplicated
- * Organization node, no second BreadcrumbList.
+ * This is what the Basalt Core plugin's basalt_core_schema_graph filter exists
+ * for: the child adds one node, and the existing graph supplies the publisher,
+ * the page identity and the breadcrumb trail through @id references. No
+ * duplicated Organization node, no second BreadcrumbList.
  *
  * Which type to use is a real decision, not a formality:
  *
@@ -119,7 +119,7 @@ function basalt_child_schema_catalog_item( $graph, $page_id ) {
 
 	return $graph;
 }
-add_filter( 'basalt_schema_graph', 'basalt_child_schema_catalog_item', 10, 2 );
+add_filter( 'basalt_core_schema_graph', 'basalt_child_schema_catalog_item', 10, 2 );
 
 /**
  * Mark catalog archives as an ItemList.
@@ -165,12 +165,12 @@ function basalt_child_schema_catalog_archive( $graph, $page_id ) {
 
 	return $graph;
 }
-add_filter( 'basalt_schema_graph', 'basalt_child_schema_catalog_archive', 10, 2 );
+add_filter( 'basalt_core_schema_graph', 'basalt_child_schema_catalog_archive', 10, 2 );
 
 /**
  * Choose which taxonomy supplies the breadcrumb term for a catalog entry.
  *
- * The parent theme walks the post type's hierarchical taxonomies in
+ * Basalt Core walks the post type's hierarchical taxonomies in
  * registration order and takes the first term it finds. For the catalog that
  * would be the load capacity, but "Home > Catalog > Facade work > Model X"
  * reads better than "Home > Catalog > Up to 200 kg > Model X", and it matches
@@ -204,4 +204,4 @@ function basalt_child_primary_term_order( $taxonomies, $post_type ) {
 
 	return array_merge( array( $preferred ), array_values( $rest ) );
 }
-add_filter( 'basalt_primary_term_taxonomies', 'basalt_child_primary_term_order', 10, 2 );
+add_filter( 'basalt_core_primary_term_taxonomies', 'basalt_child_primary_term_order', 10, 2 );

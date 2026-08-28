@@ -1,0 +1,56 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Dark",
+	"description": "The same layout on a dark ground. Text and accent colours are re-picked rather than inverted, because an inverted palette loses contrast where it matters most.",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "color": "#14171a", "name": "Base" },
+				{ "slug": "surface", "color": "#1c2126", "name": "Surface" },
+				{ "slug": "surface-strong", "color": "#262d34", "name": "Surface strong" },
+				{ "slug": "contrast", "color": "#f2f4f5", "name": "Contrast" },
+				{ "slug": "contrast-soft", "color": "#a4b0ba", "name": "Contrast soft" },
+				{ "slug": "primary", "color": "#dbe3ea", "name": "Primary" },
+				{ "slug": "primary-strong", "color": "#ffffff", "name": "Primary strong" },
+				{ "slug": "accent", "color": "#ff8a4c", "name": "Accent" },
+				{ "slug": "accent-soft", "color": "#33231a", "name": "Accent soft" },
+				{ "slug": "border", "color": "#333c45", "name": "Border" }
+			],
+			"gradients": [
+				{
+					"slug": "primary-to-contrast",
+					"gradient": "linear-gradient(135deg, #262d34 0%, #14171a 100%)",
+					"name": "Primary to contrast"
+				},
+				{
+					"slug": "surface-fade",
+					"gradient": "linear-gradient(180deg, #1c2126 0%, #14171a 100%)",
+					"name": "Surface fade"
+				}
+			]
+		}
+	},
+	"styles": {
+		"elements": {
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--accent)",
+					"text": "#14171a"
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--contrast)",
+						"text": "#14171a"
+					}
+				},
+				":focus": {
+					"color": {
+						"background": "var(--wp--preset--color--contrast)",
+						"text": "#14171a"
+					}
+				}
+			}
+		}
+	}
+}

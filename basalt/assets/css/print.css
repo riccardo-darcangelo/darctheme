@@ -14,16 +14,14 @@
 
 :where(
 	.site-header,
-	.breadcrumbs-bar,
-	.sidebar,
-	.site-footer__widgets,
-	.back-to-top,
-	.skip-link,
-	.comments,
-	.post-nav,
-	.pagination,
-	.search-form,
-	.entry__edit-link
+	.site-footer,
+	.basalt-breadcrumbs,
+	.wp-block-navigation,
+	.wp-block-search,
+	.wp-block-comments,
+	.wp-block-query-pagination,
+	.wp-block-post-navigation-link,
+	.skip-link
 ) {
 	display: none !important;
 }
@@ -35,10 +33,9 @@ body {
 	line-height: 1.5;
 }
 
-.container,
+.wp-site-blocks,
 .site-main,
-.entry__content > *,
-.entry__header {
+.wp-block-post-content > * {
 	max-inline-size: none !important;
 	margin: 0 !important;
 	padding: 0 !important;
@@ -67,19 +64,13 @@ a {
 	text-decoration: underline;
 }
 
-/* Show where a link actually goes, but not for anchors and internal jumps. */
-.entry__content a[href^="http"]::after {
+/* Show where a link goes, but not for in-page anchors. */
+.wp-block-post-content a[href^="http"]::after {
 	content: " (" attr(href) ")";
 	font-size: 9pt;
 	word-break: break-all;
 }
 
-.entry__content abbr[title]::after {
+.wp-block-post-content abbr[title]::after {
 	content: " (" attr(title) ")";
-}
-
-.site-footer__bar {
-	border-block-start: 1px solid #000;
-	padding-block-start: 6pt;
-	font-size: 9pt;
 }

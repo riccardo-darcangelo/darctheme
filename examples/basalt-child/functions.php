@@ -2,10 +2,12 @@
 /**
  * Basalt Child.
  *
- * The parent theme already enqueues this child's style.css last, so there is no
- * enqueue boilerplate to write. What is here is the pattern a real project
- * follows: presentation and structured data in the child theme, content
- * structure in a plugin.
+ * A starting point for a project built on Basalt. Three things a real project
+ * needs, and nothing else: design token overrides in theme.json, templates for
+ * a custom post type, and the structured data that goes with it.
+ *
+ * The parent already enqueues this child's style.css last, so there is no
+ * enqueue boilerplate to write.
  *
  * @package BasaltChild
  */
@@ -27,9 +29,8 @@ add_action( 'after_setup_theme', 'basalt_child_setup' );
 /**
  * Whether the catalog plugin is providing the data layer.
  *
- * Everything the child theme adds is guarded by this, so activating the child
- * theme without the plugin degrades to a plain Basalt site instead of a fatal
- * error.
+ * Everything the child theme adds is guarded by this, so activating it without
+ * the plugin degrades to a plain Basalt site instead of a fatal error.
  *
  * @return bool
  */
@@ -38,11 +39,15 @@ function basalt_child_has_catalog(): bool {
 }
 
 /**
- * Show the technical data below the content of a catalog entry.
+ * Append the technical data to a catalog entry.
  *
  * Rendered as a description list rather than a table: it is a set of label and
  * value pairs, not tabular data, and a description list stays readable on a
  * phone without any layout tricks.
+ *
+ * A content filter rather than a block, deliberately. The values come from post
+ * meta the editor already fills in, so there is nothing for an editor to place
+ * and no way for them to forget it on one product out of thirty.
  *
  * @param string $content Post content.
  * @return string
@@ -72,74 +77,19 @@ function basalt_child_append_specs( $content ) {
 		);
 	}
 
-	$markup = sprintf(
+	return $content . sprintf(
 		'<section class="catalog-specs" aria-labelledby="catalog-specs-title"><h2 id="catalog-specs-title">%1$s</h2><dl>%2$s</dl></section>',
 		esc_html__( 'Technical data', 'basalt-child' ),
 		$rows
 	);
-
-	return $content . $markup;
 }
 add_filter( 'the_content', 'basalt_child_append_specs', 15 );
 
 /**
- * Show the taxonomy terms of a catalog entry below the header.
- *
- * The terms link to their archives, which is what makes the category pages
- * reachable for both visitors and crawlers.
- *
- * Two details worth keeping: basalt_after_header fires outside the theme's
- * container, so the output has to bring its own or it sits flush against the
- * viewport edge; and all taxonomies go into one list rather than one list per
- * taxonomy, because to a reader these are one row of labels, not two groups.
- *
- * @return void
- */
-function basalt_child_render_terms(): void {
-	if ( ! basalt_child_has_catalog() || ! is_singular( BASALT_CATALOG_POST_TYPE ) ) {
-		return;
-	}
-
-	$items = array();
-
-	foreach ( array_keys( basalt_catalog_taxonomies() ) as $taxonomy ) {
-		$terms = get_the_terms( get_the_ID(), $taxonomy );
-
-		if ( ! is_array( $terms ) ) {
-			continue;
-		}
-
-		foreach ( $terms as $term ) {
-			$link = get_term_link( $term );
-
-			if ( is_wp_error( $link ) ) {
-				continue;
-			}
-
-			$items[] = sprintf(
-				'<li><a href="%1$s">%2$s</a></li>',
-				esc_url( $link ),
-				esc_html( $term->name )
-			);
-		}
-	}
-
-	if ( ! $items ) {
-		return;
-	}
-
-	printf(
-		'<div class="container"><ul class="catalog-terms" aria-label="%1$s">%2$s</ul></div>',
-		esc_attr__( 'Categories', 'basalt-child' ),
-		implode( '', $items ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each item escaped above.
-	);
-}
-add_action( 'basalt_after_header', 'basalt_child_render_terms' );
-
-/**
  * Order catalog archives by menu order, then by title.
  *
- * A catalog has a sensible manual order; publication date is meaningless for it.
+ * A catalog has a sensible manual order; publication date is meaningless for
+ * it, and it is what WordPress would otherwise use.
  *
  * @param WP_Query $query The query.
  * @return void
@@ -149,26 +99,19 @@ function basalt_child_order_catalog_archive( $query ): void {
 		return;
 	}
 
-	if ( ! $query->is_post_type_archive( BASALT_CATALOG_POST_TYPE ) && ! $query->is_tax( array_keys( basalt_catalog_taxonomies() ) ) ) {
+	$taxonomies = array_keys( basalt_catalog_taxonomies() );
+
+	if ( ! $query->is_post_type_archive( BASALT_CATALOG_POST_TYPE ) && ! $query->is_tax( $taxonomies ) ) {
 		return;
 	}
 
-	$query->set( 'orderby', array( 'menu_order' => 'ASC', 'title' => 'ASC' ) );
+	$query->set(
+		'orderby',
+		array(
+			'menu_order' => 'ASC',
+			'title'      => 'ASC',
+		)
+	);
 	$query->set( 'posts_per_page', 24 );
 }
 add_action( 'pre_get_posts', 'basalt_child_order_catalog_archive' );
-
-/**
- * Use a card grid for catalog archives regardless of the blog setting.
- *
- * @param string $layout Configured layout.
- * @return string
- */
-function basalt_child_archive_layout( $layout ) {
-	if ( basalt_child_has_catalog() && ( is_post_type_archive( BASALT_CATALOG_POST_TYPE ) || is_tax( array_keys( basalt_catalog_taxonomies() ) ) ) ) {
-		return 'grid';
-	}
-
-	return $layout;
-}
-add_filter( 'theme_mod_archive_layout', 'basalt_child_archive_layout' );

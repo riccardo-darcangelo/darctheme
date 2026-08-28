@@ -1,0 +1,38 @@
+/**
+ * Breadcrumbs block, front end.
+ *
+ * Structural only: layout, separators and focus behaviour. Colour and type come
+ * from the block's own supports, so a site owner can set them in the editor and
+ * any theme's palette applies.
+ *
+ * @package BasaltCore
+ */
+
+.basalt-breadcrumbs__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/*
+ * The separator is a pseudo element, so it is not in the accessibility tree.
+ * A literal "/" between links is announced by some screen readers as "slash"
+ * on every item.
+ */
+.basalt-breadcrumbs__item + .basalt-breadcrumbs__item::before {
+	content: "/";
+	margin-inline-end: 0.5rem;
+	opacity: 0.5;
+}
+
+.basalt-breadcrumbs__item a {
+	color: inherit;
+}
+
+.basalt-breadcrumbs__item [aria-current="page"] {
+	font-weight: 600;
+}

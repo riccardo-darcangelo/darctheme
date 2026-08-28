@@ -18,8 +18,8 @@
  * The practical consequence: where a rule has to beat a theme.json element
  * style, it needs a specificity above (0,1,0). theme.json emits its link colour
  * as ":root :where(a:where(:not(.wp-element-button)))", so a bare .class ties
- * with it and only wins on source order. Those places are written as
- * "a.button", ".site-branding .site-branding__link" and similar on purpose.
+ * with it and only wins on source order. That is why the component rules are
+ * written as ".wp-block-post-title a" rather than ".wp-block-post-title".
  *
  * @package Basalt
  */
@@ -71,9 +71,6 @@
 	--wide-width: var(--wp--style--global--wide-size, 80rem);
 	--measure: var(--wp--custom--measure, 68ch);
 	--header-height: var(--wp--custom--header--height, 4.5rem);
-
-	/* Matches the desktop breakpoint in navigation.js. */
-	--nav-breakpoint: 62rem;
 }
 
 *,
@@ -96,10 +93,7 @@ html {
 	text-size-adjust: 100%;
 	tab-size: 4;
 
-	/*
-	 * Anchor links and the back to top button must not land underneath the
-	 * sticky header.
-	 */
+	/* An anchor target must not land underneath the sticky header. */
 	scroll-padding-block-start: calc(var(--header-height) + var(--space-2));
 }
 
@@ -274,21 +268,19 @@ input[type="submit"],
 	z-index: 100000;
 }
 
-.skip-link {
-	position: absolute;
-	inset-block-start: 0;
-	inset-inline-start: 0;
-	z-index: 1000;
-	padding: 0.75rem 1.25rem;
+/*
+ * The skip link is hidden by .screen-reader-text and revealed by its :focus
+ * rule above. Only the presentation is added here, so there is one mechanism
+ * for hiding it rather than two competing ones.
+ */
+.skip-link:focus {
+	inset-block-start: 0.5rem;
+	inset-inline-start: 0.5rem;
 	background-color: var(--color-ink);
 	color: var(--color-base);
+	border-radius: var(--radius-md);
 	text-decoration: none;
-	transform: translateY(-120%);
-	transition: transform var(--transition-fast) var(--easing);
-}
-
-.skip-link:focus-visible {
-	transform: translateY(0);
+	z-index: 100000;
 }
 
 .table-scroll {

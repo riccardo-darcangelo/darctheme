@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Slate",
+	"description": "Cooler and quieter than the default, with a blue accent. For technical and professional services where an orange accent reads as too loud.",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "color": "#ffffff", "name": "Base" },
+				{ "slug": "surface", "color": "#f1f4f7", "name": "Surface" },
+				{ "slug": "surface-strong", "color": "#e2e8ee", "name": "Surface strong" },
+				{ "slug": "contrast", "color": "#131a21", "name": "Contrast" },
+				{ "slug": "contrast-soft", "color": "#556575", "name": "Contrast soft" },
+				{ "slug": "primary", "color": "#1f3346", "name": "Primary" },
+				{ "slug": "primary-strong", "color": "#132131", "name": "Primary strong" },
+				{ "slug": "accent", "color": "#0b5c8a", "name": "Accent" },
+				{ "slug": "accent-soft", "color": "#e6f1f8", "name": "Accent soft" },
+				{ "slug": "border", "color": "#d3dce4", "name": "Border" }
+			]
+		}
+	}
+}

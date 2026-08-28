@@ -2,11 +2,8 @@
 /**
  * "Getting started" screen under Appearance.
  *
- * Deliberately does not install anything by itself. The previous generation of
- * this theme downloaded plugin ZIPs over cURL and wrote to the active_plugins
- * option directly, which bypasses capability checks, filesystem abstraction and
- * signature handling. Everything here links into the core plugin installer, so
- * WordPress performs the install with the user's own permissions.
+ * Deliberately installs nothing by itself. Every action links into a core
+ * screen, so WordPress performs it with the user's own permissions.
  *
  * @package Basalt
  */
@@ -32,38 +29,40 @@ add_action( 'admin_menu', 'basalt_register_theme_page' );
 /**
  * Plugins the theme integrates with.
  *
- * None of them are required; the theme is fully functional without any of them.
- *
- * @return array<int, array{slug: string, name: string, why: string}>
+ * @return array<int, array{slug: string, name: string, why: string, required: bool}>
  */
 function basalt_recommended_plugins(): array {
 	/**
 	 * Filter the recommended plugin list.
 	 *
-	 * @param array<int, array{slug: string, name: string, why: string}> $plugins Recommended plugins.
+	 * @param array<int, array<string, mixed>> $plugins Recommended plugins.
 	 */
 	return (array) apply_filters(
 		'basalt_recommended_plugins',
 		array(
 			array(
-				'slug' => 'seo-by-rank-math',
-				'name' => 'Rank Math SEO',
-				'why'  => __( 'Editorial control over titles, descriptions and redirects. Basalt detects it and steps out of the way for meta tags, structured data and breadcrumbs.', 'basalt' ),
+				'slug'     => 'basalt-core',
+				'name'     => 'Basalt Core',
+				'why'      => __( 'Structured data, meta tags, breadcrumbs and the accessibility corrections for core blocks. Ships with the theme. Without it the templates still render, but the breadcrumb block is missing and no structured data is emitted.', 'basalt' ),
+				'required' => true,
 			),
 			array(
-				'slug' => 'fluentform',
-				'name' => 'Fluent Forms',
-				'why'  => __( 'Contact and enquiry forms. Styled by the theme out of the box, and it loads its assets only on pages that contain a form.', 'basalt' ),
+				'slug'     => 'seo-by-rank-math',
+				'name'     => 'Rank Math SEO',
+				'why'      => __( 'Editorial control over titles, descriptions and redirects. Basalt Core detects it and steps out of the way, so nothing is emitted twice.', 'basalt' ),
+				'required' => false,
 			),
 			array(
-				'slug' => 'advanced-custom-fields',
-				'name' => 'Advanced Custom Fields',
-				'why'  => __( 'Structured fields for custom post types, for example technical specifications on a product page.', 'basalt' ),
+				'slug'     => 'fluentform',
+				'name'     => 'Fluent Forms',
+				'why'      => __( 'Contact and enquiry forms. Styled by the theme out of the box, and it loads its assets only on pages that contain a form.', 'basalt' ),
+				'required' => false,
 			),
 			array(
-				'slug' => 'performant-translations',
-				'name' => 'Performant Translations',
-				'why'  => __( 'Faster translation loading on non-English sites. Measurable on every request.', 'basalt' ),
+				'slug'     => 'performant-translations',
+				'name'     => 'Performant Translations',
+				'why'      => __( 'Faster translation loading on non-English sites. Measurable on every request.', 'basalt' ),
+				'required' => false,
 			),
 		)
 	);
@@ -93,58 +92,63 @@ function basalt_render_theme_page(): void {
 		</h1>
 
 		<p class="basalt-admin__intro">
-			<?php esc_html_e( 'Three things get a new site to a good starting point. Everything else is optional.', 'basalt' ); ?>
+			<?php esc_html_e( 'Four things get a new site to a good starting point. Everything else is optional.', 'basalt' ); ?>
 		</p>
 
 		<div class="basalt-admin__grid">
 			<div class="basalt-admin__card">
-				<h2><?php esc_html_e( '1. Identity', 'basalt' ); ?></h2>
-				<p><?php esc_html_e( 'Upload the logo and set the site title and tagline. The tagline is used as the fallback meta description, so write it as a sentence a search engine could show.', 'basalt' ); ?></p>
+				<h2><?php esc_html_e( '1. Pick a style', 'basalt' ); ?></h2>
 				<p>
-					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=title_tagline' ) ); ?>">
-						<?php esc_html_e( 'Open site identity', 'basalt' ); ?>
+					<?php esc_html_e( 'Basalt ships four complete looks, including a high contrast variation where every colour clears WCAG AAA. Switching one changes colours, type and spacing everywhere at once.', 'basalt' ); ?>
+				</p>
+				<p>
+					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'site-editor.php?path=%2Fwp_global_styles' ) ); ?>">
+						<?php esc_html_e( 'Open styles', 'basalt' ); ?>
 					</a>
 				</p>
 			</div>
 
 			<div class="basalt-admin__card">
-				<h2><?php esc_html_e( '2. Structured data', 'basalt' ); ?></h2>
-				<p><?php esc_html_e( 'Tell search engines who is behind the site: business name, address, phone and opening hours. This is what produces the knowledge panel and local results.', 'basalt' ); ?></p>
+				<h2><?php esc_html_e( '2. Identity', 'basalt' ); ?></h2>
+				<p><?php esc_html_e( 'Set the site title, tagline and logo. The tagline is the fallback meta description, so write it as a sentence a search engine could show.', 'basalt' ); ?></p>
 				<p>
-					<a class="button" href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=basalt_schema' ) ); ?>">
-						<?php esc_html_e( 'Open structured data', 'basalt' ); ?>
+					<a class="button" href="<?php echo esc_url( admin_url( 'options-general.php' ) ); ?>">
+						<?php esc_html_e( 'Site settings', 'basalt' ); ?>
 					</a>
 				</p>
 			</div>
 
 			<div class="basalt-admin__card">
-				<h2><?php esc_html_e( '3. Menus', 'basalt' ); ?></h2>
-				<p><?php esc_html_e( 'Assign a primary menu. Until you do, the header lists your top level pages so the site stays navigable.', 'basalt' ); ?></p>
+				<h2><?php esc_html_e( '3. Header and footer', 'basalt' ); ?></h2>
+				<p><?php esc_html_e( 'Both are template parts. Edit them once in the site editor and every template follows, including the navigation menu.', 'basalt' ); ?></p>
 				<p>
-					<a class="button" href="<?php echo esc_url( admin_url( 'nav-menus.php' ) ); ?>">
-						<?php esc_html_e( 'Open menus', 'basalt' ); ?>
+					<a class="button" href="<?php echo esc_url( admin_url( 'site-editor.php?path=%2Fpatterns' ) ); ?>">
+						<?php esc_html_e( 'Edit template parts', 'basalt' ); ?>
 					</a>
+				</p>
+			</div>
+
+			<div class="basalt-admin__card">
+				<h2><?php esc_html_e( '4. Who is behind the site', 'basalt' ); ?></h2>
+				<p><?php esc_html_e( 'Business name, address, phone and opening hours. This is what produces the knowledge panel and local results.', 'basalt' ); ?></p>
+				<p>
+					<?php if ( defined( 'BASALT_CORE_VERSION' ) ) : ?>
+						<a class="button" href="<?php echo esc_url( admin_url( 'options-general.php?page=basalt-core' ) ); ?>">
+							<?php esc_html_e( 'Search and schema settings', 'basalt' ); ?>
+						</a>
+					<?php else : ?>
+						<em><?php esc_html_e( 'Install and activate Basalt Core to reach these settings.', 'basalt' ); ?></em>
+					<?php endif; ?>
 				</p>
 			</div>
 		</div>
 
 		<h2><?php esc_html_e( 'Design tokens', 'basalt' ); ?></h2>
 		<p>
-			<?php esc_html_e( 'Colours, the type scale and the spacing steps are defined once in theme.json and apply to the front end, the block editor, the patterns and the block styles at the same time.', 'basalt' ); ?>
-		</p>
-		<p>
-			<?php
-			printf(
-				/* translators: %s: the theme.json file name, wrapped in a code element. */
-				esc_html__( 'Basalt uses classic PHP templates, so WordPress does not offer the site editor here and there is no visual panel for these values. Edit %s in a child theme; the block editor picks the change up immediately.', 'basalt' ),
-				'<code>theme.json</code>'
-			);
-			?>
+			<?php esc_html_e( 'Colours, the type scale and the spacing steps come from theme.json. Change them under Styles and the front end, the editor, the patterns and the block styles all follow. A child theme can override the same file for a permanent change.', 'basalt' ); ?>
 		</p>
 
-		<h2><?php esc_html_e( 'Plugins that fit', 'basalt' ); ?></h2>
-		<p><?php esc_html_e( 'Basalt requires none of these. Install what the project actually needs.', 'basalt' ); ?></p>
-
+		<h2><?php esc_html_e( 'Plugins', 'basalt' ); ?></h2>
 		<table class="widefat basalt-admin__plugins">
 			<thead>
 				<tr>
@@ -156,7 +160,12 @@ function basalt_render_theme_page(): void {
 			<tbody>
 			<?php foreach ( basalt_recommended_plugins() as $plugin ) : ?>
 				<tr>
-					<td><strong><?php echo esc_html( $plugin['name'] ); ?></strong></td>
+					<td>
+						<strong><?php echo esc_html( $plugin['name'] ); ?></strong>
+						<?php if ( ! empty( $plugin['required'] ) ) : ?>
+							<br><span class="basalt-admin__status"><?php esc_html_e( 'Bundled', 'basalt' ); ?></span>
+						<?php endif; ?>
+					</td>
 					<td><?php echo esc_html( $plugin['why'] ); ?></td>
 					<td><?php basalt_render_plugin_action( $plugin['slug'] ); ?></td>
 				</tr>
@@ -170,7 +179,7 @@ function basalt_render_theme_page(): void {
 /**
  * Render the install or "already installed" state for one plugin.
  *
- * @param string $slug WordPress.org plugin slug.
+ * @param string $slug Plugin directory slug.
  * @return void
  */
 function basalt_render_plugin_action( string $slug ): void {
@@ -178,31 +187,29 @@ function basalt_render_plugin_action( string $slug ): void {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	}
 
-	$installed = false;
-
 	foreach ( array_keys( get_plugins() ) as $plugin_file ) {
-		if ( str_starts_with( (string) $plugin_file, $slug . '/' ) ) {
-			$installed = is_plugin_active( $plugin_file );
+		if ( ! str_starts_with( (string) $plugin_file, $slug . '/' ) ) {
+			continue;
+		}
 
-			if ( ! $installed ) {
-				printf(
-					'<a href="%1$s">%2$s</a>',
-					esc_url(
-						wp_nonce_url(
-							self_admin_url( 'plugins.php?action=activate&plugin=' . rawurlencode( $plugin_file ) ),
-							'activate-plugin_' . $plugin_file
-						)
-					),
-					esc_html__( 'Activate', 'basalt' )
-				);
-
-				return;
-			}
-
+		if ( is_plugin_active( $plugin_file ) ) {
 			printf( '<span class="basalt-admin__status is-active">%s</span>', esc_html__( 'Active', 'basalt' ) );
 
 			return;
 		}
+
+		printf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url(
+				wp_nonce_url(
+					self_admin_url( 'plugins.php?action=activate&plugin=' . rawurlencode( $plugin_file ) ),
+					'activate-plugin_' . $plugin_file
+				)
+			),
+			esc_html__( 'Activate', 'basalt' )
+		);
+
+		return;
 	}
 
 	if ( ! current_user_can( 'install_plugins' ) ) {
@@ -249,8 +256,7 @@ add_action( 'admin_enqueue_scripts', 'basalt_theme_page_assets' );
  * @return string[]
  */
 function basalt_theme_action_links( $actions ) {
-	$actions = (array) $actions;
-
+	$actions               = (array) $actions;
 	$actions['basalt-start'] = sprintf(
 		'<a href="%1$s">%2$s</a>',
 		esc_url( admin_url( 'themes.php?page=basalt' ) ),

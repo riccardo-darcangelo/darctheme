@@ -177,17 +177,3 @@ function basalt_disable_remote_patterns(): bool {
 }
 add_filter( 'should_load_remote_block_patterns', 'basalt_disable_remote_patterns' );
 
-/**
- * Give the editor the same content width as the front end.
- *
- * @return void
- */
-function basalt_editor_content_width(): void {
-	$css = sprintf(
-		':root { --basalt-editor-content-width: %s; }',
-		esc_attr( (string) apply_filters( 'basalt_editor_content_width', '44rem' ) )
-	);
-
-	wp_add_inline_style( 'basalt-editor', $css );
-}
-add_action( 'enqueue_block_editor_assets', 'basalt_editor_content_width', 20 );

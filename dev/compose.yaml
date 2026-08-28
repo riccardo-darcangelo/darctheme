@@ -56,7 +56,8 @@ services:
       - wp:/var/www/html
       - ../basalt:/var/www/html/wp-content/themes/basalt
       - ../examples/basalt-child:/var/www/html/wp-content/themes/basalt-child
-      - ../examples/basalt-catalog:/var/www/html/wp-content/plugins/basalt-catalog
+      - ../plugins/basalt-catalog:/var/www/html/wp-content/plugins/basalt-catalog
+      - ../plugins/basalt-core:/var/www/html/wp-content/plugins/basalt-core
 
   # WP-CLI, kept alive so commands can be run against the same volume:
   #   docker compose -f dev/compose.yaml exec -T cli wp plugin list
@@ -75,7 +76,8 @@ services:
       - wp:/var/www/html
       - ../basalt:/var/www/html/wp-content/themes/basalt
       - ../examples/basalt-child:/var/www/html/wp-content/themes/basalt-child
-      - ../examples/basalt-catalog:/var/www/html/wp-content/plugins/basalt-catalog
+      - ../plugins/basalt-catalog:/var/www/html/wp-content/plugins/basalt-catalog
+      - ../plugins/basalt-core:/var/www/html/wp-content/plugins/basalt-core
       - ./:/seed:ro
 
 volumes:

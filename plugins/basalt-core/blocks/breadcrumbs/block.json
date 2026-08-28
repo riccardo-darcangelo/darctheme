@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/breadcrumbs",
+	"title": "Breadcrumbs",
+	"category": "design",
+	"icon": "editor-ul",
+	"description": "The trail from the home page to this one. Renders nothing on the front page, and reads from the same data as the BreadcrumbList structured data so the two cannot disagree.",
+	"keywords": [
+		"breadcrumb",
+		"trail",
+		"navigation",
+		"schema"
+	],
+	"textdomain": "basalt-core",
+	"editorScript": "file:./editor.js",
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"link": true
+		}
+	},
+	"attributes": {
+		"deferToSeoPlugin": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"style": "file:./style.css"
+}

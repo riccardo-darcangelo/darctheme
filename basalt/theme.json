@@ -282,7 +282,8 @@
 					"radius": true
 				}
 			}
-		}
+		},
+		"useRootPaddingAwareAlignments": true
 	},
 	"styles": {
 		"color": {
@@ -296,7 +297,11 @@
 			"letterSpacing": "0"
 		},
 		"spacing": {
-			"blockGap": "var(--wp--preset--spacing--30)"
+			"blockGap": "var(--wp--preset--spacing--30)",
+			"padding": {
+				"left": "var(--wp--preset--spacing--30)",
+				"right": "var(--wp--preset--spacing--30)"
+			}
 		},
 		"elements": {
 			"link": {
@@ -489,5 +494,34 @@
 				}
 			}
 		}
-	}
+	},
+	"templateParts": [
+		{
+			"name": "header",
+			"title": "Header",
+			"area": "header"
+		},
+		{
+			"name": "footer",
+			"title": "Footer",
+			"area": "footer"
+		}
+	],
+	"customTemplates": [
+		{
+			"name": "page-landing",
+			"title": "Landing page",
+			"postTypes": [
+				"page"
+			]
+		},
+		{
+			"name": "page-wide",
+			"title": "Full width",
+			"postTypes": [
+				"page",
+				"post"
+			]
+		}
+	]
 }

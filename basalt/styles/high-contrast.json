@@ -1,0 +1,69 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "High contrast",
+	"description": "Every text and control colour clears WCAG AAA (7:1) against its background, links stay underlined everywhere, and the focus ring is thicker. For sites that have to demonstrate conformance rather than approximate it.",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "color": "#ffffff", "name": "Base" },
+				{ "slug": "surface", "color": "#f2f2f2", "name": "Surface" },
+				{ "slug": "surface-strong", "color": "#e0e0e0", "name": "Surface strong" },
+				{ "slug": "contrast", "color": "#000000", "name": "Contrast" },
+				{ "slug": "contrast-soft", "color": "#333333", "name": "Contrast soft" },
+				{ "slug": "primary", "color": "#12263a", "name": "Primary" },
+				{ "slug": "primary-strong", "color": "#000000", "name": "Primary strong" },
+				{ "slug": "accent", "color": "#8a2b00", "name": "Accent" },
+				{ "slug": "accent-soft", "color": "#fbeee7", "name": "Accent soft" },
+				{ "slug": "border", "color": "#4d4d4d", "name": "Border" }
+			]
+		},
+		"custom": {
+			"focus": {
+				"width": "3px",
+				"offset": "3px"
+			}
+		}
+	},
+	"styles": {
+		"elements": {
+			"link": {
+				"color": { "text": "var(--wp--preset--color--accent)" },
+				"typography": { "textDecoration": "underline" },
+				":hover": {
+					"color": { "text": "var(--wp--preset--color--contrast)" },
+					"typography": { "textDecoration": "underline" }
+				},
+				":focus": {
+					"typography": { "textDecoration": "underline" }
+				}
+			},
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--accent)",
+					"text": "var(--wp--preset--color--base)"
+				},
+				"border": {
+					"color": "var(--wp--preset--color--contrast)",
+					"style": "solid",
+					"width": "2px",
+					"radius": "var(--wp--custom--radius--md)"
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--contrast)",
+						"text": "var(--wp--preset--color--base)"
+					}
+				}
+			},
+			"caption": {
+				"color": { "text": "var(--wp--preset--color--contrast-soft)" }
+			}
+		},
+		"blocks": {
+			"core/separator": {
+				"color": { "text": "var(--wp--preset--color--contrast)" }
+			}
+		}
+	}
+}

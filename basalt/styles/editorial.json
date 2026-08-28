@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Editorial",
+	"description": "A serif face for headings and body, a warmer ground and a narrower measure. For sites where the writing is the product.",
+	"settings": {
+		"layout": {
+			"contentSize": "40rem",
+			"wideSize": "72rem"
+		},
+		"color": {
+			"palette": [
+				{ "slug": "base", "color": "#fdfcfa", "name": "Base" },
+				{ "slug": "surface", "color": "#f4f1ea", "name": "Surface" },
+				{ "slug": "surface-strong", "color": "#e7e2d6", "name": "Surface strong" },
+				{ "slug": "contrast", "color": "#1c1a17", "name": "Contrast" },
+				{ "slug": "contrast-soft", "color": "#5f594e", "name": "Contrast soft" },
+				{ "slug": "primary", "color": "#2f3a2c", "name": "Primary" },
+				{ "slug": "primary-strong", "color": "#1e261c", "name": "Primary strong" },
+				{ "slug": "accent", "color": "#8c3a1e", "name": "Accent" },
+				{ "slug": "accent-soft", "color": "#f6e9e2", "name": "Accent soft" },
+				{ "slug": "border", "color": "#ddd6c8", "name": "Border" }
+			]
+		}
+	},
+	"styles": {
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--serif)",
+			"lineHeight": "1.7"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--serif)",
+					"fontWeight": "600",
+					"letterSpacing": "-0.01em"
+				}
+			},
+			"button": {
+				"typography": { "fontFamily": "var(--wp--preset--font-family--sans)" }
+			}
+		}
+	}
+}

@@ -30,7 +30,7 @@ if ! wp core is-installed 2>/dev/null; then
 fi
 
 wp theme activate basalt
-wp plugin activate basalt-catalog
+wp plugin activate basalt-core basalt-catalog
 
 # Start from a known state so the script is repeatable.
 wp site empty --yes
@@ -169,7 +169,7 @@ cat > /tmp/home.html <<'HTML'
 HTML
 
 HOME_ID=$(wp post create /tmp/home.html --post_type=page --post_title='Home' --post_name=home --post_status=publish --porcelain)
-wp post meta update "$HOME_ID" _wp_page_template 'templates/template-landing.php' >/dev/null
+wp post meta update "$HOME_ID" _wp_page_template 'page-landing' >/dev/null
 wp option update show_on_front page >/dev/null
 wp option update page_on_front "$HOME_ID" >/dev/null
 
@@ -297,78 +297,71 @@ add_item 'Facade platform FP 400' 'facade-platform-fp-400' \
 	'A powered platform rather than a hoist: crew and material go up together, which halves the trips.' \
 	400 35 12 '400 V' 520 'above-300' 'facade' 6
 
-# ------------------------------------------------------------------- menus
+# ------------------------------------------------------------------ navigation
+#
+# A block theme registers no menu locations, so there is nothing to "assign" a
+# classic menu to. Navigation lives in a wp_navigation post instead, and an
+# unconfigured core/navigation block uses the most recently published one. That
+# is why the template needs no reference to it.
 
-wp menu create "Main" >/dev/null 2>&1 || true
-wp menu create "Legal" >/dev/null 2>&1 || true
+NAV_CONTENT=$(cat <<'NAV'
+<!-- wp:navigation-link {"label":"Home","type":"page","url":"/","kind":"custom","isTopLevelLink":true} /-->
 
-wp menu item add-post main "$(wp post list --post_type=page --name=home --format=ids)" --title="Home" >/dev/null
-wp menu item add-custom main "Catalog" "/catalog/" >/dev/null
-wp menu item add-post main "$(wp post list --post_type=page --name=about --format=ids)" --title="About" >/dev/null
-wp menu item add-post main "$(wp post list --post_type=page --name=journal --format=ids)" --title="Journal" >/dev/null
-wp menu item add-post main "$(wp post list --post_type=page --name=contact --format=ids)" --title="Contact" >/dev/null
+<!-- wp:navigation-submenu {"label":"Catalog","url":"/catalog/","kind":"custom","isTopLevelItem":true} -->
+<!-- wp:navigation-link {"label":"Facade work","url":"/application/facade/","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Roofing","url":"/application/roofing/","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Interior fit-out","url":"/application/interior/","kind":"custom"} /-->
+<!-- /wp:navigation-submenu -->
 
-# A submenu, so the accessible dropdown is actually exercised.
-PARENT=$(wp menu item list main --fields=db_id,title --format=csv | grep -i ',Catalog' | head -1 | cut -d, -f1)
-for slug in facade roofing interior; do
-	wp menu item add-term main catalog_use_case "$(wp term list catalog_use_case --slug=$slug --field=term_id)" --parent-id="$PARENT" >/dev/null
+<!-- wp:navigation-link {"label":"About","url":"/about/","kind":"custom","isTopLevelLink":true} /-->
+
+<!-- wp:navigation-link {"label":"Journal","url":"/journal/","kind":"custom","isTopLevelLink":true} /-->
+
+<!-- wp:navigation-link {"label":"Contact","url":"/contact/","kind":"custom","isTopLevelLink":true} /-->
+NAV
+)
+
+# Remove any navigation left from a previous run, so the block does not pick an
+# older one: core takes the most recently published wp_navigation post.
+for id in $(wp post list --post_type=wp_navigation --format=ids); do
+	wp post delete "$id" --force >/dev/null
 done
 
-wp menu item add-post legal "$(wp post list --post_type=page --name=imprint --format=ids)" --title="Imprint" >/dev/null
-wp menu item add-post legal "$(wp post list --post_type=page --name=privacy --format=ids)" --title="Privacy" >/dev/null
+printf '%s' "$NAV_CONTENT" > /tmp/nav.html
+wp post create /tmp/nav.html --post_type=wp_navigation --post_title='Main' --post_status=publish --porcelain >/dev/null
 
-wp menu location assign main primary >/dev/null
-wp menu location assign legal legal >/dev/null
-
-# ----------------------------------------------------------------- widgets
+# ------------------------------------------------- search and schema settings
 #
-# wp site empty clears posts and terms but leaves widget options untouched, so
-# without this reset a second run stacks a second copy of every widget. That is
-# not just untidy: two widgets with the same title produce two navigation
-# landmarks with the same accessible name, which fails an accessibility audit
-# and looks like a theme defect.
+# These are plugin options, not theme mods. That is the point of the split:
+# WordPress stores theme mods per stylesheet, so under the old classic theme a
+# switch from parent to child silently wiped every business detail. Options
+# belong to the site and survive both.
 
-wp widget reset --all >/dev/null 2>&1 || true
-
-wp widget add search sidebar-1 --title="Search" >/dev/null 2>&1 || true
-wp widget add recent-posts sidebar-1 --title="Latest from the journal" >/dev/null 2>&1 || true
-wp widget add categories sidebar-1 --title="Topics" >/dev/null 2>&1 || true
-wp widget add text footer-1 --title="The yard" --text="Industriestrasse 12, 86153 Augsburg. Open Monday to Friday, 7am to 6pm." >/dev/null 2>&1 || true
-wp widget add recent-posts footer-2 --title="Journal" >/dev/null 2>&1 || true
-
-# --------------------------------------------------- theme options per theme
-#
-# WordPress stores theme mods per stylesheet, so switching from Basalt to
-# Basalt Child drops every setting made here. Both are seeded so the demo looks
-# the same whichever is active, and so the switch does not look broken.
-
-seed_theme_mods() {
-	wp theme mod set schema_entity_type 'HomeAndConstructionBusiness' >/dev/null
-	wp theme mod set schema_entity_name 'Augsburger Hebetechnik' >/dev/null
-	wp theme mod set schema_phone '+49 821 1234567' >/dev/null
-	wp theme mod set schema_email 'hire@example.test' >/dev/null
-	wp theme mod set schema_street 'Industriestrasse 12' >/dev/null
-	wp theme mod set schema_postal_code '86153' >/dev/null
-	wp theme mod set schema_city 'Augsburg' >/dev/null
-	wp theme mod set schema_region 'Bayern' >/dev/null
-	wp theme mod set schema_country 'DE' >/dev/null
-	wp theme mod set schema_opening_hours 'Mo-Fr 07:00-18:00' >/dev/null
-	wp theme mod set schema_profiles 'https://www.linkedin.com/company/example' >/dev/null
-	wp theme mod set footer_copyright 'Copyright {year} Augsburger Hebetechnik' >/dev/null
+wp option update basalt_core_settings --format=json <<'JSON' >/dev/null
+{
+	"meta_enabled": true,
+	"meta_twitter_site": "",
+	"meta_default_image": 0,
+	"schema_enabled": true,
+	"entity_type": "HomeAndConstructionBusiness",
+	"entity_name": "Augsburger Hebetechnik",
+	"logo": 0,
+	"phone": "+49 821 1234567",
+	"email": "hire@example.test",
+	"street": "Industriestrasse 12",
+	"postal_code": "86153",
+	"city": "Augsburg",
+	"region": "Bayern",
+	"country": "DE",
+	"opening_hours": "Mo-Fr 07:00-18:00",
+	"price_range": "",
+	"profiles": "https://www.linkedin.com/company/example"
 }
-
-seed_theme_mods
-
-wp theme activate basalt-child >/dev/null
-seed_theme_mods
-wp menu location assign main primary >/dev/null
-wp menu location assign legal legal >/dev/null
-
-# Leave the parent theme active; the child is one click away in the admin.
-wp theme activate basalt >/dev/null
+JSON
 
 wp rewrite flush --hard >/dev/null
 
 echo ""
 echo "Seeded. Open ${WP_URL}  (${WP_ADMIN} / ${WP_PASSWORD})"
+echo "Styles: Appearance > Editor > Styles has four variations, including High contrast."
 echo "Switch to Basalt Child under Appearance > Themes to see the catalog extension."

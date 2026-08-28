@@ -2,21 +2,23 @@
 /**
  * Basalt bootstrap.
  *
- * This file only defines constants and loads the modules in inc/.
- * Put real logic into a module, never here, so child themes can
- * unhook a single concern instead of the whole theme.
+ * Basalt is a block theme. The templates are HTML in templates/ and parts/, so
+ * this file is deliberately small: theme supports, assets, block styles and the
+ * pattern registration, and nothing else.
+ *
+ * Structured data, meta tags, breadcrumbs and the accessibility corrections for
+ * core blocks live in the Basalt Core plugin. They describe what the site is
+ * rather than how it looks, and a customer must not lose them by changing
+ * theme.
  *
  * @package Basalt
- * @since   2.0.0
+ * @since   3.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-/**
- * Theme version. Also used as the asset cache buster in production.
- * Keep in sync with the Version header in style.css.
- */
-define( 'BASALT_VERSION', '2.0.0' );
+/** Theme version. Also the asset cache buster in production. */
+define( 'BASALT_VERSION', '3.0.0' );
 
 /** Absolute path to the parent theme, with a trailing slash. */
 define( 'BASALT_DIR', trailingslashit( get_template_directory() ) );
@@ -46,9 +48,7 @@ function basalt_load_module( string $module ): void {
 /**
  * Modules, in load order.
  *
- * Filterable so a child theme can drop a module it wants to replace
- * wholesale, for example: unset the 'seo' entry when a dedicated SEO
- * plugin should own every meta tag.
+ * Filterable so a child theme can drop one it wants to replace wholesale.
  *
  * @param string[] $modules Module slugs relative to inc/.
  */
@@ -58,19 +58,12 @@ $basalt_modules = apply_filters(
 		'compat',
 		'setup',
 		'assets',
-		'template-functions',
-		'template-tags',
-		'navigation',
+		'blocks',
 		'accessibility',
 		'performance',
-		'blocks',
-		'customizer',
-		// Loaded before seo, which asks it whether a plugin owns an output.
-		'integrations/seo-plugins',
-		'seo',
-		'integrations/woocommerce',
+		'template-functions',
 		'admin/theme-page',
-		'admin/notices',
+		'integrations/woocommerce',
 	)
 );
 

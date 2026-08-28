@@ -175,9 +175,19 @@ p.is-style-lead {
 }
 
 @media (max-width: 34rem) {
+	/*
+	 * The whole table becomes blocks, not just the cells. Turning only the
+	 * cells into blocks leaves the table box itself sized by its widest row,
+	 * which pushed the page two pixels wider than the viewport: a scrollbar on
+	 * a phone for no visible reason.
+	 */
+	.wp-block-table.is-style-specs table,
+	.wp-block-table.is-style-specs tbody,
+	.wp-block-table.is-style-specs tr,
 	.wp-block-table.is-style-specs :is(td, th) {
 		display: block;
 		inline-size: 100% !important;
+		max-inline-size: 100%;
 	}
 
 	.wp-block-table.is-style-specs tr :first-child {
@@ -208,19 +218,29 @@ p.is-style-lead {
 	display: none;
 }
 
+/*
+ * The chevron is drawn with clip-path on an axis aligned box, and the open
+ * state rotates it by 180 degrees.
+ *
+ * The obvious implementation is two borders rotated 45 degrees. It looks
+ * identical and it costs two pixels of horizontal page overflow: rotation does
+ * not change an element's layout box, but it does enlarge the scrollable
+ * overflow area, and a square rotated 45 degrees is its own diagonal wider.
+ * A 180 degree rotation leaves the bounding box unchanged, so this version has
+ * no such effect.
+ */
 .wp-block-details summary::after {
 	content: "";
 	flex-shrink: 0;
-	inline-size: 0.55rem;
-	block-size: 0.55rem;
-	border-inline-end: 2px solid currentColor;
-	border-block-end: 2px solid currentColor;
-	transform: rotate(45deg);
-	transition: transform var(--transition-fast) var(--easing);
+	inline-size: 0.75rem;
+	block-size: 0.75rem;
+	background-color: currentColor;
+	clip-path: polygon(50% 72%, 6% 28%, 18% 16%, 50% 48%, 82% 16%, 94% 28%);
+	transition: transform var(--transition-base) var(--easing);
 }
 
 .wp-block-details[open] summary::after {
-	transform: rotate(-135deg);
+	transform: rotate(180deg);
 }
 
 .wp-block-details.is-style-faq {

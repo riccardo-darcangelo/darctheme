@@ -85,9 +85,17 @@ function collect( dir ) {
  */
 function audit( files ) {
 	const problems = [];
+	/*
+	 * A block theme needs templates/index.html where a classic theme needed
+	 * index.php. WordPress decides which kind a theme is by exactly that file,
+	 * so its absence would silently turn the theme back into a classic one and
+	 * take the site editor with it.
+	 */
 	const required = [
 		'style.css',
-		'index.php',
+		'templates/index.html',
+		'parts/header.html',
+		'parts/footer.html',
 		'functions.php',
 		'theme.json',
 		'readme.txt',

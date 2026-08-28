@@ -4,10 +4,10 @@ Contributors: Riccardo D'Arcangelo
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2.0.0
+Stable tag: 3.0.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Tags: blog, portfolio, business, one-column, two-columns, block-patterns, block-styles, custom-colors, custom-logo, custom-menu, editor-style, featured-images, full-width-template, right-sidebar, rtl-language-support, sticky-post, threaded-comments, translation-ready, wide-blocks, accessibility-ready
+Tags: blog, portfolio, business, one-column, block-patterns, block-styles, custom-colors, custom-logo, custom-menu, editor-style, featured-images, rtl-language-support, sticky-post, threaded-comments, translation-ready, wide-blocks, accessibility-ready
 
 A fast, accessible and SEO-first hybrid WordPress theme.
 

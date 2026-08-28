@@ -8,80 +8,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Add layout state to the body element so CSS does not have to guess.
- *
- * @param string[] $classes Body classes.
- * @return string[]
- */
-function basalt_body_classes( $classes ) {
-	$classes = (array) $classes;
-
-	if ( ! is_singular() ) {
-		$classes[] = 'hfeed';
-	}
-
-	if ( basalt_has_sidebar() ) {
-		$classes[] = 'has-sidebar';
-	} else {
-		$classes[] = 'no-sidebar';
-	}
-
-	if ( ! has_nav_menu( 'primary' ) ) {
-		$classes[] = 'no-primary-menu';
-	}
-
-	if ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) {
-		$classes[] = 'has-footer-widgets';
-	}
-
-	if ( is_singular() && has_post_thumbnail() ) {
-		$classes[] = 'has-featured-image';
-	}
-
-	return $classes;
-}
-add_filter( 'body_class', 'basalt_body_classes' );
-
-/**
- * Whether the current view should render the sidebar.
- *
- * @return bool
- */
-function basalt_has_sidebar(): bool {
-	$has_sidebar = is_active_sidebar( 'sidebar-1' )
-		&& ! is_page_template( array( 'templates/template-full-width.php', 'templates/template-landing.php' ) )
-		&& ! is_404()
-		&& ! is_page();
-
-	if ( is_page_template( 'templates/template-sidebar.php' ) ) {
-		$has_sidebar = is_active_sidebar( 'sidebar-1' );
-	}
-
-	/**
-	 * Filter whether the sidebar renders on the current view.
-	 *
-	 * @param bool $has_sidebar Whether to render the sidebar.
-	 */
-	return (bool) apply_filters( 'basalt_has_sidebar', $has_sidebar );
-}
-
-/**
- * Emit the pingback endpoint on singular views that accept pings.
- *
- * @return void
- */
-function basalt_pingback_header(): void {
-	if ( is_singular() && pings_open() ) {
-		printf( '<link rel="pingback" href="%s">' . "\n", esc_url( get_bloginfo( 'pingback_url' ) ) );
-	}
-}
-add_action( 'wp_head', 'basalt_pingback_header' );
-
-/**
  * Replace the excerpt ellipsis with a typographic one, without a read more link.
  *
- * A link inside the excerpt would duplicate the card link and give screen
- * reader users two identical targets. The card itself is the link.
+ * A link inside the excerpt would sit next to the post title link and give
+ * screen reader users two targets for the same destination, one of them called
+ * "read more".
  *
  * @param string $more Default more string.
  * @return string
@@ -90,26 +21,6 @@ function basalt_excerpt_more( $more ) {
 	return is_admin() ? $more : '&hellip;';
 }
 add_filter( 'excerpt_more', 'basalt_excerpt_more' );
-
-/**
- * Excerpt length in words.
- *
- * @param int $length Default length.
- * @return int
- */
-function basalt_excerpt_length( $length ) {
-	if ( is_admin() ) {
-		return $length;
-	}
-
-	/**
-	 * Filter the excerpt length used by the theme's cards and archives.
-	 *
-	 * @param int $length Number of words.
-	 */
-	return (int) apply_filters( 'basalt_excerpt_length', 28 );
-}
-add_filter( 'excerpt_length', 'basalt_excerpt_length' );
 
 /**
  * Strip the "Category:", "Tag:" and similar prefixes from archive titles.
@@ -122,11 +33,15 @@ add_filter( 'excerpt_length', 'basalt_excerpt_length' );
  */
 function basalt_archive_title( $title ) {
 	if ( is_category() || is_tag() || is_tax() ) {
-		$title = single_term_title( '', false );
-	} elseif ( is_post_type_archive() ) {
-		$title = post_type_archive_title( '', false );
-	} elseif ( is_author() ) {
-		$title = get_the_author();
+		return single_term_title( '', false );
+	}
+
+	if ( is_post_type_archive() ) {
+		return post_type_archive_title( '', false );
+	}
+
+	if ( is_author() ) {
+		return (string) get_the_author();
 	}
 
 	return $title;
@@ -134,25 +49,12 @@ function basalt_archive_title( $title ) {
 add_filter( 'get_the_archive_title', 'basalt_archive_title' );
 
 /**
- * Remove the wrapping markup WordPress adds around archive descriptions.
+ * Give every attachment image a decoding hint.
  *
- * @param string $description Archive description.
- * @return string
- */
-function basalt_archive_description( $description ) {
-	return wp_kses_post( $description );
-}
-add_filter( 'get_the_archive_description', 'basalt_archive_description' );
-
-/**
- * Give every attachment image a decoding hint and a stable aspect ratio.
- *
- * @param array<string, string> $attr       Image attributes.
- * @param WP_Post               $attachment Attachment post.
- * @param string|int[]          $size       Requested size.
+ * @param array<string, string> $attr Image attributes.
  * @return array<string, string>
  */
-function basalt_image_attributes( $attr, $attachment, $size ) {
+function basalt_image_attributes( $attr ) {
 	$attr = (array) $attr;
 
 	if ( empty( $attr['decoding'] ) ) {
@@ -161,46 +63,68 @@ function basalt_image_attributes( $attr, $attachment, $size ) {
 
 	return $attr;
 }
-add_filter( 'wp_get_attachment_image_attributes', 'basalt_image_attributes', 10, 3 );
+add_filter( 'wp_get_attachment_image_attributes', 'basalt_image_attributes' );
 
 /**
- * Wrap tables and iframes coming from the editor so they can scroll on phones.
+ * Let a table from the classic editor scroll rather than overflow the page.
  *
- * Long tables are the most common source of horizontal page overflow, which
- * Lighthouse reports as a mobile usability failure.
+ * The core table block brings its own scroll container. A table pasted into a
+ * classic editor post does not, and a wide one is the most common cause of
+ * horizontal page overflow on phones, which is both a layout bug and a WCAG
+ * 1.4.10 reflow failure.
  *
  * @param string $content Post content.
  * @return string
  */
-function basalt_wrap_overflowing_content( $content ) {
-	if ( is_admin() || empty( $content ) ) {
+function basalt_wrap_overflowing_tables( $content ) {
+	if ( is_admin() || empty( $content ) || false === stripos( $content, '<table' ) ) {
 		return $content;
 	}
 
-	return (string) preg_replace(
-		'#(<table(?![^>]*class="[^"]*wp-block-table)[^>]*>.*?</table>)#is',
-		'<div class="table-scroll">$1</div>',
+	$label = esc_attr__( 'Table, scrollable', 'basalt' );
+
+	/*
+	 * The alternation is what makes this safe. The first branch matches a whole
+	 * core table block and returns it untouched; because the regex engine tries
+	 * it first, a table inside such a figure can never reach the second branch.
+	 *
+	 * An earlier version tested the class on the <table> tag itself. The core
+	 * block puts its class on the surrounding <figure> and leaves the table
+	 * bare, so every core table was wrapped a second time and inherited the
+	 * 32rem minimum width meant for legacy tables. On a phone that turned a
+	 * three row table into a horizontally scrolling one.
+	 */
+	return (string) preg_replace_callback(
+		'#(<figure[^>]*class="[^"]*wp-block-table[^"]*"[^>]*>.*?</figure>)|(<table\b.*?</table>)#is',
+		static function ( array $matches ) use ( $label ): string {
+			if ( ! empty( $matches[1] ) ) {
+				return $matches[1];
+			}
+
+			return sprintf(
+				'<div class="table-scroll" tabindex="0" role="region" aria-label="%s">%s</div>',
+				$label,
+				$matches[2]
+			);
+		},
 		$content
 	);
 }
-add_filter( 'the_content', 'basalt_wrap_overflowing_content', 20 );
+add_filter( 'the_content', 'basalt_wrap_overflowing_tables', 20 );
 
 /**
- * Allowed HTML for the small snippets the theme renders from options.
+ * Add layout state to the body element.
  *
- * @return array<string, array<string, bool>>
+ * @param string[] $classes Body classes.
+ * @return string[]
  */
-function basalt_allowed_inline_html(): array {
-	return array(
-		'a'      => array(
-			'href'   => true,
-			'title'  => true,
-			'rel'    => true,
-			'target' => true,
-		),
-		'strong' => array(),
-		'em'     => array(),
-		'br'     => array(),
-		'span'   => array( 'class' => true ),
-	);
+function basalt_body_classes( $classes ) {
+	$classes = (array) $classes;
+
+	if ( is_singular() && has_post_thumbnail() ) {
+		$classes[] = 'has-featured-image';
+	}
+
+	return $classes;
 }
+add_filter( 'body_class', 'basalt_body_classes' );
