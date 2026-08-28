@@ -2,10 +2,12 @@
 /**
  * Asset loading.
  *
- * The stylesheets are plain CSS organised with @layer, so there is no build
- * step and buyers can edit a file and see the result. Order matters only for
- * the @layer statement in base.css; everything else is resolved by the cascade
- * layers, which is why the dependency chain below is explicit.
+ * Plain CSS, no build step, so a buyer can edit a file and see the result.
+ *
+ * The dependency chain below is what establishes the cascade order: base,
+ * layout, components, blocks, then a child theme's style.css. Cascade layers
+ * are deliberately not used; see the note at the top of assets/css/base.css for
+ * why they lose every collision with the CSS that theme.json generates.
  *
  * @package Basalt
  */
