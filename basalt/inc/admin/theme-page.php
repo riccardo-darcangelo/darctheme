@@ -130,12 +130,16 @@ function basalt_render_theme_page(): void {
 
 		<h2><?php esc_html_e( 'Design tokens', 'basalt' ); ?></h2>
 		<p>
-			<?php esc_html_e( 'Colours, type scale and spacing come from theme.json. Change them in the site editor under Styles and every template, block and pattern follows. Editing CSS by hand is only needed for layout work.', 'basalt' ); ?>
+			<?php esc_html_e( 'Colours, the type scale and the spacing steps are defined once in theme.json and apply to the front end, the block editor, the patterns and the block styles at the same time.', 'basalt' ); ?>
 		</p>
 		<p>
-			<a class="button" href="<?php echo esc_url( admin_url( 'site-editor.php?path=%2Fwp_global_styles' ) ); ?>">
-				<?php esc_html_e( 'Open styles', 'basalt' ); ?>
-			</a>
+			<?php
+			printf(
+				/* translators: %s: the theme.json file name, wrapped in a code element. */
+				esc_html__( 'Basalt uses classic PHP templates, so WordPress does not offer the site editor here and there is no visual panel for these values. Edit %s in a child theme; the block editor picks the change up immediately.', 'basalt' ),
+				'<code>theme.json</code>'
+			);
+			?>
 		</p>
 
 		<h2><?php esc_html_e( 'Plugins that fit', 'basalt' ); ?></h2>

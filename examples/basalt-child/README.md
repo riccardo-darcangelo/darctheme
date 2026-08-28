@@ -7,7 +7,7 @@ file here does something a real project needs.
 
 | File | What it demonstrates |
 | --- | --- |
-| `theme.json` | Overriding design tokens. Only the palette and one custom value are redefined; everything else is inherited. Values set here stay editable in the site editor. |
+| `theme.json` | Overriding design tokens. Only the palette and one custom value are redefined; everything else is inherited. This file is the customization surface, since a classic theme has no site editor. |
 | `functions.php` | Rendering data from a plugin, filtering the archive query, choosing an archive layout, and hooking into `basalt_after_header`. |
 | `inc/schema.php` | Adding a `Product` node and an `ItemList` node to the parent's Schema.org graph, and deciding which taxonomy drives the breadcrumb. |
 | `style.css` | CSS for the child's own components, using the parent's design tokens. |

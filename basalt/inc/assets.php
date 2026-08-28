@@ -156,7 +156,8 @@ add_action( 'wp_enqueue_scripts', 'basalt_enqueue_assets' );
  * Editor assets.
  *
  * add_editor_style() in setup.php handles the iframed post editor. This adds
- * the same variables to the site editor and to editor UI chrome.
+ * the same variables to the block editor chrome. The site editor is not part
+ * of this: WordPress offers it only to block themes.
  *
  * @return void
  */

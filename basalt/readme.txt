@@ -15,8 +15,8 @@ A fast, accessible and SEO-first hybrid WordPress theme.
 
 Basalt combines classic PHP templates with a theme.json design system. The
 templates give exact control over markup, headings and structured data; the
-design tokens are edited in the site editor under Styles and apply to the
-front end, the editor, the patterns and the block styles at once.
+design tokens are defined once in theme.json and apply to the front end, the
+editor, the patterns and the block styles at once.
 
 What it does out of the box:
 
@@ -51,9 +51,10 @@ duplicated.
 
 = How do I change the colours and the type scale? =
 
-In the site editor under Appearance > Editor > Styles. Everything comes from
-theme.json, and both the front end and the editor follow. Editing CSS is only
-needed for layout work.
+In theme.json, best from a child theme. Basalt uses classic PHP templates, so
+WordPress does not offer the site editor here; there is no visual panel for
+these values. Both the front end and the block editor follow the file. Editing
+CSS by hand is only needed for layout work.
 
 = Where do I put custom CSS? =
 

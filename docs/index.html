@@ -199,10 +199,20 @@
 		<code>theme.json</code> and used everywhere: front end, editor,
 		patterns and block styles. Change a value and all four follow.
 	</p>
-	<p>
-		Edit them visually under <strong>Appearance → Editor → Styles</strong>,
-		or in <code>theme.json</code> for a permanent change in a child theme.
-	</p>
+	<div class="note">
+		<p><strong>There is no visual panel for these values</strong></p>
+		<p>
+			Basalt uses classic PHP templates. WordPress offers the site editor
+			and its Styles panel only to block themes, so the tokens are edited
+			in <code>theme.json</code> itself, best from a child theme. The block
+			editor and the front end both pick the change up immediately.
+		</p>
+		<p>
+			That is the trade for markup control: the templates decide the
+			heading order, the landmarks and the structured data, and those are
+			what the accessibility and SEO guarantees rest on.
+		</p>
+	</div>
 
 	<h3>Colours</h3>
 	<table>
@@ -491,8 +501,8 @@
 	</p>
 	<p>
 		Prefer <code>theme.json</code> in the child over CSS for anything
-		visual: values defined there stay editable in the site editor, CSS does
-		not.
+		visual: values defined there flow into the editor, the patterns and the
+		block styles at once, and CSS written by hand does not.
 	</p>
 
 	<h3>Overriding a template</h3>

@@ -131,7 +131,7 @@ msgstr ""
 msgid "Three short steps get the site to a solid starting point."
 msgstr ""
 
-#: inc/admin/notices.php:50 inc/admin/theme-page.php:253
+#: inc/admin/notices.php:50 inc/admin/theme-page.php:257
 msgid "Getting started"
 msgstr ""
 
@@ -180,46 +180,47 @@ msgid "Design tokens"
 msgstr ""
 
 #: inc/admin/theme-page.php:133
-msgid "Colours, type scale and spacing come from theme.json. Change them in the site editor under Styles and every template, block and pattern follows. Editing CSS by hand is only needed for layout work."
+msgid "Colours, the type scale and the spacing steps are defined once in theme.json and apply to the front end, the block editor, the patterns and the block styles at the same time."
 msgstr ""
 
-#: inc/admin/theme-page.php:137
-msgid "Open styles"
+#. translators: %s: the theme.json file name, wrapped in a code element.
+#: inc/admin/theme-page.php:139
+msgid "Basalt uses classic PHP templates, so WordPress does not offer the site editor here and there is no visual panel for these values. Edit %s in a child theme; the block editor picks the change up immediately."
 msgstr ""
 
-#: inc/admin/theme-page.php:141
+#: inc/admin/theme-page.php:145
 msgid "Plugins that fit"
 msgstr ""
 
-#: inc/admin/theme-page.php:142
+#: inc/admin/theme-page.php:146
 msgid "Basalt requires none of these. Install what the project actually needs."
 msgstr ""
 
-#: inc/admin/theme-page.php:147
+#: inc/admin/theme-page.php:151
 msgid "Plugin"
 msgstr ""
 
-#: inc/admin/theme-page.php:148
+#: inc/admin/theme-page.php:152
 msgid "What it adds"
 msgstr ""
 
-#: inc/admin/theme-page.php:149
+#: inc/admin/theme-page.php:153
 msgid "Status"
 msgstr ""
 
-#: inc/admin/theme-page.php:192
+#: inc/admin/theme-page.php:196
 msgid "Activate"
 msgstr ""
 
-#: inc/admin/theme-page.php:198
+#: inc/admin/theme-page.php:202
 msgid "Active"
 msgstr ""
 
-#: inc/admin/theme-page.php:205
+#: inc/admin/theme-page.php:209
 msgid "Not installed"
 msgstr ""
 
-#: inc/admin/theme-page.php:215
+#: inc/admin/theme-page.php:219
 msgid "View and install"
 msgstr ""
 
