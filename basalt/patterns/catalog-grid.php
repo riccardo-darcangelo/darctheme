@@ -27,8 +27,8 @@ $basalt_cards = array(
 	),
 );
 ?>
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
 	<!-- wp:heading {"align":"wide"} -->
 	<h2 class="wp-block-heading alignwide"><?php echo esc_html_x( 'What we offer', 'Pattern placeholder', 'basalt' ); ?></h2>
 	<!-- /wp:heading -->

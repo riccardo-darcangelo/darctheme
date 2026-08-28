@@ -679,11 +679,29 @@ a.entry__link:focus-visible {
 
 /* Widgets -------------------------------------------------------------- */
 
-.widget__title {
+/*
+ * Two kinds of widget title reach these areas. Classic widgets use the
+ * before_title markup registered in inc/setup.php and carry .widget__title.
+ * Block based widgets, the default since WordPress 5.8, emit a bare heading
+ * block that inherits the h2 size from theme.json and turns a sidebar label
+ * into a 48 pixel headline. Both are covered here.
+ *
+ * The selectors carry an element part so they clear the specificity of the
+ * theme.json heading rule.
+ */
+.widget__title,
+.sidebar :is(h1, h2, h3, h4, h5, h6),
+.site-footer__widgets :is(h1, h2, h3, h4, h5, h6) {
 	margin: 0 0 var(--space-2);
 	font-size: var(--wp--preset--font-size--medium, 1.0625rem);
-	text-transform: uppercase;
+	line-height: 1.3;
 	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.sidebar .widget + .widget,
+.site-footer__column .widget + .widget {
+	margin-block-start: var(--space-4);
 }
 
 .widget ul {

@@ -47,14 +47,31 @@ function basalt_posted_on(): void {
 /**
  * Post author with a link to the author archive.
  *
+ * Renders nothing when the post type has no author support, or when the author
+ * cannot be resolved. Both happen in practice: a custom post type registered
+ * without 'author' support, and posts created programmatically with no
+ * post_author set. Printing "By" followed by an empty link is worse than
+ * printing nothing.
+ *
  * @return void
  */
 function basalt_posted_by(): void {
+	if ( ! post_type_supports( (string) get_post_type(), 'author' ) ) {
+		return;
+	}
+
+	$author_id = (int) get_the_author_meta( 'ID' );
+	$name      = (string) get_the_author();
+
+	if ( ! $author_id || '' === trim( $name ) ) {
+		return;
+	}
+
 	printf(
 		'<span class="entry__author">%1$s <a class="entry__author-link" href="%2$s" rel="author">%3$s</a></span>',
 		esc_html__( 'By', 'basalt' ),
-		esc_url( get_author_posts_url( (int) get_the_author_meta( 'ID' ) ) ),
-		esc_html( get_the_author() )
+		esc_url( get_author_posts_url( $author_id ) ),
+		esc_html( $name )
 	);
 }
 
@@ -79,26 +96,30 @@ function basalt_reading_time( $post = null ): int {
 }
 
 /**
- * Category and tag list for the current post.
+ * Category and tag list for the current post, as markup.
  *
- * @return void
+ * Returned rather than echoed so a template can decide whether the surrounding
+ * footer is worth rendering at all. An empty footer still draws its top border,
+ * which reads as a stray rule under the content.
+ *
+ * @return string
  */
-function basalt_entry_taxonomies(): void {
+function basalt_get_entry_taxonomies(): string {
 	if ( 'post' !== get_post_type() ) {
-		return;
+		return '';
 	}
 
 	$categories = get_the_category_list( '', '', get_the_ID() );
 	$tags       = get_the_tag_list( '', '', '', get_the_ID() );
 
-	if ( ! $categories && ! $tags ) {
-		return;
+	if ( ! $categories && ( ! $tags || is_wp_error( $tags ) ) ) {
+		return '';
 	}
 
-	echo '<div class="entry__taxonomies">';
+	$markup = '<div class="entry__taxonomies">';
 
 	if ( $categories ) {
-		printf(
+		$markup .= sprintf(
 			'<div class="entry__terms entry__terms--category"><span class="entry__terms-label">%1$s</span> %2$s</div>',
 			esc_html__( 'Categories', 'basalt' ),
 			wp_kses_post( $categories )
@@ -106,14 +127,23 @@ function basalt_entry_taxonomies(): void {
 	}
 
 	if ( $tags && ! is_wp_error( $tags ) ) {
-		printf(
+		$markup .= sprintf(
 			'<div class="entry__terms entry__terms--tag"><span class="entry__terms-label">%1$s</span> %2$s</div>',
 			esc_html__( 'Tags', 'basalt' ),
 			wp_kses_post( $tags )
 		);
 	}
 
-	echo '</div>';
+	return $markup . '</div>';
+}
+
+/**
+ * Echo the category and tag list.
+ *
+ * @return void
+ */
+function basalt_entry_taxonomies(): void {
+	echo basalt_get_entry_taxonomies(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the getter.
 }
 
 /**
@@ -333,6 +363,17 @@ function basalt_get_breadcrumb_items(): array {
 			'url'  => home_url( '/' ),
 		),
 	);
+
+	/*
+	 * The front page is the root of the trail, so it has no trail. Without this
+	 * a static front page falls into the is_singular() branch below and lands
+	 * on itself: "Home > Home", both pointing at the same URL. Callers treat a
+	 * single entry as "no breadcrumb", so returning early suppresses both the
+	 * visible trail and the BreadcrumbList node.
+	 */
+	if ( is_front_page() ) {
+		return $items;
+	}
 
 	if ( is_singular() ) {
 		$post_id   = get_the_ID();

@@ -181,11 +181,22 @@ function basalt_catalog_register(): void {
 			BASALT_CATALOG_POST_TYPE,
 			'_catalog_' . $key,
 			array(
-				'type'              => 'number' === $spec['type'] ? 'number' : 'string',
-				'description'       => $spec['label'],
-				'single'            => true,
-				'show_in_rest'      => true,
-				'sanitize_callback' => 'number' === $spec['type'] ? 'floatval' : 'sanitize_text_field',
+				'type'         => 'number' === $spec['type'] ? 'number' : 'string',
+				'description'  => $spec['label'],
+				'single'       => true,
+				'show_in_rest' => true,
+				/*
+				 * Wrapped in a closure rather than passed as 'floatval'.
+				 * register_post_meta registers the sanitize callback as a filter
+				 * with four accepted arguments, and PHP throws an
+				 * ArgumentCountError when an internal function is handed more
+				 * arguments than it declares. WordPress functions such as
+				 * sanitize_text_field are userland and silently ignore the
+				 * extras, which is why the mistake is easy to miss.
+				 */
+				'sanitize_callback' => 'number' === $spec['type']
+					? static fn( $value ): float => (float) $value
+					: 'sanitize_text_field',
 				'auth_callback'     => static fn(): bool => current_user_can( 'edit_posts' ),
 			)
 		);

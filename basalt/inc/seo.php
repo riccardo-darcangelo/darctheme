@@ -301,21 +301,61 @@ function basalt_robots( $robots ) {
 	$robots = (array) $robots;
 
 	if ( is_search() || is_404() || ( is_singular() && (int) get_query_var( 'cpage' ) > 0 ) ) {
-		$robots['noindex']  = true;
-		$robots['follow']   = true;
+		$robots['noindex'] = true;
+		$robots['follow']  = true;
 		unset( $robots['index'] );
 	}
 
-	// Let Google build rich previews and use large image thumbnails.
 	if ( empty( $robots['noindex'] ) ) {
+		// Let Google build rich previews and use large image thumbnails.
 		$robots['max-image-preview'] = 'large';
 		$robots['max-snippet']       = '-1';
 		$robots['max-video-preview'] = '-1';
+	} else {
+		/*
+		 * Core adds max-image-preview at priority 10, before this filter runs.
+		 * Preview directives on a noindex page describe a result that will
+		 * never be shown, so they are removed rather than left contradicting
+		 * each other in the same tag.
+		 */
+		unset( $robots['max-image-preview'], $robots['max-snippet'], $robots['max-video-preview'] );
 	}
 
 	return $robots;
 }
 add_filter( 'wp_robots', 'basalt_robots', 20 );
+
+/**
+ * Self-referencing canonical for views WordPress does not cover.
+ *
+ * Core's rel_canonical() only runs on singular views. Archives, the posts page
+ * and taxonomy terms get nothing, so any URL that reaches them with a tracking
+ * parameter appended looks like a separate page to a crawler. Paginated
+ * archives point at their own page rather than at page one, which is what
+ * Google asks for since rel=prev/next was retired.
+ *
+ * @return void
+ */
+function basalt_archive_canonical(): void {
+	if ( ! basalt_should_output_meta() || is_singular() || is_404() ) {
+		return;
+	}
+
+	$url = basalt_get_current_url();
+
+	if ( ! $url ) {
+		return;
+	}
+
+	$page = (int) get_query_var( 'paged' );
+
+	if ( $page > 1 ) {
+		$url = get_pagenum_link( $page );
+	}
+
+	printf( '<link rel="canonical" href="%s">' . "\n", esc_url( $url ) );
+}
+add_action( 'wp_head', 'basalt_archive_canonical', 9 );
 
 /* -------------------------------------------------------------------------
  * Structured data
@@ -377,7 +417,12 @@ function basalt_build_schema_graph(): array {
 		basalt_schema_webpage_node( $page_id, $url, $website_id, $entity_id ),
 	);
 
-	$breadcrumbs = basalt_schema_breadcrumb_node( $url );
+	/*
+	 * No trail on a 404. The page describes an address that does not exist, so
+	 * a breadcrumb ending in "Page not found" claims a position in a hierarchy
+	 * that is not there.
+	 */
+	$breadcrumbs = is_404() ? null : basalt_schema_breadcrumb_node( $url );
 
 	if ( $breadcrumbs ) {
 		$graph[] = $breadcrumbs;
@@ -585,10 +630,10 @@ function basalt_schema_webpage_node( string $page_id, string $url, string $websi
 		);
 	}
 
-	$breadcrumb_id = $url . '#breadcrumb';
-
-	if ( count( basalt_get_breadcrumb_items() ) > 1 ) {
-		$node['breadcrumb'] = array( '@id' => $breadcrumb_id );
+	// Must match the condition in basalt_build_schema_graph(), or this points
+	// at a node that was never emitted.
+	if ( ! is_404() && count( basalt_get_breadcrumb_items() ) > 1 ) {
+		$node['breadcrumb'] = array( '@id' => $url . '#breadcrumb' );
 	}
 
 	return $node;

@@ -51,11 +51,14 @@ Text Domain: basalt-child
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5rem;
-	margin-block: var(--space-2);
+	margin: 0;
+	/* Shorthand first: a later "padding: 0" would reset the block padding. */
 	padding: 0;
+	padding-block: var(--space-3);
 	list-style: none;
 }
 
+/* The element part clears the specificity of the theme.json link colour. */
 .catalog-terms a {
 	display: inline-block;
 	padding: 0.25rem 0.75rem;

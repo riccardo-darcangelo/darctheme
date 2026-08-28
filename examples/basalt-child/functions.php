@@ -83,10 +83,15 @@ function basalt_child_append_specs( $content ) {
 add_filter( 'the_content', 'basalt_child_append_specs', 15 );
 
 /**
- * Show the taxonomy terms of a catalog entry above the technical data.
+ * Show the taxonomy terms of a catalog entry below the header.
  *
  * The terms link to their archives, which is what makes the category pages
  * reachable for both visitors and crawlers.
+ *
+ * Two details worth keeping: basalt_after_header fires outside the theme's
+ * container, so the output has to bring its own or it sits flush against the
+ * viewport edge; and all taxonomies go into one list rather than one list per
+ * taxonomy, because to a reader these are one row of labels, not two groups.
  *
  * @return void
  */
@@ -95,19 +100,14 @@ function basalt_child_render_terms(): void {
 		return;
 	}
 
+	$items = array();
+
 	foreach ( array_keys( basalt_catalog_taxonomies() ) as $taxonomy ) {
 		$terms = get_the_terms( get_the_ID(), $taxonomy );
 
-		if ( ! is_array( $terms ) || ! $terms ) {
+		if ( ! is_array( $terms ) ) {
 			continue;
 		}
-
-		$object = get_taxonomy( $taxonomy );
-
-		printf(
-			'<ul class="catalog-terms" aria-label="%s">',
-			esc_attr( $object ? $object->labels->name : $taxonomy )
-		);
 
 		foreach ( $terms as $term ) {
 			$link = get_term_link( $term );
@@ -116,15 +116,23 @@ function basalt_child_render_terms(): void {
 				continue;
 			}
 
-			printf(
+			$items[] = sprintf(
 				'<li><a href="%1$s">%2$s</a></li>',
 				esc_url( $link ),
 				esc_html( $term->name )
 			);
 		}
-
-		echo '</ul>';
 	}
+
+	if ( ! $items ) {
+		return;
+	}
+
+	printf(
+		'<div class="container"><ul class="catalog-terms" aria-label="%1$s">%2$s</ul></div>',
+		esc_attr__( 'Categories', 'basalt-child' ),
+		implode( '', $items ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each item escaped above.
+	);
 }
 add_action( 'basalt_after_header', 'basalt_child_render_terms' );
 

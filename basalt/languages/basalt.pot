@@ -648,43 +648,43 @@ msgstr ""
 msgid "Empty columns are skipped, so the footer grid adapts to how many you fill."
 msgstr ""
 
-#: inc/template-tags.php:103
+#: inc/template-tags.php:124
 msgid "Categories"
 msgstr ""
 
-#: inc/template-tags.php:111
+#: inc/template-tags.php:132
 msgid "Tags"
 msgstr ""
 
-#: inc/template-tags.php:178
+#: inc/template-tags.php:208
 msgid "Previous"
 msgstr ""
 
-#: inc/template-tags.php:179
+#: inc/template-tags.php:209
 msgid "Next"
 msgstr ""
 
-#: inc/template-tags.php:187
+#: inc/template-tags.php:217
 msgid "Posts pagination"
 msgstr ""
 
-#: inc/template-tags.php:209
+#: inc/template-tags.php:239
 msgid "Continue reading"
 msgstr ""
 
-#: inc/template-tags.php:215
+#: inc/template-tags.php:245
 msgid "Previous post"
 msgstr ""
 
-#: inc/template-tags.php:224
+#: inc/template-tags.php:254
 msgid "Next post"
 msgstr ""
 
-#: inc/template-tags.php:288 inc/template-tags.php:298
+#: inc/template-tags.php:318 inc/template-tags.php:328
 msgid "Breadcrumb"
 msgstr ""
 
-#: inc/template-tags.php:332
+#: inc/template-tags.php:362
 msgid "Home"
 msgstr ""
 
@@ -694,15 +694,15 @@ msgid "Updated %s"
 msgstr ""
 
 #. translators: %s: search query.
-#: inc/template-tags.php:410 search.php:21
+#: inc/template-tags.php:451 search.php:21
 msgid "Search results for %s"
 msgstr ""
 
-#: inc/template-tags.php:417
+#: inc/template-tags.php:458
 msgid "Page not found"
 msgstr ""
 
-#: inc/template-tags.php:55
+#: inc/template-tags.php:72
 msgid "By"
 msgstr ""
 
@@ -981,11 +981,11 @@ msgstr ""
 msgid "There is no content in this section at the moment. A search might help."
 msgstr ""
 
-#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:46
+#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:51
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:46
+#: template-parts/content/content-page.php:41 template-parts/content/content-single.php:51
 msgid "Page"
 msgstr ""
 
@@ -995,7 +995,7 @@ msgid "Edit %s"
 msgstr ""
 
 #. translators: %d: reading time in minutes.
-#: template-parts/content/content-single.php:28 template-parts/content/content.php:36
+#: template-parts/content/content-single.php:32 template-parts/content/content.php:36
 msgid "%d min read"
 msgid_plural "%d min read"
 msgstr[0] ""
