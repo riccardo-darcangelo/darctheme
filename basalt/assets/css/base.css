@@ -1,0 +1,309 @@
+/**
+ * Base: reset, element defaults, accessibility utilities.
+ *
+ * Loaded first. The stylesheets are ordered through their enqueue dependencies
+ * in inc/assets.php: base, layout, components, blocks, then the child theme's
+ * style.css.
+ *
+ * Why there are no cascade layers here
+ * ------------------------------------
+ * WordPress prints the CSS generated from theme.json without a layer, and an
+ * unlayered rule beats every layered rule no matter how specific the layered
+ * selector is. A theme that puts its components in @layer therefore loses every
+ * collision with theme.json: navigation links, the site title and buttons all
+ * inherit the global link colour, whatever the component says. Plain rules and
+ * ordinary specificity are the only thing that composes correctly with
+ * theme.json output, so that is what this theme uses.
+ *
+ * The practical consequence: where a rule has to beat a theme.json element
+ * style, it needs a specificity above (0,1,0). theme.json emits its link colour
+ * as ":root :where(a:where(:not(.wp-element-button)))", so a bare .class ties
+ * with it and only wins on source order. Those places are written as
+ * "a.button", ".site-branding .site-branding__link" and similar on purpose.
+ *
+ * @package Basalt
+ */
+
+/* -------------------------------------------------------------------------
+ * Tokens
+ *
+ * Short aliases for the theme.json presets. The fallbacks repeat the values
+ * from theme.json so a stylesheet still renders correctly if global styles
+ * fail to load, for example inside an isolated preview.
+ * ---------------------------------------------------------------------- */
+
+:root {
+	--color-base: var(--wp--preset--color--base, #ffffff);
+	--color-surface: var(--wp--preset--color--surface, #f4f5f7);
+	--color-surface-strong: var(--wp--preset--color--surface-strong, #e6e9ed);
+	--color-ink: var(--wp--preset--color--contrast, #16191d);
+	--color-ink-soft: var(--wp--preset--color--contrast-soft, #5b6672);
+	--color-primary: var(--wp--preset--color--primary, #2a3a47);
+	--color-primary-strong: var(--wp--preset--color--primary-strong, #1a252e);
+	--color-accent: var(--wp--preset--color--accent, #c2410c);
+	--color-accent-soft: var(--wp--preset--color--accent-soft, #fdf1e9);
+	--color-border: var(--wp--preset--color--border, #dbe0e6);
+
+	--space-1: var(--wp--preset--spacing--10, 0.5rem);
+	--space-2: var(--wp--preset--spacing--20, 1rem);
+	--space-3: var(--wp--preset--spacing--30, 1.5rem);
+	--space-4: var(--wp--preset--spacing--40, clamp(2rem, 4vw, 3rem));
+	--space-5: var(--wp--preset--spacing--50, clamp(3rem, 6vw, 4.5rem));
+	--space-6: var(--wp--preset--spacing--60, clamp(4rem, 9vw, 7rem));
+
+	--radius-sm: var(--wp--custom--radius--sm, 0.25rem);
+	--radius-md: var(--wp--custom--radius--md, 0.5rem);
+	--radius-lg: var(--wp--custom--radius--lg, 1rem);
+	--radius-pill: var(--wp--custom--radius--pill, 999px);
+
+	--shadow-sm: var(--wp--preset--shadow--sm, 0 1px 2px rgb(22 25 29 / 6%));
+	--shadow-md: var(--wp--preset--shadow--md, 0 2px 4px rgb(22 25 29 / 6%), 0 8px 16px rgb(22 25 29 / 6%));
+	--shadow-lg: var(--wp--preset--shadow--lg, 0 4px 8px rgb(22 25 29 / 5%), 0 16px 32px rgb(22 25 29 / 9%));
+
+	--transition-fast: var(--wp--custom--transition--fast, 120ms);
+	--transition-base: var(--wp--custom--transition--base, 220ms);
+	--easing: var(--wp--custom--transition--easing, cubic-bezier(0.2, 0, 0, 1));
+
+	--focus-width: var(--wp--custom--focus--width, 2px);
+	--focus-offset: var(--wp--custom--focus--offset, 2px);
+
+	--content-width: var(--wp--style--global--content-size, 44rem);
+	--wide-width: var(--wp--style--global--wide-size, 80rem);
+	--measure: var(--wp--custom--measure, 68ch);
+	--header-height: var(--wp--custom--header--height, 4.5rem);
+
+	/* Matches the desktop breakpoint in navigation.js. */
+	--nav-breakpoint: 62rem;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:where(body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ol, ul) {
+	margin: 0;
+}
+
+:where(ul, ol)[class] {
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	tab-size: 4;
+
+	/*
+	 * Anchor links and the back to top button must not land underneath the
+	 * sticky header.
+	 */
+	scroll-padding-block-start: calc(var(--header-height) + var(--space-2));
+}
+
+body {
+	min-block-size: 100vb;
+	text-rendering: optimizeSpeed;
+}
+
+:where(img, picture, video, canvas, svg) {
+	display: block;
+	max-inline-size: 100%;
+	block-size: auto;
+}
+
+:where(input, button, textarea, select) {
+	font: inherit;
+	color: inherit;
+}
+
+:where(button) {
+	cursor: pointer;
+}
+
+:where(a) {
+	color: inherit;
+}
+
+:where(table) {
+	border-collapse: collapse;
+	inline-size: 100%;
+}
+
+:where(hr) {
+	border: 0;
+	border-block-start: 1px solid var(--color-border);
+}
+
+/*
+ * Honour the operating system setting. Motion is not removed entirely,
+ * because a transition of zero can break scripts that wait for
+ * transitionend; it is reduced to a value below the perception threshold.
+ */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+body {
+	display: flow-root;
+	overflow-x: clip;
+}
+
+/*
+ * Focus visibility. WCAG 2.2 asks for a focus indicator that is not
+ * obscured and has enough contrast against both the component and the page,
+ * which is why the outline sits outside the element rather than inside it.
+ */
+:focus-visible {
+	outline: var(--focus-width) solid var(--color-accent);
+	outline-offset: var(--focus-offset);
+	border-radius: var(--radius-sm);
+}
+
+/* Only remove the default ring where a focus-visible ring is defined. */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+:target {
+	scroll-margin-block-start: calc(var(--header-height) + var(--space-3));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
+}
+
+p,
+li {
+	text-wrap: pretty;
+}
+
+:where(p, li, dd) {
+	max-inline-size: var(--measure);
+}
+
+small {
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+}
+
+abbr[title] {
+	text-decoration: underline dotted;
+	cursor: help;
+}
+
+::selection {
+	background-color: var(--color-accent-soft);
+	color: var(--color-ink);
+}
+
+/* Forms */
+input:where([type="text"], [type="email"], [type="url"], [type="tel"], [type="number"], [type="search"], [type="password"], [type="date"]),
+textarea,
+select {
+	inline-size: 100%;
+	padding: 0.6rem 0.75rem;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	background-color: var(--color-base);
+	color: var(--color-ink);
+	transition: border-color var(--transition-fast) var(--easing);
+}
+
+input:where([type="text"], [type="email"], [type="url"], [type="tel"], [type="number"], [type="search"], [type="password"], [type="date"]):hover,
+textarea:hover,
+select:hover {
+	border-color: var(--color-ink-soft);
+}
+
+label {
+	display: inline-block;
+	margin-block-end: 0.35rem;
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	font-weight: 600;
+}
+
+/*
+ * Minimum target size, WCAG 2.2 success criterion 2.5.8. Applies to the
+ * theme's own controls; inline links inside prose are exempt.
+ */
+button,
+input[type="submit"],
+.button {
+	min-block-size: 44px;
+}
+
+/*
+ * Visually hidden but available to assistive technology. The clip-path
+ * variant is the one that survives being placed inside a flex container.
+ */
+.screen-reader-text {
+	position: absolute !important;
+	clip-path: inset(50%);
+	inline-size: 1px;
+	block-size: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	word-wrap: normal;
+}
+
+.screen-reader-text:focus {
+	clip-path: none;
+	inline-size: auto;
+	block-size: auto;
+	margin: 0;
+	padding: 0.75rem 1rem;
+	background-color: var(--color-base);
+	color: var(--color-ink);
+	z-index: 100000;
+}
+
+.skip-link {
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline-start: 0;
+	z-index: 1000;
+	padding: 0.75rem 1.25rem;
+	background-color: var(--color-ink);
+	color: var(--color-base);
+	text-decoration: none;
+	transform: translateY(-120%);
+	transition: transform var(--transition-fast) var(--easing);
+}
+
+.skip-link:focus-visible {
+	transform: translateY(0);
+}
+
+.table-scroll {
+	overflow-x: auto;
+	max-inline-size: 100%;
+	margin-block: var(--space-3);
+
+	/* Announce the region so keyboard users can scroll it. */
+	scrollbar-gutter: stable;
+}
+
+.table-scroll table {
+	min-inline-size: 32rem;
+}
+
+[hidden] {
+	display: none !important;
+}

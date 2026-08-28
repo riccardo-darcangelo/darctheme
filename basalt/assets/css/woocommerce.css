@@ -1,0 +1,109 @@
+/**
+ * WooCommerce. Loaded only on shop, cart, checkout and account views.
+ *
+ * Scope is deliberately small: enough to make WooCommerce use the theme's
+ * containers, buttons and type, and nothing that would fight a WooCommerce
+ * update.
+ *
+ * @package Basalt
+ */
+
+.woocommerce-main {
+	padding-block: var(--space-5);
+}
+
+.woocommerce ul.products {
+	display: grid;
+	gap: var(--space-4);
+	grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.woocommerce ul.products::before,
+.woocommerce ul.products::after {
+	content: none;
+}
+
+.woocommerce ul.products li.product {
+	inline-size: 100% !important;
+	margin: 0 !important;
+	float: none !important;
+	text-align: start;
+}
+
+.woocommerce ul.products li.product a img {
+	margin-block-end: var(--space-2);
+	border-radius: var(--radius-md);
+}
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+	padding: 0;
+	font-size: var(--wp--preset--font-size--large, 1.375rem);
+}
+
+.woocommerce ul.products li.product .price {
+	color: var(--color-ink);
+	font-weight: 600;
+}
+
+.woocommerce span.onsale {
+	inset-block-start: var(--space-2);
+	inset-inline-start: var(--space-2);
+	min-block-size: 0;
+	min-inline-size: 0;
+	padding: 0.25rem 0.75rem;
+	border-radius: var(--radius-pill);
+	background-color: var(--color-accent);
+	line-height: 1.6;
+}
+
+.woocommerce :is(a.button, button.button, input.button, #respond input#submit),
+.woocommerce :is(a.button.alt, button.button.alt, input.button.alt) {
+	padding: 0.75rem 1.5rem;
+	border-radius: var(--radius-md);
+	background-color: var(--color-accent);
+	color: var(--color-base);
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.woocommerce :is(a.button, button.button, input.button):hover,
+.woocommerce :is(a.button.alt, button.button.alt, input.button.alt):hover {
+	background-color: var(--color-primary);
+	color: var(--color-base);
+}
+
+.woocommerce div.product .product_title {
+	font-size: var(--wp--preset--font-size--xx-large, 2.5rem);
+}
+
+.woocommerce div.product form.cart {
+	margin-block-end: var(--space-3);
+}
+
+.woocommerce .woocommerce-tabs ul.tabs {
+	padding: 0;
+	margin-block-end: var(--space-3);
+}
+
+.woocommerce .woocommerce-tabs ul.tabs::before {
+	border-block-end-color: var(--color-border);
+}
+
+.woocommerce table.shop_table {
+	border-radius: var(--radius-md);
+	border-color: var(--color-border);
+}
+
+.woocommerce :is(.woocommerce-message, .woocommerce-info, .woocommerce-error) {
+	border-block-start-color: var(--color-accent);
+	background-color: var(--color-surface);
+}
+
+.woocommerce form :is(.form-row input.input-text, .form-row textarea, .form-row select) {
+	padding: 0.6rem 0.75rem;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+}
