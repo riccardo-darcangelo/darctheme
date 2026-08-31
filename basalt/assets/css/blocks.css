@@ -10,7 +10,13 @@
 
 /* Group ---------------------------------------------------------------- */
 
-.wp-block-group.is-style-card {
+/*
+ * Also available on a column, because a row of cards is more often three
+ * columns than three groups, and a style that exists on one and not the other
+ * sends people to build the same thing twice.
+ */
+.wp-block-group.is-style-card,
+.wp-block-column.is-style-card {
 	padding: var(--space-3);
 	background-color: var(--color-base);
 	border: 1px solid var(--color-border);
@@ -304,4 +310,47 @@ p.is-style-lead {
  */
 .wp-block-post-template .wp-block-post-featured-image {
 	margin-block-end: var(--space-2);
+}
+
+/*
+ * Numbered steps.
+ *
+ * A counter rather than the browser's own marker, because the marker cannot be
+ * styled to the size this wants and cannot be moved out of the text flow. The
+ * list stays an ordered list, so the number a screen reader announces and the
+ * number drawn on screen are the same number.
+ */
+.wp-block-list.is-style-steps {
+	counter-reset: basalt-step;
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+.wp-block-list.is-style-steps > li {
+	counter-increment: basalt-step;
+	position: relative;
+	padding-inline-start: 3.25rem;
+	min-block-size: 2.5rem;
+}
+
+.wp-block-list.is-style-steps > li + li {
+	margin-block-start: var(--space-3);
+}
+
+.wp-block-list.is-style-steps > li::before {
+	content: counter(basalt-step);
+	position: absolute;
+	inset-inline-start: 0;
+	inset-block-start: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: 2.25rem;
+	block-size: 2.25rem;
+	border-radius: 999px;
+	background-color: var(--color-accent);
+	color: var(--color-base);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
 }

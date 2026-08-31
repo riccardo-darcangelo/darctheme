@@ -30,8 +30,8 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<!-- /wp:buttons -->
 
-	<!-- wp:paragraph {"align":"center","style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}}},"fontSize":"small"} -->
-	<p class="has-text-align-center has-small-font-size" style="margin-top:var(--wp--preset--spacing--30)"><a href="tel:+490000000000"><?php echo esc_html_x( '+49 000 0000000', 'Pattern placeholder', 'basalt' ); ?></a> · <a href="mailto:hello@example.com">hello@example.com</a></p>
+	<!-- wp:paragraph {"align":"center","style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}},"elements":{"link":{"color":{"text":"var:preset|color|base"}}}},"textColor":"base","fontSize":"small"} -->
+	<p class="has-text-align-center has-base-color has-text-color has-link-color has-small-font-size" style="margin-top:var(--wp--preset--spacing--30)"><a href="tel:+490000000000"><?php echo esc_html_x( '+49 000 0000000', 'Pattern placeholder', 'basalt' ); ?></a> · <a href="mailto:hello@example.com">hello@example.com</a></p>
 	<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

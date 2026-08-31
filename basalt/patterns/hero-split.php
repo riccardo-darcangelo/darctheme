@@ -3,7 +3,7 @@
  * Title: Hero, text and image
  * Slug: basalt/hero-split
  * Categories: basalt-hero
- * Description: An opening section with a headline, a short paragraph, two buttons and an image beside them.
+ * Description: An opening section with a headline, a short paragraph, two buttons and an image beside them. The headline is the page level one, so use it on the "Landing page" template, which prints no title of its own.
  * Keywords: hero, header, intro, banner
  * Viewport width: 1400
  *

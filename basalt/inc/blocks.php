@@ -35,6 +35,12 @@ function basalt_register_block_styles(): void {
 				'label' => __( 'Section', 'basalt' ),
 			),
 		),
+		'core/column'    => array(
+			array(
+				'name'  => 'card',
+				'label' => __( 'Card', 'basalt' ),
+			),
+		),
 		'core/image'     => array(
 			array(
 				'name'  => 'rounded-lg',
@@ -53,6 +59,10 @@ function basalt_register_block_styles(): void {
 			array(
 				'name'  => 'plain',
 				'label' => __( 'No markers', 'basalt' ),
+			),
+			array(
+				'name'  => 'steps',
+				'label' => __( 'Numbered steps', 'basalt' ),
 			),
 		),
 		'core/heading'   => array(

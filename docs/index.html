@@ -500,27 +500,95 @@
 <section id="patterns">
 	<h2>Patterns and block styles</h2>
 	<p>
-		Patterns are in the block inserter under the <strong>Basalt</strong>
-		categories. They are ordinary core blocks, so they keep working if you
-		switch theme later.
+		Twenty five patterns, in the block inserter under the
+		<strong>Basalt</strong> categories. They are ordinary core blocks, so
+		they keep working if you switch theme later, and every one of them was
+		audited at 390, 768 and 1440 pixels before it shipped.
+	</p>
+
+	<h3>Openings</h3>
+	<p>
+		These carry the level one heading, so they belong on the
+		<strong>Landing page</strong> template, which prints no title of its
+		own. On an ordinary page the title is already the level one heading and
+		a second would be one too many.
 	</p>
 	<table>
 		<tr><th>Pattern</th><th>Contains</th></tr>
-		<tr><td>Hero, text and image</td><td>Eyebrow, H1, paragraph, two buttons, image.</td></tr>
-		<tr><td>Text with a checklist</td><td>Image beside heading, paragraph and ticked list.</td></tr>
-		<tr><td>Catalog grid, three cards</td><td>Three linked cards with image, title and description.</td></tr>
+		<tr><td>Hero, text and image</td><td>Eyebrow, heading, paragraph, two buttons, image beside them.</td></tr>
+		<tr><td>Centred hero</td><td>The same, centred on a tinted band, without the image.</td></tr>
+		<tr><td>Hero with a background image</td><td>A cover block ready for your photograph. The overlay ships fully opaque so the text is readable before an image is added; add yours and lower it.</td></tr>
+	</table>
+
+	<h3>Sections</h3>
+	<table>
+		<tr><th>Pattern</th><th>Contains</th></tr>
+		<tr><td>Text with a checklist</td><td>Image beside a heading, paragraph and ticked list.</td></tr>
+		<tr><td>Heading with two columns of text</td><td>A section heading with the prose set beside it in two columns.</td></tr>
+		<tr><td>Two alternating image and text rows</td><td>Two rows with the sides swapped, swapped in the markup so the reading order follows the layout.</td></tr>
+		<tr><td>Row of figures</td><td>Three numbers with a label under each. Paragraphs, not headings: a figure is not a section title.</td></tr>
+		<tr><td>How it works, in steps</td><td>A numbered list styled as steps. Still an ordered list, so the number read aloud and the number drawn are the same.</td></tr>
+		<tr><td>The people</td><td>Three portraits with a name and a role.</td></tr>
+		<tr><td>Two quotations</td><td>Two testimonials as real blockquote and cite elements.</td></tr>
+		<tr><td>Row of client logos</td><td>Four logos under one line of text. Give each the company name as alternative text.</td></tr>
+		<tr><td>Comparison table</td><td>Three options across the same rows, with the first cell of each row as its header.</td></tr>
 		<tr><td>Technical specifications</td><td>Two column table that collapses to stacked rows on phones.</td></tr>
+		<tr><td>Latest three posts</td><td>A query loop with featured image, title and excerpt, under a heading that names it.</td></tr>
 		<tr><td>FAQ with structured data</td><td>Expandable questions that also emit FAQPage structured data.</td></tr>
-		<tr><td>Call to action with contact details</td><td>Dark section with a button, phone and email links.</td></tr>
-		<tr><td>Product or service landing page</td><td>All of the above in the order a visitor asks their questions.</td></tr>
+	</table>
+
+	<h3>Offers and calls to action</h3>
+	<table>
+		<tr><th>Pattern</th><th>Contains</th></tr>
+		<tr><td>Three services</td><td>Three cards with a heading, two lines and a link that says where it goes.</td></tr>
+		<tr><td>Three prices</td><td>Three cards with a price and what is included. The recommended one is marked with a word, not only a colour.</td></tr>
+		<tr><td>Catalog grid, three cards</td><td>Three linked cards with image, title and description.</td></tr>
+		<tr><td>Call to action band</td><td>One heading, one line, one button on a full width band.</td></tr>
+		<tr><td>Call to action with contact details</td><td>The same with the phone number and email as real links.</td></tr>
+		<tr><td>Address and opening hours</td><td>Where you are, when you are open and how to reach you, in three columns.</td></tr>
+	</table>
+
+	<h3>Whole pages</h3>
+	<p>
+		These appear in the pattern chooser when you create a new page. They are
+		built from the section patterns above rather than copies of them, so
+		improving a section improves every page that uses it.
+	</p>
+	<table>
+		<tr><th>Pattern</th><th>Contains</th></tr>
+		<tr><td>Product or service landing page</td><td>Hero, benefits, specifications, catalog, FAQ and a closing call to action, in the order a visitor asks their questions.</td></tr>
+		<tr><td>About page</td><td>The story, the figures, two image rows, the people, quotations and a closing band.</td></tr>
+		<tr><td>Services page</td><td>What you offer, how it works, what it costs, which option fits, logos and a closing call to action.</td></tr>
+		<tr><td>Contact page</td><td>Contact details, room for your form, what happens next, and the FAQ. No form is included: the theme does not ship one, and a fake one made of inputs that go nowhere is worse than an empty space.</td></tr>
 	</table>
 
 	<h3>Block styles</h3>
 	<p>
 		Selectable in the Styles tab of a block's sidebar: Card, Bordered and
-		Section for groups; Rounded and Framed for images; Checklist and No
-		markers for lists; Eyebrow and Underlined for headings; Testimonial for
-		quotes; Specifications for tables; FAQ item for details blocks.
+		Section for groups; Card for columns as well, because a row of cards is
+		more often three columns than three groups; Rounded and Framed for
+		images; Checklist, Numbered steps and No markers for lists; Eyebrow and
+		Underlined for headings; Testimonial for quotes; Specifications for
+		tables; FAQ item for details blocks.
+	</p>
+
+	<h3>Writing your own</h3>
+	<p>
+		A pattern is a PHP file in <code>patterns/</code> with a header comment
+		giving it a title, a slug and a category. Copy one of the existing ones
+		and change it.
+	</p>
+	<p>
+		<strong>A new pattern file will not appear until the theme's pattern
+		cache is cleared.</strong> WordPress caches the list of pattern files
+		and the parsed <code>theme.json</code>, so a file you have just added
+		looks as though it is being ignored. The switch core provides for this
+		is a line in <code>wp-config.php</code>:
+	</p>
+	<pre><code>define( 'WP_DEVELOPMENT_MODE', 'theme' );</code></pre>
+	<p>
+		With it set, both caches are skipped on every request. Take it out again
+		on a live site: it is a development switch, not a setting.
 	</p>
 </section>
 
