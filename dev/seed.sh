@@ -1,9 +1,19 @@
 #!/bin/sh
-# Install WordPress and fill it with content that exercises every template and
-# every structured-data path in the theme.
+# Install WordPress and fill it with the demo content that ships in Basalt Core.
 #
 # Run inside the cli container:
 #   docker compose -f dev/compose.yaml exec -T cli sh /seed/seed.sh
+#
+# The content itself is not in this file. It used to be, five hundred lines of
+# it, and it was a second implementation of something the product already had to
+# do: the demo importer in Basalt Core builds the same site from the same
+# declaration. Two implementations of one demo drift apart, and the one that
+# drifts is always the one the buyer gets, because the one in dev/ is the one
+# being looked at every day.
+#
+# So this script now does the part a buyer never does, which is install
+# WordPress and put it into a known state, and then calls the importer. Every
+# seed is a test of the code that ships.
 #
 # Safe to re-run: the content is wiped first, so the result is always the same
 # regardless of what was clicked in the admin beforehand.
@@ -16,6 +26,8 @@ set -e
 WP_URL="${WP_URL:-http://localhost:8088}"
 WP_ADMIN="${WP_ADMIN:-admin}"
 WP_PASSWORD="${WP_PASSWORD:-basalt-demo-pw}"
+WP_DEMO="${WP_DEMO:-trades}"
+export WP_DEMO
 
 # ---------------------------------------------------------------- install
 
@@ -32,6 +44,11 @@ fi
 wp theme activate basalt
 wp plugin activate basalt-core basalt-catalog
 
+# Theme development mode, so a new pattern file or a changed design token is
+# picked up on the next request. Without it WordPress caches the list of pattern
+# files and the parsed theme.json, and an edit to either appears to do nothing.
+wp config set WP_DEVELOPMENT_MODE theme --type=constant >/dev/null
+
 # Start from a known state so the script is repeatable.
 wp site empty --yes
 
@@ -43,526 +60,47 @@ if [ -n "$STALE" ]; then
 	wp post delete $STALE --force >/dev/null
 fi
 
+# The importer refuses to run a demo it has already run, which is right for a
+# buyer and wrong for a script whose whole job is to rebuild the site.
+wp option delete basalt_core_imported_demos >/dev/null 2>&1 || true
+
 wp rewrite structure '/%postname%/' --hard >/dev/null
-wp option update blogdescription 'Hoists, lifts and site equipment for hire across Bavaria'
 
-# ------------------------------------------------------------------ imagery
-#
-# Every image on the demo site is drawn here rather than committed. Two
-# reasons, and the second one is the important one:
-#
-# - A binary in the repository for the sake of a sandbox is a binary somebody
-#   has to maintain, and a seed that depends on a file an operator once
-#   uploaded by hand is not a seed you can run twice and get the same site.
-# - A theme sold on a marketplace cannot ship photography it does not hold the
-#   right to redistribute, and demo content is exactly where that goes wrong.
-#   Drawn graphics have no such question hanging over them.
-#
-# They are deliberately abstract rather than pretending to be photographs of
-# machinery. A buyer replaces them, and a placeholder that admits to being one
-# is easier to find and replace than a stock photo that half looks right.
+# ------------------------------------------------------------------- content
 
-mkdir -p /tmp/basalt-images
+wp eval '
+$result = basalt_core_import_demo( getenv( "WP_DEMO" ) ?: "trades" );
 
-# width height seed outfile
-make_image() {
-	W="$1" H="$2" SEED="$3" OUT="$4" php <<'PHP'
-<?php
-$width  = (int) getenv( 'W' );
-$height = (int) getenv( 'H' );
-$seed   = (int) getenv( 'SEED' );
-$out    = (string) getenv( 'OUT' );
-
-// Seeded, so the same seed always draws the same picture and a re-seeded
-// sandbox is the same sandbox.
-mt_srand( $seed );
-
-$image = imagecreatetruecolor( $width, $height );
-
-// Grounds taken from theme.json, so the imagery cannot clash with the palette.
-$grounds = array(
-	array( 42, 58, 71 ),
-	array( 26, 37, 46 ),
-	array( 22, 25, 29 ),
-	array( 31, 61, 52 ),
-);
-$ground = $grounds[ $seed % count( $grounds ) ];
-
-for ( $y = 0; $y < $height; $y++ ) {
-	$fade = 1 - 0.5 * ( $y / max( 1, $height - 1 ) );
-	imageline(
-		$image,
-		0,
-		$y,
-		$width,
-		$y,
-		imagecolorallocate(
-			$image,
-			(int) round( $ground[0] * $fade ),
-			(int) round( $ground[1] * $fade ),
-			(int) round( $ground[2] * $fade )
-		)
-	);
+if ( is_wp_error( $result ) ) {
+	WP_CLI::error( $result->get_error_message() );
 }
 
-// Basalt columns seen end on. Pointy top hexagons, so the horizontal step is
-// sqrt(3) times the radius and every second row is offset by half of that.
-$column = static function ( $target, float $cx, float $cy, float $r, int $color ): void {
-	$points = array();
+WP_CLI::log( "Imported: " . wp_json_encode( $result["created"] ) );
 
-	for ( $i = 0; $i < 6; $i++ ) {
-		$angle    = deg2rad( 60 * $i - 30 );
-		$points[] = (int) round( $cx + $r * cos( $angle ) );
-		$points[] = (int) round( $cy + $r * sin( $angle ) );
-	}
-
-	imagefilledpolygon( $target, $points, $color );
-};
-
-$unit = max( 12, min( $width, $height ) / 6 );
-$step = $unit * sqrt( 3 );
-
-for ( $row = -1; $row * $unit * 1.5 < $height + $unit; $row++ ) {
-	for ( $col = -1; $col * $step < $width + $step; $col++ ) {
-		$lift = mt_rand( -14, 30 );
-
-		$column(
-			$image,
-			$col * $step + ( 0 !== $row % 2 ? $step / 2 : 0 ),
-			$row * $unit * 1.5,
-			$unit * 0.97,
-			imagecolorallocatealpha(
-				$image,
-				max( 0, min( 255, $ground[0] + $lift ) ),
-				max( 0, min( 255, $ground[1] + $lift ) ),
-				max( 0, min( 255, $ground[2] + $lift ) ),
-				mt_rand( 55, 100 )
-			)
-		);
-	}
+foreach ( $result["notices"] as $notice ) {
+	WP_CLI::warning( $notice );
 }
-
-// One column catches the light, in the accent, so every image has a focal
-// point in a colour the theme already uses.
-$column(
-	$image,
-	mt_rand( (int) ( $width * 0.2 ), (int) ( $width * 0.8 ) ),
-	mt_rand( (int) ( $height * 0.25 ), (int) ( $height * 0.75 ) ),
-	$unit * 0.97,
-	imagecolorallocatealpha( $image, 194, 65, 12, 30 )
-);
-
-imagejpeg( $image, $out, 82 );
-PHP
-}
-
-# file title alt
-import_image() {
-	IMPORT_ID=$(wp media import "$1" --title="$2" --porcelain)
-	# Alt text on every one of them. A theme that sells accessibility and then
-	# ships demo images with an empty alt attribute teaches the buyer the wrong
-	# habit on their first day. The wording says what the picture is rather
-	# than pretending it is a machine, because describing a graphic as a
-	# photograph is a lie a screen reader has no way to see through.
-	wp post meta update "$IMPORT_ID" _wp_attachment_image_alt "$3" >/dev/null
-	echo "$IMPORT_ID"
-}
-
-php <<'PHP'
-<?php
-$size  = 128;
-$image = imagecreatetruecolor( $size, $size );
-imagesavealpha( $image, true );
-imagefill( $image, 0, 0, imagecolorallocatealpha( $image, 0, 0, 0, 127 ) );
-
-$ink    = imagecolorallocate( $image, 42, 58, 71 );
-$accent = imagecolorallocate( $image, 194, 65, 12 );
-
-// A basalt column seen end on: a hexagon, with one facet catching the light.
-$cx = (int) ( $size / 2 );
-$cy = (int) ( $size / 2 );
-$r  = (int) ( $size / 2 - 6 );
-
-$points = array();
-for ( $i = 0; $i < 6; $i++ ) {
-	$angle    = deg2rad( 60 * $i - 30 );
-	$points[] = (int) round( $cx + $r * cos( $angle ) );
-	$points[] = (int) round( $cy + $r * sin( $angle ) );
-}
-
-imagefilledpolygon( $image, $points, $ink );
-imagefilledpolygon( $image, array( $cx, $cy, $points[0], $points[1], $points[2], $points[3] ), $accent );
-imagepng( $image, '/tmp/basalt-mark.png' );
-PHP
-
-LOGO_ID=$(wp media import /tmp/basalt-mark.png --title='Basalt demo mark' --porcelain)
-wp post meta update "$LOGO_ID" _wp_attachment_image_alt 'Augsburger Hebetechnik' >/dev/null
-wp option update site_logo "$LOGO_ID" >/dev/null
-
-make_image 1600 1000 3 /tmp/basalt-images/hero.jpg
-HERO_ID=$(import_image /tmp/basalt-images/hero.jpg 'Hero' 'Placeholder graphic: a pattern of basalt columns, where a photograph of the fleet would go')
-HERO_URL=$(wp post get "$HERO_ID" --field=guid)
-
-# Open Graph needs its own size. Sharing cards crop to about 1.91:1, and a
-# square logo in that frame arrives with its sides shaved off.
-make_image 1200 630 7 /tmp/basalt-images/og.jpg
-OG_ID=$(import_image /tmp/basalt-images/og.jpg 'Social preview' 'Placeholder graphic: a pattern of basalt columns')
-
-make_image 1600 900 11 /tmp/basalt-images/about.jpg
-ABOUT_IMAGE_ID=$(import_image /tmp/basalt-images/about.jpg 'The yard' 'Placeholder graphic: a pattern of basalt columns, where a photograph of the yard would go')
-
-# ---------------------------------------------------------------- front page
-#
-# Note the alignfull on the section groups. A group with no alignment is
-# constrained to the content measure, and a child cannot be wider than its
-# parent, so alignwide columns inside an unaligned group are silently clamped.
-
-cat > /tmp/home.html <<HTML
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"backgroundColor":"surface","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide"} -->
-<div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"52%"} -->
-<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:52%"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-<p class="is-style-eyebrow">Since 1998</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":1,"fontSize":"display"} -->
-<h1 class="wp-block-heading has-display-font-size">Equipment that arrives on time and works on site</h1>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"large","textColor":"contrast-soft"} -->
-<p class="has-contrast-soft-color has-text-color has-large-font-size">Hoists, lifts and scaffolding equipment for hire. Delivered, set up and collected, anywhere in Bavaria, usually within two working days.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--30)"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/contact/">Request a quote</a></div>
-<!-- /wp:button -->
-
-<!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/catalog/">See the range</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"id":${HERO_ID},"aspectRatio":"16/10","scale":"cover","sizeSlug":"large","linkDestination":"none","style":{"border":{"radius":"16px"}}} -->
-<figure class="wp-block-image size-large has-custom-border"><img src="${HERO_URL}" alt="Placeholder graphic: a pattern of basalt columns, where a photograph of the fleet would go" class="wp-image-${HERO_ID}" style="border-radius:16px;aspect-ratio:16/10;object-fit:cover"/></figure>
-<!-- /wp:image --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:columns {"verticalAlignment":"center","align":"wide"} -->
-<div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-<p class="is-style-eyebrow">Why us</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Twenty eight years on building sites</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"textColor":"contrast-soft"} -->
-<p class="has-contrast-soft-color has-text-color">We run our own fleet and our own workshop, so a machine that fails on a Friday is replaced on the Friday.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:list {"className":"is-style-checklist"} -->
-<ul class="wp-block-list is-style-checklist"><!-- wp:list-item -->
-<li>Delivery within two working days across Bavaria</li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li>Set up and tested by our own crew</li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li>Replacement machine within 24 hours if one fails</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:group {"className":"is-style-card","layout":{"type":"constrained"}} -->
-<div class="wp-block-group is-style-card"><!-- wp:heading {"level":3,"fontSize":"large"} -->
-<h3 class="wp-block-heading has-large-font-size">Quick figures</h3>
-<!-- /wp:heading -->
-
-<!-- wp:table {"className":"is-style-specs"} -->
-<figure class="wp-block-table is-style-specs"><table><tbody><tr><th scope="row">Machines in the fleet</th><td>140</td></tr><tr><th scope="row">Average delivery time</th><td>1.4 working days</td></tr><tr><th scope="row">Service area</th><td>Bavaria and Baden-Wuerttemberg</td></tr></tbody></table></figure>
-<!-- /wp:table --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"backgroundColor":"surface","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-<p class="is-style-eyebrow">FAQ</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Questions we get asked</h2>
-<!-- /wp:heading -->
-
-<!-- wp:details {"summary":"How quickly can you deliver?","className":"is-style-faq"} -->
-<details class="wp-block-details is-style-faq"><summary>How quickly can you deliver?</summary><!-- wp:paragraph -->
-<p>Two working days for anywhere in Bavaria, often the next morning if the order reaches us before noon. Outside Bavaria it depends on the route.</p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
-
-<!-- wp:details {"summary":"Which areas do you cover?","className":"is-style-faq"} -->
-<details class="wp-block-details is-style-faq"><summary>Which areas do you cover?</summary><!-- wp:paragraph -->
-<p>All of Bavaria and the eastern half of Baden-Wuerttemberg. Augsburg, Munich, Ingolstadt, Ulm and Nuremberg are covered daily.</p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
-
-<!-- wp:details {"summary":"What does it cost?","className":"is-style-faq"} -->
-<details class="wp-block-details is-style-faq"><summary>What does it cost?</summary><!-- wp:paragraph -->
-<p>A 200 kg hoist starts at 38 euro per day including delivery inside Augsburg. Longer hires and larger machines are quoted individually.</p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"backgroundColor":"primary","textColor":"base","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-base-color has-primary-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"textAlign":"center","textColor":"base"} -->
-<h2 class="wp-block-heading has-text-align-center has-base-color has-text-color">Tell us what you need</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"align":"center","fontSize":"large"} -->
-<p class="has-text-align-center has-large-font-size">Send us the project and we come back with a quote, usually the same working day.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--30)"><!-- wp:button {"backgroundColor":"base","textColor":"contrast"} -->
-<div class="wp-block-button"><a class="wp-block-button__link has-contrast-color has-base-background-color has-text-color has-background wp-element-button" href="/contact/">Send an enquiry</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
-HTML
-
-HOME_ID=$(wp post create /tmp/home.html --post_type=page --post_title='Home' --post_name=home --post_status=publish --porcelain)
-wp post meta update "$HOME_ID" _wp_page_template 'page-landing' >/dev/null
-wp option update show_on_front page >/dev/null
-wp option update page_on_front "$HOME_ID" >/dev/null
-
-BLOG_ID=$(wp post create --post_type=page --post_title='Journal' --post_name=journal --post_status=publish \
-	--post_excerpt='Notes from the yard: equipment, site safety and the occasional opinion.' --porcelain)
-wp option update page_for_posts "$BLOG_ID" >/dev/null
-
-# ---------------------------------------------------------------- other pages
-
-cat > /tmp/about.html <<'HTML'
-<!-- wp:paragraph -->
-<p>We started in 1998 with two hoists and a flatbed. Today we run 140 machines out of a yard in Augsburg, and we still answer the phone ourselves.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">How we work</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Every machine goes through the workshop between hires. That is slower than the industry average and it is the reason our failure rate is a third of it.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:quote {"className":"is-style-testimonial"} -->
-<blockquote class="wp-block-quote is-style-testimonial"><!-- wp:paragraph -->
-<p>They replaced a failed hoist on a Saturday morning. Nobody else would have picked up the phone.</p>
-<!-- /wp:paragraph --><cite>Site manager, Munich</cite></blockquote>
-<!-- /wp:quote -->
-HTML
-ABOUT_ID=$(wp post create /tmp/about.html --post_type=page --post_title='About' --post_name=about --post_status=publish \
-	--post_excerpt='Twenty eight years of hiring out site equipment from a yard in Augsburg.' --porcelain)
-wp post meta update "$ABOUT_ID" _thumbnail_id "$ABOUT_IMAGE_ID" >/dev/null
-
-cat > /tmp/contact.html <<'HTML'
-<!-- wp:paragraph -->
-<p>Tell us the site, the height and the load, and we will come back with a price the same working day.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":2} -->
-<h2 class="wp-block-heading">Reach us</h2>
-<!-- /wp:heading -->
-
-<!-- wp:list {"className":"is-style-plain"} -->
-<ul class="wp-block-list is-style-plain"><!-- wp:list-item -->
-<li><a href="tel:+498211234567">+49 821 1234567</a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li><a href="mailto:hire@example.test">hire@example.test</a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li>Industriestrasse 12, 86153 Augsburg</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
-HTML
-wp post create /tmp/contact.html --post_type=page --post_title='Contact' --post_name=contact --post_status=publish \
-	--post_excerpt='Phone, email and the address of the yard in Augsburg.' >/dev/null
-
-wp post create --post_type=page --post_title='Imprint' --post_name=imprint --post_status=publish \
-	--post_content='<!-- wp:paragraph --><p>Placeholder for the legally required imprint.</p><!-- /wp:paragraph -->' >/dev/null
-wp post create --post_type=page --post_title='Privacy' --post_name=privacy --post_status=publish \
-	--post_content='<!-- wp:paragraph --><p>Placeholder for the privacy notice.</p><!-- /wp:paragraph -->' >/dev/null
-
-# ---------------------------------------------------------------- blog posts
-
-wp post create --post_type=post --post_status=publish \
-	--post_title='Choosing a hoist by load, not by price' \
-	--post_excerpt='The cheapest machine that fits the load is rarely the cheapest machine for the job.' \
-	--post_content='<!-- wp:paragraph --><p>Load capacity is the first number everyone looks at and the last one that should decide the hire. A 200 kg hoist running at its limit all day wears faster, runs slower and fails sooner than a 300 kg machine at two thirds load.</p><!-- /wp:paragraph --><!-- wp:heading --><h2 class="wp-block-heading">Work out the real load</h2><!-- /wp:heading --><!-- wp:paragraph --><p>Take the heaviest single item, add the carrier, then add a third. That last third is what stops the machine running at its limit.</p><!-- /wp:paragraph -->' >/dev/null
-
-wp post create --post_type=post --post_status=publish \
-	--post_title='What we check between hires' \
-	--post_excerpt='Every machine goes through the workshop before it goes out again. Here is the list.' \
-	--post_content='<!-- wp:paragraph --><p>Between every hire a machine goes through the workshop. It is slower than the industry average and it is the reason our failure rate is a third of it.</p><!-- /wp:paragraph --><!-- wp:list {"className":"is-style-checklist"} --><ul class="wp-block-list is-style-checklist"><!-- wp:list-item --><li>Rope and hook inspected over the full length</li><!-- /wp:list-item --><!-- wp:list-item --><li>Brake tested under load</li><!-- /wp:list-item --><!-- wp:list-item --><li>Limit switches triggered in both directions</li><!-- /wp:list-item --></ul><!-- /wp:list -->' >/dev/null
-
-wp post create --post_type=post --post_status=publish \
-	--post_title='Site power: what a 230 volt machine really needs' \
-	--post_excerpt='A machine rated at 230 volts still trips the site supply if the run is long enough.' \
-	--post_content='<!-- wp:paragraph --><p>The rating on the plate assumes the supply is at the machine. On a site it rarely is, and 60 metres of extension is enough to drop the voltage below what the motor needs to start under load.</p><!-- /wp:paragraph -->' >/dev/null
-
-wp term create category 'Equipment' --slug=equipment >/dev/null 2>&1 || true
-POST_SEED=40
-for id in $(wp post list --post_type=post --format=ids); do
-	wp post term set "$id" category equipment >/dev/null
-
-	POST_SEED=$(( POST_SEED + 1 ))
-	make_image 1600 900 "$POST_SEED" "/tmp/basalt-images/post-${POST_SEED}.jpg"
-	IMAGE_ID=$(import_image "/tmp/basalt-images/post-${POST_SEED}.jpg" \
-		"$(wp post get "$id" --field=post_title)" \
-		'Placeholder graphic: a pattern of basalt columns, where the article image would go')
-	wp post meta update "$id" _thumbnail_id "$IMAGE_ID" >/dev/null
-done
-
-# ------------------------------------------------------------ catalog items
-
-add_item() {
-	ID=$(wp post create --post_type=catalog_item --post_status=publish \
-		--post_title="$1" --post_name="$2" --post_excerpt="$3" --menu_order="${11}" \
-		--post_content="<!-- wp:paragraph --><p>$3</p><!-- /wp:paragraph --><!-- wp:heading --><h2 class=\"wp-block-heading\">Where it fits</h2><!-- /wp:heading --><!-- wp:paragraph --><p>Delivered on a trailer, set up by our crew and handed over tested. Collection is included in the hire price.</p><!-- /wp:paragraph -->" \
-		--porcelain)
-
-	wp post meta update "$ID" _catalog_capacity "$4" >/dev/null
-	wp post meta update "$ID" _catalog_max_height "$5" >/dev/null
-	wp post meta update "$ID" _catalog_speed "$6" >/dev/null
-	wp post meta update "$ID" _catalog_power "$7" >/dev/null
-	wp post meta update "$ID" _catalog_weight "$8" >/dev/null
-	wp post term set "$ID" catalog_capacity "$9" >/dev/null
-	wp post term set "$ID" catalog_use_case "${10}" >/dev/null
-
-	# Seeded from the menu order, so every item keeps the same picture across
-	# re-seeds and the catalog grid does not reshuffle itself.
-	make_image 1200 750 "$(( 20 + ${11} ))" "/tmp/basalt-images/item-${11}.jpg"
-	ITEM_IMAGE_ID=$(import_image "/tmp/basalt-images/item-${11}.jpg" "$1" \
-		"Placeholder graphic: a pattern of basalt columns, where a photograph of the $1 would go")
-	wp post meta update "$ID" _thumbnail_id "$ITEM_IMAGE_ID" >/dev/null
-}
-
-wp term create catalog_capacity 'Up to 200 kg' --slug=up-to-200 >/dev/null 2>&1 || true
-wp term create catalog_capacity 'Up to 300 kg' --slug=up-to-300 >/dev/null 2>&1 || true
-wp term create catalog_capacity 'Above 300 kg' --slug=above-300 >/dev/null 2>&1 || true
-wp term create catalog_use_case 'Facade work' --slug=facade >/dev/null 2>&1 || true
-wp term create catalog_use_case 'Roofing' --slug=roofing >/dev/null 2>&1 || true
-wp term create catalog_use_case 'Interior fit-out' --slug=interior >/dev/null 2>&1 || true
-
-add_item 'Hoist GL 200' 'hoist-gl-200' \
-	'The workhorse of the fleet. 200 kg to 30 metres on a single phase supply, light enough for two people to position.' \
-	200 30 30 '230 V' 85 'up-to-200' 'facade' 1
-add_item 'Hoist GL 300 T' 'hoist-gl-300-t' \
-	'Three hundred kilos and a wider carrier, for pallets of tile and stone that will not fit a standard cradle.' \
-	300 40 24 '400 V' 140 'up-to-300' 'roofing' 2
-add_item 'Roof lift RL 250' 'roof-lift-rl-250' \
-	'An inclined lift for tile and membrane. Sets up against the eaves in under twenty minutes.' \
-	250 22 18 '230 V' 190 'up-to-300' 'roofing' 3
-add_item 'Interior lift IL 150' 'interior-lift-il-150' \
-	'Fits through a standard door frame and runs off a normal socket. For fit-out work above the second floor.' \
-	150 12 20 '230 V' 62 'up-to-200' 'interior' 4
-add_item 'Heavy hoist HH 500' 'heavy-hoist-hh-500' \
-	'Five hundred kilos to 45 metres. Needs a 400 volt supply and a crew of two to rig.' \
-	500 45 20 '400 V' 310 'above-300' 'facade' 5
-add_item 'Facade platform FP 400' 'facade-platform-fp-400' \
-	'A powered platform rather than a hoist: crew and material go up together, which halves the trips.' \
-	400 35 12 '400 V' 520 'above-300' 'facade' 6
-
-# ------------------------------------------------------------------ navigation
-#
-# A block theme registers no menu locations, so there is nothing to "assign" a
-# classic menu to. Navigation lives in a wp_navigation post instead, and an
-# unconfigured core/navigation block uses the most recently published one. That
-# is why the template needs no reference to it.
-
-NAV_CONTENT=$(cat <<'NAV'
-<!-- wp:navigation-link {"label":"Home","type":"page","url":"/","kind":"custom","isTopLevelLink":true} /-->
-
-<!-- wp:navigation-submenu {"label":"Catalog","url":"/catalog/","kind":"custom","isTopLevelItem":true} -->
-<!-- wp:navigation-link {"label":"Facade work","url":"/application/facade/","kind":"custom"} /-->
-<!-- wp:navigation-link {"label":"Roofing","url":"/application/roofing/","kind":"custom"} /-->
-<!-- wp:navigation-link {"label":"Interior fit-out","url":"/application/interior/","kind":"custom"} /-->
-<!-- /wp:navigation-submenu -->
-
-<!-- wp:navigation-link {"label":"About","url":"/about/","kind":"custom","isTopLevelLink":true} /-->
-
-<!-- wp:navigation-link {"label":"Journal","url":"/journal/","kind":"custom","isTopLevelLink":true} /-->
-
-<!-- wp:navigation-link {"label":"Contact","url":"/contact/","kind":"custom","isTopLevelLink":true} /-->
-NAV
-)
-
-# Remove any navigation left from a previous run, so the block does not pick an
-# older one: core takes the most recently published wp_navigation post.
-for id in $(wp post list --post_type=wp_navigation --format=ids); do
-	wp post delete "$id" --force >/dev/null
-done
-
-printf '%s' "$NAV_CONTENT" > /tmp/nav.html
-wp post create /tmp/nav.html --post_type=wp_navigation --post_title='Main' --post_status=publish --porcelain >/dev/null
-
-# ------------------------------------------------- search and schema settings
-#
-# These are plugin options, not theme mods. That is the point of the split:
-# WordPress stores theme mods per stylesheet, so under the old classic theme a
-# switch from parent to child silently wiped every business detail. Options
-# belong to the site and survive both.
-
-# Everything the settings screen owns, including the two newest features, so
-# that a freshly seeded sandbox shows the product rather than a subset of it.
-wp option update basalt_core_settings --format=json <<JSON >/dev/null
-{
-	"meta_enabled": true,
-	"meta_twitter_site": "",
-	"meta_default_image": $OG_ID,
-	"schema_enabled": true,
-	"entity_type": "HomeAndConstructionBusiness",
-	"entity_name": "Augsburger Hebetechnik",
-	"logo": $LOGO_ID,
-	"phone": "+49 821 1234567",
-	"email": "hire@example.test",
-	"street": "Industriestrasse 12",
-	"postal_code": "86153",
-	"city": "Augsburg",
-	"region": "Bayern",
-	"country": "DE",
-	"opening_hours": "Mo-Fr 07:00-18:00",
-	"price_range": "",
-	"profiles": "https://www.linkedin.com/company/example",
-	"preferences_enabled": true,
-	"preferences_position": "right",
-	"login_enabled": true,
-	"login_logo": $LOGO_ID,
-	"login_logo_width": 128,
-	"login_background": "#1f3d34",
-	"login_form_background": "#ffffff",
-	"login_accent": "#c2410c",
-	"login_background_image": 0,
-	"login_generic_errors": true
-}
-JSON
+'
+
+# ------------------------------------------------------------- sandbox only
+
+# The demo deliberately leaves the login screen alone: changing an admin screen
+# is not something an import should do to somebody unasked. The sandbox turns it
+# on, because looking at it is what the sandbox is for.
+LOGO_ID=$(wp option get site_logo)
+
+wp option patch update basalt_core_settings login_enabled 1 >/dev/null
+wp option patch update basalt_core_settings login_generic_errors 1 >/dev/null
+wp option patch update basalt_core_settings login_logo "$LOGO_ID" >/dev/null
+wp option patch update basalt_core_settings login_logo_width 128 >/dev/null
+wp option patch update basalt_core_settings login_background '#1f3d34' >/dev/null
+wp option patch update basalt_core_settings login_form_background '#ffffff' >/dev/null
+wp option patch update basalt_core_settings login_accent '#c2410c' >/dev/null
 
 wp rewrite flush --hard >/dev/null
 
 echo ""
 echo "Seeded. Open ${WP_URL}  (${WP_ADMIN} / ${WP_PASSWORD})"
+echo "This is the same content a buyer gets from Tools > Basalt demos."
 echo "Styles: Appearance > Editor > Styles has four variations, including High contrast."
 echo "Switch to Basalt Child under Appearance > Themes to see the catalog extension."

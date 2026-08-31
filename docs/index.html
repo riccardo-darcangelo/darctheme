@@ -116,6 +116,7 @@
 		<li><a href="#accessibility">Accessibility</a></li>
 		<li><a href="#preferences">Visitor display settings</a></li>
 		<li><a href="#login">Login screen</a></li>
+		<li><a href="#demos">Demo content</a></li>
 		<li><a href="#plugins">Plugins</a></li>
 		<li><a href="#child">Child themes</a></li>
 		<li><a href="#hooks">Hooks reference</a></li>
@@ -843,6 +844,92 @@
 		page reports, both of them core's rather than ours. It follows the
 		branding switch, because it changes core markup and a site with custom
 		login CSS written against a direct child selector would notice.
+	</p>
+</section>
+
+<section id="demos">
+	<h2>Demo content</h2>
+	<p>
+		<strong>Tools &rarr; Basalt demos.</strong> A demo fills an empty site
+		with pages, posts, a menu and pictures so that you can see how the
+		pieces fit together, then edit them into your own. It takes a few
+		seconds and needs no other plugin.
+	</p>
+
+	<h3>Nothing is ever deleted</h3>
+	<p>
+		Importing only creates. A page whose address is already taken is left
+		alone and reported, and no setting you have already filled in is
+		overwritten. Every importer that offers to "replace" the existing
+		content is one misplaced click away from removing work somebody had
+		already done, so this one cannot do it. A demo that has been imported
+		is not offered a second time, for the same reason.
+	</p>
+	<p>
+		Which also means the tidiest way to use it is on a site with nothing on
+		it yet. On a site you have started, expect to be told that some of the
+		pages were skipped.
+	</p>
+
+	<h3>The pictures</h3>
+	<p>
+		They are drawn during the import rather than downloaded or shipped: an
+		abstract pattern of basalt columns in the theme palette, one per image,
+		always the same from the same demo. Two reasons. A theme sold on a
+		marketplace cannot redistribute photography it does not hold the rights
+		to, and demo content is exactly where that goes wrong. And a placeholder
+		that admits to being one is easier to find and replace than a stock
+		photograph that half looks right.
+	</p>
+	<p>
+		Every one arrives with alternative text saying what it is. If the
+		<code>GD</code> extension is missing, which is rare, the demo imports
+		without pictures and says so.
+	</p>
+
+	<h3>The pages are patterns</h3>
+	<p>
+		A demo page is a handful of references to the patterns in the inserter,
+		not a copy of them. So the demo cannot drift from what you get when you
+		build a page yourself, and improving a pattern improves the demo. The
+		one exception is the hero on the front page, which is written out,
+		because a pattern is resolved when the page is rendered and cannot be
+		handed the id of an image the import has just created.
+	</p>
+
+	<h3>Writing your own demo</h3>
+	<p>
+		A demo is one PHP file in <code>demos/</code> inside Basalt Core that
+		returns an array. There is no importer to write: the runner reads the
+		declaration and creates what it describes.
+	</p>
+	<pre><code>return array(
+	'title'      =&gt; 'A studio',
+	'front_page' =&gt; 'home',
+	'images'     =&gt; array(
+		'hero' =&gt; array( 'width' =&gt; 1600, 'height' =&gt; 1000, 'seed' =&gt; 3, 'title' =&gt; 'Hero', 'alt' =&gt; '...' ),
+	),
+	'posts'      =&gt; array(
+		array(
+			'type'     =&gt; 'page',
+			'slug'     =&gt; 'home',
+			'title'    =&gt; 'Home',
+			'template' =&gt; 'page-landing',
+			'content'  =&gt; '&lt;!-- wp:pattern {"slug":"basalt/hero-centred"} /--&gt;',
+		),
+	),
+);</code></pre>
+	<p>
+		Two tokens are available in content: <code>{{url:slug}}</code> for a
+		link to another page in the same demo, and <code>{{image:key}}</code>
+		for one of its images. Both exist because neither value is known until
+		the import is running.
+	</p>
+	<p>
+		A post whose type is not registered is skipped rather than failing, so a
+		demo can declare catalog entries and still import correctly on a site
+		without Basalt Catalog. Filter <code>basalt_core_demos</code> to add a
+		demo from somewhere other than that folder.
 	</p>
 </section>
 
