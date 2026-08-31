@@ -46,13 +46,178 @@ fi
 wp rewrite structure '/%postname%/' --hard >/dev/null
 wp option update blogdescription 'Hoists, lifts and site equipment for hire across Bavaria'
 
+# ------------------------------------------------------------------ imagery
+#
+# Every image on the demo site is drawn here rather than committed. Two
+# reasons, and the second one is the important one:
+#
+# - A binary in the repository for the sake of a sandbox is a binary somebody
+#   has to maintain, and a seed that depends on a file an operator once
+#   uploaded by hand is not a seed you can run twice and get the same site.
+# - A theme sold on a marketplace cannot ship photography it does not hold the
+#   right to redistribute, and demo content is exactly where that goes wrong.
+#   Drawn graphics have no such question hanging over them.
+#
+# They are deliberately abstract rather than pretending to be photographs of
+# machinery. A buyer replaces them, and a placeholder that admits to being one
+# is easier to find and replace than a stock photo that half looks right.
+
+mkdir -p /tmp/basalt-images
+
+# width height seed outfile
+make_image() {
+	W="$1" H="$2" SEED="$3" OUT="$4" php <<'PHP'
+<?php
+$width  = (int) getenv( 'W' );
+$height = (int) getenv( 'H' );
+$seed   = (int) getenv( 'SEED' );
+$out    = (string) getenv( 'OUT' );
+
+// Seeded, so the same seed always draws the same picture and a re-seeded
+// sandbox is the same sandbox.
+mt_srand( $seed );
+
+$image = imagecreatetruecolor( $width, $height );
+
+// Grounds taken from theme.json, so the imagery cannot clash with the palette.
+$grounds = array(
+	array( 42, 58, 71 ),
+	array( 26, 37, 46 ),
+	array( 22, 25, 29 ),
+	array( 31, 61, 52 ),
+);
+$ground = $grounds[ $seed % count( $grounds ) ];
+
+for ( $y = 0; $y < $height; $y++ ) {
+	$fade = 1 - 0.5 * ( $y / max( 1, $height - 1 ) );
+	imageline(
+		$image,
+		0,
+		$y,
+		$width,
+		$y,
+		imagecolorallocate(
+			$image,
+			(int) round( $ground[0] * $fade ),
+			(int) round( $ground[1] * $fade ),
+			(int) round( $ground[2] * $fade )
+		)
+	);
+}
+
+// Basalt columns seen end on. Pointy top hexagons, so the horizontal step is
+// sqrt(3) times the radius and every second row is offset by half of that.
+$column = static function ( $target, float $cx, float $cy, float $r, int $color ): void {
+	$points = array();
+
+	for ( $i = 0; $i < 6; $i++ ) {
+		$angle    = deg2rad( 60 * $i - 30 );
+		$points[] = (int) round( $cx + $r * cos( $angle ) );
+		$points[] = (int) round( $cy + $r * sin( $angle ) );
+	}
+
+	imagefilledpolygon( $target, $points, $color );
+};
+
+$unit = max( 12, min( $width, $height ) / 6 );
+$step = $unit * sqrt( 3 );
+
+for ( $row = -1; $row * $unit * 1.5 < $height + $unit; $row++ ) {
+	for ( $col = -1; $col * $step < $width + $step; $col++ ) {
+		$lift = mt_rand( -14, 30 );
+
+		$column(
+			$image,
+			$col * $step + ( 0 !== $row % 2 ? $step / 2 : 0 ),
+			$row * $unit * 1.5,
+			$unit * 0.97,
+			imagecolorallocatealpha(
+				$image,
+				max( 0, min( 255, $ground[0] + $lift ) ),
+				max( 0, min( 255, $ground[1] + $lift ) ),
+				max( 0, min( 255, $ground[2] + $lift ) ),
+				mt_rand( 55, 100 )
+			)
+		);
+	}
+}
+
+// One column catches the light, in the accent, so every image has a focal
+// point in a colour the theme already uses.
+$column(
+	$image,
+	mt_rand( (int) ( $width * 0.2 ), (int) ( $width * 0.8 ) ),
+	mt_rand( (int) ( $height * 0.25 ), (int) ( $height * 0.75 ) ),
+	$unit * 0.97,
+	imagecolorallocatealpha( $image, 194, 65, 12, 30 )
+);
+
+imagejpeg( $image, $out, 82 );
+PHP
+}
+
+# file title alt
+import_image() {
+	IMPORT_ID=$(wp media import "$1" --title="$2" --porcelain)
+	# Alt text on every one of them. A theme that sells accessibility and then
+	# ships demo images with an empty alt attribute teaches the buyer the wrong
+	# habit on their first day. The wording says what the picture is rather
+	# than pretending it is a machine, because describing a graphic as a
+	# photograph is a lie a screen reader has no way to see through.
+	wp post meta update "$IMPORT_ID" _wp_attachment_image_alt "$3" >/dev/null
+	echo "$IMPORT_ID"
+}
+
+php <<'PHP'
+<?php
+$size  = 128;
+$image = imagecreatetruecolor( $size, $size );
+imagesavealpha( $image, true );
+imagefill( $image, 0, 0, imagecolorallocatealpha( $image, 0, 0, 0, 127 ) );
+
+$ink    = imagecolorallocate( $image, 42, 58, 71 );
+$accent = imagecolorallocate( $image, 194, 65, 12 );
+
+// A basalt column seen end on: a hexagon, with one facet catching the light.
+$cx = (int) ( $size / 2 );
+$cy = (int) ( $size / 2 );
+$r  = (int) ( $size / 2 - 6 );
+
+$points = array();
+for ( $i = 0; $i < 6; $i++ ) {
+	$angle    = deg2rad( 60 * $i - 30 );
+	$points[] = (int) round( $cx + $r * cos( $angle ) );
+	$points[] = (int) round( $cy + $r * sin( $angle ) );
+}
+
+imagefilledpolygon( $image, $points, $ink );
+imagefilledpolygon( $image, array( $cx, $cy, $points[0], $points[1], $points[2], $points[3] ), $accent );
+imagepng( $image, '/tmp/basalt-mark.png' );
+PHP
+
+LOGO_ID=$(wp media import /tmp/basalt-mark.png --title='Basalt demo mark' --porcelain)
+wp post meta update "$LOGO_ID" _wp_attachment_image_alt 'Augsburger Hebetechnik' >/dev/null
+wp option update site_logo "$LOGO_ID" >/dev/null
+
+make_image 1600 1000 3 /tmp/basalt-images/hero.jpg
+HERO_ID=$(import_image /tmp/basalt-images/hero.jpg 'Hero' 'Placeholder graphic: a pattern of basalt columns, where a photograph of the fleet would go')
+HERO_URL=$(wp post get "$HERO_ID" --field=guid)
+
+# Open Graph needs its own size. Sharing cards crop to about 1.91:1, and a
+# square logo in that frame arrives with its sides shaved off.
+make_image 1200 630 7 /tmp/basalt-images/og.jpg
+OG_ID=$(import_image /tmp/basalt-images/og.jpg 'Social preview' 'Placeholder graphic: a pattern of basalt columns')
+
+make_image 1600 900 11 /tmp/basalt-images/about.jpg
+ABOUT_IMAGE_ID=$(import_image /tmp/basalt-images/about.jpg 'The yard' 'Placeholder graphic: a pattern of basalt columns, where a photograph of the yard would go')
+
 # ---------------------------------------------------------------- front page
 #
 # Note the alignfull on the section groups. A group with no alignment is
 # constrained to the content measure, and a child cannot be wider than its
 # parent, so alignwide columns inside an unaligned group are silently clamped.
 
-cat > /tmp/home.html <<'HTML'
+cat > /tmp/home.html <<HTML
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"backgroundColor":"surface","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"verticalAlignment":"center","align":"wide"} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"52%"} -->
@@ -80,9 +245,9 @@ cat > /tmp/home.html <<'HTML'
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"center"} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:group {"style":{"dimensions":{"aspectRatio":"16/10"},"border":{"radius":"16px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-background" style="border-radius:16px;background:linear-gradient(135deg,#2a3a47 0%,#16191d 100%);aspect-ratio:16/10"></div>
-<!-- /wp:group --></div>
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"id":${HERO_ID},"aspectRatio":"16/10","scale":"cover","sizeSlug":"large","linkDestination":"none","style":{"border":{"radius":"16px"}}} -->
+<figure class="wp-block-image size-large has-custom-border"><img src="${HERO_URL}" alt="Placeholder graphic: a pattern of basalt columns, where a photograph of the fleet would go" class="wp-image-${HERO_ID}" style="border-radius:16px;aspect-ratio:16/10;object-fit:cover"/></figure>
+<!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
@@ -206,8 +371,9 @@ cat > /tmp/about.html <<'HTML'
 <!-- /wp:paragraph --><cite>Site manager, Munich</cite></blockquote>
 <!-- /wp:quote -->
 HTML
-wp post create /tmp/about.html --post_type=page --post_title='About' --post_name=about --post_status=publish \
-	--post_excerpt='Twenty eight years of hiring out site equipment from a yard in Augsburg.' >/dev/null
+ABOUT_ID=$(wp post create /tmp/about.html --post_type=page --post_title='About' --post_name=about --post_status=publish \
+	--post_excerpt='Twenty eight years of hiring out site equipment from a yard in Augsburg.' --porcelain)
+wp post meta update "$ABOUT_ID" _thumbnail_id "$ABOUT_IMAGE_ID" >/dev/null
 
 cat > /tmp/contact.html <<'HTML'
 <!-- wp:paragraph -->
@@ -258,8 +424,16 @@ wp post create --post_type=post --post_status=publish \
 	--post_content='<!-- wp:paragraph --><p>The rating on the plate assumes the supply is at the machine. On a site it rarely is, and 60 metres of extension is enough to drop the voltage below what the motor needs to start under load.</p><!-- /wp:paragraph -->' >/dev/null
 
 wp term create category 'Equipment' --slug=equipment >/dev/null 2>&1 || true
+POST_SEED=40
 for id in $(wp post list --post_type=post --format=ids); do
 	wp post term set "$id" category equipment >/dev/null
+
+	POST_SEED=$(( POST_SEED + 1 ))
+	make_image 1600 900 "$POST_SEED" "/tmp/basalt-images/post-${POST_SEED}.jpg"
+	IMAGE_ID=$(import_image "/tmp/basalt-images/post-${POST_SEED}.jpg" \
+		"$(wp post get "$id" --field=post_title)" \
+		'Placeholder graphic: a pattern of basalt columns, where the article image would go')
+	wp post meta update "$id" _thumbnail_id "$IMAGE_ID" >/dev/null
 done
 
 # ------------------------------------------------------------ catalog items
@@ -277,6 +451,13 @@ add_item() {
 	wp post meta update "$ID" _catalog_weight "$8" >/dev/null
 	wp post term set "$ID" catalog_capacity "$9" >/dev/null
 	wp post term set "$ID" catalog_use_case "${10}" >/dev/null
+
+	# Seeded from the menu order, so every item keeps the same picture across
+	# re-seeds and the catalog grid does not reshuffle itself.
+	make_image 1200 750 "$(( 20 + ${11} ))" "/tmp/basalt-images/item-${11}.jpg"
+	ITEM_IMAGE_ID=$(import_image "/tmp/basalt-images/item-${11}.jpg" "$1" \
+		"Placeholder graphic: a pattern of basalt columns, where a photograph of the $1 would go")
+	wp post meta update "$ID" _thumbnail_id "$ITEM_IMAGE_ID" >/dev/null
 }
 
 wp term create catalog_capacity 'Up to 200 kg' --slug=up-to-200 >/dev/null 2>&1 || true
@@ -345,47 +526,13 @@ wp post create /tmp/nav.html --post_type=wp_navigation --post_title='Main' --pos
 # switch from parent to child silently wiped every business detail. Options
 # belong to the site and survive both.
 
-# The demo mark is drawn here rather than committed. A binary in the repository
-# for the sake of a sandbox is a binary somebody has to maintain, and a seed
-# that depends on an image an operator once uploaded by hand is not a seed you
-# can run twice and get the same site from.
-php <<'PHP'
-<?php
-$size = 128;
-$image = imagecreatetruecolor( $size, $size );
-imagesavealpha( $image, true );
-imagefill( $image, 0, 0, imagecolorallocatealpha( $image, 0, 0, 0, 127 ) );
-
-$ink    = imagecolorallocate( $image, 42, 58, 71 );
-$accent = imagecolorallocate( $image, 194, 65, 12 );
-
-// A basalt column seen end on: a hexagon, with one facet catching the light.
-$cx = (int) ( $size / 2 );
-$cy = (int) ( $size / 2 );
-$r  = (int) ( $size / 2 - 6 );
-
-$points = array();
-for ( $i = 0; $i < 6; $i++ ) {
-	$angle    = deg2rad( 60 * $i - 30 );
-	$points[] = (int) round( $cx + $r * cos( $angle ) );
-	$points[] = (int) round( $cy + $r * sin( $angle ) );
-}
-
-imagefilledpolygon( $image, $points, $ink );
-imagefilledpolygon( $image, array( $cx, $cy, $points[0], $points[1], $points[2], $points[3] ), $accent );
-imagepng( $image, '/tmp/basalt-mark.png' );
-PHP
-
-LOGO_ID=$(wp media import /tmp/basalt-mark.png --title='Basalt demo mark' --porcelain)
-wp option update site_logo "$LOGO_ID" >/dev/null
-
 # Everything the settings screen owns, including the two newest features, so
 # that a freshly seeded sandbox shows the product rather than a subset of it.
 wp option update basalt_core_settings --format=json <<JSON >/dev/null
 {
 	"meta_enabled": true,
 	"meta_twitter_site": "",
-	"meta_default_image": $LOGO_ID,
+	"meta_default_image": $OG_ID,
 	"schema_enabled": true,
 	"entity_type": "HomeAndConstructionBusiness",
 	"entity_name": "Augsburger Hebetechnik",

@@ -286,3 +286,22 @@ p.is-style-lead {
 	font-size: var(--wp--preset--font-size--x-small, 0.8125rem) !important;
 	text-decoration: none;
 }
+
+/* Post cards ----------------------------------------------------------- */
+
+/*
+ * A card in a query loop is two links stacked with nothing between them: the
+ * featured image and the title. WCAG 2.2 success criterion 2.5.8 asks a target
+ * to be 24 by 24, or to be spaced far enough from its neighbours to make up
+ * for it. A post title at the small end of the type scale measures 23px tall,
+ * and with the image ending exactly where the title begins there was no
+ * spacing to make up the difference: on a phone, the top edge of the title and
+ * the bottom edge of the image were the same line, and a thumb aiming for one
+ * routinely got the other.
+ *
+ * The gap is the fix and it is also the better card. It only applies inside a
+ * query loop, so a featured image at the top of a single post is untouched.
+ */
+.wp-block-post-template .wp-block-post-featured-image {
+	margin-block-end: var(--space-2);
+}
