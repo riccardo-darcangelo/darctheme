@@ -791,6 +791,54 @@
 		colours, in the Elementor editor.
 	</p>
 
+	<h3>Classic Editor</h3>
+	<p>
+		Supported, and it is worth knowing why that needed saying. Classic
+		Editor is on ten million sites, and a site that imports older content
+		has <code>post_content</code> full of plain HTML with no block classes
+		on it. Headings, lists and paragraphs are fine, because those are styled
+		as elements. Quotes and tables are styled per block, so a blockquote
+		written in the classic editor arrived with no quotation mark of any
+		kind and read as an ordinary paragraph, and a table arrived unbordered
+		and wider than the column it was in. Both are styled now, with
+		<code>:where()</code> and scoped to elements carrying no class, so a
+		real block always wins.
+	</p>
+
+	<h3>Caching and optimisation</h3>
+	<p>
+		LiteSpeed Cache, WP Rocket, Autoptimize and SiteGround Optimizer move,
+		defer and bundle inline JavaScript. Basalt Core has exactly one inline
+		script, the one that applies a visitor's saved display settings before
+		the first paint, and it carries the exclusion markers all four read
+		(<code>data-no-optimize</code>, <code>data-noptimize</code>,
+		<code>data-cfasync</code>). If it were deferred the page would paint
+		once unadjusted and then jump, in front of the person who turned the
+		setting on because the default was hard to read.
+	</p>
+	<p>
+		Verified rather than assumed: with LiteSpeed Cache set to minify,
+		combine and delay JavaScript, nineteen scripts on the page were
+		rewritten and two were converted to delayed execution. The boot script
+		kept its attributes, its position in the head and its ordinary
+		<code>type</code>.
+	</p>
+
+	<h3>Login security plugins</h3>
+	<p>
+		Wordfence, Limit Login Attempts Reloaded and Really Simple SSL were run
+		against the branded login screen, including the lockout state, which is
+		the one that actually renders extra markup. Nothing needed correcting:
+		the error notice keeps core's own colours, which stay legible whatever
+		page background you choose, because it carries its own.
+	</p>
+	<p>
+		Their messages are not rewritten by the generic error setting either.
+		That setting replaces the message that says whether an account exists;
+		a lockout message says nothing about the account, so it is left alone
+		and the visitor still learns why they cannot get in.
+	</p>
+
 	<h3>SEO plugins</h3>
 	<p>
 		Rank Math, Yoast, SEOPress, All in One SEO, Slim SEO and Squirrly are
@@ -811,44 +859,50 @@
 		on a translated one.
 	</p>
 
-	<h3>Caching and optimisation</h3>
-	<p>
-		LiteSpeed Cache, WP Rocket, Autoptimize and SiteGround Optimizer move,
-		defer and bundle inline JavaScript. Basalt Core has exactly one inline
-		script, the one that applies a visitor's saved display settings before
-		the first paint, and it carries the exclusion markers all four read
-		(<code>data-no-optimize</code>, <code>data-noptimize</code>,
-		<code>data-cfasync</code>). If it were deferred the page would paint
-		once unadjusted and then jump, in front of the person who turned the
-		setting on because the default was hard to read.
-	</p>
-
 	<h3>Consent banners</h3>
 	<p>
-		No corrections ship for these. CookieYes was audited against the theme
-		and is clean: focus reaches the banner first, its controls are 44 pixels
-		tall, the focus ring is visible, contrast passes, and rejecting is as
-		prominent as accepting. Complianz could not be audited, because its
-		banner does not appear until its setup wizard has been completed.
+		The two leading ones behave very differently, so they are treated
+		differently.
+	</p>
+	<p>
+		CookieYes is clean as it ships and needs nothing: focus reaches the
+		banner first, its controls are 44 pixels tall, the focus ring is
+		visible, contrast passes, and rejecting is as prominent as accepting.
+	</p>
+	<p>
+		Cookie Notice &amp; Compliance is corrected. It paints the accept and
+		reject buttons in a colour from its own settings and leaves the label
+		white whatever that colour is, so its default gives 2.93:1 where 4.5:1
+		is required, on the primary control of a banner a site is obliged to
+		make usable. Basalt Core leaves the background alone, because it is a
+		colour somebody chose, and moves only the label to whichever of near
+		black or near white can be read on it. Pick a dark button and the white
+		label stays and the rule is never emitted. The correction is applied on
+		the login screen too, where the banner also renders.
+	</p>
+	<p>
+		Complianz could not be audited, because its banner does not appear until
+		its setup wizard has been completed. Nothing is claimed about it.
 	</p>
 	<p>
 		There is one collision worth knowing about. A bottom anchored consent
 		banner covers the display settings trigger on a phone: measured with
-		CookieYes at 390 pixels wide, the banner reaches the bottom edge and the
-		trigger sits underneath it, so a tap lands on the banner. The trigger
+		both CookieYes and Cookie Notice at 390 pixels wide, each reaches the
+		bottom edge and the trigger sits underneath it, so a tap lands on the
+		banner. The trigger
 		stays in the tab order, so it is never unreachable by keyboard. If it
 		affects your site, move the trigger with the offset property rather than
 		waiting for a theme update:
 	</p>
 	<pre><code>@media (width &lt;= 767px) {
-	body:has(.cky-consent-container) {
-		--basalt-a11y-trigger-offset: 21rem;
-	}
+	body:has(.cky-consent-container) { --basalt-a11y-trigger-offset: 21rem; }
+	body:has(#cookie-notice) { --basalt-a11y-trigger-offset: 8rem; }
 }</code></pre>
 	<p>
-		No value is set in the theme, because the height of a consent banner
-		depends on its own text and a number guessed against one version of one
-		plugin is a rule that silently stops being true.
+		Those two numbers differ by more than 200 pixels, which is why no value
+		is set in the theme. The height of a consent banner depends on its own
+		text, and a number guessed against one version of one plugin is a rule
+		that silently stops being true.
 	</p>
 </section>
 

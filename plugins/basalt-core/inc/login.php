@@ -43,61 +43,6 @@ function basalt_core_login_enabled(): bool {
 }
 
 /**
- * Validate a hex colour.
- *
- * Implemented here rather than with sanitize_hex_color(), which is not loaded
- * on every request. Returns an empty string for anything that is not a plain
- * three or six digit hex colour, so nothing else can reach the stylesheet.
- *
- * @param mixed $value Raw value.
- * @return string A #rrggbb value, or an empty string.
- */
-function basalt_core_hex_color( $value ): string {
-	$value = trim( (string) $value );
-
-	return preg_match( '/^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/', $value ) ? $value : '';
-}
-
-/**
- * Relative luminance of a hex colour, per WCAG.
- *
- * @param string $hex A #rgb or #rrggbb value.
- * @return float Between 0 and 1.
- */
-function basalt_core_luminance( string $hex ): float {
-	$hex = ltrim( $hex, '#' );
-
-	if ( 3 === strlen( $hex ) ) {
-		$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
-	}
-
-	$channels = array_map(
-		static function ( string $pair ): float {
-			$value = hexdec( $pair ) / 255;
-
-			return $value <= 0.03928 ? $value / 12.92 : pow( ( $value + 0.055 ) / 1.055, 2.4 );
-		},
-		str_split( $hex, 2 )
-	);
-
-	return 0.2126 * $channels[0] + 0.7152 * $channels[1] + 0.0722 * $channels[2];
-}
-
-/**
- * Contrast ratio between two hex colours.
- *
- * @param string $one First colour.
- * @param string $two Second colour.
- * @return float Between 1 and 21.
- */
-function basalt_core_contrast_ratio( string $one, string $two ): float {
-	$a = basalt_core_luminance( $one );
-	$b = basalt_core_luminance( $two );
-
-	return ( max( $a, $b ) + 0.05 ) / ( min( $a, $b ) + 0.05 );
-}
-
-/**
  * The resolved login colours, with defaults filled in.
  *
  * @return array{page: string, form: string, accent: string, text: string, page_text: string}
@@ -116,18 +61,12 @@ function basalt_core_login_colors(): array {
 	 * page background stayed light, and became unreadable the moment it did
 	 * not.
 	 */
-	$on = static function ( string $background ): string {
-		return basalt_core_contrast_ratio( $background, '#000000' ) >= basalt_core_contrast_ratio( $background, '#ffffff' )
-			? '#16191d'
-			: '#f2f4f5';
-	};
-
 	return array(
 		'page'      => $page,
 		'form'      => $form,
 		'accent'    => $accent,
-		'text'      => $on( $form ),
-		'page_text' => $on( $page ),
+		'text'      => basalt_core_readable_on( $form ),
+		'page_text' => basalt_core_readable_on( $page ),
 	);
 }
 
@@ -191,6 +130,28 @@ function basalt_core_login_styles(): void {
 	 * browser default happens to be against the chosen background.
 	 */
 	$css .= '.login :focus-visible{outline:2px solid ' . $colors['accent'] . ';outline-offset:2px;}';
+
+	/*
+	 * The fields need saying twice, at a higher specificity. Core styles a
+	 * focused login field as "input[type=text]:focus", which is one point more
+	 * specific than the rule above, and part of what it sets is
+	 * "outline: 2px solid transparent" for Windows high contrast mode. The
+	 * shorthand takes the colour with it, so the accent ring above was being
+	 * drawn in transparent and the only visible indicator was core's blue,
+	 * whatever accent the site had chosen. Measured rather than guessed: the
+	 * computed outline colour on a focused field was rgba(0, 0, 0, 0).
+	 *
+	 * Core's blue border and box shadow are replaced at the same time. Two
+	 * focus indicators in two different colours on one field is worse than
+	 * either alone.
+	 */
+	$css .= '.login form .input:focus-visible,'
+		. '.login input[type=text]:focus-visible,'
+		. '.login input[type=email]:focus-visible,'
+		. '.login input[type=password]:focus-visible'
+		. '{outline:2px solid ' . $colors['accent'] . ';outline-offset:2px;'
+		. 'border-color:' . $colors['accent'] . ';box-shadow:none;}';
+
 	// These sit on the page background, not on the form.
 	$css .= '.login #backtoblog a,.login #nav a{color:' . $colors['page_text'] . ';}';
 	$css .= '.login #backtoblog a:hover,.login #nav a:hover,.login #backtoblog a:focus,.login #nav a:focus{color:' . $colors['page_text'] . ';text-decoration:underline;}';

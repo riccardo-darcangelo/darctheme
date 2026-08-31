@@ -123,15 +123,17 @@ html[data-a11y-unstick] :is(.site-header, .wp-site-blocks > header, header.wp-bl
  * The offset exists because the bottom of a viewport is crowded: consent
  * banners, chat widgets and back-to-top buttons all live there, and on a phone
  * a bottom anchored consent banner covers this trigger completely. Measured
- * with CookieYes at 390px: the banner runs from 502px to the bottom edge and
- * the trigger sits at 784px, so a tap lands on the banner.
+ * with CookieYes and with Cookie Notice at 390px: both run to the bottom edge
+ * and the trigger sits underneath, so a tap lands on the banner. Their heights
+ * differ by more than 200px, which is the reason no value is set here.
  *
- * No per plugin value is set here. The height of a consent banner depends on
- * its own text, and a number guessed against one version of one plugin is a
- * rule that silently stops being true. A site that has this collision sets the
- * property once, in the customiser CSS or a child theme:
+ * A site that has this collision sets the property once, in the customiser CSS
+ * or a child theme, with a value measured against its own banner:
  *
- *     @media (width <= 767px) { body:has(.cky-consent-container) { --basalt-a11y-trigger-offset: 21rem; } }
+ *     @media (width <= 767px) {
+ *         body:has(.cky-consent-container) { --basalt-a11y-trigger-offset: 21rem; }
+ *         body:has(#cookie-notice) { --basalt-a11y-trigger-offset: 8rem; }
+ *     }
  *
  * The trigger stays in the tab order either way, so it is never unreachable by
  * keyboard, only awkward to tap.

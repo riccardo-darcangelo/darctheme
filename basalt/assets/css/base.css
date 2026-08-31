@@ -285,7 +285,6 @@ input[type="submit"],
 
 .table-scroll {
 	overflow-x: auto;
-	max-inline-size: 100%;
 	margin-block: var(--space-3);
 
 	/* Announce the region so keyboard users can scroll it. */
@@ -298,4 +297,36 @@ input[type="submit"],
 
 [hidden] {
 	display: none !important;
+}
+
+/*
+ * Content written outside the block editor.
+ *
+ * The Classic Editor plugin is on ten million sites, and a site that imports
+ * older content has post_content full of plain HTML with no block classes on
+ * it. Headings, lists and paragraphs are covered already, because theme.json
+ * styles those as elements. Quotes and tables are styled per block, so a
+ * blockquote written in the classic editor arrived with no quotation mark of
+ * any kind: it read as an ordinary paragraph, which is a change of meaning
+ * rather than a change of appearance.
+ *
+ * Written with :where() and scoped to elements carrying no class, so a block
+ * always wins and this can never fight one.
+ */
+:where(blockquote:not([class])) {
+	margin-inline: 0;
+	padding-inline-start: var(--wp--preset--spacing--30, 1rem);
+	border-inline-start: 3px solid var(--color-accent);
+	font-size: var(--wp--preset--font-size--large, 1.25rem);
+}
+
+:where(table:not([class])) {
+	inline-size: 100%;
+	border-collapse: collapse;
+}
+
+:where(table:not([class])) :is(th, td) {
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--color-border);
+	text-align: start;
 }

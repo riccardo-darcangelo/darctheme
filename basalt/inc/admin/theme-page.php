@@ -74,6 +74,12 @@ function basalt_recommended_plugins(): array {
 				'required' => false,
 			),
 			array(
+				'slug'     => 'cookie-notice',
+				'name'     => 'Cookie Notice & Compliance',
+				'why'      => __( 'Consent banner. Basalt Core repairs the contrast of its accept and reject labels: the plugin paints those buttons in a colour from its own settings and leaves the label white, and its default gives 2.93 to 1 where 4.5 is required. Your colour is left alone, only the label moves.', 'basalt' ),
+				'required' => false,
+			),
+			array(
 				'slug'     => 'wordpress-seo',
 				'name'     => 'Yoast SEO',
 				'why'      => __( 'Editorial control over titles, descriptions and redirects. Basalt Core detects it and steps out of the way, so nothing is emitted twice. Rank Math, SEOPress, All in One SEO, Slim SEO and Squirrly are recognised in the same way.', 'basalt' ),
