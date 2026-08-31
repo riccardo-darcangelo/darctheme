@@ -116,6 +116,7 @@
 		<li><a href="#accessibility">Accessibility</a></li>
 		<li><a href="#preferences">Visitor display settings</a></li>
 		<li><a href="#login">Login screen</a></li>
+		<li><a href="#plugins">Plugins</a></li>
 		<li><a href="#child">Child themes</a></li>
 		<li><a href="#hooks">Hooks reference</a></li>
 		<li><a href="#translate">Translation</a></li>
@@ -691,6 +692,163 @@
 		page reports, both of them core's rather than ours. It follows the
 		branding switch, because it changes core markup and a site with custom
 		login CSS written against a direct child selector would notice.
+	</p>
+</section>
+
+<section id="plugins">
+	<h2>Plugins</h2>
+	<p>
+		Basalt has been built and tested against the plugins a site is most
+		likely to already have. Everything below has been run in a real install,
+		and each entry says what the theme actually does. Nothing is listed as
+		"compatible" on the strength of having read its documentation.
+	</p>
+
+	<h3>WooCommerce</h3>
+	<p>
+		Supported. WooCommerce brings its own block templates for the shop, the
+		product page, the cart and the checkout, and Basalt uses them rather
+		than shipping copies: those templates change between WooCommerce
+		releases, and a theme that copies them inherits the maintenance without
+		giving you anything you can see.
+	</p>
+	<p>
+		What the theme adds is the part WooCommerce cannot know about. Wherever
+		WooCommerce still renders through its classic templates it opens a
+		second <code>main</code> element, and since the surrounding block
+		template has already opened one, the page ends up with two main
+		landmarks. That fails WCAG and leaves a screen reader user guessing
+		which one holds the content. Basalt replaces that wrapper with a plain
+		<code>div</code>, so the styling hook survives and the landmark does
+		not. It also brings WooCommerce's buttons and the show password toggle
+		up to the 44 pixel target size the rest of the theme uses, and styles
+		its tables, notices and checkout fields with the theme's tokens.
+	</p>
+	<p>
+		The mini cart drawer correction lives in Basalt Core rather than in the
+		theme: WooCommerce prints that drawer on every page of a store with
+		<code>aria-hidden="true"</code> around six focusable controls, and
+		nothing takes them out of the tab order. It is a problem under any
+		theme, so it is fixed where it will survive changing theme.
+	</p>
+
+	<h3>Contact Form 7 and WPForms</h3>
+	<p>
+		Supported. The theme's input, label and focus rules are written with
+		<code>:where()</code>, so both plugins inherit them without being asked.
+		What is left is what each one sets itself.
+	</p>
+	<p>
+		Contact Form 7 ships almost no styling on purpose, so its submit button
+		arrives as the browser default and its fields come out around 375
+		pixels wide whatever the column is. Basalt gives the button the theme's
+		button, makes the fields fill their column, and darkens the validation
+		red, which sits just under AA on white.
+	</p>
+	<p>
+		WPForms ships a full design and exposes it through custom properties.
+		Basalt maps those onto its own colours, corner radii and the 44 pixel
+		target size. It is the supported way in, so anything you restyle in the
+		WPForms settings still wins.
+	</p>
+	<p>
+		These rules load on exactly the pages where the plugin has loaded its
+		own stylesheet. That is the plugin's decision, not the theme's, and the
+		two do not currently agree: WPForms loads per page, Contact Form 7 on
+		every page.
+	</p>
+	<p>
+		Gravity Forms is not on this list. It ships its own design system with
+		its own token layer and is styled through that, and being commercial it
+		cannot be tested against before release. A rule written blind against
+		markup nobody has run is worse than no rule.
+	</p>
+
+	<h3>Elementor</h3>
+	<p>
+		Basalt does not integrate with Elementor, and this is deliberate.
+		Elementor is not a plugin a theme supports, it is a plugin that replaces
+		the theme: registering its theme locations would hand
+		<code>templates/</code> to Elementor Pro's theme builder, and none of
+		the accessibility work in this theme would still be reachable. A default
+		Elementor page also ships several hundred kilobytes of JavaScript before
+		the first theme asset, which is the opposite of what Basalt is for.
+	</p>
+	<p>
+		What the theme does guarantee is that an Elementor page renders
+		correctly. Elementor's root element is given the block layout system's
+		<code>alignfull</code>, so it gets the full width of the content area
+		and Elementor decides the width of its own sections. Without that, a
+		full width Elementor section comes out as a narrow column.
+	</p>
+	<p>
+		<strong>Set your global colours in Elementor before you build
+		anything.</strong> Elementor's untouched default kit uses a light blue,
+		a mid grey and a green that fail contrast on a white background: the
+		default heading colour measures 2.01:1 where 3:1 is required. The theme
+		does not overwrite them, because a customer who has chosen brand colours
+		in Elementor would lose them without being asked. Site settings, Global
+		colours, in the Elementor editor.
+	</p>
+
+	<h3>SEO plugins</h3>
+	<p>
+		Rank Math, Yoast, SEOPress, All in One SEO, Slim SEO and Squirrly are
+		detected. Basalt Core hands over the parts each of them owns, so
+		nothing is emitted twice. See <a href="#seo">SEO and structured
+		data</a>.
+	</p>
+
+	<h3>Translation plugins</h3>
+	<p>
+		WPML, Polylang, TranslatePress, Weglot and GTranslate are detected, and
+		they own exactly one thing Basalt Core would otherwise be tempted to
+		emit: hreflang. Basalt Core emits none of its own. A site with one
+		language does not need it, and a site with several has one of these
+		installed, which is the only thing that knows which URLs are
+		translations of each other. A self-referencing hreflang from a theme
+		would be noise on a monolingual site and a contradicting second answer
+		on a translated one.
+	</p>
+
+	<h3>Caching and optimisation</h3>
+	<p>
+		LiteSpeed Cache, WP Rocket, Autoptimize and SiteGround Optimizer move,
+		defer and bundle inline JavaScript. Basalt Core has exactly one inline
+		script, the one that applies a visitor's saved display settings before
+		the first paint, and it carries the exclusion markers all four read
+		(<code>data-no-optimize</code>, <code>data-noptimize</code>,
+		<code>data-cfasync</code>). If it were deferred the page would paint
+		once unadjusted and then jump, in front of the person who turned the
+		setting on because the default was hard to read.
+	</p>
+
+	<h3>Consent banners</h3>
+	<p>
+		No corrections ship for these. CookieYes was audited against the theme
+		and is clean: focus reaches the banner first, its controls are 44 pixels
+		tall, the focus ring is visible, contrast passes, and rejecting is as
+		prominent as accepting. Complianz could not be audited, because its
+		banner does not appear until its setup wizard has been completed.
+	</p>
+	<p>
+		There is one collision worth knowing about. A bottom anchored consent
+		banner covers the display settings trigger on a phone: measured with
+		CookieYes at 390 pixels wide, the banner reaches the bottom edge and the
+		trigger sits underneath it, so a tap lands on the banner. The trigger
+		stays in the tab order, so it is never unreachable by keyboard. If it
+		affects your site, move the trigger with the offset property rather than
+		waiting for a theme update:
+	</p>
+	<pre><code>@media (width &lt;= 767px) {
+	body:has(.cky-consent-container) {
+		--basalt-a11y-trigger-offset: 21rem;
+	}
+}</code></pre>
+	<p>
+		No value is set in the theme, because the height of a consent banner
+		depends on its own text and a number guessed against one version of one
+		plugin is a rule that silently stops being true.
 	</p>
 </section>
 

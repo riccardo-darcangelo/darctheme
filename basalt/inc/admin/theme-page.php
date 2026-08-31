@@ -27,7 +27,16 @@ function basalt_register_theme_page(): void {
 add_action( 'admin_menu', 'basalt_register_theme_page' );
 
 /**
- * Plugins the theme integrates with.
+ * Plugins the theme has been built and tested against.
+ *
+ * Ordered by how likely a customer is to already have one, not by preference.
+ * A list of the plugins a theme author happens to like is of no use to somebody
+ * who has just taken over a site that runs on something else, and it is a way
+ * of quietly making the theme look better tested than it is.
+ *
+ * Everything here has been run against the theme in a real install, and each
+ * entry says what the theme actually does about it rather than that it is
+ * "compatible".
  *
  * @return array<int, array{slug: string, name: string, why: string, required: bool}>
  */
@@ -43,25 +52,31 @@ function basalt_recommended_plugins(): array {
 			array(
 				'slug'     => 'basalt-core',
 				'name'     => 'Basalt Core',
-				'why'      => __( 'Structured data, meta tags, breadcrumbs and the accessibility corrections for core blocks. Ships with the theme. Without it the templates still render, but the breadcrumb block is missing and no structured data is emitted.', 'basalt' ),
+				'why'      => __( 'Structured data, meta tags, breadcrumbs, the accessibility corrections for core blocks and for WooCommerce, the visitor display settings and the login screen. Ships with the theme. Without it the templates still render, but the breadcrumb block is missing and no structured data is emitted.', 'basalt' ),
 				'required' => true,
 			),
 			array(
-				'slug'     => 'seo-by-rank-math',
-				'name'     => 'Rank Math SEO',
-				'why'      => __( 'Editorial control over titles, descriptions and redirects. Basalt Core detects it and steps out of the way, so nothing is emitted twice.', 'basalt' ),
+				'slug'     => 'contact-form-7',
+				'name'     => 'Contact Form 7',
+				'why'      => __( 'Contact and enquiry forms. It ships almost no styling by design, so the theme supplies the submit button, the field widths and the validation colours. Those rules load only where Contact Form 7 has loaded its own stylesheet.', 'basalt' ),
 				'required' => false,
 			),
 			array(
-				'slug'     => 'fluentform',
-				'name'     => 'Fluent Forms',
-				'why'      => __( 'Contact and enquiry forms. Styled by the theme out of the box, and it loads its assets only on pages that contain a form.', 'basalt' ),
+				'slug'     => 'wpforms-lite',
+				'name'     => 'WPForms',
+				'why'      => __( 'Contact forms with a drag and drop builder. It exposes its design through custom properties, which the theme maps onto its own colours, corner radii and the 44 pixel minimum target size. Anything you restyle in the WPForms settings still wins.', 'basalt' ),
 				'required' => false,
 			),
 			array(
-				'slug'     => 'performant-translations',
-				'name'     => 'Performant Translations',
-				'why'      => __( 'Faster translation loading on non-English sites. Measurable on every request.', 'basalt' ),
+				'slug'     => 'woocommerce',
+				'name'     => 'WooCommerce',
+				'why'      => __( 'Selling. The theme stops WooCommerce opening a second main landmark on shop pages, brings its buttons and the show password toggle up to the minimum target size, and styles its tables, notices and checkout fields.', 'basalt' ),
+				'required' => false,
+			),
+			array(
+				'slug'     => 'wordpress-seo',
+				'name'     => 'Yoast SEO',
+				'why'      => __( 'Editorial control over titles, descriptions and redirects. Basalt Core detects it and steps out of the way, so nothing is emitted twice. Rank Math, SEOPress, All in One SEO, Slim SEO and Squirrly are recognised in the same way.', 'basalt' ),
 				'required' => false,
 			),
 		)

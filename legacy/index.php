@@ -1,1 +1,0 @@
-Look! A golden Snitch!

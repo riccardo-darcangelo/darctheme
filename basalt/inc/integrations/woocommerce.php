@@ -2,9 +2,14 @@
 /**
  * WooCommerce support.
  *
- * Declaring support is what stops WooCommerce from falling back to its own
- * bundled layout, which ignores the theme's containers. Everything here is
- * inert on a site without WooCommerce.
+ * Basalt is a block theme, so the shop pages are block templates, not PHP.
+ * WooCommerce ships its own set and the theme overrides the ones it wants to
+ * control: the product archive, the single product and product search. Cart,
+ * checkout and the order confirmation are left to WooCommerce, because those
+ * change between releases and a theme that copies them inherits the
+ * maintenance without gaining anything a customer can see.
+ *
+ * Everything here is inert on a site without WooCommerce.
  *
  * @package Basalt
  */
@@ -12,12 +17,21 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Whether WooCommerce is active.
+ *
+ * @return bool
+ */
+function basalt_has_woocommerce(): bool {
+	return class_exists( 'WooCommerce' );
+}
+
+/**
  * Declare theme support for WooCommerce and its gallery features.
  *
  * @return void
  */
 function basalt_woocommerce_setup(): void {
-	if ( ! class_exists( 'WooCommerce' ) ) {
+	if ( ! basalt_has_woocommerce() ) {
 		return;
 	}
 
@@ -48,7 +62,7 @@ add_action( 'after_setup_theme', 'basalt_woocommerce_setup' );
  * @return void
  */
 function basalt_woocommerce_assets(): void {
-	if ( ! class_exists( 'WooCommerce' ) ) {
+	if ( ! basalt_has_woocommerce() ) {
 		return;
 	}
 
@@ -66,12 +80,23 @@ function basalt_woocommerce_assets(): void {
 add_action( 'wp_enqueue_scripts', 'basalt_woocommerce_assets', 20 );
 
 /**
- * Replace WooCommerce's own wrappers with the theme's containers.
+ * Stop WooCommerce opening a second main landmark.
+ *
+ * Wherever WooCommerce still renders through its classic templates, and the
+ * Classic Template block is one of those places, it calls
+ * woocommerce_output_content_wrapper. That prints its own
+ * <main class="site-main">. In a block theme the surrounding template has
+ * already opened a main, so the page ends up with two, which is a WCAG failure
+ * and leaves screen reader users guessing which one holds the content.
+ *
+ * The wrapper is replaced rather than removed: WooCommerce's own stylesheet and
+ * a good deal of third party CSS expect an element between the layout and the
+ * shop content. A div carries that without claiming to be a landmark.
  *
  * @return void
  */
 function basalt_woocommerce_wrappers(): void {
-	if ( ! class_exists( 'WooCommerce' ) ) {
+	if ( ! basalt_has_woocommerce() || ! wp_is_block_theme() ) {
 		return;
 	}
 
@@ -81,7 +106,7 @@ function basalt_woocommerce_wrappers(): void {
 	add_action(
 		'woocommerce_before_main_content',
 		static function (): void {
-			echo '<div class="container"><main id="content" class="site-main woocommerce-main" tabindex="-1">';
+			echo '<div class="woocommerce-main">';
 		},
 		10
 	);
@@ -89,23 +114,16 @@ function basalt_woocommerce_wrappers(): void {
 	add_action(
 		'woocommerce_after_main_content',
 		static function (): void {
-			echo '</main></div>';
+			echo '</div>';
 		},
 		10
 	);
 
-	// The theme renders breadcrumbs in header.php; WooCommerce's own would duplicate them.
+	/*
+	 * The theme templates below render the breadcrumb block, which also feeds
+	 * the BreadcrumbList structured data. WooCommerce's own breadcrumb would sit
+	 * next to it saying the same thing.
+	 */
 	remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 }
 add_action( 'init', 'basalt_woocommerce_wrappers' );
-
-/**
- * Hide the theme's page title on shop views, WooCommerce prints its own.
- *
- * @param bool $show Whether to show the title.
- * @return bool
- */
-function basalt_woocommerce_hide_page_title( $show ) {
-	return class_exists( 'WooCommerce' ) && is_woocommerce() ? false : (bool) $show;
-}
-add_filter( 'basalt_show_page_header', 'basalt_woocommerce_hide_page_title' );

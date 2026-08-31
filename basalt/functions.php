@@ -73,6 +73,8 @@ $basalt_modules = apply_filters(
 		'performance',
 		'template-functions',
 		'admin/theme-page',
+		'integrations/elementor',
+		'integrations/forms',
 		'integrations/woocommerce',
 	)
 );

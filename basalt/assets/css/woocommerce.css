@@ -107,3 +107,26 @@
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-md);
 }
+
+/*
+ * The show-password toggle inside WooCommerce account and checkout fields is
+ * an 18px icon, below the 24px floor of WCAG 2.2 success criterion 2.5.8. It
+ * is absolutely positioned inside the field, so the box can grow without
+ * moving anything.
+ */
+.woocommerce .show-password-input {
+	min-inline-size: 24px;
+	min-block-size: 24px;
+	background-position: center;
+}
+
+/*
+ * WooCommerce buttons are its own class, not the theme's, so they need the
+ * same target size floor the theme applies to its own controls.
+ */
+.woocommerce :is(a.button, button.button, input.button, .wp-element-button) {
+	min-block-size: 44px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}

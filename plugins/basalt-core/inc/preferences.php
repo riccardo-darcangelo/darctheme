@@ -181,7 +181,29 @@ function basalt_core_preferences_boot_script(): void {
 }());
 JS;
 
-	wp_print_inline_script_tag( $script, array( 'id' => 'basalt-core-preferences-boot' ) );
+	/*
+	 * The extra attributes are exclusion markers for the caching and
+	 * optimisation plugins that move, defer or bundle inline JavaScript:
+	 * data-no-optimize is read by LiteSpeed Cache, WP Rocket and SiteGround
+	 * Optimizer, data-noptimize by Autoptimize, and data-cfasync by
+	 * Cloudflare's Rocket Loader. LiteSpeed Cache alone is on more than five
+	 * million sites, so this is the common case and not an edge one.
+	 *
+	 * This script has to run before the first paint, because it is what
+	 * applies a visitor's saved text size and contrast setting. Deferred, the
+	 * page paints once unadjusted and then jumps, and the person who sees that
+	 * flash is exactly the person who turned the setting on because the
+	 * default was hard for them to read.
+	 */
+	wp_print_inline_script_tag(
+		$script,
+		array(
+			'id'               => 'basalt-core-preferences-boot',
+			'data-no-optimize' => '1',
+			'data-noptimize'   => '1',
+			'data-cfasync'     => 'false',
+		)
+	);
 }
 add_action( 'wp_head', 'basalt_core_preferences_boot_script', 1 );
 

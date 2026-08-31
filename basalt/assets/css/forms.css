@@ -1,0 +1,168 @@
+/*
+ * Contact Form 7 and WPForms.
+ *
+ * These two are on more WordPress sites than any theme, and a buyer will have
+ * one of them installed before they have finished reading the documentation.
+ * Neither can match a theme it has never seen:
+ *
+ * - Contact Form 7 ships almost no styling on purpose. Its submit button
+ *   arrives as the browser default, which on a page of theme buttons reads as
+ *   a bug rather than a decision.
+ * - WPForms ships a full design in its own blue, and exposes it through custom
+ *   properties. Overriding those is the supported way in, so nothing here
+ *   fights its selectors, and a form the customer has restyled in the WPForms
+ *   settings keeps whatever they chose for the parts they touched.
+ *
+ * The theme's own input and label rules in base.css are written with :where(),
+ * so both plugins already inherit them. What is left is the parts they set
+ * themselves.
+ *
+ * Loaded on exactly the pages where one of the two has loaded its own
+ * stylesheet, which is the plugin's decision rather than the theme's.
+ * Contact Form 7 currently loads sitewide, WPForms per page. See
+ * inc/integrations/forms.php.
+ */
+
+:root {
+	/*
+	 * Not in the palette: an error colour is not a design choice a site owner
+	 * should be making per form, and every red in the palette would then have
+	 * to stay a red. Overridable from a child theme through the custom
+	 * property, which is why it reads from theme.json first.
+	 */
+	--form-error-color: var(--wp--custom--color--error, #b32d2e);
+}
+
+/* Contact Form 7 ------------------------------------------------------- */
+
+/*
+ * Contact Form 7 renders the size attribute of the shortcode as a real width,
+ * so a form built with the default tags comes out at around 375px whatever the
+ * column is. Full width and let the column decide, which is also what makes it
+ * usable on a phone.
+ */
+.wpcf7 .wpcf7-form-control-wrap {
+	display: block;
+}
+
+.wpcf7 input.wpcf7-form-control:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.wpcf7 textarea.wpcf7-form-control,
+.wpcf7 select.wpcf7-form-control {
+	inline-size: 100%;
+	max-inline-size: 100%;
+}
+
+.wpcf7 label {
+	display: block;
+}
+
+.wpcf7 input[type="submit"],
+.wpcf7 button[type="submit"] {
+	min-block-size: 44px;
+	padding: 0.75rem 1.5rem;
+	border: 0;
+	border-radius: var(--radius-md);
+	background-color: var(--color-accent);
+	color: var(--color-base);
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	cursor: pointer;
+	transition: background-color var(--transition-fast) var(--easing);
+}
+
+.wpcf7 input[type="submit"]:hover,
+.wpcf7 button[type="submit"]:hover,
+.wpcf7 input[type="submit"]:focus-visible,
+.wpcf7 button[type="submit"]:focus-visible {
+	background-color: var(--color-primary);
+}
+
+.wpcf7 input[type="submit"]:active,
+.wpcf7 button[type="submit"]:active {
+	background-color: var(--color-primary-strong);
+}
+
+/*
+ * The validation message under a field is the one piece of text a person only
+ * ever reads when something has already gone wrong. Contact Form 7's default
+ * red sits at about 4.4:1 on white, just under AA for body text.
+ */
+.wpcf7 .wpcf7-not-valid-tip {
+	color: var(--form-error-color);
+	font-size: var(--wp--preset--font-size--small, 0.9375rem);
+	font-weight: 600;
+}
+
+.wpcf7 .wpcf7-not-valid {
+	border-color: var(--form-error-color);
+}
+
+/*
+ * The response area is a live region. It has to be legible in both states and
+ * it must not move the form when it appears, which is why it keeps its border
+ * width in every state.
+ */
+.wpcf7 form .wpcf7-response-output {
+	margin: 1.5rem 0 0;
+	padding: 0.75rem 1rem;
+	border: 2px solid var(--color-border);
+	border-radius: var(--radius-md);
+	background-color: var(--color-surface);
+	color: var(--color-ink);
+}
+
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output,
+.wpcf7 form.payment-required .wpcf7-response-output {
+	border-color: var(--form-error-color);
+}
+
+.wpcf7 form.sent .wpcf7-response-output {
+	border-color: var(--color-accent);
+}
+
+/* WPForms -------------------------------------------------------------- */
+
+/*
+ * WPForms defines these on :root. Redefining them on the form container keeps
+ * the override inside the form, so nothing else on the page inherits a value
+ * meant for a form field.
+ */
+.wpforms-container {
+	--wpforms-field-border-radius: var(--radius-md);
+	--wpforms-field-border-color: var(--color-border);
+	--wpforms-field-border-color-spare: var(--color-border);
+	--wpforms-field-background-color: var(--color-base);
+	--wpforms-field-text-color: var(--color-ink);
+	--wpforms-field-menu-color: var(--color-base);
+	--wpforms-label-color: var(--color-ink);
+	--wpforms-label-sublabel-color: var(--color-ink-soft);
+	--wpforms-label-error-color: var(--form-error-color);
+	--wpforms-button-background-color: var(--color-accent);
+	--wpforms-button-border-color: var(--color-accent);
+	--wpforms-button-text-color: var(--color-base);
+	--wpforms-button-border-radius: var(--radius-md);
+	--wpforms-page-break-color: var(--color-accent);
+
+	/*
+	 * WPForms defaults to a 41px button and a 43px field. Both are under the
+	 * 44px the theme holds its own controls to, and a 3px difference is exactly
+	 * the kind of thing nobody notices until they are trying to hit it on a
+	 * phone.
+	 */
+	--wpforms-button-size-height: 44px;
+	--wpforms-field-size-input-height: 44px;
+}
+
+.wpforms-container .wpforms-submit:hover,
+.wpforms-container .wpforms-submit:focus-visible {
+	--wpforms-button-background-color: var(--color-primary);
+	--wpforms-button-border-color: var(--color-primary);
+}
+
+.wpforms-container .wpforms-submit:active {
+	--wpforms-button-background-color: var(--color-primary-strong);
+	--wpforms-button-border-color: var(--color-primary-strong);
+}

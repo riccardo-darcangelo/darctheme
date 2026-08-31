@@ -35,6 +35,14 @@ wp plugin activate basalt-core basalt-catalog
 # Start from a known state so the script is repeatable.
 wp site empty --yes
 
+# Templates and template parts saved from the site editor live in the database
+# and shadow the theme files. Left behind, a re-seed keeps serving the previous
+# version of the header, and edits to the theme appear to do nothing.
+STALE=$(wp post list --post_type=wp_template,wp_template_part --format=ids)
+if [ -n "$STALE" ]; then
+	wp post delete $STALE --force >/dev/null
+fi
+
 wp rewrite structure '/%postname%/' --hard >/dev/null
 wp option update blogdescription 'Hoists, lifts and site equipment for hire across Bavaria'
 

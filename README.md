@@ -10,8 +10,7 @@ step, no dependencies, no external requests, and the theme itself ships no
 JavaScript at all.
 
 Formerly *DarcTheme*. Version 3.0.0 converted the theme from classic templates
-to a block theme; the pre-2.0 theme is kept under `legacy/` for reference and is
-not maintained.
+to a block theme.
 
 ## Repository layout
 
@@ -24,7 +23,6 @@ not maintained.
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
 | `dev/` | Throwaway WordPress in Docker, with a seed script for demo content. |
 | `tools/` | POT generation, static preview, packaging. Node only, no dependencies. |
-| `legacy/` | The pre-2.0 theme. Not maintained. |
 
 ## Requirements
 
