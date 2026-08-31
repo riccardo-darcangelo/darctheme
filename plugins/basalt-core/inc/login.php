@@ -106,10 +106,25 @@ function basalt_core_login_styles(): void {
 		 * The heading still contains the site name as text for assistive
 		 * technology, which is why this is done with CSS rather than by
 		 * replacing the markup.
+		 *
+		 * The height comes from the image itself. It used to be the width times
+		 * 0.4, which is a reasonable guess for a wordmark and wrong for
+		 * everything else: a square mark was drawn into a box two and a half
+		 * times wider than it was tall, so background-size: contain shrank it
+		 * to the height of that box and the width setting stopped meaning
+		 * anything. Sites use square marks on the login screen more often than
+		 * wide ones, because it is the one place a logo has no text beside it.
 		 */
+		$ratio = 0.4;
+		$meta  = wp_get_attachment_metadata( $logo_id );
+
+		if ( ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+			$ratio = (float) $meta['height'] / (float) $meta['width'];
+		}
+
 		$css .= '.login h1 a{background-image:url(' . esc_url_raw( $logo_url ) . ');'
 			. 'background-size:contain;background-position:center;'
-			. 'width:' . $logo_width . 'px;height:' . (int) round( $logo_width * 0.4 ) . 'px;}';
+			. 'width:' . $logo_width . 'px;height:' . max( 1, (int) round( $logo_width * $ratio ) ) . 'px;}';
 	}
 
 	$css .= '.login form{background:' . $colors['form'] . ';color:' . $colors['text'] . ';'

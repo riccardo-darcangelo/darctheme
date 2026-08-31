@@ -345,15 +345,51 @@ wp post create /tmp/nav.html --post_type=wp_navigation --post_title='Main' --pos
 # switch from parent to child silently wiped every business detail. Options
 # belong to the site and survive both.
 
-wp option update basalt_core_settings --format=json <<'JSON' >/dev/null
+# The demo mark is drawn here rather than committed. A binary in the repository
+# for the sake of a sandbox is a binary somebody has to maintain, and a seed
+# that depends on an image an operator once uploaded by hand is not a seed you
+# can run twice and get the same site from.
+php <<'PHP'
+<?php
+$size = 128;
+$image = imagecreatetruecolor( $size, $size );
+imagesavealpha( $image, true );
+imagefill( $image, 0, 0, imagecolorallocatealpha( $image, 0, 0, 0, 127 ) );
+
+$ink    = imagecolorallocate( $image, 42, 58, 71 );
+$accent = imagecolorallocate( $image, 194, 65, 12 );
+
+// A basalt column seen end on: a hexagon, with one facet catching the light.
+$cx = (int) ( $size / 2 );
+$cy = (int) ( $size / 2 );
+$r  = (int) ( $size / 2 - 6 );
+
+$points = array();
+for ( $i = 0; $i < 6; $i++ ) {
+	$angle    = deg2rad( 60 * $i - 30 );
+	$points[] = (int) round( $cx + $r * cos( $angle ) );
+	$points[] = (int) round( $cy + $r * sin( $angle ) );
+}
+
+imagefilledpolygon( $image, $points, $ink );
+imagefilledpolygon( $image, array( $cx, $cy, $points[0], $points[1], $points[2], $points[3] ), $accent );
+imagepng( $image, '/tmp/basalt-mark.png' );
+PHP
+
+LOGO_ID=$(wp media import /tmp/basalt-mark.png --title='Basalt demo mark' --porcelain)
+wp option update site_logo "$LOGO_ID" >/dev/null
+
+# Everything the settings screen owns, including the two newest features, so
+# that a freshly seeded sandbox shows the product rather than a subset of it.
+wp option update basalt_core_settings --format=json <<JSON >/dev/null
 {
 	"meta_enabled": true,
 	"meta_twitter_site": "",
-	"meta_default_image": 0,
+	"meta_default_image": $LOGO_ID,
 	"schema_enabled": true,
 	"entity_type": "HomeAndConstructionBusiness",
 	"entity_name": "Augsburger Hebetechnik",
-	"logo": 0,
+	"logo": $LOGO_ID,
 	"phone": "+49 821 1234567",
 	"email": "hire@example.test",
 	"street": "Industriestrasse 12",
@@ -363,7 +399,17 @@ wp option update basalt_core_settings --format=json <<'JSON' >/dev/null
 	"country": "DE",
 	"opening_hours": "Mo-Fr 07:00-18:00",
 	"price_range": "",
-	"profiles": "https://www.linkedin.com/company/example"
+	"profiles": "https://www.linkedin.com/company/example",
+	"preferences_enabled": true,
+	"preferences_position": "right",
+	"login_enabled": true,
+	"login_logo": $LOGO_ID,
+	"login_logo_width": 128,
+	"login_background": "#1f3d34",
+	"login_form_background": "#ffffff",
+	"login_accent": "#c2410c",
+	"login_background_image": 0,
+	"login_generic_errors": true
 }
 JSON
 
