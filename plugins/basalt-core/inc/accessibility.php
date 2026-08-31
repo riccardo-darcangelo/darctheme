@@ -20,35 +20,80 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Give the core navigation block an accessible name.
  *
- * The name comes from the menu the block renders, so it matches what the site
- * owner already called it and needs no extra configuration. An explicit
- * aria-label on the block always wins.
+ * The name comes from the block's own aria-label if it has one, otherwise from
+ * the menu it renders, so it matches what the site owner already called it and
+ * needs no configuration.
+ *
+ * Core names a navigation block itself, but only when it can work out a name.
+ * It reads the ariaLabel attribute, then the title of the menu the block refers
+ * to by id, and returns an empty string when a block has neither. A block
+ * placed in a template part without a ref, which is how a theme ships one so
+ * that it picks up whichever menu the site has, has neither.
+ *
+ * Core then de-duplicates names by appending a count, and appends it to that
+ * empty string as well. The second such navigation on a page therefore renders
+ * as aria-label=" 2": a landmark whose entire accessible name is the number
+ * two. It is a real bug and it is in the shipped output of any block theme with
+ * a menu in the header and another in the footer.
+ *
+ * So an existing label is respected, with one exception: a label that is
+ * nothing but a number is that bug and not a decision, and gets replaced.
+ * Duplicates are numbered here too, because a page with two landmarks both
+ * called "Menu" is no more usable than a page with two called "navigation".
  *
  * @param string               $content Rendered block markup.
  * @param array<string, mixed> $block   Parsed block.
  * @return string
  */
 function basalt_core_name_navigation_block( $content, $block ) {
-	if ( ( $block['blockName'] ?? '' ) !== 'core/navigation' ) {
+	static $used = array();
+
+	if ( ( $block['blockName'] ?? '' ) !== 'core/navigation' || ! is_string( $content ) || '' === trim( $content ) ) {
 		return $content;
 	}
 
-	$label = '';
-	$ref   = (int) ( $block['attrs']['ref'] ?? 0 );
+	$html = new WP_HTML_Tag_Processor( $content );
 
-	if ( $ref ) {
-		$menu = get_post( $ref );
+	if ( ! $html->next_tag( array( 'tag_name' => 'NAV' ) ) ) {
+		return $content;
+	}
+
+	if ( null !== $html->get_attribute( 'aria-labelledby' ) ) {
+		return $content;
+	}
+
+	$existing = $html->get_attribute( 'aria-label' );
+
+	if ( is_string( $existing ) && ! preg_match( '/^\s*\d+\s*$/', $existing ) ) {
+		return $content;
+	}
+
+	$label = trim( (string) ( $block['attrs']['ariaLabel'] ?? '' ) );
+
+	if ( '' === $label ) {
+		$ref  = (int) ( $block['attrs']['ref'] ?? 0 );
+		$menu = $ref ? get_post( $ref ) : null;
 
 		if ( $menu instanceof WP_Post ) {
-			$label = $menu->post_title;
+			$label = trim( (string) $menu->post_title );
 		}
 	}
 
-	if ( '' === trim( $label ) ) {
+	if ( '' === $label ) {
 		$label = __( 'Menu', 'basalt-core' );
 	}
 
-	return basalt_core_label_tag( $content, 'NAV', $label );
+	$key           = strtolower( $label );
+	$used[ $key ]  = ( $used[ $key ] ?? 0 ) + 1;
+
+	if ( $used[ $key ] > 1 ) {
+		/* translators: 1: navigation name, 2: how many of that name are on the page so far. */
+		$label = sprintf( _x( '%1$s %2$d', 'navigation landmark', 'basalt-core' ), $label, $used[ $key ] );
+	}
+
+	$html->set_attribute( 'aria-label', $label );
+
+	return $html->get_updated_html();
 }
 add_filter( 'render_block', 'basalt_core_name_navigation_block', 10, 2 );
 

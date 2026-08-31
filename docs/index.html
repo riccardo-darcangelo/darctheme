@@ -385,6 +385,89 @@
 		footer are template parts, and everything in them is a block.
 	</p>
 
+	<h3>Choosing a header or a footer</h3>
+	<p>
+		Basalt ships four of each. They are template parts like any other, so
+		you swap one for another rather than rebuilding it: in the site editor,
+		select the header or footer block, open the toolbar and choose Replace.
+		The list shows every part registered for that area. The swap applies to
+		every template that uses that part, which is all of them.
+	</p>
+	<p>
+		Whichever you pick, the menu comes with it. None of these parts pins
+		itself to a particular menu, so they all render whichever menu the site
+		has and switching header does not lose it.
+	</p>
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">Header</th>
+				<th scope="col">What it is</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><strong>Header</strong></td>
+				<td>Logo and site title on the left, menu and search on the right. Sticks to the top of the window. The default.</td>
+			</tr>
+			<tr>
+				<td><strong>Header, centred</strong></td>
+				<td>Logo and title centred, menu centred underneath. Gives the name of the site more weight, and suits a shorter menu.</td>
+			</tr>
+			<tr>
+				<td><strong>Header, minimal</strong></td>
+				<td>Site title and menu, nothing else: no logo, no search, no border, no background of its own. Scrolls away rather than sticking, because a header with no background stuck over the page is text floating on top of whatever is passing underneath.</td>
+			</tr>
+			<tr>
+				<td><strong>Header with announcement bar</strong></td>
+				<td>A strip across the top for one short line, above the standard row. Also scrolls away: two rows stuck to a phone screen take about a sixth of it and never give it back.</td>
+			</tr>
+		</tbody>
+	</table>
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">Footer</th>
+				<th scope="col">What it is</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><strong>Footer</strong></td>
+				<td>Three columns: site title and tagline, a menu, the three most recent posts. The default.</td>
+			</tr>
+			<tr>
+				<td><strong>Footer, compact</strong></td>
+				<td>One row, title on the left and menu on the right, with the copyright line underneath. For a site with few pages, where three columns are three columns of nothing.</td>
+			</tr>
+			<tr>
+				<td><strong>Footer with call to action</strong></td>
+				<td>A band in the primary colour with a heading, a line and a button, above the compact row. For a site whose last invitation should be on every page.</td>
+			</tr>
+			<tr>
+				<td><strong>Footer with contact details</strong></td>
+				<td>Four columns, adding an address and an opening hours block. Fill these in to match what you entered under Settings, Search and schema, so that visitors and search engines are told the same thing.</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		Every one of them was audited at 390, 768 and 1440 pixels: one banner,
+		one main and one contentinfo landmark, no duplicate landmark names, no
+		horizontal overflow, and no axe violations. Two navigation regions on
+		one page are fine as long as a screen reader user can tell them apart,
+		so the header menu is named Main menu and the footer menu Footer menu.
+	</p>
+	<p>
+		If you build your own, copy one of the files in <code>parts/</code>, add
+		it to <code>templateParts</code> in <code>theme.json</code>, and give
+		the outer group the class <code>site-header</code> or
+		<code>site-footer</code>. Do not give it a <code>header</code> or
+		<code>footer</code> tag: the template supplies that. A part that carries
+		its own landmark tag produces two of them as soon as a plugin embeds it
+		without saying which tag it wants, which is exactly what WooCommerce
+		does.
+	</p>
+
 	<h3>The menu</h3>
 	<p>
 		The header contains a Navigation block. Select it in the site editor to

@@ -49,6 +49,26 @@
 	padding-block-start: 0;
 }
 
+/*
+ * Two of the header variations opt out of sticking, and both for the same
+ * reason: what sticks has to earn the space it takes off the top of a phone.
+ *
+ * The minimal header has no background of its own, which is the point of it.
+ * Stuck to the top it would be text floating over whatever scrolls underneath.
+ *
+ * The announcement header is two rows. Stuck, it takes about a sixth of a
+ * short phone screen and never gives it back, and the strip is the half of it
+ * a visitor has already read.
+ *
+ * A site that wants either of them stuck sets position: sticky back on the
+ * class. The preference that unsticks headers still applies to both, because
+ * it targets .site-header.
+ */
+.site-header--minimal,
+.site-header--announcement {
+	position: static;
+}
+
 /* Footer --------------------------------------------------------------- */
 
 .site-footer__heading {

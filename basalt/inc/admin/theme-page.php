@@ -142,6 +142,7 @@ function basalt_render_theme_page(): void {
 			<div class="basalt-admin__card">
 				<h2><?php esc_html_e( '3. Header and footer', 'basalt' ); ?></h2>
 				<p><?php esc_html_e( 'Both are template parts. Edit them once in the site editor and every template follows, including the navigation menu.', 'basalt' ); ?></p>
+				<p><?php esc_html_e( 'There are four of each: pick one with Replace in the block toolbar rather than rebuilding. The menu comes with whichever you choose.', 'basalt' ); ?></p>
 				<p>
 					<a class="button" href="<?php echo esc_url( admin_url( 'site-editor.php?path=%2Fpatterns' ) ); ?>">
 						<?php esc_html_e( 'Edit template parts', 'basalt' ); ?>

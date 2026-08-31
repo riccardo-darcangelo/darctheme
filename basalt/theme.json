@@ -502,8 +502,38 @@
 			"area": "header"
 		},
 		{
+			"name": "header-centred",
+			"title": "Header, centred",
+			"area": "header"
+		},
+		{
+			"name": "header-minimal",
+			"title": "Header, minimal",
+			"area": "header"
+		},
+		{
+			"name": "header-announcement",
+			"title": "Header with announcement bar",
+			"area": "header"
+		},
+		{
 			"name": "footer",
 			"title": "Footer",
+			"area": "footer"
+		},
+		{
+			"name": "footer-compact",
+			"title": "Footer, compact",
+			"area": "footer"
+		},
+		{
+			"name": "footer-cta",
+			"title": "Footer with call to action",
+			"area": "footer"
+		},
+		{
+			"name": "footer-contact",
+			"title": "Footer with contact details",
 			"area": "footer"
 		}
 	],
