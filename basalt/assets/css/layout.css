@@ -50,7 +50,7 @@
 }
 
 /*
- * Two of the header variations opt out of sticking, and both for the same
+ * Three of the header variations opt out of sticking, and all for the same
  * reason: what sticks has to earn the space it takes off the top of a phone.
  *
  * The minimal header has no background of its own, which is the point of it.
@@ -60,12 +60,18 @@
  * short phone screen and never gives it back, and the strip is the half of it
  * a visitor has already read.
  *
+ * The shop details header is the same two rows, and the strip is the part a
+ * visitor needs once: the hours and the phone number. Both are repeated at the
+ * foot of the page by the contact footer, which is where a visitor who has
+ * scrolled that far looks for them.
+ *
  * A site that wants either of them stuck sets position: sticky back on the
  * class. The preference that unsticks headers still applies to both, because
  * it targets .site-header.
  */
 .site-header--minimal,
-.site-header--announcement {
+.site-header--announcement,
+.site-header--store {
 	position: static;
 }
 
@@ -75,4 +81,17 @@
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 	margin-block-end: 0.75rem;
+}
+
+/*
+ * The details strip of the shop header: three short items spread across the
+ * row on a desktop, centred and wrapped on a phone. The element part clears
+ * the specificity of the flex layout class core prints for the group.
+ */
+@media (max-width: 40rem) {
+	.site-header .site-header__details {
+		justify-content: center;
+		row-gap: 0.25rem;
+		text-align: center;
+	}
 }

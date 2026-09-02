@@ -217,11 +217,22 @@ html[data-a11y-unstick] :is(.site-header, .wp-site-blocks > header, header.wp-bl
 	inline-size: min(26rem, calc(100vw - 2rem));
 	max-block-size: min(40rem, calc(100vh - 2rem));
 	padding: 0;
+	/* The form scrolls, the dialog does not: two scrollbars for one list is one too many. */
+	overflow: hidden;
 	border: 1px solid var(--basalt-a11y-border);
 	border-radius: 12px;
 	background-color: var(--basalt-a11y-bg);
 	color: var(--basalt-a11y-ink);
 	box-shadow: 0 8px 16px rgb(0 0 0 / 8%), 0 24px 64px rgb(0 0 0 / 18%);
+}
+
+/*
+ * Only while open. A dialog that is closed is display: none from the user agent,
+ * and a rule that set display: flex on it unconditionally would show it.
+ */
+.basalt-a11y__panel[open] {
+	display: flex;
+	flex-direction: column;
 }
 
 .basalt-a11y__panel::backdrop {
@@ -233,7 +244,7 @@ html[data-a11y-unstick] :is(.site-header, .wp-site-blocks > header, header.wp-bl
 	flex-direction: column;
 	gap: 1.25rem;
 	padding: 1.25rem;
-	max-block-size: inherit;
+	min-block-size: 0;
 	overflow-y: auto;
 }
 

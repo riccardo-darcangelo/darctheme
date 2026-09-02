@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/opening-hours",
+	"title": "Opening hours",
+	"category": "widgets",
+	"icon": "clock",
+	"description": "Whether you are open right now and until when, plus a table of your hours. Reads the hours entered under Settings, Search and schema, so the visitor and the structured data are told the same thing.",
+	"keywords": [
+		"opening hours",
+		"open",
+		"closed",
+		"business hours",
+		"shop"
+	],
+	"textdomain": "basalt-core",
+	"editorScript": "file:./editor.js",
+	"style": "file:./style.css",
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		},
+		"color": {
+			"text": true,
+			"background": true
+		}
+	},
+	"attributes": {
+		"showStatus": {
+			"type": "boolean",
+			"default": true
+		},
+		"showTable": {
+			"type": "boolean",
+			"default": true
+		},
+		"showClosedDays": {
+			"type": "boolean",
+			"default": true
+		},
+		"layout": {
+			"type": "string",
+			"enum": [ "stacked", "inline" ],
+			"default": "stacked"
+		}
+	}
+}

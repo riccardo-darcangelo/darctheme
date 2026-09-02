@@ -1,0 +1,87 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Boutique",
+	"description": "A warm off-white ground, plum text, a rose accent, serif headings and pill shaped buttons. For shops, salons, studios and anything sold on look and feel rather than on specifications.",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "color": "#fbf7f4", "name": "Base" },
+				{ "slug": "surface", "color": "#f5ebe6", "name": "Surface" },
+				{ "slug": "surface-strong", "color": "#eadcd5", "name": "Surface strong" },
+				{ "slug": "contrast", "color": "#2b2226", "name": "Contrast" },
+				{ "slug": "contrast-soft", "color": "#6a5a61", "name": "Contrast soft" },
+				{ "slug": "primary", "color": "#4a2b3a", "name": "Primary" },
+				{ "slug": "primary-strong", "color": "#331c28", "name": "Primary strong" },
+				{ "slug": "accent", "color": "#b0245f", "name": "Accent" },
+				{ "slug": "accent-soft", "color": "#f8e2ea", "name": "Accent soft" },
+				{ "slug": "border", "color": "#e6d6cf", "name": "Border" }
+			],
+			"gradients": [
+				{
+					"slug": "primary-to-contrast",
+					"gradient": "linear-gradient(135deg, #4a2b3a 0%, #2b2226 100%)",
+					"name": "Primary to contrast"
+				},
+				{
+					"slug": "surface-fade",
+					"gradient": "linear-gradient(180deg, #f5ebe6 0%, #fbf7f4 100%)",
+					"name": "Surface fade"
+				}
+			]
+		}
+	},
+	"styles": {
+		"typography": {
+			"lineHeight": "1.7"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--serif)",
+					"fontWeight": "500",
+					"letterSpacing": "-0.01em",
+					"lineHeight": "1.1"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--sans)",
+					"fontWeight": "700"
+				}
+			},
+			"button": {
+				"border": {
+					"radius": "var(--wp--custom--radius--pill)"
+				},
+				"spacing": {
+					"padding": {
+						"top": "0.8rem",
+						"bottom": "0.8rem",
+						"left": "1.75rem",
+						"right": "1.75rem"
+					}
+				}
+			}
+		},
+		"blocks": {
+			"core/site-title": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--serif)",
+					"fontWeight": "500",
+					"letterSpacing": "0"
+				}
+			},
+			"core/quote": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--serif)"
+				}
+			},
+			"core/pullquote": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--serif)"
+				}
+			}
+		}
+	}
+}

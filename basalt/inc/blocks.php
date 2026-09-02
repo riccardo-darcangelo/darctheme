@@ -119,6 +119,17 @@ function basalt_register_block_styles(): void {
 				'label' => __( 'FAQ item', 'basalt' ),
 			),
 		),
+		/*
+		 * A cover as a tile: the heading link is stretched over the whole block, so
+		 * the image, the eyebrow and the words are one link and one tab stop. Used
+		 * by the collection tiles pattern.
+		 */
+		'core/cover'     => array(
+			array(
+				'name'  => 'tile',
+				'label' => __( 'Tile', 'basalt' ),
+			),
+		),
 	);
 
 	foreach ( $styles as $block => $variations ) {

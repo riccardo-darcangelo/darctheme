@@ -15,196 +15,220 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/admin/theme-page.php:100
-msgid "1. Pick a style"
-msgstr ""
-
-#: inc/admin/theme-page.php:102
-msgid "Basalt ships four complete looks, including a high contrast variation where every colour clears WCAG AAA. Switching one changes colours, type and spacing everywhere at once."
-msgstr ""
-
-#: inc/admin/theme-page.php:106
-msgid "Open styles"
-msgstr ""
-
-#: inc/admin/theme-page.php:112
-msgid "2. Identity"
-msgstr ""
-
-#: inc/admin/theme-page.php:113
-msgid "Set the site title, tagline and logo. The tagline is the fallback meta description, so write it as a sentence a search engine could show."
+#. translators: %s: theme version.
+#: inc/admin/theme-page.php:109
+msgid "Basalt %s"
 msgstr ""
 
 #: inc/admin/theme-page.php:116
-msgid "Site settings"
+msgid "Four things get a new site to a good starting point. Everything else is optional."
 msgstr ""
 
-#: inc/admin/theme-page.php:122
-msgid "3. Header and footer"
+#: inc/admin/theme-page.php:121
+msgid "1. Pick a style"
 msgstr ""
 
 #: inc/admin/theme-page.php:123
-msgid "Both are template parts. Edit them once in the site editor and every template follows, including the navigation menu."
+msgid "Basalt ships five complete looks, including a high contrast variation where every colour clears WCAG AAA. Switching one changes colours, type and spacing everywhere at once."
 msgstr ""
 
-#: inc/admin/theme-page.php:126
-msgid "Edit template parts"
-msgstr ""
-
-#: inc/admin/theme-page.php:132
-msgid "4. Who is behind the site"
+#: inc/admin/theme-page.php:127
+msgid "Open styles"
 msgstr ""
 
 #: inc/admin/theme-page.php:133
-msgid "Business name, address, phone and opening hours. This is what produces the knowledge panel and local results."
+msgid "2. Identity"
+msgstr ""
+
+#: inc/admin/theme-page.php:134
+msgid "Set the site title, tagline and logo. The tagline is the fallback meta description, so write it as a sentence a search engine could show."
 msgstr ""
 
 #: inc/admin/theme-page.php:137
-msgid "Search and schema settings"
+msgid "Site settings"
 msgstr ""
 
-#: inc/admin/theme-page.php:140
-msgid "Install and activate Basalt Core to reach these settings."
+#: inc/admin/theme-page.php:143
+msgid "3. Header and footer"
 msgstr ""
 
-#: inc/admin/theme-page.php:146
-msgid "Design tokens"
+#: inc/admin/theme-page.php:144
+msgid "Both are template parts. Edit them once in the site editor and every template follows, including the navigation menu."
+msgstr ""
+
+#: inc/admin/theme-page.php:145
+msgid "There are four of each: pick one with Replace in the block toolbar rather than rebuilding. The menu comes with whichever you choose."
 msgstr ""
 
 #: inc/admin/theme-page.php:148
-msgid "Colours, the type scale and the spacing steps come from theme.json. Change them under Styles and the front end, the editor, the patterns and the block styles all follow. A child theme can override the same file for a permanent change."
+msgid "Edit template parts"
 msgstr ""
 
-#: inc/admin/theme-page.php:151
-msgid "Plugins"
+#: inc/admin/theme-page.php:154
+msgid "4. Who is behind the site"
 msgstr ""
 
 #: inc/admin/theme-page.php:155
+msgid "Business name, address, phone and opening hours. This is what produces the knowledge panel and local results."
+msgstr ""
+
+#: inc/admin/theme-page.php:159
+msgid "Search and schema settings"
+msgstr ""
+
+#: inc/admin/theme-page.php:162
+msgid "Install and activate Basalt Core to reach these settings."
+msgstr ""
+
+#: inc/admin/theme-page.php:168
+msgid "Design tokens"
+msgstr ""
+
+#: inc/admin/theme-page.php:170
+msgid "Colours, the type scale and the spacing steps come from theme.json. Change them under Styles and the front end, the editor, the patterns and the block styles all follow. A child theme can override the same file for a permanent change."
+msgstr ""
+
+#: inc/admin/theme-page.php:173
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin/theme-page.php:177
 msgid "Plugin"
 msgstr ""
 
-#: inc/admin/theme-page.php:156
+#: inc/admin/theme-page.php:178
 msgid "What it adds"
 msgstr ""
 
-#: inc/admin/theme-page.php:157
+#: inc/admin/theme-page.php:179
 msgid "Status"
 msgstr ""
 
-#: inc/admin/theme-page.php:166
+#: inc/admin/theme-page.php:188
 msgid "Bundled"
-msgstr ""
-
-#: inc/admin/theme-page.php:196
-msgid "Active"
 msgstr ""
 
 #: inc/admin/theme-page.php:20 inc/admin/theme-page.php:21
 msgid "Basalt"
 msgstr ""
 
-#: inc/admin/theme-page.php:210
+#: inc/admin/theme-page.php:218
+msgid "Active"
+msgstr ""
+
+#: inc/admin/theme-page.php:232
 msgid "Installed, not active"
 msgstr ""
 
-#: inc/admin/theme-page.php:223
+#: inc/admin/theme-page.php:245
 msgid "Activate"
 msgstr ""
 
-#: inc/admin/theme-page.php:230
+#: inc/admin/theme-page.php:252
 msgid "Not installed"
 msgstr ""
 
-#: inc/admin/theme-page.php:240
+#: inc/admin/theme-page.php:262
 msgid "View and install"
 msgstr ""
 
-#: inc/admin/theme-page.php:277
+#: inc/admin/theme-page.php:299
 msgid "Getting started"
 msgstr ""
 
-#: inc/admin/theme-page.php:46
-msgid "Structured data, meta tags, breadcrumbs and the accessibility corrections for core blocks. Ships with the theme. Without it the templates still render, but the breadcrumb block is missing and no structured data is emitted."
+#: inc/admin/theme-page.php:55
+msgid "Structured data, meta tags, breadcrumbs, the accessibility corrections for core blocks and for WooCommerce, the visitor display settings and the login screen. Ships with the theme. Without it the templates still render, but the breadcrumb block is missing and no structured data is emitted."
 msgstr ""
 
-#: inc/admin/theme-page.php:52
-msgid "Editorial control over titles, descriptions and redirects. Basalt Core detects it and steps out of the way, so nothing is emitted twice."
+#: inc/admin/theme-page.php:61
+msgid "Contact and enquiry forms. It ships almost no styling by design, so the theme supplies the submit button, the field widths and the validation colours. Those rules load only where Contact Form 7 has loaded its own stylesheet."
 msgstr ""
 
-#: inc/admin/theme-page.php:58
-msgid "Contact and enquiry forms. Styled by the theme out of the box, and it loads its assets only on pages that contain a form."
+#: inc/admin/theme-page.php:67
+msgid "Contact forms with a drag and drop builder. It exposes its design through custom properties, which the theme maps onto its own colours, corner radii and the 44 pixel minimum target size. Anything you restyle in the WPForms settings still wins."
 msgstr ""
 
-#: inc/admin/theme-page.php:64
-msgid "Faster translation loading on non-English sites. Measurable on every request."
+#: inc/admin/theme-page.php:73
+msgid "Selling. The theme stops WooCommerce opening a second main landmark on shop pages, brings its buttons and the show password toggle up to the minimum target size, and styles its tables, notices and checkout fields."
 msgstr ""
 
-#. translators: %s: theme version.
-#: inc/admin/theme-page.php:88
-msgid "Basalt %s"
+#: inc/admin/theme-page.php:79
+msgid "Consent banner. Basalt Core repairs the contrast of its accept and reject labels: the plugin paints those buttons in a colour from its own settings and leaves the label white, and its default gives 2.93 to 1 where 4.5 is required. Your colour is left alone, only the label moves."
 msgstr ""
 
-#: inc/admin/theme-page.php:95
-msgid "Four things get a new site to a good starting point. Everything else is optional."
+#: inc/admin/theme-page.php:85
+msgid "Editorial control over titles, descriptions and redirects. Basalt Core detects it and steps out of the way, so nothing is emitted twice. Rank Math, SEOPress, All in One SEO, Slim SEO and Squirrly are recognised in the same way."
 msgstr ""
 
-#: inc/blocks.php:103
+#: inc/blocks.php:101
+msgid "Testimonial"
+msgstr ""
+
+#: inc/blocks.php:107
+msgid "Tight gap"
+msgstr ""
+
+#: inc/blocks.php:113
 msgid "Specifications"
 msgstr ""
 
-#: inc/blocks.php:109
+#: inc/blocks.php:119
 msgid "FAQ item"
 msgstr ""
 
 #: inc/blocks.php:130
-msgid "Basalt: hero"
-msgstr ""
-
-#: inc/blocks.php:131
-msgid "Opening sections for landing and home pages."
-msgstr ""
-
-#: inc/blocks.php:134
-msgid "Basalt: content"
-msgstr ""
-
-#: inc/blocks.php:135
-msgid "Text, media and feature sections."
-msgstr ""
-
-#: inc/blocks.php:138
-msgid "Basalt: catalog"
-msgstr ""
-
-#: inc/blocks.php:139
-msgid "Grids and cards for products, services or projects."
-msgstr ""
-
-#: inc/blocks.php:142
-msgid "Basalt: call to action"
-msgstr ""
-
-#: inc/blocks.php:143
-msgid "Conversion sections and contact prompts."
-msgstr ""
-
-#: inc/blocks.php:146
-msgid "Basalt: FAQ"
-msgstr ""
-
-#: inc/blocks.php:147
-msgid "Question and answer sections that emit FAQ structured data."
-msgstr ""
-
-#: inc/blocks.php:150
-msgid "Basalt: full pages"
+msgid "Tile"
 msgstr ""
 
 #: inc/blocks.php:151
+msgid "Basalt: hero"
+msgstr ""
+
+#: inc/blocks.php:152
+msgid "Opening sections for landing and home pages."
+msgstr ""
+
+#: inc/blocks.php:155
+msgid "Basalt: content"
+msgstr ""
+
+#: inc/blocks.php:156
+msgid "Text, media and feature sections."
+msgstr ""
+
+#: inc/blocks.php:159
+msgid "Basalt: catalog"
+msgstr ""
+
+#: inc/blocks.php:160
+msgid "Grids and cards for products, services or projects."
+msgstr ""
+
+#: inc/blocks.php:163
+msgid "Basalt: call to action"
+msgstr ""
+
+#: inc/blocks.php:164
+msgid "Conversion sections and contact prompts."
+msgstr ""
+
+#: inc/blocks.php:167
+msgid "Basalt: FAQ"
+msgstr ""
+
+#: inc/blocks.php:168
+msgid "Question and answer sections that emit FAQ structured data."
+msgstr ""
+
+#: inc/blocks.php:171
+msgid "Basalt: full pages"
+msgstr ""
+
+#: inc/blocks.php:172
 msgid "Complete page layouts to start from."
 msgstr ""
 
-#: inc/blocks.php:27 inc/setup.php:66
+#: inc/blocks.php:27 inc/blocks.php:41 inc/setup.php:66
 msgid "Card"
 msgstr ""
 
@@ -216,44 +240,40 @@ msgstr ""
 msgid "Section"
 msgstr ""
 
-#: inc/blocks.php:41
+#: inc/blocks.php:47
 msgid "Rounded"
 msgstr ""
 
-#: inc/blocks.php:45
+#: inc/blocks.php:51
 msgid "Framed"
 msgstr ""
 
-#: inc/blocks.php:51
+#: inc/blocks.php:57
 msgid "Checklist"
 msgstr ""
 
-#: inc/blocks.php:55
+#: inc/blocks.php:61
 msgid "No markers"
 msgstr ""
 
-#: inc/blocks.php:61
+#: inc/blocks.php:65
+msgid "Numbered steps"
+msgstr ""
+
+#: inc/blocks.php:71
 msgid "Underlined"
 msgstr ""
 
-#: inc/blocks.php:75
+#: inc/blocks.php:85
 msgid "Eyebrow"
 msgstr ""
 
-#: inc/blocks.php:79
+#: inc/blocks.php:89
 msgid "Lead paragraph"
 msgstr ""
 
-#: inc/blocks.php:85
+#: inc/blocks.php:95
 msgid "Thick"
-msgstr ""
-
-#: inc/blocks.php:91
-msgid "Testimonial"
-msgstr ""
-
-#: inc/blocks.php:97
-msgid "Tight gap"
 msgstr ""
 
 #. translators: 1: required PHP version, 2: required WordPress version, 3: current PHP version, 4: current WordPress version.
@@ -313,6 +333,176 @@ msgctxt "Pattern placeholder"
 msgid "Details"
 msgstr ""
 
+#: patterns/category-tiles.php:25
+msgctxt "Pattern placeholder"
+msgid "From 65 to 115"
+msgstr ""
+
+#: patterns/category-tiles.php:26
+msgctxt "Pattern placeholder"
+msgid "First collection"
+msgstr ""
+
+#: patterns/category-tiles.php:29
+msgctxt "Pattern placeholder"
+msgid "New this season"
+msgstr ""
+
+#: patterns/category-tiles.php:30
+msgctxt "Pattern placeholder"
+msgid "Second collection"
+msgstr ""
+
+#: patterns/category-tiles.php:33
+msgctxt "Pattern placeholder"
+msgid "For every day"
+msgstr ""
+
+#: patterns/category-tiles.php:34
+msgctxt "Pattern placeholder"
+msgid "Third collection"
+msgstr ""
+
+#: patterns/category-tiles.php:37
+msgctxt "Pattern placeholder"
+msgid "Gifts"
+msgstr ""
+
+#: patterns/category-tiles.php:38
+msgctxt "Pattern placeholder"
+msgid "Fourth collection"
+msgstr ""
+
+#: patterns/category-tiles.php:45
+msgctxt "Pattern placeholder"
+msgid "Browse the range"
+msgstr ""
+
+#: patterns/comparison-table.php:26
+msgctxt "Pattern placeholder"
+msgid "Which one fits"
+msgstr ""
+
+#: patterns/comparison-table.php:34
+msgctxt "Pattern placeholder"
+msgid "What matters"
+msgstr ""
+
+#: patterns/comparison-table.php:35
+msgctxt "Pattern placeholder"
+msgid "The small one"
+msgstr ""
+
+#: patterns/comparison-table.php:36
+msgctxt "Pattern placeholder"
+msgid "The big one"
+msgstr ""
+
+#: patterns/comparison-table.php:41 patterns/specs-table.php:16
+msgctxt "Pattern placeholder"
+msgid "Load capacity"
+msgstr ""
+
+#: patterns/comparison-table.php:42 patterns/specs-table.php:16
+msgctxt "Pattern placeholder"
+msgid "200 kg"
+msgstr ""
+
+#: patterns/comparison-table.php:43
+msgctxt "Pattern placeholder"
+msgid "500 kg"
+msgstr ""
+
+#: patterns/comparison-table.php:46 patterns/specs-table.php:19
+msgctxt "Pattern placeholder"
+msgid "Power supply"
+msgstr ""
+
+#: patterns/comparison-table.php:47 patterns/specs-table.php:19
+msgctxt "Pattern placeholder"
+msgid "230 V"
+msgstr ""
+
+#: patterns/comparison-table.php:48
+msgctxt "Pattern placeholder"
+msgid "400 V"
+msgstr ""
+
+#: patterns/comparison-table.php:51
+msgctxt "Pattern placeholder"
+msgid "Crew to rig it"
+msgstr ""
+
+#: patterns/comparison-table.php:52
+msgctxt "Pattern placeholder"
+msgid "Two people"
+msgstr ""
+
+#: patterns/comparison-table.php:53
+msgctxt "Pattern placeholder"
+msgid "Two people and a trailer"
+msgstr ""
+
+#: patterns/contact-details.php:22
+msgctxt "Pattern placeholder"
+msgid "Where to find us"
+msgstr ""
+
+#: patterns/contact-details.php:30
+msgctxt "Pattern placeholder"
+msgid "Address"
+msgstr ""
+
+#: patterns/contact-details.php:34
+msgctxt "Pattern placeholder"
+msgid "Street and number"
+msgstr ""
+
+#: patterns/contact-details.php:34
+msgctxt "Pattern placeholder"
+msgid "Postcode and town"
+msgstr ""
+
+#: patterns/contact-details.php:42
+msgctxt "Pattern placeholder"
+msgid "Open"
+msgstr ""
+
+#: patterns/contact-details.php:46
+msgctxt "Pattern placeholder"
+msgid "Monday to Friday, 7 to 18"
+msgstr ""
+
+#: patterns/contact-details.php:46
+msgctxt "Pattern placeholder"
+msgid "Saturday by arrangement"
+msgstr ""
+
+#: patterns/contact-details.php:54
+msgctxt "Pattern placeholder"
+msgid "Reach us"
+msgstr ""
+
+#: patterns/contact-details.php:58 patterns/cta-contact.php:34
+msgctxt "Pattern placeholder"
+msgid "+49 000 0000000"
+msgstr ""
+
+#: patterns/cta-banner.php:18
+msgctxt "Pattern placeholder"
+msgid "Ready when you are"
+msgstr ""
+
+#: patterns/cta-banner.php:22
+msgctxt "Pattern placeholder"
+msgid "One line about what happens next, so the button is not the first thing that explains it."
+msgstr ""
+
+#: patterns/cta-banner.php:28 patterns/cta-contact.php:28
+msgctxt "Pattern placeholder"
+msgid "Send an enquiry"
+msgstr ""
+
 #: patterns/cta-contact.php:18
 msgctxt "Pattern placeholder"
 msgid "Tell us what you need"
@@ -321,16 +511,6 @@ msgstr ""
 #: patterns/cta-contact.php:22
 msgctxt "Pattern placeholder"
 msgid "Send us the project and we will come back with a quote, usually the same working day."
-msgstr ""
-
-#: patterns/cta-contact.php:28
-msgctxt "Pattern placeholder"
-msgid "Send an enquiry"
-msgstr ""
-
-#: patterns/cta-contact.php:34
-msgctxt "Pattern placeholder"
-msgid "+49 000 0000000"
 msgstr ""
 
 #: patterns/faq-accordion.php:22
@@ -408,9 +588,64 @@ msgctxt "Pattern placeholder"
 msgid "Three to five points, no more"
 msgstr ""
 
-#: patterns/hero-split.php:22
+#: patterns/founder-note.php:38
+msgctxt "Pattern placeholder"
+msgid "Who you will meet"
+msgstr ""
+
+#: patterns/founder-note.php:42
+msgctxt "Pattern placeholder"
+msgid "Why I still open the door myself"
+msgstr ""
+
+#: patterns/founder-note.php:46
+msgctxt "Pattern placeholder"
+msgid "Two or three sentences in the first person: how the business started, what you refuse to compromise on, and what a customer can expect from you personally."
+msgstr ""
+
+#: patterns/founder-note.php:50
+msgctxt "Pattern placeholder"
+msgid "One more paragraph if there is a story worth telling, such as the generation before you or the day you moved to the current address. Cut anything that reads like a brochure."
+msgstr ""
+
+#: patterns/founder-note.php:54
+msgctxt "Pattern placeholder"
+msgid "First and last name"
+msgstr ""
+
+#: patterns/founder-note.php:54
+msgctxt "Pattern placeholder"
+msgid "Owner, third generation"
+msgstr ""
+
+#: patterns/hero-centred.php:18 patterns/hero-split.php:22
 msgctxt "Pattern placeholder"
 msgid "Since 1998"
+msgstr ""
+
+#: patterns/hero-centred.php:22 patterns/hero-cover.php:29
+msgctxt "Pattern placeholder"
+msgid "One sentence that says what you do"
+msgstr ""
+
+#: patterns/hero-centred.php:26
+msgctxt "Pattern placeholder"
+msgid "A second sentence for the part that does not fit in the first. Who it is for, where you work, how quickly you answer."
+msgstr ""
+
+#: patterns/hero-centred.php:32 patterns/hero-cover.php:39 patterns/hero-split.php:36
+msgctxt "Pattern placeholder"
+msgid "Request a quote"
+msgstr ""
+
+#: patterns/hero-centred.php:36 patterns/hero-split.php:40
+msgctxt "Pattern placeholder"
+msgid "See the range"
+msgstr ""
+
+#: patterns/hero-cover.php:33
+msgctxt "Pattern placeholder"
+msgid "Replace the image with your own, and keep the overlay: it is what holds the text readable whatever the photograph turns out to be."
 msgstr ""
 
 #: patterns/hero-split.php:26
@@ -423,24 +658,179 @@ msgctxt "Pattern placeholder"
 msgid "Describe in two sentences what you offer and who it is for. Keep the words your customers would type into a search box, and put the most important one near the front."
 msgstr ""
 
-#: patterns/hero-split.php:36
+#: patterns/logo-strip.php:18
 msgctxt "Pattern placeholder"
-msgid "Request a quote"
+msgid "Working for"
 msgstr ""
 
-#: patterns/hero-split.php:40
+#: patterns/media-alternating.php:36
 msgctxt "Pattern placeholder"
-msgid "See the range"
+msgid "The first thing"
 msgstr ""
 
-#: patterns/specs-table.php:16
+#: patterns/media-alternating.php:40
 msgctxt "Pattern placeholder"
-msgid "Load capacity"
+msgid "Two or three sentences. The image carries the feeling, the text carries the fact, and neither should be doing both."
 msgstr ""
 
-#: patterns/specs-table.php:16
+#: patterns/media-alternating.php:52
 msgctxt "Pattern placeholder"
-msgid "200 kg"
+msgid "The second thing"
+msgstr ""
+
+#: patterns/media-alternating.php:56
+msgctxt "Pattern placeholder"
+msgid "Same length as the first. Two rows of very different lengths look like one of them was an afterthought."
+msgstr ""
+
+#: patterns/page-contact.php:27
+msgctxt "Pattern placeholder"
+msgid "Send us the job"
+msgstr ""
+
+#: patterns/page-contact.php:31
+msgctxt "Pattern placeholder"
+msgid "Replace this paragraph with your form. Contact Form 7 and WPForms are both styled by the theme, so their fields and buttons will already match."
+msgstr ""
+
+#: patterns/post-grid.php:22
+msgctxt "Pattern placeholder"
+msgid "From the journal"
+msgstr ""
+
+#: patterns/pricing-table.php:106
+msgctxt "Pattern placeholder"
+msgid "Month rate"
+msgstr ""
+
+#: patterns/pricing-table.php:110
+msgctxt "Pattern placeholder"
+msgid "1090 euro"
+msgstr ""
+
+#: patterns/pricing-table.php:116
+msgctxt "Pattern placeholder"
+msgid "Four weeks on site"
+msgstr ""
+
+#: patterns/pricing-table.php:120
+msgctxt "Pattern placeholder"
+msgid "Service visit halfway"
+msgstr ""
+
+#: patterns/pricing-table.php:22
+msgctxt "Pattern placeholder"
+msgid "What it costs"
+msgstr ""
+
+#: patterns/pricing-table.php:26
+msgctxt "Pattern placeholder"
+msgid "Per week, delivery and collection included. Longer hires are quoted individually."
+msgstr ""
+
+#: patterns/pricing-table.php:34
+msgctxt "Pattern placeholder"
+msgid "Day rate"
+msgstr ""
+
+#: patterns/pricing-table.php:38
+msgctxt "Pattern placeholder"
+msgid "90 euro"
+msgstr ""
+
+#: patterns/pricing-table.php:44
+msgctxt "Pattern placeholder"
+msgid "One working day on site"
+msgstr ""
+
+#: patterns/pricing-table.php:48
+msgctxt "Pattern placeholder"
+msgid "Set up by our crew"
+msgstr ""
+
+#: patterns/pricing-table.php:56 patterns/pricing-table.php:96 patterns/pricing-table.php:128
+msgctxt "Pattern placeholder"
+msgid "Enquire"
+msgstr ""
+
+#: patterns/pricing-table.php:66
+msgctxt "Pattern placeholder"
+msgid "Most chosen"
+msgstr ""
+
+#: patterns/pricing-table.php:70
+msgctxt "Pattern placeholder"
+msgid "Week rate"
+msgstr ""
+
+#: patterns/pricing-table.php:74
+msgctxt "Pattern placeholder"
+msgid "340 euro"
+msgstr ""
+
+#: patterns/pricing-table.php:80
+msgctxt "Pattern placeholder"
+msgid "Five working days"
+msgstr ""
+
+#: patterns/pricing-table.php:84
+msgctxt "Pattern placeholder"
+msgid "Replacement within 24 hours"
+msgstr ""
+
+#: patterns/pricing-table.php:88
+msgctxt "Pattern placeholder"
+msgid "Delivery and collection included"
+msgstr ""
+
+#: patterns/service-cards.php:22
+msgctxt "Pattern placeholder"
+msgid "What we do"
+msgstr ""
+
+#: patterns/service-cards.php:30
+msgctxt "Pattern placeholder"
+msgid "Hire"
+msgstr ""
+
+#: patterns/service-cards.php:34
+msgctxt "Pattern placeholder"
+msgid "By the day, the week or the month, delivered and collected."
+msgstr ""
+
+#: patterns/service-cards.php:38
+msgctxt "Pattern placeholder"
+msgid "What we hire out"
+msgstr ""
+
+#: patterns/service-cards.php:46
+msgctxt "Pattern placeholder"
+msgid "Set up on site"
+msgstr ""
+
+#: patterns/service-cards.php:50
+msgctxt "Pattern placeholder"
+msgid "Our crew rigs it, tests it under load and hands it over ready to work."
+msgstr ""
+
+#: patterns/service-cards.php:54
+msgctxt "Pattern placeholder"
+msgid "How setting up works"
+msgstr ""
+
+#: patterns/service-cards.php:62
+msgctxt "Pattern placeholder"
+msgid "Service and repair"
+msgstr ""
+
+#: patterns/service-cards.php:66
+msgctxt "Pattern placeholder"
+msgid "Our own workshop, so a machine that fails on a Friday is replaced on the Friday."
+msgstr ""
+
+#: patterns/service-cards.php:70
+msgctxt "Pattern placeholder"
+msgid "What the workshop covers"
 msgstr ""
 
 #: patterns/specs-table.php:17
@@ -463,16 +853,6 @@ msgctxt "Pattern placeholder"
 msgid "30 m/min"
 msgstr ""
 
-#: patterns/specs-table.php:19
-msgctxt "Pattern placeholder"
-msgid "Power supply"
-msgstr ""
-
-#: patterns/specs-table.php:19
-msgctxt "Pattern placeholder"
-msgid "230 V"
-msgstr ""
-
 #: patterns/specs-table.php:20
 msgctxt "Pattern placeholder"
 msgid "Weight"
@@ -491,4 +871,234 @@ msgstr ""
 #: patterns/specs-table.php:41
 msgctxt "Pattern placeholder"
 msgid "Subject to change. Values are for the standard configuration."
+msgstr ""
+
+#: patterns/stats-row.php:27
+msgctxt "Pattern placeholder"
+msgid "140"
+msgstr ""
+
+#: patterns/stats-row.php:31
+msgctxt "Pattern placeholder"
+msgid "Machines in the fleet"
+msgstr ""
+
+#: patterns/stats-row.php:39
+msgctxt "Pattern placeholder"
+msgid "28"
+msgstr ""
+
+#: patterns/stats-row.php:43
+msgctxt "Pattern placeholder"
+msgid "Years on building sites"
+msgstr ""
+
+#: patterns/stats-row.php:51
+msgctxt "Pattern placeholder"
+msgid "1.4"
+msgstr ""
+
+#: patterns/stats-row.php:55
+msgctxt "Pattern placeholder"
+msgid "Working days to delivery"
+msgstr ""
+
+#: patterns/steps-process.php:22
+msgctxt "Pattern placeholder"
+msgid "How it works"
+msgstr ""
+
+#: patterns/steps-process.php:26
+msgctxt "Pattern placeholder"
+msgid "From the first call to the machine on site"
+msgstr ""
+
+#: patterns/steps-process.php:32
+msgctxt "Pattern placeholder"
+msgid "Tell us the job"
+msgstr ""
+
+#: patterns/steps-process.php:32
+msgctxt "Pattern placeholder"
+msgid "What has to go up, how high, and when. A photograph of the site answers most of it."
+msgstr ""
+
+#: patterns/steps-process.php:36
+msgctxt "Pattern placeholder"
+msgid "We pick the machine"
+msgstr ""
+
+#: patterns/steps-process.php:36
+msgctxt "Pattern placeholder"
+msgid "Usually the same working day, with the price and the delivery date in writing."
+msgstr ""
+
+#: patterns/steps-process.php:40
+msgctxt "Pattern placeholder"
+msgid "Delivered and set up"
+msgstr ""
+
+#: patterns/steps-process.php:40
+msgctxt "Pattern placeholder"
+msgid "Our crew rigs it, tests it under load and hands it over. Collection is included."
+msgstr ""
+
+#: patterns/store-visit.php:38
+msgctxt "Pattern placeholder"
+msgid "Come and see us"
+msgstr ""
+
+#: patterns/store-visit.php:42
+msgctxt "Pattern placeholder"
+msgid "Try it on, in the shop"
+msgstr ""
+
+#: patterns/store-visit.php:46
+msgctxt "Pattern placeholder"
+msgid "One sentence on what happens when somebody walks in: who greets them, whether they need an appointment, how long it takes. Take away the uncertainty and the visit follows."
+msgstr ""
+
+#: patterns/store-visit.php:50
+msgctxt "Pattern placeholder"
+msgid "Street and number, postcode and town"
+msgstr ""
+
+#: patterns/store-visit.php:50
+msgctxt "Pattern placeholder"
+msgid "Tuesday to Friday 10 to 18, Saturday 10 to 14"
+msgstr ""
+
+#: patterns/store-visit.php:56
+msgctxt "Pattern placeholder"
+msgid "Get directions"
+msgstr ""
+
+#: patterns/store-visit.php:60
+msgctxt "Pattern placeholder"
+msgid "Call +49 000 0000000"
+msgstr ""
+
+#: patterns/team-grid.php:18
+msgctxt "Pattern placeholder"
+msgid "Who you will be speaking to"
+msgstr ""
+
+#: patterns/team-grid.php:30
+msgctxt "Pattern placeholder"
+msgid "A name"
+msgstr ""
+
+#: patterns/team-grid.php:34
+msgctxt "Pattern placeholder"
+msgid "What they do, in three or four words"
+msgstr ""
+
+#: patterns/team-grid.php:46
+msgctxt "Pattern placeholder"
+msgid "A second name"
+msgstr ""
+
+#: patterns/team-grid.php:50
+msgctxt "Pattern placeholder"
+msgid "And what this one does"
+msgstr ""
+
+#: patterns/team-grid.php:62
+msgctxt "Pattern placeholder"
+msgid "A third name"
+msgstr ""
+
+#: patterns/team-grid.php:66
+msgctxt "Pattern placeholder"
+msgid "Three is usually enough"
+msgstr ""
+
+#: patterns/testimonials-row.php:22
+msgctxt "Pattern placeholder"
+msgid "What customers say"
+msgstr ""
+
+#: patterns/testimonials-row.php:32
+msgctxt "Pattern placeholder"
+msgid "One specific thing that went right, in the customer's own words. Specific beats enthusiastic."
+msgstr ""
+
+#: patterns/testimonials-row.php:34
+msgctxt "Pattern placeholder"
+msgid "A name, a role, a town"
+msgstr ""
+
+#: patterns/testimonials-row.php:45
+msgctxt "Pattern placeholder"
+msgid "A second one, about something different. Two quotations that praise the same thing read as one."
+msgstr ""
+
+#: patterns/testimonials-row.php:47
+msgctxt "Pattern placeholder"
+msgid "A second name and town"
+msgstr ""
+
+#: patterns/text-two-column.php:22
+msgctxt "Pattern placeholder"
+msgid "How we got here"
+msgstr ""
+
+#: patterns/text-two-column.php:30
+msgctxt "Pattern placeholder"
+msgid "Open with the sentence somebody would repeat to a colleague. The rest of the section earns its place by explaining it."
+msgstr ""
+
+#: patterns/text-two-column.php:34
+msgctxt "Pattern placeholder"
+msgid "Two or three paragraphs is the right length here. Anything longer belongs on its own page, and anything shorter did not need a section of its own."
+msgstr ""
+
+#: patterns/text-two-column.php:42
+msgctxt "Pattern placeholder"
+msgid "The second column continues the thought rather than starting a new one. Two columns of unrelated text read as two sections that lost their headings."
+msgstr ""
+
+#: patterns/text-two-column.php:46
+msgctxt "Pattern placeholder"
+msgid "On a phone these stack, so write them in the order you want them read."
+msgstr ""
+
+#: patterns/trust-row.php:25
+msgctxt "Pattern placeholder"
+msgid "Fitted in person"
+msgstr ""
+
+#: patterns/trust-row.php:26
+msgctxt "Pattern placeholder"
+msgid "Measured properly, every visit, at no charge."
+msgstr ""
+
+#: patterns/trust-row.php:29
+msgctxt "Pattern placeholder"
+msgid "Sizes 65 to 115, cups A to L"
+msgstr ""
+
+#: patterns/trust-row.php:30
+msgctxt "Pattern placeholder"
+msgid "The range most shops stop short of."
+msgstr ""
+
+#: patterns/trust-row.php:33
+msgctxt "Pattern placeholder"
+msgid "Alterations in house"
+msgstr ""
+
+#: patterns/trust-row.php:34
+msgctxt "Pattern placeholder"
+msgid "Straps, bands and hems adjusted on the spot."
+msgstr ""
+
+#: patterns/trust-row.php:37
+msgctxt "Pattern placeholder"
+msgid "Rated 4.9 by 35 customers"
+msgstr ""
+
+#: patterns/trust-row.php:38
+msgctxt "Pattern placeholder"
+msgid "Read the reviews on Google, they are not ours to edit."
 msgstr ""

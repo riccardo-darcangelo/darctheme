@@ -87,6 +87,7 @@ function basalt_core_entity_types(): array {
 			'HomeAndConstructionBusiness' => __( 'Construction or trade business', 'basalt-core' ),
 			'ProfessionalService'         => __( 'Professional service', 'basalt-core' ),
 			'Store'                       => __( 'Store', 'basalt-core' ),
+			'ClothingStore'               => __( 'Clothing or fashion store', 'basalt-core' ),
 			'Person'                      => __( 'Person', 'basalt-core' ),
 		)
 	);

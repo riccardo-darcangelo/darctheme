@@ -1,0 +1,108 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/form",
+	"title": "Contact form",
+	"category": "widgets",
+	"icon": "email",
+	"description": "A contact or appointment request form. Name and email always, phone, topic, preferred date and message as you need them. Validated on the server, the error shown at the field, delivered by email and kept under Form entries.",
+	"keywords": [
+		"form",
+		"contact",
+		"appointment",
+		"request",
+		"enquiry"
+	],
+	"textdomain": "basalt-forms",
+	"editorScript": "file:./editor.js",
+	"style": "file:./style.css",
+	"supports": {
+		"html": false,
+		"multiple": true,
+		"align": [
+			"wide"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"text": true,
+			"background": true
+		}
+	},
+	"attributes": {
+		"formId": {
+			"type": "string",
+			"default": ""
+		},
+		"recipient": {
+			"type": "string",
+			"default": ""
+		},
+		"subject": {
+			"type": "string",
+			"default": "New message from %name% via %site%"
+		},
+		"submitLabel": {
+			"type": "string",
+			"default": "Send"
+		},
+		"successMessage": {
+			"type": "string",
+			"default": "Thank you, your message has arrived. We will get back to you within one working day."
+		},
+		"nameLabel": {
+			"type": "string",
+			"default": "Your name"
+		},
+		"emailLabel": {
+			"type": "string",
+			"default": "Email"
+		},
+		"showPhone": {
+			"type": "boolean",
+			"default": true
+		},
+		"phoneLabel": {
+			"type": "string",
+			"default": "Phone"
+		},
+		"showTopic": {
+			"type": "boolean",
+			"default": false
+		},
+		"topicLabel": {
+			"type": "string",
+			"default": "What is it about?"
+		},
+		"topics": {
+			"type": "string",
+			"default": "Appointment\nQuestion about a product\nSomething else"
+		},
+		"showDate": {
+			"type": "boolean",
+			"default": false
+		},
+		"dateLabel": {
+			"type": "string",
+			"default": "Preferred date"
+		},
+		"showMessage": {
+			"type": "boolean",
+			"default": true
+		},
+		"messageRequired": {
+			"type": "boolean",
+			"default": false
+		},
+		"messageLabel": {
+			"type": "string",
+			"default": "Your message"
+		},
+		"consentText": {
+			"type": "string",
+			"default": "I have read the privacy policy and agree that my details are used to answer my request."
+		}
+	}
+}

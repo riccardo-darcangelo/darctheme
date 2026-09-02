@@ -129,7 +129,7 @@
 
 <h1>Basalt</h1>
 <p class="lead">
-	A WordPress block theme built for accessibility and search. Four style
+	A WordPress block theme built for accessibility and search. Five style
 	variations switch the whole look in one click, including a high contrast
 	variation where every colour clears WCAG AAA. Structured data, breadcrumbs
 	and the accessibility corrections live in a companion plugin, so they stay
@@ -174,7 +174,7 @@
 
 	<h3>1. Pick a style</h3>
 	<p>
-		<strong>Appearance → Editor → Styles</strong>. Four complete looks are
+		<strong>Appearance → Editor → Styles</strong>. Five complete looks are
 		included; switching one changes colours, type and spacing everywhere at
 		once, and your own adjustments layer on top of whichever you choose.
 	</p>
@@ -205,7 +205,7 @@
 <section id="styles">
 	<h2>Style variations</h2>
 	<p>
-		Four complete looks ship with the theme, switchable under
+		Five complete looks ship with the theme, switchable under
 		<strong>Appearance → Editor → Styles</strong>. Each one redefines the
 		palette, and some also the typography and the content measure. Anything
 		you change afterwards in the Styles panel layers on top of the variation
@@ -237,6 +237,11 @@
 			<td><strong>Slate</strong></td>
 			<td>Cooler palette with a blue accent.</td>
 			<td>Technical and professional services where an orange accent reads as too loud.</td>
+		</tr>
+		<tr>
+			<td><strong>Boutique</strong></td>
+			<td>Warm off-white ground, plum text, a rose accent, serif headings and pill shaped buttons.</td>
+			<td>Shops, salons, studios and anything sold on look and feel rather than on specifications.</td>
 		</tr>
 	</table>
 	<div class="note">
@@ -388,7 +393,7 @@
 
 	<h3>Choosing a header or a footer</h3>
 	<p>
-		Basalt ships four of each. They are template parts like any other, so
+		Basalt ships five headers and four footers. They are template parts like any other, so
 		you swap one for another rather than rebuilding it: in the site editor,
 		select the header or footer block, open the toolbar and choose Replace.
 		The list shows every part registered for that area. The swap applies to
@@ -422,6 +427,10 @@
 			<tr>
 				<td><strong>Header with announcement bar</strong></td>
 				<td>A strip across the top for one short line, above the standard row. Also scrolls away: two rows stuck to a phone screen take about a sixth of it and never give it back.</td>
+			</tr>
+			<tr>
+				<td><strong>Header with shop details</strong></td>
+				<td>A strip with the opening hours, the phone number as a link that dials, and the address as a link that opens directions, above the standard row. For a business whose website exists to bring people through the door. Scrolls away for the same reason as the announcement bar.</td>
 			</tr>
 		</tbody>
 	</table>
@@ -501,7 +510,7 @@
 <section id="patterns">
 	<h2>Patterns and block styles</h2>
 	<p>
-		Twenty five patterns, in the block inserter under the
+		Thirty patterns, in the block inserter under the
 		<strong>Basalt</strong> categories. They are ordinary core blocks, so
 		they keep working if you switch theme later, and every one of them was
 		audited at 390, 768 and 1440 pixels before it shipped.
@@ -531,6 +540,8 @@
 		<tr><td>How it works, in steps</td><td>A numbered list styled as steps. Still an ordered list, so the number read aloud and the number drawn are the same.</td></tr>
 		<tr><td>The people</td><td>Three portraits with a name and a role.</td></tr>
 		<tr><td>Two quotations</td><td>Two testimonials as real blockquote and cite elements.</td></tr>
+		<tr><td>Row of reassurances</td><td>Four short reasons to trust you in one row, for directly under the opening. Paragraphs, not headings: a reassurance is not a section.</td></tr>
+		<tr><td>A word from the owner</td><td>A portrait beside a few sentences in the first person, signed with a name.</td></tr>
 		<tr><td>Row of client logos</td><td>Four logos under one line of text. Give each the company name as alternative text.</td></tr>
 		<tr><td>Comparison table</td><td>Three options across the same rows, with the first cell of each row as its header.</td></tr>
 		<tr><td>Technical specifications</td><td>Two column table that collapses to stacked rows on phones.</td></tr>
@@ -547,6 +558,8 @@
 		<tr><td>Call to action band</td><td>One heading, one line, one button on a full width band.</td></tr>
 		<tr><td>Call to action with contact details</td><td>The same with the phone number and email as real links.</td></tr>
 		<tr><td>Address and opening hours</td><td>Where you are, when you are open and how to reach you, in three columns.</td></tr>
+		<tr><td>Four collection tiles</td><td>Four image tiles in a grid that reflows on its own, each one a single link to a category. Uses the Tile style for covers.</td></tr>
+		<tr><td>Visit the shop</td><td>A photograph of the shop beside the address and the hours, with a directions button and a phone button that dials.</td></tr>
 	</table>
 
 	<h3>Whole pages</h3>
@@ -561,6 +574,7 @@
 		<tr><td>About page</td><td>The story, the figures, two image rows, the people, quotations and a closing band.</td></tr>
 		<tr><td>Services page</td><td>What you offer, how it works, what it costs, which option fits, logos and a closing call to action.</td></tr>
 		<tr><td>Contact page</td><td>Contact details, room for your form, what happens next, and the FAQ. No form is included: the theme does not ship one, and a fake one made of inputs that go nowhere is worse than an empty space.</td></tr>
+		<tr><td>Shop front page</td><td>For a shop, salon or studio with a door: opening, reassurances, the range as tiles, the owner, the services, quotations and how to get there.</td></tr>
 	</table>
 
 	<h3>Block styles</h3>
@@ -569,7 +583,7 @@
 		Section for groups; Card for columns as well, because a row of cards is
 		more often three columns than three groups; Rounded and Framed for
 		images; Checklist, Numbered steps and No markers for lists; Eyebrow and
-		Underlined for headings; Testimonial for quotes; Specifications for
+		Underlined for headings; Testimonial for quotes; Tile for covers, which stretches the heading link over the whole block; Specifications for
 		tables; FAQ item for details blocks.
 	</p>
 
@@ -633,6 +647,26 @@
 		<tr><td><code>BlogPosting</code></td><td>Single posts only. Pages are not articles.</td></tr>
 		<tr><td><code>FAQPage</code></td><td>Any page containing details blocks styled as FAQ item.</td></tr>
 	</table>
+
+	<h3>Opening hours</h3>
+	<p>
+		The hours you enter under Settings, Search and schema feed the
+		LocalBusiness node, and they also feed the <strong>Opening hours</strong>
+		block: a status line computed in the site's time zone ("Open today
+		until 18:00", "Closed, opens Tuesday at 10:00") and a table in which
+		consecutive days with the same hours share a row. One source, two
+		outputs, so the visitor and the search engine are never told different
+		things. The wording is filterable through
+		<code>basalt_core_opening_status</code> and
+		<code>basalt_core_opening_rows</code>.
+	</p>
+	<p>
+		The table groups the way a sign on the door does: days that open at the
+		same time share a row, a day that stays open longer gets a short row of
+		its own ("Thursday until 20:00"), a closed Sunday and Monday become one
+		row. The block has two layouts, the table and a single line with short
+		day names for a header strip.
+	</p>
 
 	<h3>FAQ structured data</h3>
 	<p>
@@ -970,6 +1004,25 @@
 		theme, so it is fixed where it will survive changing theme.
 	</p>
 
+	<h3>Basalt Shop</h3>
+	<p>
+		A companion plugin for a shop that also has a counter. A product marked
+		<strong>In store only</strong> on its General tab stays visible, keeps
+		its page and its place in the grid, but cannot be bought online: the cart
+		button and the add to cart form become an appointment button with a
+		sentence you write yourself, the price can be hidden, and the Offer in the
+		structured data is marked <code>InStoreOnly</code> so search engines are
+		told the same thing. Settings under WooCommerce, Settings, Products,
+		In store: the appointment page, the button label, the text.
+	</p>
+	<p>
+		The plugin also adds the <strong>Attribute range</strong> block for the
+		product grid: the span of one or more attributes in a line, such as
+		"70 to 90 · Cup B to G", so a shopper sees whether her size is in the
+		range before opening the product. Attribute slugs are entered comma
+		separated, the first one without its label.
+	</p>
+
 	<h3>Contact Form 7 and WPForms</h3>
 	<p>
 		Supported. The theme's input, label and focus rules are written with
@@ -1000,6 +1053,24 @@
 		its own token layer and is styled through that, and being commercial it
 		cannot be tested against before release. A rule written blind against
 		markup nobody has run is worse than no rule.
+	</p>
+
+	<h3>Basalt Forms</h3>
+	<p>
+		The reason a site installs Contact Form 7 is one form, and this plugin is
+		that one form. A <strong>Contact form</strong> block with name and email
+		always, and phone, topic, preferred date and message as you switch them
+		on. Every label is an attribute, so you write them in your own language
+		in the editor. Validation happens on the server with the message at the
+		field, the invalid control carries <code>aria-invalid</code> and points at
+		its message, and there is no JavaScript at all. A honeypot and a rate
+		limit of five messages per address and hour keep the spam out. Every
+		submission is mailed and also kept under <strong>Form entries</strong>,
+		because mail from a shared host does not always arrive.
+	</p>
+	<p>
+		The form carries a stable token rather than a nonce on purpose: a nonce
+		expires, and a contact page is exactly the page a cache keeps for days.
 	</p>
 
 	<h3>Elementor</h3>

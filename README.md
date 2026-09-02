@@ -4,7 +4,7 @@ A fast, accessible, SEO-first WordPress block theme, with the structured data
 and accessibility layer in a companion plugin so a customer keeps it when they
 change theme.
 
-Four style variations switch the whole look in one click, including a high
+Five style variations switch the whole look in one click, including a high
 contrast variation where every text and control colour clears WCAG AAA. No build
 step, no dependencies, no external requests, and the theme itself ships no
 JavaScript at all.
@@ -19,6 +19,8 @@ to a block theme.
 | `basalt/` | The theme. A block theme; this folder is what ships as the theme. |
 | `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, breadcrumb block, accessibility corrections for core blocks. |
 | `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
+| `plugins/basalt-forms/` | Companion plugin: one accessible contact and appointment form block, server validated, no JavaScript, submissions kept in the admin. |
+| `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, and an InStoreOnly offer. |
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
 | `dev/` | Throwaway WordPress in Docker, with a seed script for demo content. |

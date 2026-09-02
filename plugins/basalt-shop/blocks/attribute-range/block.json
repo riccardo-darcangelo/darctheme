@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/product-attribute-range",
+	"title": "Attribute range",
+	"category": "woocommerce",
+	"icon": "leftright",
+	"description": "The span of one or more product attributes in a line, such as \"70 to 90 · Cup B to G\". For the product grid, where a shopper wants to know whether her size is in the range before she opens the product.",
+	"keywords": [
+		"size",
+		"range",
+		"attribute",
+		"variations",
+		"product"
+	],
+	"textdomain": "basalt-shop",
+	"editorScript": "file:./editor.js",
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		},
+		"color": {
+			"text": true
+		},
+		"spacing": {
+			"margin": true
+		}
+	},
+	"attributes": {
+		"attributes": {
+			"type": "string",
+			"default": ""
+		},
+		"labelFirst": {
+			"type": "boolean",
+			"default": false
+		},
+		"separator": {
+			"type": "string",
+			"default": " · "
+		}
+	}
+}

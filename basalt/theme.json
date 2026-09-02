@@ -517,6 +517,11 @@
 			"area": "header"
 		},
 		{
+			"name": "header-store",
+			"title": "Header with shop details",
+			"area": "header"
+		},
+		{
 			"name": "footer",
 			"title": "Footer",
 			"area": "footer"

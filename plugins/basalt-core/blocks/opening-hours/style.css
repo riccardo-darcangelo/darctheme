@@ -1,0 +1,52 @@
+/**
+ * Opening hours block.
+ *
+ * Structure only. Colours come from the theme; the status carries a state
+ * class (is-open, is-opens-later, is-closed) that a theme may colour, and the
+ * text says the same thing, so colour is never the only signal.
+ */
+
+.basalt-opening-hours__status {
+	margin: 0 0 0.5rem;
+	font-weight: 600;
+}
+
+.basalt-opening-hours__table {
+	display: grid;
+	gap: 0.25rem 1rem;
+	grid-template-columns: max-content minmax(0, 1fr);
+	margin: 0;
+}
+
+.basalt-opening-hours__row {
+	display: contents;
+}
+
+.basalt-opening-hours__table dt,
+.basalt-opening-hours__table dd {
+	margin: 0;
+}
+
+.basalt-opening-hours__table dt {
+	font-weight: 600;
+}
+
+.basalt-opening-hours__row.is-closed dd {
+	opacity: 0.8;
+}
+
+/* Inline variant: status only, sits in a header strip. */
+.basalt-opening-hours.is-style-inline .basalt-opening-hours__status {
+	margin: 0;
+	display: inline;
+}
+
+/* Inline layout, for a header strip. */
+.basalt-opening-hours__inline {
+	margin: 0;
+	display: inline;
+}
+
+.basalt-opening-hours__status + .basalt-opening-hours__inline::before {
+	content: " · ";
+}

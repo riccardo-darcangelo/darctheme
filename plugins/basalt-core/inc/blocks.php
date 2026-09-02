@@ -23,6 +23,16 @@ function basalt_core_register_blocks(): void {
 		BASALT_CORE_DIR . 'blocks/breadcrumbs',
 		array( 'render_callback' => 'basalt_core_breadcrumbs_block' )
 	);
+
+	/*
+	 * Opening hours: today's status and a table, from the same setting the
+	 * LocalBusiness node reads. A pattern of paragraphs would have to be kept
+	 * in step by hand, and the first time the hours change it would not be.
+	 */
+	register_block_type(
+		BASALT_CORE_DIR . 'blocks/opening-hours',
+		array( 'render_callback' => 'basalt_core_opening_hours_block' )
+	);
 }
 add_action( 'init', 'basalt_core_register_blocks' );
 

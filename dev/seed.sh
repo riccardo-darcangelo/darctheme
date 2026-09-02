@@ -42,7 +42,7 @@ if ! wp core is-installed 2>/dev/null; then
 fi
 
 wp theme activate basalt
-wp plugin activate basalt-core basalt-catalog
+wp plugin activate basalt-core basalt-catalog basalt-forms basalt-shop
 
 # Theme development mode, so a new pattern file or a changed design token is
 # picked up on the next request. Without it WordPress caches the list of pattern
@@ -102,5 +102,5 @@ wp rewrite flush --hard >/dev/null
 echo ""
 echo "Seeded. Open ${WP_URL}  (${WP_ADMIN} / ${WP_PASSWORD})"
 echo "This is the same content a buyer gets from Tools > Basalt demos."
-echo "Styles: Appearance > Editor > Styles has four variations, including High contrast."
+echo "Styles: Appearance > Editor > Styles has five variations, including High contrast and Boutique."
 echo "Switch to Basalt Child under Appearance > Themes to see the catalog extension."

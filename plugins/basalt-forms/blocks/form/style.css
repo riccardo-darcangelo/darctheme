@@ -1,0 +1,93 @@
+/**
+ * Form block.
+ *
+ * Layout and the states that must be visible under any theme. Colours and
+ * control styling come from the theme's own form rules; the error is marked by
+ * weight and a border, so it does not rely on a colour the theme may not have.
+ */
+
+.basalt-form__form {
+	display: grid;
+	gap: 1.25rem;
+}
+
+.basalt-form__field {
+	display: grid;
+	gap: 0.375rem;
+}
+
+.basalt-form__field label {
+	font-weight: 600;
+}
+
+.basalt-form__optional {
+	font-weight: 400;
+	opacity: 0.75;
+}
+
+.basalt-form__field input:not([type="checkbox"]),
+.basalt-form__field select,
+.basalt-form__field textarea {
+	inline-size: 100%;
+	min-block-size: 44px;
+	font: inherit;
+}
+
+.basalt-form__field--consent {
+	grid-template-columns: auto minmax(0, 1fr);
+	align-items: start;
+	column-gap: 0.75rem;
+}
+
+.basalt-form__field--consent input {
+	inline-size: 1.25rem;
+	block-size: 1.25rem;
+	margin-block-start: 0.2rem;
+}
+
+.basalt-form__field--consent label {
+	font-weight: 400;
+}
+
+.basalt-form__field--consent .basalt-form__error {
+	grid-column: 1 / -1;
+}
+
+.basalt-form__field.has-error {
+	padding-inline-start: 0.75rem;
+	border-inline-start: 3px solid currentColor;
+}
+
+.basalt-form__error {
+	margin: 0;
+	font-weight: 600;
+}
+
+.basalt-form__summary {
+	padding: 0.75rem 1rem;
+	border: 1px solid currentColor;
+	border-radius: 0.5rem;
+	font-weight: 600;
+}
+
+.basalt-form__success {
+	padding: 1rem 1.25rem;
+	border: 1px solid currentColor;
+	border-radius: 0.5rem;
+	font-weight: 600;
+}
+
+/* The honeypot: out of sight, out of the tab order, out of the tree. */
+.basalt-form__hp {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.basalt-form__actions .wp-block-button__link {
+	cursor: pointer;
+	min-block-size: 44px;
+}

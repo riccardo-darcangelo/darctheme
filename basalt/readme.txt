@@ -13,7 +13,7 @@ A fast, accessible, SEO-first WordPress block theme.
 
 == Description ==
 
-Basalt is a block theme with four complete style variations that switch the
+Basalt is a block theme with five complete style variations that switch the
 whole look in one click, including a high contrast variation where every text
 and control colour clears WCAG AAA. The design tokens are defined once in
 theme.json and apply to the front end, the editor, the patterns and the block
@@ -83,8 +83,13 @@ theme can replace a single part instead of a whole template.
 = 3.0.0 =
 * Converted to a block theme. Templates and template parts are HTML in
   templates/ and parts/, editable in the site editor.
-* Added four style variations, including High contrast where every text and
-  control colour clears WCAG AAA and the focus ring widens to 3px.
+* Added five style variations, including High contrast where every text and
+  control colour clears WCAG AAA and the focus ring widens to 3px, and
+  Boutique with serif headings and a rose accent for shops and studios.
+* Added a header with shop details (hours, a phone link, directions) and five
+  patterns for a business with a door: a row of reassurances, collection
+  tiles, a word from the owner, visit the shop, and a complete shop front
+  page. Covers gained a Tile style that makes the whole block one link.
 * Moved structured data, meta tags, breadcrumbs and the accessibility
   corrections for core blocks into the bundled Basalt Core plugin, so a site
   keeps them across a theme change. Settings moved from theme mods to options

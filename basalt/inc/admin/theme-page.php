@@ -120,7 +120,7 @@ function basalt_render_theme_page(): void {
 			<div class="basalt-admin__card">
 				<h2><?php esc_html_e( '1. Pick a style', 'basalt' ); ?></h2>
 				<p>
-					<?php esc_html_e( 'Basalt ships four complete looks, including a high contrast variation where every colour clears WCAG AAA. Switching one changes colours, type and spacing everywhere at once.', 'basalt' ); ?>
+					<?php esc_html_e( 'Basalt ships five complete looks, including a high contrast variation where every colour clears WCAG AAA. Switching one changes colours, type and spacing everywhere at once.', 'basalt' ); ?>
 				</p>
 				<p>
 					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'site-editor.php?path=%2Fwp_global_styles' ) ); ?>">

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Basalt Core
  * Description: Structured data, meta tags, breadcrumbs and accessibility corrections. The part of a Basalt site that must survive a theme change.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires at least: 6.6
  * Requires PHP: 8.1
  * Author: Riccardo D'Arcangelo
@@ -31,7 +31,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'BASALT_CORE_VERSION', '1.0.0' );
+define( 'BASALT_CORE_VERSION', '1.1.0' );
 define( 'BASALT_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BASALT_CORE_URL', plugin_dir_url( __FILE__ ) );
 
@@ -41,7 +41,7 @@ define( 'BASALT_CORE_URL', plugin_dir_url( __FILE__ ) );
  * seo-plugins is first: the others ask it whether a dedicated SEO plugin has
  * already taken over a responsibility.
  */
-foreach ( array( 'color', 'seo-plugins', 'settings', 'demos', 'meta-tags', 'breadcrumbs', 'schema', 'accessibility', 'plugin-fixes', 'preferences', 'login', 'blocks' ) as $basalt_core_module ) {
+foreach ( array( 'color', 'seo-plugins', 'settings', 'demos', 'meta-tags', 'breadcrumbs', 'opening-hours', 'schema', 'accessibility', 'plugin-fixes', 'preferences', 'login', 'blocks' ) as $basalt_core_module ) {
 	require_once BASALT_CORE_DIR . 'inc/' . $basalt_core_module . '.php';
 }
 
