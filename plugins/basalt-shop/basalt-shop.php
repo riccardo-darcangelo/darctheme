@@ -24,7 +24,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'BASALT_SHOP_VERSION', '1.1.0' );
+define( 'BASALT_SHOP_VERSION', '1.2.0' );
 
 const BASALT_SHOP_META = '_basalt_in_store_only';
 
@@ -50,6 +50,7 @@ function basalt_shop_setting( string $key ): string {
 		'in_store_text'     => __( 'This one we only hand over after a fitting. We measure you, bring two or three sizes into the cubicle, and you decide in front of the mirror.', 'basalt-shop' ),
 		'grid_label'        => __( 'In store only', 'basalt-shop' ),
 		'hide_price'        => 'no',
+		'buy_bar'           => 'yes',
 	);
 
 	$value = get_option( 'basalt_shop_' . $key, null );
@@ -259,15 +260,31 @@ add_filter( 'woocommerce_structured_data_product_offer', 'basalt_shop_offer_avai
  * @return void
  */
 function basalt_shop_styles(): void {
-	if ( ! basalt_shop_active() || ! ( is_woocommerce() || is_front_page() ) ) {
+	if ( ! basalt_shop_active() ) {
 		return;
 	}
 
-	wp_register_style( 'basalt-shop', false, array(), BASALT_SHOP_VERSION );
-	wp_enqueue_style( 'basalt-shop' );
-	wp_add_inline_style(
+	/*
+	 * The cart button lives in the header, so the stylesheet is needed on
+	 * every page rather than only on the shop ones. It is two kilobytes.
+	 */
+	wp_enqueue_style(
 		'basalt-shop',
-		'.basalt-shop-cta{display:grid;gap:.5rem}.basalt-shop-cta__label,.basalt-shop-cta__text{margin:0}.basalt-shop-cta--compact .basalt-shop-cta__label{font-size:.9375rem}'
+		plugins_url( 'assets/shop.css', __FILE__ ),
+		array(),
+		BASALT_SHOP_VERSION
+	);
+
+	/*
+	 * The script is the manners, not the feature: the bar and the panel both
+	 * work without it, so it goes at the end and blocks nothing.
+	 */
+	wp_enqueue_script(
+		'basalt-shop',
+		plugins_url( 'assets/shop.js', __FILE__ ),
+		array(),
+		BASALT_SHOP_VERSION,
+		array( 'strategy' => 'defer', 'in_footer' => true )
 	);
 }
 add_action( 'wp_enqueue_scripts', 'basalt_shop_styles' );
@@ -346,6 +363,24 @@ function basalt_shop_settings_fields( $settings, $section ) {
 			'type' => 'sectionend',
 			'id'   => 'basalt_shop_options',
 		),
+		array(
+			'title' => __( 'On a phone', 'basalt-shop' ),
+			'type'  => 'title',
+			'desc'  => __( 'A product page on a phone is a long column, and the button that sells the thing scrolls out of sight in the first second.', 'basalt-shop' ),
+			'id'    => 'basalt_shop_mobile',
+		),
+		array(
+			'title'    => __( 'Buy bar', 'basalt-shop' ),
+			'desc'     => __( 'Keep the price and the button at the bottom of the screen on narrow displays.', 'basalt-shop' ),
+			'id'       => 'basalt_shop_buy_bar',
+			'type'     => 'checkbox',
+			'default'  => 'yes',
+			'desc_tip' => __( 'The bar submits the form that is already on the page. Where a size has to be chosen first, it takes the visitor to that choice instead.', 'basalt-shop' ),
+		),
+		array(
+			'type' => 'sectionend',
+			'id'   => 'basalt_shop_mobile',
+		),
 	);
 }
 add_filter( 'woocommerce_get_settings_products', 'basalt_shop_settings_fields', 10, 2 );
@@ -382,6 +417,11 @@ function basalt_shop_register_blocks(): void {
 	register_block_type(
 		plugin_dir_path( __FILE__ ) . 'blocks/fit-summary',
 		array( 'render_callback' => 'basalt_shop_fit_summary_block' )
+	);
+
+	register_block_type(
+		plugin_dir_path( __FILE__ ) . 'blocks/cart-drawer',
+		array( 'render_callback' => 'basalt_shop_cart_drawer_block' )
 	);
 }
 add_action( 'init', 'basalt_shop_register_blocks' );
@@ -800,3 +840,13 @@ function basalt_shop_fit_styles(): void {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'basalt_shop_fit_styles', 21 );
+
+/* -------------------------------------------------------------------------
+ * Modules
+ * ---------------------------------------------------------------------- */
+
+foreach ( array( 'buy-bar', 'cart-drawer' ) as $basalt_shop_module ) {
+	require_once plugin_dir_path( __FILE__ ) . 'inc/' . $basalt_shop_module . '.php';
+}
+
+unset( $basalt_shop_module );

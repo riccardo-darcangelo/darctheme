@@ -1,0 +1,321 @@
+/*
+ * Basalt Shop.
+ *
+ * Colours come from the theme's presets with a fallback, so the panel and the
+ * bar look like the site rather than like a plugin. No cascade layers: the CSS
+ * WordPress generates from theme.json is unlayered, and an unlayered rule wins
+ * against every layered one regardless of specificity.
+ */
+
+/* In store only ---------------------------------------------------------- */
+
+.basalt-shop-cta {
+	display: grid;
+	gap: 0.5rem;
+}
+
+.basalt-shop-cta__label,
+.basalt-shop-cta__text {
+	margin: 0;
+}
+
+.basalt-shop-cta--compact .basalt-shop-cta__label {
+	font-size: 0.9375rem;
+}
+
+/* The buy bar ------------------------------------------------------------ */
+
+.basalt-buybar {
+	display: none;
+}
+
+@media (max-width: 781px) {
+	.basalt-buybar {
+		position: fixed;
+		z-index: 30;
+		inset-inline: 0;
+		inset-block-end: 0;
+		display: block;
+		padding: 0.625rem clamp(0.75rem, 4vw, 1.25rem);
+		padding-block-end: max(0.625rem, env(safe-area-inset-bottom));
+		background: var(--wp--preset--color--base, #fff);
+		border-block-start: 1px solid color-mix(in srgb, var(--wp--preset--color--contrast, #111) 15%, transparent);
+		box-shadow: 0 -2px 12px rgb(0 0 0 / 8%);
+	}
+
+	/*
+	 * With JavaScript the bar waits until the real button has scrolled past.
+	 * Without it the bar is simply there, which is still better than a button
+	 * three screens up.
+	 */
+	.basalt-buybar[data-auto] {
+		transform: translateY(110%);
+		visibility: hidden;
+		transition: transform 0.18s ease-out, visibility 0.18s;
+	}
+
+	.basalt-buybar[data-auto][data-state="here"] {
+		transform: none;
+		visibility: visible;
+	}
+
+	.basalt-buybar__inner {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		max-width: var(--wp--style--global--content-size, 40rem);
+		margin-inline: auto;
+	}
+
+	.basalt-buybar__text {
+		display: grid;
+		min-width: 0;
+		line-height: 1.25;
+	}
+
+	.basalt-buybar__title {
+		overflow: hidden;
+		font-size: 0.8125rem;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		opacity: 0.75;
+	}
+
+	.basalt-buybar__price {
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	.basalt-buybar__price del {
+		font-weight: 400;
+		opacity: 0.6;
+	}
+
+	.basalt-buybar__button {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		margin-inline-start: auto;
+		white-space: nowrap;
+	}
+
+	/* So the last paragraph of a page is not sitting under the bar. */
+	body:has(.basalt-buybar) {
+		padding-block-end: 4.5rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.basalt-buybar[data-auto] {
+		transition: none;
+	}
+}
+
+/* The cart drawer -------------------------------------------------------- */
+
+.basalt-cart {
+	position: relative;
+}
+
+.basalt-cart__toggle {
+	display: inline-flex;
+	gap: 0.375rem;
+	align-items: center;
+	min-height: 44px;
+	padding-inline: 0.25rem;
+	cursor: pointer;
+	list-style: none;
+}
+
+.basalt-cart__toggle::-webkit-details-marker {
+	display: none;
+}
+
+.basalt-cart__count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.5rem;
+	height: 1.5rem;
+	padding-inline: 0.375rem;
+	font-size: 0.75rem;
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+	color: var(--wp--preset--color--base, #fff);
+	background: var(--wp--preset--color--contrast, #111);
+	border-radius: 999px;
+}
+
+.basalt-cart__total {
+	font-size: 0.875rem;
+}
+
+.basalt-cart__panel {
+	position: fixed;
+	z-index: 40;
+	inset-block: 0;
+	inset-inline-end: 0;
+	display: flex;
+	flex-direction: column;
+	width: min(24rem, 100%);
+	overflow-y: auto;
+	background: var(--wp--preset--color--base, #fff);
+	box-shadow: -4px 0 24px rgb(0 0 0 / 18%);
+}
+
+/*
+ * The dimmed page behind the panel. A pseudo element on the details rather
+ * than a second node, so the markup stays one element and nothing is left
+ * behind if the panel is removed.
+ */
+.basalt-cart[open]::before {
+	position: fixed;
+	z-index: 39;
+	inset: 0;
+	content: "";
+	background: rgb(0 0 0 / 35%);
+}
+
+.basalt-cart__inner {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 1rem;
+	padding: clamp(1rem, 4vw, 1.5rem);
+}
+
+.basalt-cart__head {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.basalt-cart__heading {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.basalt-cart__close {
+	min-height: 44px;
+	padding-inline: 0.5rem;
+	color: inherit;
+	cursor: pointer;
+	background: none;
+	border: 0;
+	text-decoration: underline;
+}
+
+.basalt-cart__empty {
+	margin: 0;
+}
+
+.basalt-cart__items {
+	display: grid;
+	gap: 1rem;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.basalt-cart__item {
+	display: grid;
+	grid-template-columns: 3.5rem 1fr auto auto;
+	gap: 0.75rem;
+	align-items: start;
+}
+
+.basalt-cart__item img {
+	width: 3.5rem;
+	height: auto;
+	border-radius: 2px;
+}
+
+.basalt-cart__item-name,
+.basalt-cart__item-meta,
+.basalt-cart__item-price {
+	margin: 0;
+}
+
+.basalt-cart__item-meta {
+	font-size: 0.8125rem;
+	opacity: 0.75;
+}
+
+.basalt-cart__item-price {
+	font-variant-numeric: tabular-nums;
+}
+
+.basalt-cart__remove {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	margin: -0.625rem;
+	font-size: 1.25rem;
+	color: inherit;
+	text-decoration: none;
+	opacity: 0.6;
+}
+
+.basalt-cart__remove:hover,
+.basalt-cart__remove:focus {
+	opacity: 1;
+}
+
+.basalt-cart__foot {
+	display: grid;
+	gap: 0.75rem;
+	padding-block-start: 1rem;
+	margin-block-start: auto;
+	border-block-start: 1px solid color-mix(in srgb, var(--wp--preset--color--contrast, #111) 15%, transparent);
+}
+
+.basalt-cart__subtotal {
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+	font-weight: 600;
+}
+
+.basalt-cart__note {
+	margin: 0;
+	font-size: 0.8125rem;
+	opacity: 0.75;
+}
+
+.basalt-cart__actions {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.5rem;
+	margin: 0;
+}
+
+.basalt-cart__actions .wp-block-button__link {
+	min-height: 44px;
+	text-align: center;
+}
+
+/*
+ * The quieter of the two buttons. Not is-style-outline: that style lives on
+ * the wrapper a block editor produces, and this markup has no wrapper.
+ */
+.basalt-cart__button--quiet {
+	color: inherit;
+	background: transparent;
+	box-shadow: inset 0 0 0 1px currentcolor;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.basalt-cart[open] .basalt-cart__panel {
+		animation: basalt-cart-in 0.2s ease-out;
+	}
+}
+
+@keyframes basalt-cart-in {
+	from {
+		transform: translateX(100%);
+	}
+}

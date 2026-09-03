@@ -1183,6 +1183,71 @@
 		separated, the first one without its label.
 	</p>
 
+	<h4 id="shop-buybar">The buy bar</h4>
+	<p>
+		A product page on a phone is a long column, and the button that sells the
+		thing scrolls out of sight in the first second. The buy bar keeps the
+		name, the price and one button at the bottom of the screen on displays
+		narrower than 782 pixels. Switch it off under <strong>WooCommerce,
+		Settings, Products, In store</strong>.
+	</p>
+	<p>
+		It is not a second add to cart form. A second form means a second set of
+		variation selects, a second quantity field and two states to keep in
+		step. The button belongs to the form that is already on the page, through
+		the HTML <code>form</code> attribute, so pressing it is the same event as
+		pressing the real one. What the button does depends on what the product
+		is:
+	</p>
+	<table>
+		<tr><th>Product</th><th>The button</th></tr>
+		<tr><td>Simple, in stock</td><td>Adds to the cart, exactly as the real button does.</td></tr>
+		<tr><td>Variable or grouped</td><td>Says "Choose your size" and takes the visitor to the form. A size cannot be skipped, and a button that pretends otherwise produces the wrong order.</td></tr>
+		<tr><td>In store only</td><td>The appointment button.</td></tr>
+		<tr><td>External</td><td>The link to the other shop.</td></tr>
+		<tr><td>Out of stock</td><td>No bar at all.</td></tr>
+	</table>
+	<p>
+		Without JavaScript the bar is simply always there on a narrow screen.
+		With it, the bar waits until the real button has scrolled past and slides
+		out of the way again when it comes back.
+	</p>
+
+	<h4 id="shop-cart-drawer">The cart drawer</h4>
+	<p>
+		The <strong>Cart drawer</strong> block belongs in the header. It is a
+		button with the number of items, and a panel that slides in from the side
+		with the contents, the subtotal and the two links out: the cart page and
+		the checkout.
+	</p>
+	<p>
+		WooCommerce has a mini cart block of its own and it is a small
+		application: its own store, an interactivity runtime, a rendering layer,
+		several hundred kilobytes of JavaScript for a list of three items. This
+		one is a <code>details</code> element with the cart rendered into it on
+		the server. It opens and closes without JavaScript, the remove links are
+		ordinary links with a nonce, and after adding something the panel is
+		simply rendered open. What the script adds is the manners: escape closes
+		it, a click on the dimmed page closes it, the focus goes in and comes
+		back, and when WooCommerce adds to the cart over its own API without
+		reloading the page, the panel fetches its own contents again so the
+		number in the header is never a lie.
+	</p>
+	<p>
+		A remove link comes back to the page the visitor was on rather than to
+		the cart page: taking something out of the cart is not a reason to leave
+		the product they were reading about.
+	</p>
+	<div class="note">
+		<p><strong>A cart in the markup is personal data</strong></p>
+		<p>
+			A page containing this panel must not be served from a shared cache.
+			WooCommerce sets the cookies a sane cache looks at, and the plugin
+			sets <code>DONOTCACHEPAGE</code> once there is something in the cart.
+			An empty cart renders an empty panel, which is safe to cache.
+		</p>
+	</div>
+
 	<h3>Contact Form 7 and WPForms</h3>
 	<p>
 		Supported. The theme's input, label and focus rules are written with

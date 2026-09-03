@@ -21,7 +21,7 @@ to a block theme.
 | `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `plugins/basalt-forms/` | Companion plugin: one accessible contact and appointment form block, server validated, no JavaScript, submissions kept in the admin. |
 | `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, guarded password reset and registration, password quality, a small request filter, security headers and the hardening WordPress leaves off. |
-| `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, and an InStoreOnly offer. |
+| `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, a buy bar that keeps the price and the button in reach on a phone, and a cart drawer rendered on the server instead of the mini cart block. |
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
 | `dev/` | Throwaway WordPress in Docker, with a seed script for demo content. |
