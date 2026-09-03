@@ -632,6 +632,98 @@
 		<tr><td>Canonical</td><td>WordPress core. The theme never adds a second one.</td></tr>
 	</table>
 
+	<h3 id="seo-crawling">robots.txt and the AI crawlers</h3>
+	<p>
+		Under <strong>Settings → Search and schema</strong> there is a section
+		called <strong>Crawling, robots.txt and AI</strong>. WordPress serves a
+		virtual robots.txt with two lines in it; the theme adds the rules a normal
+		site wants and one decision that is genuinely new.
+	</p>
+	<p>
+		Two different things share the label "AI crawler". Some collect text to
+		train on and give nothing back. Others fetch a page because somebody asked
+		a question and then name the source, which sends visitors, and for a local
+		business those are turning into what a search result used to be. So the
+		setting has three positions rather than a checkbox:
+	</p>
+	<table>
+		<tr><th>Setting</th><th>What lands in robots.txt</th></tr>
+		<tr><td>Let all of them read the site</td><td>Nothing. The default, because changing what a site tells crawlers is the owner's decision, not an activation side effect.</td></tr>
+		<tr><td>Only the ones that cite the source</td><td><code>Disallow: /</code> for the training crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended, Bytespider and the rest). The citing ones (OAI-SearchBot, ChatGPT-User, Claude-User, PerplexityBot, DuckAssistBot, Applebot) stay welcome. What most small businesses want.</td></tr>
+		<tr><td>Keep all of them out</td><td>Both lists blocked.</td></tr>
+	</table>
+	<p>
+		The two lists are filterable through
+		<code>basalt_core_training_crawlers</code> and
+		<code>basalt_core_citation_crawlers</code>, so a new bot is one line in a
+		child theme rather than a plugin update. Anything in <strong>Extra
+		robots.txt lines</strong> is appended exactly as written.
+	</p>
+	<div class="note">
+		<p><strong>A real robots.txt file wins</strong></p>
+		<p>
+			If there is a <code>robots.txt</code> in the site root, the server serves
+			that one and nothing WordPress builds is ever seen. The settings screen
+			says so with a warning when it finds one, because otherwise the setting
+			simply appears not to work.
+		</p>
+	</div>
+
+	<h3 id="seo-llms">llms.txt</h3>
+	<p>
+		A plain text summary of the site at <code>/llms.txt</code>: what this is,
+		the pages that matter, and how to get in touch. The format is a convention
+		rather than a standard, which is exactly why it is worth serving. It is the
+		one place where a site says in its own words what it wants to be quoted as.
+	</p>
+	<p>
+		Nothing in it is maintained twice. The title and tagline come from
+		Settings, the address and hours from the schema fields, the page list from
+		the pages that are published and not hidden from search engines. Cart,
+		checkout, account and the privacy page are left out: they describe nothing
+		about the business. The file is cached for twelve hours and thrown away
+		when a page or a setting changes. It is served from a request handler, so
+		no permalinks have to be flushed and nothing breaks if they are.
+	</p>
+	<p>
+		The two sentences at the top come from <strong>What this site is</strong>
+		on the settings screen. Write them for somebody who has never heard of the
+		business. The finished file can be rewritten through
+		<code>basalt_core_llms_txt</code>, the page list through
+		<code>basalt_core_llms_pages</code>.
+	</p>
+
+	<h3 id="seo-indexing">Keeping something out of the index</h3>
+	<p>
+		Every post and page has a box called <strong>Search engines</strong> in the
+		editor sidebar. Ticking it adds <code>noindex, follow</code>, takes the
+		page out of the sitemap and out of llms.txt. The page stays reachable for
+		anybody with the link, which is the point: a thank you page or a price
+		list for one customer belongs online but not in a search result.
+	</p>
+	<p>
+		Three site wide switches sit next to it under <strong>Indexing</strong>:
+	</p>
+	<table>
+		<tr><th>Switch</th><th>What it does</th></tr>
+		<tr><td>Hide date archives</td><td>On by default. On most sites they are the same posts listed a third time.</td></tr>
+		<tr><td>Hide author archives</td><td>Off by default. Worth switching on when one person writes everything.</td></tr>
+		<tr><td>Send attachment pages to the post</td><td>On by default. Every upload otherwise gets a page of its own with a title, an image and nothing else, competing with the post that uses the image.</td></tr>
+	</table>
+	<p>
+		All of it stands down when a dedicated SEO plugin is active, the same way
+		the meta tags and the schema graph do.
+	</p>
+
+	<h3>Search Console and Bing</h3>
+	<p>
+		The verification codes go in the same section. Paste the code or the whole
+		<code>&lt;meta&gt;</code> tag you were given; the code is taken out of it.
+		The tags are emitted on the front page only, which is all either service
+		looks at, and they survive theme updates because they are settings rather
+		than a snippet in a template.
+	</p>
+
 	<h3>The structured data graph</h3>
 	<p>
 		One <code>@graph</code> with cross referenced <code>@id</code> values,

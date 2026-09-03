@@ -17,7 +17,7 @@ to a block theme.
 | Path | Contents |
 | --- | --- |
 | `basalt/` | The theme. A block theme; this folder is what ships as the theme. |
-| `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, breadcrumb block, accessibility corrections for core blocks. |
+| `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, robots.txt and AI crawler policy, llms.txt, per page indexing switch, breadcrumb block, accessibility corrections for core blocks. |
 | `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `plugins/basalt-forms/` | Companion plugin: one accessible contact and appointment form block, server validated, no JavaScript, submissions kept in the admin. |
 | `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, a small request filter, security headers and the hardening WordPress leaves off. |
@@ -122,6 +122,13 @@ content and their search presence with it when they switch.
 The settings are options rather than theme mods, and that fixes a real defect:
 WordPress stores theme mods per stylesheet, so under 2.x switching from the
 parent to the child theme silently wiped every business detail.
+
+**Crawling policy is a setting, not an opinion.** The AI crawler switch ships
+on "allow": a theme that quietly blocks crawlers on activation makes a decision
+that belongs to the site owner. The middle position, which lets the crawlers
+that cite a source in and keeps the ones that only collect training data out,
+is the one most small sites want, and the two lists are filterable through
+`basalt_core_training_crawlers` and `basalt_core_citation_crawlers`.
 
 **The plugin stands down for SEO plugins.** Meta tags, structured data and
 breadcrumbs are emitted only when no SEO plugin owns them. Detection lives in

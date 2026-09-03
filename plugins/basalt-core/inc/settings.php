@@ -37,6 +37,21 @@ function basalt_core_defaults(): array {
 		'opening_hours'      => '',
 		'price_range'        => '',
 		'profiles'           => '',
+
+		// Crawling and AI. The AI setting starts at "allow": changing what a
+		// site tells crawlers is the owner's decision, not an activation side effect.
+		'robots_block_search' => true,
+		'robots_ai'           => 'allow',
+		'robots_extra'        => '',
+		'llms_enabled'        => true,
+		'llms_intro'          => '',
+
+		// Indexing.
+		'noindex_date'         => true,
+		'noindex_author'       => false,
+		'redirect_attachments' => true,
+		'verify_google'        => '',
+		'verify_bing'          => '',
 		// Off by default: a floating control is the site owner's decision to make.
 		'preferences_enabled'  => false,
 		'preferences_position' => 'right',
@@ -166,6 +181,32 @@ function basalt_core_sanitize( $input ): array {
 	}
 
 	$out['profiles'] = implode( "\n", $urls );
+
+	$out['robots_block_search']  = ! empty( $input['robots_block_search'] );
+	$out['llms_enabled']         = ! empty( $input['llms_enabled'] );
+	$out['noindex_date']         = ! empty( $input['noindex_date'] );
+	$out['noindex_author']       = ! empty( $input['noindex_author'] );
+	$out['redirect_attachments'] = ! empty( $input['redirect_attachments'] );
+
+	$ai              = (string) ( $input['robots_ai'] ?? 'allow' );
+	$out['robots_ai'] = in_array( $ai, array( 'allow', 'citation', 'block' ), true ) ? $ai : 'allow';
+
+	$out['robots_extra'] = sanitize_textarea_field( (string) ( $input['robots_extra'] ?? '' ) );
+	$out['llms_intro']   = sanitize_textarea_field( (string) ( $input['llms_intro'] ?? '' ) );
+
+	/*
+	 * Verification codes are usually copied as a whole meta tag. Taking the
+	 * content out of it is two lines here and saves a support message.
+	 */
+	foreach ( array( 'verify_google', 'verify_bing' ) as $key ) {
+		$value = trim( (string) ( $input[ $key ] ?? '' ) );
+
+		if ( preg_match( '/content=["\']([^"\']+)["\']/', $value, $m ) ) {
+			$value = $m[1];
+		}
+
+		$out[ $key ] = sanitize_text_field( wp_strip_all_tags( $value ) );
+	}
 
 	$out['preferences_enabled']  = ! empty( $input['preferences_enabled'] );
 	$out['preferences_position'] = 'left' === ( $input['preferences_position'] ?? '' ) ? 'left' : 'right';
@@ -327,6 +368,52 @@ function basalt_core_render_settings(): void {
 				basalt_core_field( 'profiles', __( 'Profile URLs', 'basalt-core' ), 'textarea', array( 'description' => __( 'One per line. Emitted as sameAs, which connects the site to its social profiles.', 'basalt-core' ) ) );
 				?>
 			</table>
+
+			<h2 id="basalt-core-crawling"><?php esc_html_e( 'Crawling, robots.txt and AI', 'basalt-core' ); ?></h2>
+
+			<?php if ( basalt_core_has_static_robots() ) : ?>
+				<div class="notice notice-warning inline">
+					<p><?php esc_html_e( 'There is a robots.txt file in the site root. A real file wins over the one WordPress builds, so nothing below has any effect until it is deleted.', 'basalt-core' ); ?></p>
+				</div>
+			<?php endif; ?>
+
+			<table class="form-table" role="presentation">
+				<?php
+				basalt_core_field( 'robots_block_search', __( 'Keep crawlers out of search results', 'basalt-core' ), 'checkbox', array( 'description' => __( 'Internal search pages carry no ranking value and use up the crawl budget.', 'basalt-core' ) ) );
+				basalt_core_field(
+					'robots_ai',
+					__( 'AI crawlers', 'basalt-core' ),
+					'select',
+					array(
+						'choices'     => array(
+							'allow'    => __( 'Let all of them read the site', 'basalt-core' ),
+							'citation' => __( 'Only the ones that cite the source', 'basalt-core' ),
+							'block'    => __( 'Keep all of them out', 'basalt-core' ),
+						),
+						'description' => __( 'Two kinds of crawler share the label. Some collect text to train on and give nothing back; others fetch a page because somebody asked a question and then name the source, which sends visitors. The middle option is what most small businesses want.', 'basalt-core' ),
+					)
+				);
+				basalt_core_field( 'robots_extra', __( 'Extra robots.txt lines', 'basalt-core' ), 'textarea', array( 'description' => __( 'Added at the end, exactly as written. Leave empty unless you know why.', 'basalt-core' ) ) );
+				basalt_core_field( 'llms_enabled', __( 'Serve llms.txt', 'basalt-core' ), 'checkbox', array( 'description' => __( 'A short plain text summary of the site for language models, built from the title, the pages and the business details below. Nothing to maintain twice.', 'basalt-core' ) ) );
+				basalt_core_field( 'llms_intro', __( 'What this site is, in two sentences', 'basalt-core' ), 'textarea', array( 'description' => __( 'Goes at the top of llms.txt. This is the one place where the site says in its own words what it wants to be quoted as.', 'basalt-core' ) ) );
+				?>
+			</table>
+
+			<h2 id="basalt-core-indexing"><?php esc_html_e( 'Indexing', 'basalt-core' ); ?></h2>
+
+			<table class="form-table" role="presentation">
+				<?php
+				basalt_core_field( 'noindex_date', __( 'Hide date archives', 'basalt-core' ), 'checkbox', array( 'description' => __( 'On most sites they are the same posts listed a third time.', 'basalt-core' ) ) );
+				basalt_core_field( 'noindex_author', __( 'Hide author archives', 'basalt-core' ), 'checkbox', array( 'description' => __( 'Worth switching on when one person writes everything.', 'basalt-core' ) ) );
+				basalt_core_field( 'redirect_attachments', __( 'Send attachment pages to the post', 'basalt-core' ), 'checkbox', array( 'description' => __( 'Every upload otherwise gets a page of its own with a title, an image and nothing else.', 'basalt-core' ) ) );
+				basalt_core_field( 'verify_google', __( 'Google Search Console code', 'basalt-core' ), 'text', array( 'description' => __( 'Paste the code or the whole meta tag; the code is taken out of it.', 'basalt-core' ) ) );
+				basalt_core_field( 'verify_bing', __( 'Bing Webmaster Tools code', 'basalt-core' ), 'text' );
+				?>
+			</table>
+
+			<p class="description">
+				<?php esc_html_e( 'A single page or post can be hidden from search engines in the editor, in the box called Search engines in the sidebar. That also keeps it out of the sitemap and out of llms.txt.', 'basalt-core' ); ?>
+			</p>
 
 			<h2><?php esc_html_e( 'Meta tags', 'basalt-core' ); ?></h2>
 			<table class="form-table" role="presentation">
