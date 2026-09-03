@@ -976,6 +976,27 @@
 		"compatible" on the strength of having read its documentation.
 	</p>
 
+	<h3>Basalt Security</h3>
+	<p>
+		The security a small site needs, without the weight the category is
+		known for: no scanner, no cron job, no dashboard of graphs, and nothing
+		written to the database on a normal page view. Settings live under
+		<strong>Settings → Security</strong>.
+	</p>
+	<ul>
+		<li><strong>The login page moves.</strong> Pick an address and wp-login.php answers 404 for everybody, including the bots that make up nearly all login traffic. Every link WordPress builds, including the ones in password emails, is rewritten to the new address. wp-admin answers 404 for visitors who are not signed in, rather than redirecting to the login page and giving the address away; admin-ajax.php and admin-post.php stay open.</li>
+		<li><strong>Lockout after repeated failures.</strong> Per address, not per account, because locking an account is what an attacker wants. Each further lockout doubles, up to a day. No artificial delay: a sleep() holds a PHP worker, and a handful of attackers could then take the site down with the protection itself.</li>
+		<li><strong>A short list of patterns.</strong> Traversal, union select, script tags in a URL, requests for .env or an old phpunit runner. The URL is always checked; a submitted form only for visitors who are not signed in, so an editor pasting a code sample is never blocked.</li>
+		<li><strong>Headers.</strong> nosniff, a referrer policy, a permissions policy, X-Frame-Options and a narrow content policy. The policy deliberately says nothing about scripts: a script policy needs a nonce per response and breaks the moment a page is cached at the edge.</li>
+		<li><strong>Hardening.</strong> XML-RPC off (and /xmlrpc.php answers nothing at all), no user enumeration through ?author=1, the REST users endpoint or the sitemap, no theme and plugin editor, no version number in the markup, application passwords for administrators only.</li>
+	</ul>
+	<p>
+		Locked out? <code>define( 'BASALT_SECURITY_LOGIN_SLUG', '' );</code> in
+		wp-config.php puts the login page back at its usual address, and
+		<code>define( 'BASALT_SECURITY_OFF', true );</code> switches the whole
+		plugin off without touching the database.
+	</p>
+
 	<h3>WooCommerce</h3>
 	<p>
 		Supported. WooCommerce brings its own block templates for the shop, the

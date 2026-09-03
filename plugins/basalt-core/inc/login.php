@@ -234,6 +234,19 @@ function basalt_core_login_generic_error( $error ) {
 		return $error;
 	}
 
+	/**
+	 * Filter whether this message survives the generic replacement.
+	 *
+	 * A rate limiter has something to say that a visitor needs to read: when
+	 * to come back. Replacing that with "the details are not correct" sends
+	 * somebody who typed the right password away confused.
+	 *
+	 * @param bool $keep Whether to leave the message alone. Default false.
+	 */
+	if ( apply_filters( 'basalt_core_login_keep_error', false ) ) {
+		return $error;
+	}
+
 	return esc_html__( 'The username or password is not correct.', 'basalt-core' );
 }
 add_filter( 'login_errors', 'basalt_core_login_generic_error' );

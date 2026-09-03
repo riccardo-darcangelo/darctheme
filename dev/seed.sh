@@ -42,7 +42,7 @@ if ! wp core is-installed 2>/dev/null; then
 fi
 
 wp theme activate basalt
-wp plugin activate basalt-core basalt-catalog basalt-forms basalt-shop
+wp plugin activate basalt-core basalt-catalog basalt-forms basalt-shop basalt-security
 
 # Theme development mode, so a new pattern file or a changed design token is
 # picked up on the next request. Without it WordPress caches the list of pattern

@@ -20,6 +20,7 @@ to a block theme.
 | `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, breadcrumb block, accessibility corrections for core blocks. |
 | `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `plugins/basalt-forms/` | Companion plugin: one accessible contact and appointment form block, server validated, no JavaScript, submissions kept in the admin. |
+| `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, a small request filter, security headers and the hardening WordPress leaves off. |
 | `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, and an InStoreOnly offer. |
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
