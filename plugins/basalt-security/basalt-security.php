@@ -98,6 +98,10 @@ function basalt_security_defaults(): array {
 		'magic_for_staff'    => false,
 		'magic_limit'        => 5,
 
+		// Second factor.
+		'two_factor'         => true,
+		'two_factor_staff'   => true,
+
 		// Hardening.
 		'disable_xmlrpc'     => true,
 		'disable_enumeration' => true,
@@ -220,7 +224,7 @@ function basalt_security_not_found(): void {
 	exit;
 }
 
-foreach ( array( 'log', 'login-path', 'brute-force', 'firewall', 'headers', 'hardening', 'accounts', 'magic-link', 'review', 'settings' ) as $basalt_security_module ) {
+foreach ( array( 'log', 'login-path', 'brute-force', 'firewall', 'headers', 'hardening', 'accounts', 'magic-link', 'two-factor', 'review', 'settings' ) as $basalt_security_module ) {
 	require_once BASALT_SECURITY_DIR . 'inc/' . $basalt_security_module . '.php';
 }
 

@@ -38,7 +38,7 @@ function basalt_security_sanitize( $input ): array {
 	$input = (array) $input;
 	$out   = basalt_security_defaults();
 
-	foreach ( array( 'block_wp_admin', 'brute_force', 'brute_notify', 'firewall', 'headers', 'content_policy', 'hsts', 'disable_xmlrpc', 'disable_enumeration', 'disable_file_edit', 'hide_version', 'limit_app_passwords', 'limit_resets', 'guard_registration', 'strong_passwords', 'magic_link', 'magic_for_staff' ) as $flag ) {
+	foreach ( array( 'block_wp_admin', 'brute_force', 'brute_notify', 'firewall', 'headers', 'content_policy', 'hsts', 'disable_xmlrpc', 'disable_enumeration', 'disable_file_edit', 'hide_version', 'limit_app_passwords', 'limit_resets', 'guard_registration', 'strong_passwords', 'magic_link', 'magic_for_staff', 'two_factor', 'two_factor_staff' ) as $flag ) {
 		$out[ $flag ] = ! empty( $input[ $flag ] );
 	}
 
@@ -212,6 +212,8 @@ function basalt_security_render_settings(): void {
 				basalt_security_field( 'guard_registration', __( 'Guard the registration form', 'basalt-security' ), 'checkbox', array( 'description' => __( 'A hidden field no person fills in, a limit per address, and an answer that does not confirm which addresses already have an account. Covers the WooCommerce form as well.', 'basalt-security' ) ) );
 				basalt_security_field( 'registration_limit', __( 'Registrations per hour', 'basalt-security' ), 'number', array( 'description' => __( 'Per address. A household behind one connection rarely needs more than a handful.', 'basalt-security' ) ) );
 				basalt_security_field( 'strong_passwords', __( 'Refuse obvious passwords', 'basalt-security' ), 'checkbox', array( 'description' => __( 'Length, and nothing built around the site name or the account name. No rule about capitals and digits: that produces Sommer2026! and nothing safer.', 'basalt-security' ) ) );
+				basalt_security_field( 'two_factor', __( 'Offer two factor authentication', 'basalt-security' ), 'checkbox', array( 'description' => __( 'A six digit code from an authenticator app after the password. Each person switches it on for themselves under Users, Profile. Codes by email or SMS are deliberately not offered: the inbox is what the password reset already uses, and SMS needs a paid service and loses to a SIM swap.', 'basalt-security' ) ) );
+				basalt_security_field( 'two_factor_staff', __( 'Ask everybody who can edit the site to use it', 'basalt-security' ), 'checkbox', array( 'description' => __( 'A notice in the admin, not a locked door. Refusing to let somebody in until they set it up is how a site ends up with nobody able to get in at all.', 'basalt-security' ) ) );
 				basalt_security_field( 'magic_link', __( 'Offer a sign in link by email', 'basalt-security' ), 'checkbox', array( 'description' => __( 'A customer who signs in twice a year does not remember a password, resets it, and picks a worse one. A link proves the same thing the reset proves, in one step instead of four. Off by default, because it changes how people sign in.', 'basalt-security' ) ) );
 				basalt_security_field( 'magic_for_staff', __( 'Links for accounts that can edit the site too', 'basalt-security' ), 'checkbox', array( 'description' => __( 'A link is exactly as strong as the inbox it lands in. That is the right trade for a customer and the wrong one for an editor.', 'basalt-security' ) ) );
 				basalt_security_field( 'magic_limit', __( 'Links per hour', 'basalt-security' ), 'number', array( 'description' => __( 'Per address, like the other two.', 'basalt-security' ) ) );

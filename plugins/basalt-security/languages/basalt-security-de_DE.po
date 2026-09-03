@@ -152,36 +152,37 @@ msgstr "Dieser Link wurde bereits benutzt oder ist abgelaufen. Fordern Sie einen
 msgid "That page had gone stale. Open the link from the email again."
 msgstr "Diese Seite war nicht mehr aktuell. Öffnen Sie den Link aus der E-Mail noch einmal."
 
-#: inc/magic-link.php:345
+#: inc/magic-link.php:354
 msgid "Sign in with a link"
 msgstr "Mit einem Link anmelden"
 
-#: inc/magic-link.php:354
+#: inc/magic-link.php:363
 msgid "If that address has an account, a sign in link is on its way. It works once and expires in fifteen minutes."
 msgstr "Falls es zu dieser Adresse ein Konto gibt, ist ein Anmeldelink unterwegs. Er funktioniert einmal und läuft nach fünfzehn Minuten ab."
 
-#: inc/magic-link.php:360
+#: inc/magic-link.php:369
 msgid "Email address"
 msgstr "E-Mail-Adresse"
 
-#: inc/magic-link.php:366
+#: inc/magic-link.php:375
 msgid "Send me a link"
 msgstr "Link schicken"
 
-#: inc/magic-link.php:376
+#: inc/magic-link.php:385
 msgid "Sign in with a password instead"
 msgstr "Stattdessen mit Passwort anmelden"
 
-#: inc/magic-link.php:390
+#: inc/magic-link.php:399
+#: inc/two-factor.php:532
 msgid "Sign in"
 msgstr "Anmelden"
 
 #. translators: %s: the account's display name
-#: inc/magic-link.php:397
+#: inc/magic-link.php:406
 msgid "Signing in as %s."
 msgstr "Anmeldung als %s."
 
-#: inc/magic-link.php:406
+#: inc/magic-link.php:415
 msgid "Sign me in"
 msgstr "Jetzt anmelden"
 
@@ -262,22 +263,37 @@ msgstr "PHP bekommt noch Sicherheitsupdates (läuft mit %s)"
 msgid "Older versions get no fixes at all, whatever the host says. Every host has a switch for this in its panel."
 msgstr "Ältere Versionen bekommen überhaupt keine Updates mehr, was der Hoster auch sagt. Jeder Hoster hat dafür einen Schalter im Kundenbereich."
 
-#: inc/review.php:101
+#: inc/review.php:113
+msgid "Everybody who can edit the site has a second factor"
+msgstr "Alle, die die Website bearbeiten dürfen, haben einen zweiten Faktor"
+
+#: inc/review.php:115
+msgid "Nothing to do. A stolen password on its own gets nobody in."
+msgstr "Nichts zu tun. Ein gestohlenes Passwort allein bringt niemanden hinein."
+
+#. translators: %d: number of accounts
+#: inc/review.php:118
+msgid "%d account that can edit the site has none. Each person switches it on for themselves under Users, Profile."
+msgid_plural "%d accounts that can edit the site have none. Each person switches it on for themselves under Users, Profile."
+msgstr[0] "%d Konto mit Bearbeitungsrechten hat keinen. Jede Person schaltet ihn selbst unter Benutzer, Profil ein."
+msgstr[1] "%d Konten mit Bearbeitungsrechten haben keinen. Jede Person schaltet ihn selbst unter Benutzer, Profil ein."
+
+#: inc/review.php:133
 msgid "The login page is not at wp-login.php"
 msgstr "Die Anmeldeseite liegt nicht unter wp-login.php"
 
-#: inc/review.php:102
+#: inc/review.php:134
 msgid "Optional, and it is not a lock: it is the doormat the bots stand on. Almost all of them only ever try the one address."
 msgstr "Freiwillig, und es ist kein Schloss, sondern die Fußmatte, auf der die Bots stehen. Fast alle probieren nur diese eine Adresse."
 
 #. translators: %d: number of open points
-#: inc/review.php:132
+#: inc/review.php:164
 msgid "%d point is worth looking at. None of it is changed automatically."
 msgid_plural "%d points are worth looking at. None of it is changed automatically."
 msgstr[0] "%d Punkt lohnt einen Blick. Nichts davon wird automatisch geändert."
 msgstr[1] "%d Punkte lohnen einen Blick. Nichts davon wird automatisch geändert."
 
-#: inc/review.php:133
+#: inc/review.php:165
 msgid "Nothing open. This list is checked when the page loads, so it stays honest."
 msgstr "Nichts offen. Diese Liste wird beim Laden der Seite geprüft und bleibt damit ehrlich."
 
@@ -404,181 +420,304 @@ msgid "Length, and nothing built around the site name or the account name. No ru
 msgstr "Länge, und nichts, was um den Namen der Website oder des Kontos herum gebaut ist. Keine Regel über Großbuchstaben und Ziffern: die bringt Sommer2026! hervor und sonst nichts Sichereres."
 
 #: inc/settings.php:215
+msgid "Offer two factor authentication"
+msgstr "Zwei-Faktor-Anmeldung anbieten"
+
+#: inc/settings.php:215
+msgid "A six digit code from an authenticator app after the password. Each person switches it on for themselves under Users, Profile. Codes by email or SMS are deliberately not offered: the inbox is what the password reset already uses, and SMS needs a paid service and loses to a SIM swap."
+msgstr "Ein sechsstelliger Code aus einer Authenticator-App nach dem Passwort. Jede Person schaltet ihn selbst unter Benutzer, Profil ein. Codes per E-Mail oder SMS gibt es bewusst nicht: das Postfach nutzt schon das Zurücksetzen des Passworts, und SMS braucht einen kostenpflichtigen Dienst und verliert gegen einen SIM-Tausch."
+
+#: inc/settings.php:216
+msgid "Ask everybody who can edit the site to use it"
+msgstr "Alle mit Bearbeitungsrechten darum bitten"
+
+#: inc/settings.php:216
+msgid "A notice in the admin, not a locked door. Refusing to let somebody in until they set it up is how a site ends up with nobody able to get in at all."
+msgstr "Ein Hinweis im Backend, keine verschlossene Tür. Wer niemanden hereinlässt, bevor der zweite Faktor eingerichtet ist, endet damit, dass überhaupt niemand mehr hineinkommt."
+
+#: inc/settings.php:217
 msgid "Offer a sign in link by email"
 msgstr "Anmeldung per Link anbieten"
 
-#: inc/settings.php:215
+#: inc/settings.php:217
 msgid "A customer who signs in twice a year does not remember a password, resets it, and picks a worse one. A link proves the same thing the reset proves, in one step instead of four. Off by default, because it changes how people sign in."
 msgstr "Wer sich zweimal im Jahr anmeldet, erinnert sich an kein Passwort, setzt es zurück und wählt ein schlechteres. Ein Link beweist dasselbe wie das Zurücksetzen, in einem Schritt statt in vier. Standardmäßig aus, weil es die Art der Anmeldung verändert."
 
-#: inc/settings.php:216
+#: inc/settings.php:218
 msgid "Links for accounts that can edit the site too"
 msgstr "Links auch für Konten, die die Website bearbeiten dürfen"
 
-#: inc/settings.php:216
+#: inc/settings.php:218
 msgid "A link is exactly as strong as the inbox it lands in. That is the right trade for a customer and the wrong one for an editor."
 msgstr "Ein Link ist genau so sicher wie das Postfach, in dem er landet. Für Kundschaft ist das der richtige Tausch, für Redaktionskonten der falsche."
 
-#: inc/settings.php:217
+#: inc/settings.php:219
 msgid "Links per hour"
 msgstr "Links pro Stunde"
 
-#: inc/settings.php:217
+#: inc/settings.php:219
 msgid "Per address, like the other two."
 msgstr "Pro Adresse, wie die anderen beiden."
 
-#: inc/settings.php:218
+#: inc/settings.php:220
 msgid "Shortest password allowed"
 msgstr "Kürzestes erlaubtes Passwort"
 
-#: inc/settings.php:218
+#: inc/settings.php:220
 msgid "Twelve characters. A short sentence is easier to remember and much harder to guess than eight characters of noise."
 msgstr "Zwölf Zeichen. Ein kurzer Satz ist leichter zu merken und viel schwerer zu erraten als acht Zeichen Kauderwelsch."
 
-#: inc/settings.php:222
+#: inc/settings.php:224
 msgid "Requests"
 msgstr "Anfragen"
 
-#: inc/settings.php:227
+#: inc/settings.php:229
 msgid "Block obvious probes"
 msgstr "Offensichtliche Sondierungen blockieren"
 
-#: inc/settings.php:229
+#: inc/settings.php:231
 msgid "A short list of patterns: traversal, union select, script tags in a URL, requests for .env or an old phpunit runner. The URL is always checked, a submitted form only for visitors who are not signed in."
 msgstr "Eine kurze Liste von Mustern: Verzeichniswechsel, union select, Script-Tags in einer URL, Anfragen nach .env oder einem alten phpunit-Runner. Die URL wird immer geprüft, ein abgesendetes Formular nur bei nicht angemeldeten Besuchern."
 
-#: inc/settings.php:233
+#: inc/settings.php:235
 msgid "Addresses that skip all of this"
 msgstr "Adressen, für die nichts davon gilt"
 
-#: inc/settings.php:235
+#: inc/settings.php:237
 msgid "One per line. Your office, a monitoring service. Anything that is not a valid address is dropped when you save."
 msgstr "Eine pro Zeile. Ihr Büro, ein Überwachungsdienst. Was keine gültige Adresse ist, fällt beim Speichern weg."
 
-#: inc/settings.php:240
+#: inc/settings.php:242
 msgid "Headers"
 msgstr "Header"
 
-#: inc/settings.php:243
+#: inc/settings.php:245
 msgid "Send security headers"
 msgstr "Sicherheits-Header senden"
 
-#: inc/settings.php:243
+#: inc/settings.php:245
 msgid "nosniff, a referrer policy, and a permissions policy that switches off camera, microphone and location."
 msgstr "nosniff, eine Referrer-Richtlinie und eine Berechtigungsrichtlinie, die Kamera, Mikrofon und Standort abschaltet."
 
-#: inc/settings.php:246
+#: inc/settings.php:248
 msgid "Allow the site in a frame"
 msgstr "Website in einem Frame erlauben"
 
-#: inc/settings.php:250
+#: inc/settings.php:252
 msgid "Only on this site"
 msgstr "Nur auf dieser Website"
 
-#: inc/settings.php:251
+#: inc/settings.php:253
 msgid "Nowhere"
 msgstr "Nirgends"
 
-#: inc/settings.php:252
+#: inc/settings.php:254
 msgid "Anywhere, send no header"
 msgstr "Überall, keinen Header senden"
 
-#: inc/settings.php:254
+#: inc/settings.php:256
 msgid "Stops another site loading yours invisibly and collecting clicks."
 msgstr "Verhindert, dass eine fremde Seite Ihre unsichtbar lädt und Klicks abgreift."
 
-#: inc/settings.php:259
+#: inc/settings.php:261
 msgid "Content security policy"
 msgstr "Content Security Policy"
 
-#: inc/settings.php:261
+#: inc/settings.php:263
 msgid "A narrow one: no plugins, no rewritten base URL, forms only to this site. Deliberately says nothing about scripts, because a script policy needs a nonce per response and breaks the moment a page is cached."
 msgstr "Eine schmale: keine Plugins, keine umgeschriebene Basis-URL, Formulare nur an diese Website. Zu Skripten sagt sie bewusst nichts, denn eine Skript-Richtlinie braucht pro Antwort einen Nonce und zerbricht, sobald eine Seite zwischengespeichert wird."
 
-#: inc/settings.php:265
+#: inc/settings.php:267
 msgid "Require HTTPS in the browser (HSTS)"
 msgstr "HTTPS im Browser erzwingen (HSTS)"
 
-#: inc/settings.php:267
+#: inc/settings.php:269
 msgid "Only switch this on once HTTPS works everywhere: a browser that has seen the header refuses plain HTTP for six months, whatever the site says afterwards."
 msgstr "Erst einschalten, wenn HTTPS überall funktioniert: ein Browser, der den Header einmal gesehen hat, verweigert sechs Monate lang einfaches HTTP, was die Website danach auch sagt."
 
-#: inc/settings.php:272
+#: inc/settings.php:274
 msgid "Hardening"
 msgstr "Härtung"
 
-#: inc/settings.php:275
+#: inc/settings.php:277
 msgid "Switch off XML-RPC"
 msgstr "XML-RPC abschalten"
 
-#: inc/settings.php:275
+#: inc/settings.php:277
 msgid "It answers before authentication and lets one request try hundreds of passwords. Leave it on only if an app still posts through it."
 msgstr "Es antwortet vor der Anmeldung und lässt eine einzige Anfrage hunderte Passwörter probieren. Lassen Sie es nur an, wenn eine App darüber noch veröffentlicht."
 
-#: inc/settings.php:276
+#: inc/settings.php:278
 msgid "Do not list user names"
 msgstr "Benutzernamen nicht auflisten"
 
-#: inc/settings.php:276
+#: inc/settings.php:278
 msgid "Closes ?author=1, the REST users endpoint and the users sitemap for visitors who are not signed in."
 msgstr "Schließt ?author=1, den REST-Endpunkt für Benutzer und die Benutzer-Sitemap für nicht angemeldete Besucher."
 
-#: inc/settings.php:277
+#: inc/settings.php:279
 msgid "No theme and plugin editor"
 msgstr "Kein Theme- und Plugin-Editor"
 
-#: inc/settings.php:277
+#: inc/settings.php:279
 msgid "A stolen password should not come with a code editor."
 msgstr "Zu einem gestohlenen Passwort sollte kein Code-Editor gehören."
 
-#: inc/settings.php:278
+#: inc/settings.php:280
 msgid "Keep the version out of the markup"
 msgstr "Versionsnummer aus dem Quelltext heraushalten"
 
-#: inc/settings.php:279
+#: inc/settings.php:281
 msgid "Application passwords for administrators only"
 msgstr "Anwendungspasswörter nur für Administratoren"
 
-#: inc/settings.php:279
+#: inc/settings.php:281
 msgid "On a shop, every customer account would otherwise be a possible long lived token."
 msgstr "In einem Shop wäre sonst jedes Kundenkonto ein möglicher langlebiger Zugangsschlüssel."
 
-#: inc/settings.php:286
+#: inc/settings.php:288
 msgid "What this installation still leaves open"
 msgstr "Was diese Installation noch offen lässt"
 
-#: inc/settings.php:289
+#: inc/settings.php:291
 msgid "What happened"
 msgstr "Was passiert ist"
 
-#: inc/settings.php:304
+#: inc/settings.php:306
 msgid "Nothing yet. Lockouts, blocked requests and sign-ins show up here."
 msgstr "Noch nichts. Sperren, blockierte Anfragen und Anmeldungen erscheinen hier."
 
-#: inc/settings.php:309
+#: inc/settings.php:311
 msgid "When"
 msgstr "Wann"
 
-#: inc/settings.php:310
+#: inc/settings.php:312
 msgid "What"
 msgstr "Was"
 
-#: inc/settings.php:311
+#: inc/settings.php:313
 msgid "Address"
 msgstr "Adresse"
 
-#: inc/settings.php:312
+#: inc/settings.php:314
 msgid "Detail"
 msgstr "Einzelheit"
 
-#: inc/settings.php:331
+#: inc/settings.php:333
 msgid "Clear the log"
 msgstr "Protokoll leeren"
 
-#: inc/settings.php:342
+#: inc/settings.php:344
 msgid "You cannot do that."
 msgstr "Das dürfen Sie nicht."
 
-#: inc/settings.php:362
+#: inc/settings.php:364
 msgid "Settings"
 msgstr "Einstellungen"
+
+#: inc/two-factor.php:494
+msgid "That page had gone stale. Please sign in again."
+msgstr "Diese Seite war nicht mehr aktuell. Bitte melden Sie sich noch einmal an."
+
+#: inc/two-factor.php:498
+msgid "Too many attempts. Please sign in again."
+msgstr "Zu viele Versuche. Bitte melden Sie sich noch einmal an."
+
+#: inc/two-factor.php:514
+msgid "That code is not right. Codes change every thirty seconds, so try the current one."
+msgstr "Dieser Code stimmt nicht. Die Codes wechseln alle dreißig Sekunden, nehmen Sie den aktuellen."
+
+#: inc/two-factor.php:518
+msgid "One more step"
+msgstr "Noch ein Schritt"
+
+#: inc/two-factor.php:525
+msgid "Open your authenticator app and type the six digit code. A recovery code works too."
+msgstr "Öffnen Sie Ihre Authenticator-App und geben Sie den sechsstelligen Code ein. Ein Wiederherstellungscode geht auch."
+
+#: inc/two-factor.php:527
+msgid "Code"
+msgstr "Code"
+
+#: inc/two-factor.php:535
+msgid "Start again"
+msgstr "Von vorn anfangen"
+
+#: inc/two-factor.php:564
+msgid "Two factor authentication"
+msgstr "Zwei-Faktor-Anmeldung"
+
+#: inc/two-factor.php:567
+msgid "Only the account holder can set this up: it needs their phone."
+msgstr "Das kann nur die Kontoinhaberin selbst einrichten, dafür braucht es ihr Telefon."
+
+#: inc/two-factor.php:578
+msgid "Status"
+msgstr "Status"
+
+#: inc/two-factor.php:579
+msgid "On."
+msgstr "An."
+
+#. translators: %d: number of recovery codes left
+#: inc/two-factor.php:583
+msgid "%d recovery code left."
+msgid_plural "%d recovery codes left."
+msgstr[0] "Noch %d Wiederherstellungscode übrig."
+msgstr[1] "Noch %d Wiederherstellungscodes übrig."
+
+#: inc/two-factor.php:587
+msgid "Switch two factor authentication off for this account"
+msgstr "Zwei-Faktor-Anmeldung für dieses Konto abschalten"
+
+#: inc/two-factor.php:589
+msgid "Give me a fresh set of recovery codes"
+msgstr "Neue Wiederherstellungscodes erzeugen"
+
+#: inc/two-factor.php:608
+msgid "Set it up"
+msgstr "Einrichten"
+
+#: inc/two-factor.php:609
+msgid "Add this key to an authenticator app, for example Aegis, 2FAS, Ente Auth or the one built into your password manager."
+msgstr "Tragen Sie diesen Schlüssel in eine Authenticator-App ein, zum Beispiel Aegis, 2FAS, Ente Auth oder die eingebaute Funktion Ihres Passwortmanagers."
+
+#: inc/two-factor.php:611
+msgid "On a phone this link adds it in one tap:"
+msgstr "Auf dem Handy trägt dieser Link ihn mit einem Tipp ein:"
+
+#: inc/two-factor.php:614
+msgid "open in the app"
+msgstr "in der App öffnen"
+
+#: inc/two-factor.php:615
+msgid "Then type the code it shows, to prove it arrived:"
+msgstr "Geben Sie dann den angezeigten Code ein, damit klar ist, dass er angekommen ist:"
+
+#: inc/two-factor.php:616
+msgid "There is no QR code on purpose. Drawing one here would mean sending the key to an outside service, and the key is the whole secret."
+msgstr "Einen QR-Code gibt es bewusst nicht. Ihn hier zu zeichnen hieße, den Schlüssel an einen fremden Dienst zu schicken, und der Schlüssel ist das ganze Geheimnis."
+
+#: inc/two-factor.php:688
+msgid "That code did not match, so two factor authentication is still off. The key is still on this page: check that your app has it and try the current code."
+msgstr "Dieser Code passte nicht, die Zwei-Faktor-Anmeldung ist deshalb weiterhin aus. Der Schlüssel steht noch auf dieser Seite: prüfen Sie, ob Ihre App ihn hat, und nehmen Sie den aktuellen Code."
+
+#: inc/two-factor.php:702
+msgid "Your recovery codes"
+msgstr "Ihre Wiederherstellungscodes"
+
+#: inc/two-factor.php:703
+msgid "Each one works once, in place of a code from the app. Print them or put them in your password manager now: this is the only time they are shown."
+msgstr "Jeder funktioniert einmal, anstelle eines Codes aus der App. Drucken Sie sie aus oder legen Sie sie jetzt in Ihren Passwortmanager: sie werden nur dieses eine Mal angezeigt."
+
+#: inc/two-factor.php:705
+msgid "Without them, a lost phone means an administrator has to switch the second factor off for you."
+msgstr "Ohne sie muss bei einem verlorenen Telefon eine Administratorin den zweiten Faktor für Sie abschalten."
+
+#: inc/two-factor.php:732
+msgid "This site asks everybody who can edit it to use a second factor. Yours is not set up yet."
+msgstr "Diese Website bittet alle mit Bearbeitungsrechten um einen zweiten Faktor. Ihrer ist noch nicht eingerichtet."
+
+#: inc/two-factor.php:734
+msgid "Set it up now"
+msgstr "Jetzt einrichten"

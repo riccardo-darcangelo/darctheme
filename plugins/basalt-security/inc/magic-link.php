@@ -297,6 +297,15 @@ function basalt_security_magic_confirm( string $token ): void {
 		// Single use: gone before the session exists, so a replay finds nothing.
 		delete_transient( basalt_security_magic_key( $token ) );
 
+		/*
+		 * A link proves one thing, the same one a password proves: that whoever
+		 * is asking can reach something belonging to the account. An account
+		 * with a second factor still owes the second factor.
+		 */
+		if ( function_exists( "basalt_security_2fa_active" ) && basalt_security_2fa_active( $user->ID ) ) {
+			basalt_security_2fa_begin( $user, false, basalt_security_magic_destination( $user ) );
+		}
+
 		wp_set_current_user( $user->ID );
 		wp_set_auth_cookie( $user->ID, false );
 		do_action( 'wp_login', $user->user_login, $user );

@@ -20,7 +20,7 @@ to a block theme.
 | `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, robots.txt and AI crawler policy, llms.txt, per page indexing switch, breadcrumb block, accessibility corrections for core blocks. |
 | `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `plugins/basalt-forms/` | Companion plugin: one accessible contact and appointment form block, server validated, no JavaScript, submissions kept in the admin. |
-| `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, guarded password reset and registration, optional sign in by emailed link, password quality, a small request filter, security headers and the hardening WordPress leaves off. |
+| `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, two factor authentication, guarded password reset and registration, optional sign in by emailed link, password quality, a small request filter, security headers and the hardening WordPress leaves off. |
 | `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, a buy bar that keeps the price and the button in reach on a phone, a cart drawer rendered on the server instead of the mini cart block, and reviews filtered by the size the reviewer wears. |
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
@@ -122,6 +122,13 @@ content and their search presence with it when they switch.
 The settings are options rather than theme mods, and that fixes a real defect:
 WordPress stores theme mods per stylesheet, so under 2.x switching from the
 parent to the child theme silently wiped every business detail.
+
+**TOTP is implemented, not imported.** The second factor is thirty lines of
+HMAC and arithmetic in `plugins/basalt-security/inc/two-factor.php`, verified
+against the RFC 6238 test vectors. A dependency for that much code is a supply
+chain for the one thing on the site that must not have one. The secret is
+encrypted with a key derived from the wp-config salts, so a database dump alone
+is not a working second factor.
 
 **Translations live in JSON, not in the .po.** Each plugin ships a de_DE
 catalogue built by `tools/make-po.mjs` from its POT and a JSON table of

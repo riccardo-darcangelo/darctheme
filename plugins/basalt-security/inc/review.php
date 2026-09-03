@@ -94,6 +94,38 @@ function basalt_security_review(): array {
 		'note'  => __( 'Older versions get no fixes at all, whatever the host says. Every host has a switch for this in its panel.', 'basalt-security' ),
 	);
 
+	if ( function_exists( 'basalt_security_2fa_available' ) && basalt_security_2fa_available() ) {
+		$staff   = get_users(
+			array(
+				'capability' => 'edit_posts',
+				'fields'     => array( 'ID' ),
+				'number'     => 50,
+			)
+		);
+		$without = 0;
+
+		foreach ( $staff as $person ) {
+			$without += basalt_security_2fa_active( (int) $person->ID ) ? 0 : 1;
+		}
+
+		$rows[] = array(
+			'state' => 0 === $without ? 'ok' : 'warn',
+			'title' => __( 'Everybody who can edit the site has a second factor', 'basalt-security' ),
+			'note'  => 0 === $without
+				? __( 'Nothing to do. A stolen password on its own gets nobody in.', 'basalt-security' )
+				: sprintf(
+					/* translators: %d: number of accounts */
+					_n(
+						'%d account that can edit the site has none. Each person switches it on for themselves under Users, Profile.',
+						'%d accounts that can edit the site have none. Each person switches it on for themselves under Users, Profile.',
+						$without,
+						'basalt-security'
+					),
+					$without
+				),
+		);
+	}
+
 	$slug = (string) basalt_security_login_slug();
 
 	$rows[] = array(

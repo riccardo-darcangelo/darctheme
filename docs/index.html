@@ -1082,6 +1082,7 @@
 		<li><strong>A short list of patterns.</strong> Traversal, union select, script tags in a URL, requests for .env or an old phpunit runner. The URL is always checked; a submitted form only for visitors who are not signed in, so an editor pasting a code sample is never blocked.</li>
 		<li><strong>Headers.</strong> nosniff, a referrer policy, a permissions policy, X-Frame-Options and a narrow content policy. The policy deliberately says nothing about scripts: a script policy needs a nonce per response and breaks the moment a page is cached at the edge.</li>
 		<li><strong>The other three doors into an account.</strong> The password reset form is limited per address, because every request sends mail to an inbox a stranger typed. The registration form gets a hidden field no person fills in, a limit per address, and an answer that does not confirm which addresses already have an account. Both cover the WooCommerce forms as well, which run their own registration and never reach the WordPress hooks. Resetting a password ends every session on the account, which is the point of resetting it.</li>
+		<li><strong>A second factor.</strong> A six digit code from an authenticator app after the password, switched on per account under Users, Profile. See below.</li>
 		<li><strong>Signing in with a link.</strong> Off by default. A customer signs in twice a year, cannot remember the password, resets it and picks something worse: a link proves the same thing the reset proves, in one step instead of four. The token is single use, expires in fifteen minutes and is stored only as a hash, so a database dump is not a pile of working sign in links. The link opens a page with a button rather than signing anybody in by itself, because mail scanners follow every link in a message and a token a scanner can spend is gone before the person clicks it. Administrators are left out unless you say otherwise, the answer never reveals whether an address has an account, and it stands down entirely while a lockout is in effect.</li>
 		<li><strong>Passwords that are not obvious.</strong> Length, and nothing built around the site name or the account name. No rule about capitals and digits: that rule produces Sommer2026! and nothing safer. Twelve characters by default, and the message says why a short sentence beats a short password.</li>
 		<li><strong>Hardening.</strong> XML-RPC off (and /xmlrpc.php answers nothing at all), no user enumeration through ?author=1, the REST users endpoint or the sitemap, no theme and plugin editor, no version number in the markup, application passwords for administrators only.</li>
@@ -1212,6 +1213,48 @@
 		Without JavaScript the bar is simply always there on a narrow screen.
 		With it, the bar waits until the real button has scrolled past and slides
 		out of the way again when it comes back.
+	</p>
+
+	<h4 id="security-2fa">The second factor</h4>
+	<p>
+		A password is one secret and every year makes it a worse one: it is
+		reused, it is phished, it turns up in the breach of a site that had
+		nothing to do with this one. The second factor is the answer that
+		actually works, and on a small site it costs one app on a phone.
+	</p>
+	<p>
+		Time based codes (TOTP, RFC 6238), not codes by email or SMS. Email is
+		the same inbox that can already reset the password, so it is not a
+		second factor at all; SMS needs a paid service and loses to a SIM swap.
+		The algorithm is thirty lines of HMAC and arithmetic and is implemented
+		in the plugin, because a library for this is a supply chain for this.
+		It is checked against the test vectors in the RFC.
+	</p>
+	<table>
+		<tr><th>Detail</th><th>Why</th></tr>
+		<tr><td>The secret is stored encrypted, with a key derived from the salts in wp-config.php</td><td>A stolen database on its own is then not a pile of working second factors: the attacker also needs the file.</td></tr>
+		<tr><td>Nothing is signed in until the code is right</td><td>The password step clears its own cookies again and parks the login in a short lived handle. The handle is a cookie, not a URL, because a URL ends up in access logs and browser history.</td></tr>
+		<tr><td>A code works once</td><td>The accepted time step is remembered, so a code caught in transit cannot be replayed in the thirty seconds it is still valid.</td></tr>
+		<tr><td>One step of drift either way</td><td>Half a minute of clock error in each direction, and no more. Every extra step is another code an attacker may guess.</td></tr>
+		<tr><td>Ten attempts an hour per address</td><td>Six digits is a million combinations, which is plenty against a person and nothing against a script.</td></tr>
+		<tr><td>Eight recovery codes, hashed</td><td>Shown once when the factor is switched on. Without them a lost phone means an administrator has to switch it off.</td></tr>
+		<tr><td>An administrator can switch it off for somebody, but not on</td><td>Switching it on needs the phone in the room.</td></tr>
+		<tr><td>A sign in link asks for the code too</td><td>The link proves the same one thing a password proves. An account with a second factor still owes the second factor.</td></tr>
+	</table>
+	<div class="note">
+		<p><strong>No QR code, on purpose</strong></p>
+		<p>
+			The profile screen shows the key as text and offers an
+			<code>otpauth:</code> link that adds it in one tap on a phone.
+			Drawing a QR code would mean either shipping a QR library or sending
+			the key to an outside service, and the key is the whole secret.
+		</p>
+	</div>
+	<p>
+		The site can ask everybody who can edit it to switch it on, which shows
+		a notice in the admin. It is a notice rather than a locked door:
+		refusing to let somebody in until they have set it up is how a site
+		ends up with nobody able to get in at all.
 	</p>
 
 	<h4 id="shop-review-filter">Filtering reviews by size</h4>

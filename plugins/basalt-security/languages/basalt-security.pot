@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-03T08:54:33+00:00\n"
+"POT-Creation-Date: 2026-09-03T12:52:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: basalt-security\n"
@@ -153,37 +153,38 @@ msgstr ""
 msgid "That page had gone stale. Open the link from the email again."
 msgstr ""
 
-#: inc/magic-link.php:345
+#: inc/magic-link.php:354
 msgid "Sign in with a link"
 msgstr ""
 
-#: inc/magic-link.php:354
+#: inc/magic-link.php:363
 msgid "If that address has an account, a sign in link is on its way. It works once and expires in fifteen minutes."
 msgstr ""
 
-#: inc/magic-link.php:360
+#: inc/magic-link.php:369
 msgid "Email address"
 msgstr ""
 
-#: inc/magic-link.php:366
+#: inc/magic-link.php:375
 msgid "Send me a link"
 msgstr ""
 
-#: inc/magic-link.php:376
+#: inc/magic-link.php:385
 msgid "Sign in with a password instead"
 msgstr ""
 
-#: inc/magic-link.php:390
+#: inc/magic-link.php:399
+#: inc/two-factor.php:532
 msgid "Sign in"
 msgstr ""
 
 #. translators: %s: the account's display name
-#: inc/magic-link.php:397
+#: inc/magic-link.php:406
 #, php-format
 msgid "Signing in as %s."
 msgstr ""
 
-#: inc/magic-link.php:406
+#: inc/magic-link.php:415
 msgid "Sign me in"
 msgstr ""
 
@@ -265,23 +266,39 @@ msgstr ""
 msgid "Older versions get no fixes at all, whatever the host says. Every host has a switch for this in its panel."
 msgstr ""
 
-#: inc/review.php:101
+#: inc/review.php:113
+msgid "Everybody who can edit the site has a second factor"
+msgstr ""
+
+#: inc/review.php:115
+msgid "Nothing to do. A stolen password on its own gets nobody in."
+msgstr ""
+
+#. translators: %d: number of accounts
+#: inc/review.php:118
+#, php-format
+msgid "%d account that can edit the site has none. Each person switches it on for themselves under Users, Profile."
+msgid_plural "%d accounts that can edit the site have none. Each person switches it on for themselves under Users, Profile."
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/review.php:133
 msgid "The login page is not at wp-login.php"
 msgstr ""
 
-#: inc/review.php:102
+#: inc/review.php:134
 msgid "Optional, and it is not a lock: it is the doormat the bots stand on. Almost all of them only ever try the one address."
 msgstr ""
 
 #. translators: %d: number of open points
-#: inc/review.php:132
+#: inc/review.php:164
 #, php-format
 msgid "%d point is worth looking at. None of it is changed automatically."
 msgid_plural "%d points are worth looking at. None of it is changed automatically."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/review.php:133
+#: inc/review.php:165
 msgid "Nothing open. This list is checked when the page loads, so it stays honest."
 msgstr ""
 
@@ -408,181 +425,305 @@ msgid "Length, and nothing built around the site name or the account name. No ru
 msgstr ""
 
 #: inc/settings.php:215
-msgid "Offer a sign in link by email"
+msgid "Offer two factor authentication"
 msgstr ""
 
 #: inc/settings.php:215
+msgid "A six digit code from an authenticator app after the password. Each person switches it on for themselves under Users, Profile. Codes by email or SMS are deliberately not offered: the inbox is what the password reset already uses, and SMS needs a paid service and loses to a SIM swap."
+msgstr ""
+
+#: inc/settings.php:216
+msgid "Ask everybody who can edit the site to use it"
+msgstr ""
+
+#: inc/settings.php:216
+msgid "A notice in the admin, not a locked door. Refusing to let somebody in until they set it up is how a site ends up with nobody able to get in at all."
+msgstr ""
+
+#: inc/settings.php:217
+msgid "Offer a sign in link by email"
+msgstr ""
+
+#: inc/settings.php:217
 msgid "A customer who signs in twice a year does not remember a password, resets it, and picks a worse one. A link proves the same thing the reset proves, in one step instead of four. Off by default, because it changes how people sign in."
 msgstr ""
 
-#: inc/settings.php:216
+#: inc/settings.php:218
 msgid "Links for accounts that can edit the site too"
 msgstr ""
 
-#: inc/settings.php:216
+#: inc/settings.php:218
 msgid "A link is exactly as strong as the inbox it lands in. That is the right trade for a customer and the wrong one for an editor."
 msgstr ""
 
-#: inc/settings.php:217
+#: inc/settings.php:219
 msgid "Links per hour"
 msgstr ""
 
-#: inc/settings.php:217
+#: inc/settings.php:219
 msgid "Per address, like the other two."
 msgstr ""
 
-#: inc/settings.php:218
+#: inc/settings.php:220
 msgid "Shortest password allowed"
 msgstr ""
 
-#: inc/settings.php:218
+#: inc/settings.php:220
 msgid "Twelve characters. A short sentence is easier to remember and much harder to guess than eight characters of noise."
 msgstr ""
 
-#: inc/settings.php:222
+#: inc/settings.php:224
 msgid "Requests"
 msgstr ""
 
-#: inc/settings.php:227
+#: inc/settings.php:229
 msgid "Block obvious probes"
 msgstr ""
 
-#: inc/settings.php:229
+#: inc/settings.php:231
 msgid "A short list of patterns: traversal, union select, script tags in a URL, requests for .env or an old phpunit runner. The URL is always checked, a submitted form only for visitors who are not signed in."
 msgstr ""
 
-#: inc/settings.php:233
+#: inc/settings.php:235
 msgid "Addresses that skip all of this"
 msgstr ""
 
-#: inc/settings.php:235
+#: inc/settings.php:237
 msgid "One per line. Your office, a monitoring service. Anything that is not a valid address is dropped when you save."
 msgstr ""
 
-#: inc/settings.php:240
+#: inc/settings.php:242
 msgid "Headers"
 msgstr ""
 
-#: inc/settings.php:243
+#: inc/settings.php:245
 msgid "Send security headers"
 msgstr ""
 
-#: inc/settings.php:243
+#: inc/settings.php:245
 msgid "nosniff, a referrer policy, and a permissions policy that switches off camera, microphone and location."
 msgstr ""
 
-#: inc/settings.php:246
+#: inc/settings.php:248
 msgid "Allow the site in a frame"
 msgstr ""
 
-#: inc/settings.php:250
+#: inc/settings.php:252
 msgid "Only on this site"
 msgstr ""
 
-#: inc/settings.php:251
+#: inc/settings.php:253
 msgid "Nowhere"
 msgstr ""
 
-#: inc/settings.php:252
+#: inc/settings.php:254
 msgid "Anywhere, send no header"
 msgstr ""
 
-#: inc/settings.php:254
+#: inc/settings.php:256
 msgid "Stops another site loading yours invisibly and collecting clicks."
 msgstr ""
 
-#: inc/settings.php:259
+#: inc/settings.php:261
 msgid "Content security policy"
 msgstr ""
 
-#: inc/settings.php:261
+#: inc/settings.php:263
 msgid "A narrow one: no plugins, no rewritten base URL, forms only to this site. Deliberately says nothing about scripts, because a script policy needs a nonce per response and breaks the moment a page is cached."
 msgstr ""
 
-#: inc/settings.php:265
+#: inc/settings.php:267
 msgid "Require HTTPS in the browser (HSTS)"
 msgstr ""
 
-#: inc/settings.php:267
+#: inc/settings.php:269
 msgid "Only switch this on once HTTPS works everywhere: a browser that has seen the header refuses plain HTTP for six months, whatever the site says afterwards."
 msgstr ""
 
-#: inc/settings.php:272
+#: inc/settings.php:274
 msgid "Hardening"
 msgstr ""
 
-#: inc/settings.php:275
+#: inc/settings.php:277
 msgid "Switch off XML-RPC"
 msgstr ""
 
-#: inc/settings.php:275
+#: inc/settings.php:277
 msgid "It answers before authentication and lets one request try hundreds of passwords. Leave it on only if an app still posts through it."
 msgstr ""
 
-#: inc/settings.php:276
+#: inc/settings.php:278
 msgid "Do not list user names"
 msgstr ""
 
-#: inc/settings.php:276
+#: inc/settings.php:278
 msgid "Closes ?author=1, the REST users endpoint and the users sitemap for visitors who are not signed in."
 msgstr ""
 
-#: inc/settings.php:277
+#: inc/settings.php:279
 msgid "No theme and plugin editor"
 msgstr ""
 
-#: inc/settings.php:277
+#: inc/settings.php:279
 msgid "A stolen password should not come with a code editor."
 msgstr ""
 
-#: inc/settings.php:278
+#: inc/settings.php:280
 msgid "Keep the version out of the markup"
 msgstr ""
 
-#: inc/settings.php:279
+#: inc/settings.php:281
 msgid "Application passwords for administrators only"
 msgstr ""
 
-#: inc/settings.php:279
+#: inc/settings.php:281
 msgid "On a shop, every customer account would otherwise be a possible long lived token."
 msgstr ""
 
-#: inc/settings.php:286
+#: inc/settings.php:288
 msgid "What this installation still leaves open"
 msgstr ""
 
-#: inc/settings.php:289
+#: inc/settings.php:291
 msgid "What happened"
 msgstr ""
 
-#: inc/settings.php:304
+#: inc/settings.php:306
 msgid "Nothing yet. Lockouts, blocked requests and sign-ins show up here."
 msgstr ""
 
-#: inc/settings.php:309
+#: inc/settings.php:311
 msgid "When"
 msgstr ""
 
-#: inc/settings.php:310
+#: inc/settings.php:312
 msgid "What"
 msgstr ""
 
-#: inc/settings.php:311
+#: inc/settings.php:313
 msgid "Address"
 msgstr ""
 
-#: inc/settings.php:312
+#: inc/settings.php:314
 msgid "Detail"
 msgstr ""
 
-#: inc/settings.php:331
+#: inc/settings.php:333
 msgid "Clear the log"
 msgstr ""
 
-#: inc/settings.php:342
+#: inc/settings.php:344
 msgid "You cannot do that."
 msgstr ""
 
-#: inc/settings.php:362
+#: inc/settings.php:364
 msgid "Settings"
+msgstr ""
+
+#: inc/two-factor.php:494
+msgid "That page had gone stale. Please sign in again."
+msgstr ""
+
+#: inc/two-factor.php:498
+msgid "Too many attempts. Please sign in again."
+msgstr ""
+
+#: inc/two-factor.php:514
+msgid "That code is not right. Codes change every thirty seconds, so try the current one."
+msgstr ""
+
+#: inc/two-factor.php:518
+msgid "One more step"
+msgstr ""
+
+#: inc/two-factor.php:525
+msgid "Open your authenticator app and type the six digit code. A recovery code works too."
+msgstr ""
+
+#: inc/two-factor.php:527
+msgid "Code"
+msgstr ""
+
+#: inc/two-factor.php:535
+msgid "Start again"
+msgstr ""
+
+#: inc/two-factor.php:564
+msgid "Two factor authentication"
+msgstr ""
+
+#: inc/two-factor.php:567
+msgid "Only the account holder can set this up: it needs their phone."
+msgstr ""
+
+#: inc/two-factor.php:578
+msgid "Status"
+msgstr ""
+
+#: inc/two-factor.php:579
+msgid "On."
+msgstr ""
+
+#. translators: %d: number of recovery codes left
+#: inc/two-factor.php:583
+#, php-format
+msgid "%d recovery code left."
+msgid_plural "%d recovery codes left."
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/two-factor.php:587
+msgid "Switch two factor authentication off for this account"
+msgstr ""
+
+#: inc/two-factor.php:589
+msgid "Give me a fresh set of recovery codes"
+msgstr ""
+
+#: inc/two-factor.php:608
+msgid "Set it up"
+msgstr ""
+
+#: inc/two-factor.php:609
+msgid "Add this key to an authenticator app, for example Aegis, 2FAS, Ente Auth or the one built into your password manager."
+msgstr ""
+
+#: inc/two-factor.php:611
+msgid "On a phone this link adds it in one tap:"
+msgstr ""
+
+#: inc/two-factor.php:614
+msgid "open in the app"
+msgstr ""
+
+#: inc/two-factor.php:615
+msgid "Then type the code it shows, to prove it arrived:"
+msgstr ""
+
+#: inc/two-factor.php:616
+msgid "There is no QR code on purpose. Drawing one here would mean sending the key to an outside service, and the key is the whole secret."
+msgstr ""
+
+#: inc/two-factor.php:688
+msgid "That code did not match, so two factor authentication is still off. The key is still on this page: check that your app has it and try the current code."
+msgstr ""
+
+#: inc/two-factor.php:702
+msgid "Your recovery codes"
+msgstr ""
+
+#: inc/two-factor.php:703
+msgid "Each one works once, in place of a code from the app. Print them or put them in your password manager now: this is the only time they are shown."
+msgstr ""
+
+#: inc/two-factor.php:705
+msgid "Without them, a lost phone means an administrator has to switch the second factor off for you."
+msgstr ""
+
+#: inc/two-factor.php:732
+msgid "This site asks everybody who can edit it to use a second factor. Yours is not set up yet."
+msgstr ""
+
+#: inc/two-factor.php:734
+msgid "Set it up now"
 msgstr ""
