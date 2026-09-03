@@ -41,7 +41,7 @@ define( 'BASALT_CORE_URL', plugin_dir_url( __FILE__ ) );
  * seo-plugins is first: the others ask it whether a dedicated SEO plugin has
  * already taken over a responsibility.
  */
-foreach ( array( 'color', 'seo-plugins', 'settings', 'demos', 'meta-tags', 'breadcrumbs', 'opening-hours', 'schema', 'accessibility', 'plugin-fixes', 'preferences', 'login', 'blocks' ) as $basalt_core_module ) {
+foreach ( array( 'color', 'seo-plugins', 'settings', 'demos', 'meta-tags', 'breadcrumbs', 'opening-hours', 'maintenance', 'feedback', 'schema', 'accessibility', 'plugin-fixes', 'preferences', 'login', 'blocks' ) as $basalt_core_module ) {
 	require_once BASALT_CORE_DIR . 'inc/' . $basalt_core_module . '.php';
 }
 

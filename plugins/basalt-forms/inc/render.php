@@ -38,7 +38,7 @@ function basalt_forms_render( $attributes ): string {
 		return sprintf(
 			'<div %1$s><p class="basalt-form__success" role="status" tabindex="-1">%2$s</p></div>',
 			$wrapper,
-			esc_html( (string) $attributes['successMessage'] )
+			wp_kses( (string) $attributes['successMessage'], array( 'a' => array( 'href' => array(), 'target' => array(), 'rel' => array() ), 'strong' => array(), 'em' => array() ) )
 		);
 	}
 

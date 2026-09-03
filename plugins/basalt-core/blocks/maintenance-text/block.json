@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/maintenance-text",
+	"title": "Maintenance text",
+	"category": "text",
+	"icon": "admin-tools",
+	"description": "One of the three maintenance texts: the headline, the message, or the time you expect to be back. Edited under Settings, Search and schema, so the page can be updated without opening the editor.",
+	"keywords": [
+		"maintenance",
+		"downtime",
+		"offline",
+		"back soon"
+	],
+	"textdomain": "basalt-core",
+	"editorScript": "file:./editor.js",
+	"supports": {
+		"html": false,
+		"align": [ "wide" ],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fontWeight": true
+		},
+		"color": {
+			"text": true,
+			"background": true
+		}
+	},
+	"attributes": {
+		"field": {
+			"type": "string",
+			"enum": [ "headline", "message", "until" ],
+			"default": "headline"
+		},
+		"level": {
+			"type": "number",
+			"default": 0
+		},
+		"prefix": {
+			"type": "string",
+			"default": ""
+		},
+		"suffix": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

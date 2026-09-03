@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/fit-summary",
+	"title": "Fit summary",
+	"category": "woocommerce",
+	"icon": "chart-bar",
+	"description": "How the reviews of this product answered the fit question: comes up small, as expected, comes up large, with a sentence of advice when the answers agree. Renders nothing until a review has answered.",
+	"keywords": [ "fit", "size", "reviews", "sizing" ],
+	"textdomain": "basalt-shop",
+	"editorScript": "file:./editor.js",
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"spacing": { "margin": true },
+		"typography": { "fontSize": true },
+		"color": { "text": true }
+	},
+	"attributes": {}
+}

@@ -33,6 +33,26 @@ function basalt_core_register_blocks(): void {
 		BASALT_CORE_DIR . 'blocks/opening-hours',
 		array( 'render_callback' => 'basalt_core_opening_hours_block' )
 	);
+
+	/*
+	 * The three maintenance texts. A block rather than words typed into the
+	 * template, so the page can be updated from the settings screen while the
+	 * site is down and the editor is the last thing anybody wants to open.
+	 */
+	register_block_type(
+		BASALT_CORE_DIR . 'blocks/maintenance-text',
+		array( 'render_callback' => 'basalt_core_maintenance_block' )
+	);
+
+	/*
+	 * One question under a page that explains something. Server rendered
+	 * because the answer has to be counted somewhere, and a form post is the
+	 * only way to do that without a script and without a cookie.
+	 */
+	register_block_type(
+		BASALT_CORE_DIR . 'blocks/feedback',
+		array( 'render_callback' => 'basalt_core_feedback_block' )
+	);
 }
 add_action( 'init', 'basalt_core_register_blocks' );
 

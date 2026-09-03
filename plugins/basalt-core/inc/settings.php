@@ -49,6 +49,11 @@ function basalt_core_defaults(): array {
 		'login_accent'           => '',
 		'login_background_image' => 0,
 		'login_generic_errors'   => false,
+		// Maintenance mode. Off, obviously, and the texts empty until somebody needs them.
+		'maintenance_enabled'  => false,
+		'maintenance_headline' => '',
+		'maintenance_message'  => '',
+		'maintenance_until'    => '',
 	);
 }
 
@@ -167,6 +172,14 @@ function basalt_core_sanitize( $input ): array {
 
 	$out['login_enabled']        = ! empty( $input['login_enabled'] );
 	$out['login_generic_errors'] = ! empty( $input['login_generic_errors'] );
+
+	$out['maintenance_enabled']  = ! empty( $input['maintenance_enabled'] );
+	$out['maintenance_headline'] = sanitize_text_field( (string) ( $input['maintenance_headline'] ?? '' ) );
+	$out['maintenance_message']  = sanitize_textarea_field( (string) ( $input['maintenance_message'] ?? '' ) );
+
+	// A time of day or nothing. Anything else is a typo, and it would end up in a header.
+	$until                    = trim( (string) ( $input['maintenance_until'] ?? '' ) );
+	$out['maintenance_until'] = preg_match( '/^([01]?\\d|2[0-3]):[0-5]\\d$/', $until ) ? $until : '';
 
 	$out['login_logo']             = absint( $input['login_logo'] ?? 0 );
 	$out['login_background_image'] = absint( $input['login_background_image'] ?? 0 );
@@ -347,6 +360,29 @@ function basalt_core_render_settings(): void {
 						'description' => __( 'Move it to the side that does not collide with a cookie banner or a chat widget.', 'basalt-core' ),
 					)
 				);
+				?>
+			</table>
+
+			<h2 id="basalt-core-feedback"><?php esc_html_e( 'Feedback', 'basalt-core' ); ?></h2>
+
+			<p class="description">
+				<?php esc_html_e( 'What visitors answered to the Feedback block. Counted without cookies and without an external service, so the same person can answer twice: read the trend, not the exact number.', 'basalt-core' ); ?>
+			</p>
+
+			<?php basalt_core_feedback_report(); ?>
+
+			<h2 id="basalt-core-maintenance"><?php esc_html_e( 'Maintenance mode', 'basalt-core' ); ?></h2>
+
+			<p class="description">
+				<?php esc_html_e( 'While this is on, visitors get the maintenance page and a 503 status, which tells search engines the outage is temporary. Anyone who can edit posts keeps seeing the real site. The page itself is the template named "maintenance" in the theme; without one, a plain readable page is printed.', 'basalt-core' ); ?>
+			</p>
+
+			<table class="form-table" role="presentation">
+				<?php
+				basalt_core_field( 'maintenance_enabled', __( 'Turn on maintenance mode', 'basalt-core' ), 'checkbox' );
+				basalt_core_field( 'maintenance_headline', __( 'Headline', 'basalt-core' ), 'text', array( 'description' => __( 'What the page says in large type.', 'basalt-core' ) ) );
+				basalt_core_field( 'maintenance_message', __( 'Message', 'basalt-core' ), 'textarea', array( 'description' => __( 'Two sentences at most: what is happening, and how to reach you meanwhile.', 'basalt-core' ) ) );
+				basalt_core_field( 'maintenance_until', __( 'Back at', 'basalt-core' ), 'time', array( 'description' => __( 'Time of day, for example 18:00. Also sets the Retry-After header. Leave empty if you cannot say.', 'basalt-core' ) ) );
 				?>
 			</table>
 

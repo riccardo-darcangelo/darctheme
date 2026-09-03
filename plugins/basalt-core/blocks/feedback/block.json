@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/feedback",
+	"title": "Feedback",
+	"category": "widgets",
+	"icon": "thumbs-up",
+	"description": "One question at the end of a page that explains something: was this helpful, yes or no. A no opens a small text field. No cookies, no script, no external service; the answers are counted under Settings, Search and schema.",
+	"keywords": [ "feedback", "helpful", "rating", "survey" ],
+	"textdomain": "basalt-core",
+	"editorScript": "file:./editor.js",
+	"style": "file:./style.css",
+	"supports": {
+		"html": false,
+		"align": [ "wide" ],
+		"spacing": { "margin": true, "padding": true },
+		"color": { "text": true, "background": true }
+	},
+	"attributes": {
+		"topic": { "type": "string", "default": "" },
+		"question": { "type": "string", "default": "Was this helpful?" },
+		"yesLabel": { "type": "string", "default": "Yes" },
+		"noLabel": { "type": "string", "default": "No" },
+		"moreLabel": { "type": "string", "default": "Thank you. What was missing?" },
+		"sendLabel": { "type": "string", "default": "Send" },
+		"callLabel": { "type": "string", "default": "" },
+		"callUrl": { "type": "string", "default": "" }
+	}
+}

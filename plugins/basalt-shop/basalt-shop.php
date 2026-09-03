@@ -378,6 +378,11 @@ function basalt_shop_register_blocks(): void {
 		plugin_dir_path( __FILE__ ) . 'blocks/attribute-range',
 		array( 'render_callback' => 'basalt_shop_attribute_range_block' )
 	);
+
+	register_block_type(
+		plugin_dir_path( __FILE__ ) . 'blocks/fit-summary',
+		array( 'render_callback' => 'basalt_shop_fit_summary_block' )
+	);
 }
 add_action( 'init', 'basalt_shop_register_blocks' );
 
@@ -506,3 +511,292 @@ function basalt_shop_availability_text( $text, $product ) {
 	return $text;
 }
 add_filter( 'woocommerce_get_availability_text', 'basalt_shop_availability_text', 10, 2 );
+
+/* -------------------------------------------------------------------------
+ * Fit on reviews
+ *
+ * On a bra, a jacket or a pair of shoes, the useful part of a review is not
+ * the star count: it is which size the reviewer normally wears, which size she
+ * bought, and whether the thing came up small. Three fields on the review
+ * form, three lines under the review, and one summary block that adds them up.
+ *
+ * Stored as comment meta, so the data belongs to the review and travels with
+ * an export. Nothing here runs outside a product.
+ * ---------------------------------------------------------------------- */
+
+/** Meta keys, and the scale. */
+const BASALT_SHOP_FIT_META = array(
+	'worn'   => '_basalt_worn_size',
+	'bought' => '_basalt_bought_size',
+	'fit'    => '_basalt_fit',
+);
+
+/**
+ * The three answers on the fit scale.
+ *
+ * @return array<string, string>
+ */
+function basalt_shop_fit_scale(): array {
+	return array(
+		'smaller'  => __( 'Comes up small', 'basalt-shop' ),
+		'expected' => __( 'As expected', 'basalt-shop' ),
+		'larger'   => __( 'Comes up large', 'basalt-shop' ),
+	);
+}
+
+/**
+ * Whether the current request is a product page with reviews.
+ *
+ * @return bool
+ */
+function basalt_shop_is_review_context(): bool {
+	return basalt_shop_active() && is_singular( 'product' );
+}
+
+/**
+ * The extra fields on the review form.
+ *
+ * @return void
+ */
+function basalt_shop_review_fields(): void {
+	if ( ! basalt_shop_is_review_context() ) {
+		return;
+	}
+
+	$scale = basalt_shop_fit_scale();
+	$radios = '';
+
+	foreach ( $scale as $value => $label ) {
+		$radios .= sprintf(
+			'<label class="basalt-fit-form__option"><input type="radio" name="basalt_fit" value="%1$s"> %2$s</label>',
+			esc_attr( $value ),
+			esc_html( $label )
+		);
+	}
+
+	printf(
+		'<fieldset class="basalt-fit-form comment-form-fit">
+			<legend>%1$s</legend>
+			<div class="basalt-fit-form__scale">%2$s</div>
+			<p class="comment-form-worn-size"><label for="basalt-worn-size">%3$s</label><input type="text" id="basalt-worn-size" name="basalt_worn_size" maxlength="20" autocomplete="off"></p>
+			<p class="comment-form-bought-size"><label for="basalt-bought-size">%4$s</label><input type="text" id="basalt-bought-size" name="basalt_bought_size" maxlength="20" autocomplete="off"></p>
+			<p class="basalt-fit-form__help">%5$s</p>
+		</fieldset>',
+		esc_html__( 'How does the size come out?', 'basalt-shop' ),
+		$radios, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
+		esc_html__( 'You normally wear', 'basalt-shop' ),
+		esc_html__( 'You bought', 'basalt-shop' ),
+		esc_html__( 'Your size is the most useful thing in a review. It is published with your name; your email never is.', 'basalt-shop' )
+	);
+}
+add_action( 'comment_form_logged_in_after', 'basalt_shop_review_fields' );
+add_action( 'comment_form_after_fields', 'basalt_shop_review_fields' );
+
+/**
+ * Save them with the review.
+ *
+ * WordPress has run its own checks on the comment by this point.
+ *
+ * @param int $comment_id The new comment.
+ * @return void
+ */
+function basalt_shop_save_review_fields( $comment_id ): void {
+	$comment = get_comment( $comment_id );
+
+	if ( ! $comment || 'product' !== get_post_type( (int) $comment->comment_post_ID ) ) {
+		return;
+	}
+
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- comment submission, verified by WordPress.
+	$fit = sanitize_key( wp_unslash( (string) ( $_POST['basalt_fit'] ?? '' ) ) );
+
+	if ( array_key_exists( $fit, basalt_shop_fit_scale() ) ) {
+		add_comment_meta( $comment_id, BASALT_SHOP_FIT_META['fit'], $fit, true );
+	}
+
+	foreach ( array( 'worn' => 'basalt_worn_size', 'bought' => 'basalt_bought_size' ) as $key => $field ) {
+		$value = sanitize_text_field( wp_unslash( (string) ( $_POST[ $field ] ?? '' ) ) );
+
+		if ( '' !== $value ) {
+			add_comment_meta( $comment_id, BASALT_SHOP_FIT_META[ $key ], mb_substr( $value, 0, 20 ), true );
+		}
+	}
+	// phpcs:enable
+}
+add_action( 'comment_post', 'basalt_shop_save_review_fields' );
+
+/**
+ * Print the three answers under the review text.
+ *
+ * A filter on the text rather than an action in the classic template, because
+ * the block based review list renders through the same filter and the classic
+ * one does too.
+ *
+ * @param string          $text    The comment text.
+ * @param WP_Comment|null $comment The comment.
+ * @return string
+ */
+function basalt_shop_review_meta_line( $text, $comment = null ) {
+	if ( ! $comment instanceof WP_Comment || 'product' !== get_post_type( (int) $comment->comment_post_ID ) ) {
+		return $text;
+	}
+
+	$scale = basalt_shop_fit_scale();
+	$parts = array();
+	$worn  = (string) get_comment_meta( $comment->comment_ID, BASALT_SHOP_FIT_META['worn'], true );
+	$bought = (string) get_comment_meta( $comment->comment_ID, BASALT_SHOP_FIT_META['bought'], true );
+	$fit   = (string) get_comment_meta( $comment->comment_ID, BASALT_SHOP_FIT_META['fit'], true );
+
+	if ( $worn ) {
+		/* translators: %s: the size the reviewer normally wears. */
+		$parts[] = sprintf( __( 'Wears %s', 'basalt-shop' ), $worn );
+	}
+
+	if ( $bought ) {
+		/* translators: %s: the size the reviewer bought. */
+		$parts[] = sprintf( __( 'Bought %s', 'basalt-shop' ), $bought );
+	}
+
+	if ( isset( $scale[ $fit ] ) ) {
+		$parts[] = $scale[ $fit ];
+	}
+
+	if ( ! $parts ) {
+		return $text;
+	}
+
+	$chips = '';
+
+	foreach ( $parts as $part ) {
+		$chips .= '<span class="basalt-fit-chip">' . esc_html( $part ) . '</span>';
+	}
+
+	return $text . '<p class="basalt-fit-chips">' . $chips . '</p>';
+}
+add_filter( 'comment_text', 'basalt_shop_review_meta_line', 20, 2 );
+
+/**
+ * How the reviews of one product answered the fit question.
+ *
+ * @param int $product_id The product.
+ * @return array{total: int, counts: array<string, int>}
+ */
+function basalt_shop_fit_counts( int $product_id ): array {
+	$counts = array_fill_keys( array_keys( basalt_shop_fit_scale() ), 0 );
+
+	$comments = get_comments(
+		array(
+			'post_id' => $product_id,
+			'status'  => 'approve',
+			'type'    => 'review',
+			'number'  => 500,
+			'fields'  => 'ids',
+		)
+	);
+
+	$total = 0;
+
+	foreach ( (array) $comments as $id ) {
+		$fit = (string) get_comment_meta( (int) $id, BASALT_SHOP_FIT_META['fit'], true );
+
+		if ( isset( $counts[ $fit ] ) ) {
+			++$counts[ $fit ];
+			++$total;
+		}
+	}
+
+	return array(
+		'total'  => $total,
+		'counts' => $counts,
+	);
+}
+
+/**
+ * Render the fit summary block.
+ *
+ * @param array<string, mixed> $attributes Block attributes.
+ * @param string               $content    Unused.
+ * @param WP_Block|null        $block      Block instance.
+ * @return string
+ */
+function basalt_shop_fit_summary_block( $attributes, $content = '', $block = null ): string {
+	$post_id = (int) ( $block instanceof WP_Block ? ( $block->context['postId'] ?? 0 ) : 0 );
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- editor preview passes the product id, read only.
+	$post_id = $post_id ?: (int) ( $_GET['postId'] ?? get_the_ID() );
+
+	if ( ! $post_id || ! basalt_shop_active() ) {
+		return '';
+	}
+
+	$data = basalt_shop_fit_counts( $post_id );
+
+	if ( ! $data['total'] ) {
+		return '';
+	}
+
+	$scale = basalt_shop_fit_scale();
+	$rows  = '';
+
+	foreach ( $scale as $key => $label ) {
+		$count   = $data['counts'][ $key ];
+		$percent = (int) round( $count / $data['total'] * 100 );
+
+		$rows .= sprintf(
+			'<div class="basalt-fit-summary__row"><span class="basalt-fit-summary__label">%1$s</span><span class="basalt-fit-summary__bar"><span style="inline-size:%2$d%%"></span></span><span class="basalt-fit-summary__count">%3$d</span></div>',
+			esc_html( $label ),
+			$percent,
+			$count
+		);
+	}
+
+	$lead     = '';
+	$dominant = array_search( max( $data['counts'] ), $data['counts'], true );
+
+	if ( 'expected' !== $dominant && max( $data['counts'] ) / $data['total'] >= 0.5 ) {
+		$lead = sprintf(
+			/* translators: 1: number of reviews, 2: total reviews, 3: the advice. */
+			esc_html__( '%1$d of %2$d say so. %3$s', 'basalt-shop' ),
+			max( $data['counts'] ),
+			$data['total'],
+			'smaller' === $dominant
+				? esc_html__( 'We suggest going one size up.', 'basalt-shop' )
+				: esc_html__( 'We suggest going one size down.', 'basalt-shop' )
+		);
+	}
+
+	return sprintf(
+		'<div %1$s><p class="basalt-fit-summary__title">%2$s</p>%3$s%4$s</div>',
+		get_block_wrapper_attributes( array( 'class' => 'basalt-fit-summary' ) ),
+		esc_html__( 'How the size comes out', 'basalt-shop' ),
+		$rows,
+		$lead ? '<p class="basalt-fit-summary__lead">' . $lead . '</p>' : ''
+	);
+}
+
+/**
+ * Minimal styles for the fit output, on shop views only.
+ *
+ * @return void
+ */
+function basalt_shop_fit_styles(): void {
+	if ( ! basalt_shop_active() || ! is_woocommerce() ) {
+		return;
+	}
+
+	wp_add_inline_style(
+		'basalt-shop',
+		'.basalt-fit-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 0}'
+		. '.basalt-fit-chip{padding:.15rem .6rem;border:1px solid currentColor;border-radius:999px;font-size:.8125rem;opacity:.85}'
+		. '.basalt-fit-summary{display:grid;gap:.35rem;margin-block:1rem}'
+		. '.basalt-fit-summary__title{margin:0;font-weight:600}'
+		. '.basalt-fit-summary__row{display:grid;grid-template-columns:minmax(6rem,10rem) 1fr auto;align-items:center;gap:.75rem}'
+		. '.basalt-fit-summary__bar{block-size:.5rem;background:rgb(0 0 0 / 8%);border-radius:999px;overflow:hidden}'
+		. '.basalt-fit-summary__bar span{display:block;block-size:100%;background:currentColor}'
+		. '.basalt-fit-summary__lead{margin:.25rem 0 0}'
+		. '.basalt-fit-form{margin-block:1rem;border:0;padding:0}'
+		. '.basalt-fit-form__scale{display:flex;flex-wrap:wrap;gap:.75rem;margin-block:.5rem}'
+		. '.basalt-fit-form__option{display:inline-flex;align-items:center;gap:.35rem;min-block-size:44px}'
+		. '.basalt-fit-form__help{font-size:.9375rem;opacity:.8}'
+	);
+}
+add_action( 'wp_enqueue_scripts', 'basalt_shop_fit_styles', 21 );
