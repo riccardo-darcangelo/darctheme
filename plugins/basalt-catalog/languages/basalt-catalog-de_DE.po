@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://darcdesign.de/themes/basalt/\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: tools/make-po.mjs\n"
+
+#. Plugin Name of the plugin
+#: basalt-catalog.php
+msgid "Basalt Catalog"
+msgstr ""
+
+#. Description of the plugin
+#: basalt-catalog.php
+msgid "Registers a catalog post type with filterable taxonomies and technical specification fields. Example of the data layer that belongs in a plugin rather than in the theme."
+msgstr "Registriert einen Katalog-Inhaltstyp mit filterbaren Taxonomien und Feldern für technische Daten. Beispiel für die Datenschicht, die in ein Plugin gehört und nicht ins Theme."
+
+#. Author of the plugin
+#: basalt-catalog.php
+msgid "Riccardo D'Arcangelo"
+msgstr ""
+
+#: basalt-catalog.php:59
+msgid "Load capacities"
+msgstr "Tragfähigkeiten"
+
+#: basalt-catalog.php:60
+#: basalt-catalog.php:93
+msgid "Load capacity"
+msgstr "Tragfähigkeit"
+
+#: basalt-catalog.php:65
+msgid "Applications"
+msgstr "Einsatzbereiche"
+
+#: basalt-catalog.php:66
+msgid "Application"
+msgstr "Einsatzbereich"
+
+#: basalt-catalog.php:98
+msgid "Maximum height"
+msgstr "Maximale Höhe"
+
+#: basalt-catalog.php:103
+msgid "Lifting speed"
+msgstr "Hubgeschwindigkeit"
+
+#: basalt-catalog.php:108
+msgid "Power supply"
+msgstr "Stromversorgung"
+
+#: basalt-catalog.php:113
+msgid "Weight"
+msgstr "Gewicht"
+
+#: basalt-catalog.php:131
+msgid "Catalog"
+msgstr "Katalog"
+
+#: basalt-catalog.php:132
+msgid "Catalog item"
+msgstr "Katalogeintrag"
+
+#: basalt-catalog.php:133
+msgid "Add catalog item"
+msgstr "Katalogeintrag hinzufügen"
+
+#: basalt-catalog.php:134
+msgid "Edit catalog item"
+msgstr "Katalogeintrag bearbeiten"
+
+#: basalt-catalog.php:135
+msgid "Search catalog"
+msgstr "Katalog durchsuchen"
+
+#: basalt-catalog.php:136
+msgid "No catalog items yet"
+msgstr "Noch keine Katalogeinträge"
+
+#: basalt-catalog.php:142
+msgid "Products and equipment presented with their technical data."
+msgstr "Produkte und Geräte mit ihren technischen Daten."

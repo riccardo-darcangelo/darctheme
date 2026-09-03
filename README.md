@@ -20,8 +20,8 @@ to a block theme.
 | `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, robots.txt and AI crawler policy, llms.txt, per page indexing switch, breadcrumb block, accessibility corrections for core blocks. |
 | `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `plugins/basalt-forms/` | Companion plugin: one accessible contact and appointment form block, server validated, no JavaScript, submissions kept in the admin. |
-| `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, guarded password reset and registration, password quality, a small request filter, security headers and the hardening WordPress leaves off. |
-| `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, a buy bar that keeps the price and the button in reach on a phone, and a cart drawer rendered on the server instead of the mini cart block. |
+| `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, guarded password reset and registration, optional sign in by emailed link, password quality, a small request filter, security headers and the hardening WordPress leaves off. |
+| `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, a buy bar that keeps the price and the button in reach on a phone, a cart drawer rendered on the server instead of the mini cart block, and reviews filtered by the size the reviewer wears. |
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
 | `dev/` | Throwaway WordPress in Docker, with a seed script for demo content. |
@@ -122,6 +122,14 @@ content and their search presence with it when they switch.
 The settings are options rather than theme mods, and that fixes a real defect:
 WordPress stores theme mods per stylesheet, so under 2.x switching from the
 parent to the child theme silently wiped every business detail.
+
+**Translations live in JSON, not in the .po.** Each plugin ships a de_DE
+catalogue built by `tools/make-po.mjs` from its POT and a JSON table of
+strings. Regenerating a POT is then harmless: what still exists keeps its
+translation and what is new is reported as missing. The German is in the
+polite form, because a catalogue that ships with a product cannot know whether
+a site says du or Sie; a child theme maps the handful of sentences it says
+differently.
 
 **Security is mostly what is not there.** The theme and its plugins were gone
 through against the OWASP Top Ten: no direct database queries, no unescaped

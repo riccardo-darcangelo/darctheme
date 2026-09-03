@@ -93,6 +93,11 @@ function basalt_security_defaults(): array {
 		'strong_passwords'   => true,
 		'password_min'       => 12,
 
+		// Signing in with a link.
+		'magic_link'         => false,
+		'magic_for_staff'    => false,
+		'magic_limit'        => 5,
+
 		// Hardening.
 		'disable_xmlrpc'     => true,
 		'disable_enumeration' => true,
@@ -215,7 +220,7 @@ function basalt_security_not_found(): void {
 	exit;
 }
 
-foreach ( array( 'log', 'login-path', 'brute-force', 'firewall', 'headers', 'hardening', 'accounts', 'review', 'settings' ) as $basalt_security_module ) {
+foreach ( array( 'log', 'login-path', 'brute-force', 'firewall', 'headers', 'hardening', 'accounts', 'magic-link', 'review', 'settings' ) as $basalt_security_module ) {
 	require_once BASALT_SECURITY_DIR . 'inc/' . $basalt_security_module . '.php';
 }
 

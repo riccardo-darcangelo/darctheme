@@ -1082,6 +1082,7 @@
 		<li><strong>A short list of patterns.</strong> Traversal, union select, script tags in a URL, requests for .env or an old phpunit runner. The URL is always checked; a submitted form only for visitors who are not signed in, so an editor pasting a code sample is never blocked.</li>
 		<li><strong>Headers.</strong> nosniff, a referrer policy, a permissions policy, X-Frame-Options and a narrow content policy. The policy deliberately says nothing about scripts: a script policy needs a nonce per response and breaks the moment a page is cached at the edge.</li>
 		<li><strong>The other three doors into an account.</strong> The password reset form is limited per address, because every request sends mail to an inbox a stranger typed. The registration form gets a hidden field no person fills in, a limit per address, and an answer that does not confirm which addresses already have an account. Both cover the WooCommerce forms as well, which run their own registration and never reach the WordPress hooks. Resetting a password ends every session on the account, which is the point of resetting it.</li>
+		<li><strong>Signing in with a link.</strong> Off by default. A customer signs in twice a year, cannot remember the password, resets it and picks something worse: a link proves the same thing the reset proves, in one step instead of four. The token is single use, expires in fifteen minutes and is stored only as a hash, so a database dump is not a pile of working sign in links. The link opens a page with a button rather than signing anybody in by itself, because mail scanners follow every link in a message and a token a scanner can spend is gone before the person clicks it. Administrators are left out unless you say otherwise, the answer never reveals whether an address has an account, and it stands down entirely while a lockout is in effect.</li>
 		<li><strong>Passwords that are not obvious.</strong> Length, and nothing built around the site name or the account name. No rule about capitals and digits: that rule produces Sommer2026! and nothing safer. Twelve characters by default, and the message says why a short sentence beats a short password.</li>
 		<li><strong>Hardening.</strong> XML-RPC off (and /xmlrpc.php answers nothing at all), no user enumeration through ?author=1, the REST users endpoint or the sitemap, no theme and plugin editor, no version number in the markup, application passwords for administrators only.</li>
 	</ul>
@@ -1211,6 +1212,25 @@
 		Without JavaScript the bar is simply always there on a narrow screen.
 		With it, the bar waits until the real button has scrolled past and slides
 		out of the way again when it comes back.
+	</p>
+
+	<h4 id="shop-review-filter">Filtering reviews by size</h4>
+	<p>
+		On a shop where size is the whole question, the useful review is not the
+		most recent one, it is the one written by somebody the same size. The
+		<strong>Review filter</strong> block puts a row of sizes above the
+		reviews, taken from what reviewers said they wear, with a second row for
+		how the size came out.
+	</p>
+	<p>
+		Each one is a link: the same page with a query argument on it. A filtered
+		view therefore has its own address, can be sent to somebody, works with
+		the back button and needs no JavaScript. The filtering happens in the
+		comment query itself, so it applies to the classic review template and
+		the review block equally, and WooCommerce's pagination keeps working
+		because it is the same query. The block renders nothing until two
+		different sizes have been named, which is the point at which a filter
+		starts to be worth having.
 	</p>
 
 	<h4 id="shop-cart-drawer">The cart drawer</h4>
@@ -1536,6 +1556,35 @@
 		Put translations in a child theme's <code>languages/</code> folder to
 		keep them safe from theme updates. WordPress loads a child theme's
 		translations before the parent's.
+	</p>
+	<h3>The plugins, and German</h3>
+	<p>
+		All five plugins are translation ready in the same way, each with its own
+		POT in its own <code>languages</code> folder. German is included: a
+		<code>de_DE</code> catalogue per plugin, as .po, .mo and the .php format
+		WordPress 6.5 and later loads fastest. Set the site language to Deutsch
+		and everything the plugins print is German, front end and admin.
+	</p>
+	<p>
+		The German is written in the polite form. A catalogue that ships with a
+		product cannot know whether a site says du or Sie to its visitors, and
+		the polite form is the one that is never wrong. A site that wants the
+		informal form does not edit the catalogue, which the next update would
+		overwrite: it filters <code>gettext</code> in its child theme and maps
+		only the sentences it says differently, which is usually a dozen rather
+		than three hundred.
+	</p>
+	<h3>Another language, without editing a .po by hand</h3>
+	<ol class="steps">
+		<li>Regenerate the POT if the code has changed: <code>wp i18n make-pot plugins/basalt-core plugins/basalt-core/languages/basalt-core.pot --domain=basalt-core</code></li>
+		<li>Put the translations in a JSON file, one <code>"original": "translation"</code> pair per string.</li>
+		<li><code>node tools/make-po.mjs &lt;pot&gt; &lt;json&gt; &lt;out.po&gt; &lt;locale&gt;</code>. Whatever has no translation is listed rather than quietly shipped in English.</li>
+		<li><code>wp i18n make-mo &lt;dir&gt;</code> and <code>wp i18n make-php &lt;dir&gt;</code>.</li>
+	</ol>
+	<p>
+		Keeping the translations in JSON rather than in the .po is what makes a
+		regenerated POT harmless: strings that still exist keep their
+		translations, and new ones show up as missing instead of disappearing.
 	</p>
 	<p>
 		Right to left languages need no separate stylesheet. The theme uses CSS

@@ -1,0 +1,455 @@
+# Copyright (C) 2026 Riccardo D'Arcangelo
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Basalt Shop 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/basalt-shop\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-03T08:54:34+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: basalt-shop\n"
+
+#. Plugin Name of the plugin
+#: basalt-shop.php
+msgid "Basalt Shop"
+msgstr ""
+
+#. Description of the plugin
+#: basalt-shop.php
+msgid "WooCommerce for a shop with a door. Marks products as available in store only, in which case the cart button becomes an appointment button and the structured data says so. Settings under WooCommerce, Settings, Products, In store."
+msgstr ""
+
+#. Author of the plugin
+#: basalt-shop.php
+msgid "Riccardo D'Arcangelo"
+msgstr ""
+
+#: basalt-shop.php:49
+#: basalt-shop.php:340
+msgid "Book a fitting"
+msgstr ""
+
+#: basalt-shop.php:50
+#: basalt-shop.php:353
+msgid "This one we only hand over after a fitting. We measure you, bring two or three sizes into the cubicle, and you decide in front of the mirror."
+msgstr ""
+
+#: basalt-shop.php:51
+#: basalt-shop.php:101
+#: basalt-shop.php:346
+msgid "In store only"
+msgstr ""
+
+#: basalt-shop.php:102
+msgid "Show the product, but replace the cart button with the appointment button. The Offer in the structured data is marked InStoreOnly."
+msgstr ""
+
+#: basalt-shop.php:303
+msgid "In store"
+msgstr ""
+
+#: basalt-shop.php:323
+msgid "Products sold in store only"
+msgstr ""
+
+#: basalt-shop.php:325
+msgid "Mark a product as \"In store only\" on its General tab. These settings decide what visitors see instead of the cart button."
+msgstr ""
+
+#: basalt-shop.php:329
+msgid "Appointment page"
+msgstr ""
+
+#: basalt-shop.php:330
+msgid "Where the button leads. Leave empty to show the text without a button."
+msgstr ""
+
+#: basalt-shop.php:337
+msgid "Button label"
+msgstr ""
+
+#: basalt-shop.php:343
+msgid "Label in the product grid"
+msgstr ""
+
+#: basalt-shop.php:349
+msgid "Text on the product page"
+msgstr ""
+
+#: basalt-shop.php:356
+msgid "Hide the price"
+msgstr ""
+
+#: basalt-shop.php:357
+msgid "Do not show a price for products sold in store only."
+msgstr ""
+
+#: basalt-shop.php:367
+msgid "On a phone"
+msgstr ""
+
+#: basalt-shop.php:369
+msgid "A product page on a phone is a long column, and the button that sells the thing scrolls out of sight in the first second."
+msgstr ""
+
+#: basalt-shop.php:373
+msgid "Buy bar"
+msgstr ""
+
+#: basalt-shop.php:374
+msgid "Keep the price and the button at the bottom of the screen on narrow displays."
+msgstr ""
+
+#: basalt-shop.php:378
+msgid "The bar submits the form that is already on the page. Where a size has to be chosen first, it takes the visitor to that choice instead."
+msgstr ""
+
+#. translators: 1: smallest option, 2: largest option
+#: basalt-shop.php:504
+#, php-format
+msgctxt "attribute range"
+msgid "%1$s to %2$s"
+msgstr ""
+
+#: basalt-shop.php:552
+msgid "Available"
+msgstr ""
+
+#: basalt-shop.php:586
+msgid "Comes up small"
+msgstr ""
+
+#: basalt-shop.php:587
+msgid "As expected"
+msgstr ""
+
+#: basalt-shop.php:588
+msgid "Comes up large"
+msgstr ""
+
+#: basalt-shop.php:630
+msgid "How does the size come out?"
+msgstr ""
+
+#: basalt-shop.php:632
+msgid "You normally wear"
+msgstr ""
+
+#: basalt-shop.php:633
+msgid "You bought"
+msgstr ""
+
+#: basalt-shop.php:634
+msgid "Your size is the most useful thing in a review. It is published with your name; your email never is."
+msgstr ""
+
+#. translators: %s: the size the reviewer normally wears.
+#: basalt-shop.php:697
+#, php-format
+msgid "Wears %s"
+msgstr ""
+
+#. translators: %s: the size the reviewer bought.
+#: basalt-shop.php:702
+#, php-format
+msgid "Bought %s"
+msgstr ""
+
+#. translators: 1: number of reviews, 2: total reviews, 3: the advice.
+#: basalt-shop.php:803
+#, php-format
+msgid "%1$d of %2$d say so. %3$s"
+msgstr ""
+
+#: basalt-shop.php:807
+msgid "We suggest going one size up."
+msgstr ""
+
+#: basalt-shop.php:808
+msgid "We suggest going one size down."
+msgstr ""
+
+#: basalt-shop.php:815
+msgid "How the size comes out"
+msgstr ""
+
+#: inc/buy-bar.php:185
+msgid "Choose your size"
+msgstr ""
+
+#: inc/cart-drawer.php:55
+#: inc/cart-drawer.php:91
+msgid "Cart"
+msgstr ""
+
+#. translators: %d: number of items in the cart.
+#: inc/cart-drawer.php:81
+#, php-format
+msgid "%d item in the cart"
+msgid_plural "%d items in the cart"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/cart-drawer.php:133
+msgid "Your cart"
+msgstr ""
+
+#: inc/cart-drawer.php:134
+msgid "Close"
+msgstr ""
+
+#: inc/cart-drawer.php:140
+msgid "Nothing in it yet."
+msgstr ""
+
+#: inc/cart-drawer.php:142
+msgid "Have a look around"
+msgstr ""
+
+#. translators: %s: product name.
+#: inc/cart-drawer.php:180
+#, php-format
+msgid "Remove %s from the cart"
+msgstr ""
+
+#: inc/cart-drawer.php:186
+msgid "Subtotal"
+msgstr ""
+
+#: inc/cart-drawer.php:188
+msgid "Shipping and any discount are worked out at the checkout."
+msgstr ""
+
+#: inc/cart-drawer.php:190
+msgid "View cart"
+msgstr ""
+
+#: inc/cart-drawer.php:192
+msgid "Checkout"
+msgstr ""
+
+#: inc/review-filter.php:231
+msgid "Size worn"
+msgstr ""
+
+#: inc/review-filter.php:232
+msgid "How it came out"
+msgstr ""
+
+#: inc/review-filter.php:245
+#: inc/review-filter.php:264
+msgid "All"
+msgstr ""
+
+#. translators: 1: number of reviews shown, 2: number of reviews in total
+#: inc/review-filter.php:301
+#, php-format
+msgid "Showing %1$d of %2$d review."
+msgid_plural "Showing %1$d of %2$d reviews."
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/review-filter.php:307
+msgid "Show all"
+msgstr ""
+
+#: blocks/attribute-range/editor.js:25
+#: blocks/attribute-range/editor.js:66
+msgid "Attribute range"
+msgstr ""
+
+#: blocks/attribute-range/editor.js:29
+msgid "Attributes"
+msgstr ""
+
+#: blocks/attribute-range/editor.js:30
+msgid "Attribute slugs, comma separated, in the order to show them. Global attributes with or without the pa_ prefix, for example: unterbrust, cup"
+msgstr ""
+
+#: blocks/attribute-range/editor.js:38
+msgid "Label on the first attribute too"
+msgstr ""
+
+#: blocks/attribute-range/editor.js:39
+msgid "Off by default: \"70 to 90 · Cup B to G\" reads better than \"Band 70 to 90 · Cup B to G\"."
+msgstr ""
+
+#: blocks/attribute-range/editor.js:48
+msgid "Separator"
+msgstr ""
+
+#: blocks/attribute-range/editor.js:67
+msgid "Shows the span of the chosen attributes for each product. Nothing to preview until an attribute slug is entered and a product is in context."
+msgstr ""
+
+#: blocks/cart-drawer/editor.js:26
+#: blocks/cart-drawer/editor.js:68
+msgid "Cart drawer"
+msgstr ""
+
+#: blocks/cart-drawer/editor.js:28
+msgid "Label"
+msgstr ""
+
+#: blocks/cart-drawer/editor.js:36
+msgid "Show the number of items"
+msgstr ""
+
+#: blocks/cart-drawer/editor.js:44
+msgid "Show the subtotal"
+msgstr ""
+
+#: blocks/cart-drawer/editor.js:45
+msgid "Useful in a wide header, too much in a narrow one."
+msgstr ""
+
+#: blocks/cart-drawer/editor.js:55
+msgid "The panel itself is only shown on the site. In the editor this is the button that opens it."
+msgstr ""
+
+#: blocks/cart-drawer/editor.js:69
+msgid "Appears once WooCommerce is active."
+msgstr ""
+
+#: blocks/fit-summary/editor.js:27
+msgid "Fit summary"
+msgstr ""
+
+#: blocks/fit-summary/editor.js:28
+msgid "Appears once a review has answered the fit question."
+msgstr ""
+
+#: blocks/review-filter/editor.js:26
+#: blocks/review-filter/editor.js:63
+msgid "Review filter"
+msgstr ""
+
+#: blocks/review-filter/editor.js:28
+msgid "Also filter by how the size came out"
+msgstr ""
+
+#: blocks/review-filter/editor.js:36
+msgid "Label for the sizes"
+msgstr ""
+
+#: blocks/review-filter/editor.js:44
+msgid "Label for the fit"
+msgstr ""
+
+#: blocks/review-filter/editor.js:64
+msgid "Appears once reviews have named two different sizes."
+msgstr ""
+
+#: blocks/attribute-range/block.json
+msgctxt "block title"
+msgid "Attribute range"
+msgstr ""
+
+#: blocks/attribute-range/block.json
+msgctxt "block description"
+msgid "The span of one or more product attributes in a line, such as \"70 to 90 · Cup B to G\". For the product grid, where a shopper wants to know whether her size is in the range before she opens the product."
+msgstr ""
+
+#: blocks/attribute-range/block.json
+#: blocks/fit-summary/block.json
+#: blocks/review-filter/block.json
+msgctxt "block keyword"
+msgid "size"
+msgstr ""
+
+#: blocks/attribute-range/block.json
+msgctxt "block keyword"
+msgid "range"
+msgstr ""
+
+#: blocks/attribute-range/block.json
+msgctxt "block keyword"
+msgid "attribute"
+msgstr ""
+
+#: blocks/attribute-range/block.json
+msgctxt "block keyword"
+msgid "variations"
+msgstr ""
+
+#: blocks/attribute-range/block.json
+msgctxt "block keyword"
+msgid "product"
+msgstr ""
+
+#: blocks/cart-drawer/block.json
+msgctxt "block title"
+msgid "Cart drawer"
+msgstr ""
+
+#: blocks/cart-drawer/block.json
+msgctxt "block description"
+msgid "The cart as a panel that slides in from the side, rendered on the server. Opens and closes without JavaScript, and opens by itself after something has been added."
+msgstr ""
+
+#: blocks/cart-drawer/block.json
+msgctxt "block keyword"
+msgid "cart"
+msgstr ""
+
+#: blocks/cart-drawer/block.json
+msgctxt "block keyword"
+msgid "mini cart"
+msgstr ""
+
+#: blocks/cart-drawer/block.json
+msgctxt "block keyword"
+msgid "basket"
+msgstr ""
+
+#: blocks/cart-drawer/block.json
+msgctxt "block keyword"
+msgid "drawer"
+msgstr ""
+
+#: blocks/fit-summary/block.json
+msgctxt "block title"
+msgid "Fit summary"
+msgstr ""
+
+#: blocks/fit-summary/block.json
+msgctxt "block description"
+msgid "How the reviews of this product answered the fit question: comes up small, as expected, comes up large, with a sentence of advice when the answers agree. Renders nothing until a review has answered."
+msgstr ""
+
+#: blocks/fit-summary/block.json
+#: blocks/review-filter/block.json
+msgctxt "block keyword"
+msgid "fit"
+msgstr ""
+
+#: blocks/fit-summary/block.json
+#: blocks/review-filter/block.json
+msgctxt "block keyword"
+msgid "reviews"
+msgstr ""
+
+#: blocks/fit-summary/block.json
+msgctxt "block keyword"
+msgid "sizing"
+msgstr ""
+
+#: blocks/review-filter/block.json
+msgctxt "block title"
+msgid "Review filter"
+msgstr ""
+
+#: blocks/review-filter/block.json
+msgctxt "block description"
+msgid "Filter the reviews of this product by the size the reviewer wears and by how the size came out. Links rather than a script, so a filtered view has its own address. Renders nothing until two different sizes have been reviewed."
+msgstr ""
+
+#: blocks/review-filter/block.json
+msgctxt "block keyword"
+msgid "filter"
+msgstr ""

@@ -1,0 +1,246 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://darcdesign.de/themes/basalt/\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: tools/make-po.mjs\n"
+
+#. Plugin Name of the plugin
+#: basalt-forms.php
+msgid "Basalt Forms"
+msgstr ""
+
+#. Description of the plugin
+#: basalt-forms.php
+msgid "One accessible form block for contact and appointment requests. Server side validation with the error at the field, a honeypot, a rate limit, delivery by email and a copy of every submission in the admin. No JavaScript, no external service, nothing to configure before it works."
+msgstr "Ein barrierefreier Formularblock für Kontakt- und Terminanfragen. Prüfung auf dem Server mit der Meldung direkt am Feld, ein verstecktes Feld gegen Bots, eine Sendegrenze, Zustellung per E-Mail und eine Kopie jeder Anfrage im Backend. Kein JavaScript, kein externer Dienst, nichts einzurichten, bevor es funktioniert."
+
+#. Author of the plugin
+#: basalt-forms.php
+msgid "Riccardo D'Arcangelo"
+msgstr ""
+
+#: inc/entries.php:28
+msgid "Form entries"
+msgstr "Formularanfragen"
+
+#: inc/entries.php:29
+msgid "Form entry"
+msgstr "Formularanfrage"
+
+#: inc/entries.php:30
+msgid "Search entries"
+msgstr "Anfragen durchsuchen"
+
+#: inc/entries.php:31
+msgid "No entries yet"
+msgstr "Noch keine Anfragen"
+
+#. translators: 1: sender name, 2: date
+#: inc/entries.php:72
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+#: inc/entries.php:73
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: inc/handler.php:280
+msgid "Too many attempts in a short time. Please try again in an hour, or call us."
+msgstr "Zu viele Versuche in kurzer Zeit. Bitte versuchen Sie es in einer Stunde noch einmal oder rufen Sie uns an."
+
+#: inc/handler.php:297
+msgid "This form could not be verified. Please reload the page and try again."
+msgstr "Dieses Formular konnte nicht geprüft werden. Bitte laden Sie die Seite neu und versuchen Sie es noch einmal."
+
+#: inc/handler.php:302
+msgid "Your message could not be sent."
+msgstr "Ihre Nachricht konnte nicht gesendet werden."
+
+#: inc/handler.php:310
+msgid "This entry is too long."
+msgstr "Diese Eingabe ist zu lang."
+
+#: inc/handler.php:315
+msgid "Please fill in this field."
+msgstr "Bitte füllen Sie dieses Feld aus."
+
+#: inc/handler.php:318
+msgid "Please enter a complete email address, so that we can reply."
+msgstr "Bitte geben Sie eine vollständige E-Mail-Adresse an, damit wir antworten können."
+
+#: inc/handler.php:320
+msgid "Please enter a phone number with digits only."
+msgstr "Bitte geben Sie eine Telefonnummer nur mit Ziffern ein."
+
+#: inc/handler.php:325
+msgid "Please enter a valid date."
+msgstr "Bitte geben Sie ein gültiges Datum ein."
+
+#: inc/handler.php:327
+msgid "Please pick a date that is not in the past."
+msgstr "Bitte wählen Sie ein Datum, das nicht in der Vergangenheit liegt."
+
+#: inc/handler.php:332
+msgid "Please choose one of the options."
+msgstr "Bitte wählen Sie eine der Möglichkeiten."
+
+#: inc/handler.php:339
+msgid "Please confirm that you have read the privacy policy."
+msgstr "Bitte bestätigen Sie, dass Sie die Datenschutzerklärung gelesen haben."
+
+#: inc/handler.php:343
+msgid "Too many messages in a short time. Please try again in an hour, or call us."
+msgstr "Zu viele Nachrichten in kurzer Zeit. Bitte versuchen Sie es in einer Stunde noch einmal oder rufen Sie uns an."
+
+#. translators: %s: page URL
+#: inc/handler.php:426
+msgid "Sent from %s"
+msgstr "Gesendet von %s"
+
+#: inc/render.php:59
+msgid "Please check the highlighted fields."
+msgstr "Bitte prüfen Sie die hervorgehobenen Felder."
+
+#: inc/render.php:71
+msgid "Leave this field empty"
+msgstr "Dieses Feld bitte leer lassen"
+
+#: inc/render.php:130
+msgid "(optional)"
+msgstr "(optional)"
+
+#: inc/render.php:139
+msgid "Please choose"
+msgstr "Bitte wählen"
+
+#: blocks/form/editor.js:67
+msgid "Delivery"
+msgstr "Zustellung"
+
+#: blocks/form/editor.js:68
+msgid "Send to"
+msgstr "Senden an"
+
+#: blocks/form/editor.js:68
+msgid "Leave empty for the site administration address."
+msgstr "Leer lassen für die Administrationsadresse der Website."
+
+#: blocks/form/editor.js:69
+msgid "Email subject"
+msgstr "Betreff der E-Mail"
+
+#: blocks/form/editor.js:69
+msgid "%name% and %site% are replaced."
+msgstr "%name% und %site% werden ersetzt."
+
+#: blocks/form/editor.js:70
+msgid "Message after sending"
+msgstr "Meldung nach dem Absenden"
+
+#: blocks/form/editor.js:74
+msgid "Fields"
+msgstr "Felder"
+
+#: blocks/form/editor.js:75
+msgid "Name label"
+msgstr "Beschriftung für den Namen"
+
+#: blocks/form/editor.js:76
+msgid "Email label"
+msgstr "Beschriftung für die E-Mail-Adresse"
+
+#: blocks/form/editor.js:77
+msgid "Ask for a phone number"
+msgstr "Nach der Telefonnummer fragen"
+
+#: blocks/form/editor.js:78
+msgid "Phone label"
+msgstr "Beschriftung für die Telefonnummer"
+
+#: blocks/form/editor.js:79
+msgid "Ask what it is about"
+msgstr "Nach dem Anliegen fragen"
+
+#: blocks/form/editor.js:80
+msgid "Topic label"
+msgstr "Beschriftung für das Anliegen"
+
+#: blocks/form/editor.js:84
+msgid "Topic options, one per line"
+msgstr "Auswahl für das Anliegen, eine pro Zeile"
+
+#: blocks/form/editor.js:91
+msgid "Ask for a preferred date"
+msgstr "Nach einem Wunschtermin fragen"
+
+#: blocks/form/editor.js:92
+msgid "Date label"
+msgstr "Beschriftung für das Datum"
+
+#: blocks/form/editor.js:93
+msgid "Message field"
+msgstr "Nachrichtenfeld"
+
+#: blocks/form/editor.js:94
+msgid "Message label"
+msgstr "Beschriftung für die Nachricht"
+
+#: blocks/form/editor.js:95
+msgid "Message is required"
+msgstr "Nachricht ist Pflicht"
+
+#: blocks/form/editor.js:96
+msgid "Consent text"
+msgstr "Text zur Einwilligung"
+
+#: blocks/form/editor.js:96
+msgid "Always required. A link is allowed, for example <a href=\"/privacy/\">privacy policy</a>."
+msgstr "Immer Pflicht. Ein Link ist erlaubt, zum Beispiel <a href=\"/datenschutz/\">Datenschutzerklärung</a>."
+
+#: blocks/form/editor.js:97
+msgid "Button label"
+msgstr "Beschriftung des Buttons"
+
+#: blocks/form/block.json
+msgctxt "block title"
+msgid "Contact form"
+msgstr "Kontaktformular"
+
+#: blocks/form/block.json
+msgctxt "block description"
+msgid "A contact or appointment request form. Name and email always, phone, topic, preferred date and message as you need them. Validated on the server, the error shown at the field, delivered by email and kept under Form entries."
+msgstr "Ein Formular für Kontakt- und Terminanfragen. Name und E-Mail immer, Telefon, Anliegen, Wunschtermin und Nachricht nach Bedarf. Geprüft wird auf dem Server, die Meldung steht am Feld, zugestellt wird per E-Mail, eine Kopie liegt unter Formularanfragen."
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "form"
+msgstr "Formular"
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "contact"
+msgstr "Kontakt"
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "appointment"
+msgstr "Termin"
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "request"
+msgstr "Anfrage"
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "enquiry"
+msgstr "Anliegen"

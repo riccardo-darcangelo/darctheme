@@ -24,7 +24,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'BASALT_SHOP_VERSION', '1.2.0' );
+define( 'BASALT_SHOP_VERSION', '1.3.0' );
 
 const BASALT_SHOP_META = '_basalt_in_store_only';
 
@@ -422,6 +422,11 @@ function basalt_shop_register_blocks(): void {
 	register_block_type(
 		plugin_dir_path( __FILE__ ) . 'blocks/cart-drawer',
 		array( 'render_callback' => 'basalt_shop_cart_drawer_block' )
+	);
+
+	register_block_type(
+		plugin_dir_path( __FILE__ ) . 'blocks/review-filter',
+		array( 'render_callback' => 'basalt_shop_review_filter_block' )
 	);
 }
 add_action( 'init', 'basalt_shop_register_blocks' );
@@ -845,7 +850,7 @@ add_action( 'wp_enqueue_scripts', 'basalt_shop_fit_styles', 21 );
  * Modules
  * ---------------------------------------------------------------------- */
 
-foreach ( array( 'buy-bar', 'cart-drawer' ) as $basalt_shop_module ) {
+foreach ( array( 'buy-bar', 'cart-drawer', 'review-filter' ) as $basalt_shop_module ) {
 	require_once plugin_dir_path( __FILE__ ) . 'inc/' . $basalt_shop_module . '.php';
 }
 

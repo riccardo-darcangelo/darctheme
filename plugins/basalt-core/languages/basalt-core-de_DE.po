@@ -1,0 +1,1318 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://darcdesign.de/themes/basalt/\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: tools/make-po.mjs\n"
+
+#. Plugin Name of the plugin
+#: basalt-core.php
+msgid "Basalt Core"
+msgstr ""
+
+#. Description of the plugin
+#: basalt-core.php
+msgid "Structured data, meta tags, breadcrumbs and accessibility corrections. The part of a Basalt site that must survive a theme change."
+msgstr "Strukturierte Daten, Meta-Tags, Brotkrumen und Korrekturen für die Barrierefreiheit. Der Teil einer Basalt-Website, der einen Theme-Wechsel überleben muss."
+
+#. Author of the plugin
+#: basalt-core.php
+msgid "Riccardo D'Arcangelo"
+msgstr ""
+
+#: demos/trades.php:19
+msgid "Trades and equipment"
+msgstr "Handwerk und Geräte"
+
+#: demos/trades.php:20
+msgid "A firm that hires out machines: a landing page, a catalog with technical data, three articles and the usual legal pages. The closest fit for construction, plant hire, workshops and anything sold on specifications."
+msgstr "Ein Betrieb, der Maschinen vermietet: eine Startseite, ein Katalog mit technischen Daten, drei Beiträge und die üblichen Rechtsseiten. Passt am ehesten für Bau, Gerätevermietung, Werkstätten und alles, was über technische Daten verkauft wird."
+
+#: demos/trades.php:27
+msgid "Hoists, lifts and site equipment for hire across Bavaria"
+msgstr "Aufzüge, Lifte und Baustellengeräte zur Miete in ganz Bayern"
+
+#: demos/trades.php:39
+msgid "Augsburger Hebetechnik"
+msgstr "Augsburger Hebetechnik"
+
+#: demos/trades.php:48
+msgid "Site mark"
+msgstr "Bildmarke"
+
+#: demos/trades.php:49
+msgid "Placeholder graphic: a pattern of basalt columns, standing in for a logo"
+msgstr "Platzhaltergrafik: ein Muster aus Basaltsäulen, stellvertretend für ein Logo"
+
+#: demos/trades.php:55
+msgid "The fleet"
+msgstr "Der Fuhrpark"
+
+#: demos/trades.php:56
+#: demos/trades.php:171
+msgid "Placeholder graphic: a pattern of basalt columns, where a photograph of the fleet would go"
+msgstr "Platzhaltergrafik: ein Muster aus Basaltsäulen an der Stelle, an die ein Foto des Fuhrparks gehört"
+
+#: demos/trades.php:62
+msgid "Social preview"
+msgstr "Vorschaubild für soziale Netzwerke"
+
+#: demos/trades.php:63
+msgid "Placeholder graphic: a pattern of basalt columns"
+msgstr "Platzhaltergrafik: ein Muster aus Basaltsäulen"
+
+#: demos/trades.php:69
+msgid "The yard"
+msgstr "Der Hof"
+
+#: demos/trades.php:70
+msgid "Placeholder graphic: a pattern of basalt columns, where a photograph of the yard would go"
+msgstr "Platzhaltergrafik: ein Muster aus Basaltsäulen an der Stelle, an die ein Foto des Hofs gehört"
+
+#: demos/trades.php:76
+#: demos/trades.php:267
+msgid "Hoist GL 200"
+msgstr "Aufzug GL 200"
+
+#: demos/trades.php:77
+#: demos/trades.php:84
+#: demos/trades.php:91
+msgid "Placeholder graphic: a pattern of basalt columns, where a photograph of the machine would go"
+msgstr "Platzhaltergrafik: ein Muster aus Basaltsäulen an der Stelle, an die ein Foto der Maschine gehört"
+
+#: demos/trades.php:83
+#: demos/trades.php:287
+msgid "Roof lift RL 250"
+msgstr "Dachlift RL 250"
+
+#: demos/trades.php:90
+#: demos/trades.php:307
+msgid "Heavy hoist HH 500"
+msgstr "Schwerlastaufzug HH 500"
+
+#: demos/trades.php:97
+msgid "Article image"
+msgstr "Beitragsbild"
+
+#: demos/trades.php:98
+msgid "Placeholder graphic: a pattern of basalt columns, where the article image would go"
+msgstr "Platzhaltergrafik: ein Muster aus Basaltsäulen an der Stelle, an die das Beitragsbild gehört"
+
+#: demos/trades.php:105
+msgid "Equipment"
+msgstr "Geräte"
+
+#: demos/trades.php:110
+msgid "Up to 200 kg"
+msgstr "Bis 200 kg"
+
+#: demos/trades.php:115
+msgid "Above 300 kg"
+msgstr "Über 300 kg"
+
+#: demos/trades.php:120
+msgid "Facade work"
+msgstr "Fassadenarbeiten"
+
+#: demos/trades.php:125
+msgid "Roofing"
+msgstr "Dacharbeiten"
+
+#: demos/trades.php:131
+#: inc/demos.php:448
+msgid "Main"
+msgstr "Hauptmenü"
+
+#: demos/trades.php:133
+#: demos/trades.php:145
+#: inc/breadcrumbs.php:23
+msgid "Home"
+msgstr "Startseite"
+
+#: demos/trades.php:134
+#: demos/trades.php:184
+msgid "Services"
+msgstr "Leistungen"
+
+#: demos/trades.php:135
+#: demos/trades.php:191
+msgid "About"
+msgstr "Über uns"
+
+#: demos/trades.php:136
+#: demos/trades.php:206
+msgid "Journal"
+msgstr "Journal"
+
+#: demos/trades.php:137
+#: demos/trades.php:199
+msgid "Contact"
+msgstr "Kontakt"
+
+#: demos/trades.php:162
+msgid "Since 1998"
+msgstr "Seit 1998"
+
+#: demos/trades.php:163
+msgid "Equipment that arrives on time and works on site"
+msgstr "Geräte, die pünktlich kommen und auf der Baustelle laufen"
+
+#: demos/trades.php:164
+msgid "Hoists, lifts and scaffolding equipment for hire. Delivered, set up and collected, anywhere in Bavaria, usually within two working days."
+msgstr "Aufzüge, Lifte und Gerüstzubehör zur Miete. Geliefert, aufgebaut und wieder abgeholt, überall in Bayern, meist innerhalb von zwei Werktagen."
+
+#: demos/trades.php:166
+msgid "Request a quote"
+msgstr "Angebot anfordern"
+
+#: demos/trades.php:167
+msgid "See the range"
+msgstr "Sortiment ansehen"
+
+#: demos/trades.php:185
+msgid "What we hire out, how it works and what it costs."
+msgstr "Was wir vermieten, wie es abläuft und was es kostet."
+
+#: demos/trades.php:192
+msgid "Twenty eight years of hiring out site equipment from a yard in Augsburg."
+msgstr "Achtundzwanzig Jahre Baustellengeräte aus einem Hof in Augsburg."
+
+#: demos/trades.php:200
+msgid "Where to find us, and what happens after an enquiry."
+msgstr "Wo Sie uns finden und was nach einer Anfrage passiert."
+
+#: demos/trades.php:207
+msgid "Notes from the workshop and the yard."
+msgstr "Notizen aus Werkstatt und Hof."
+
+#: demos/trades.php:213
+msgid "Imprint"
+msgstr "Impressum"
+
+#: demos/trades.php:214
+msgid "The legally required details of who runs this site. Replace this with yours."
+msgstr "Die gesetzlich vorgeschriebenen Angaben, wer diese Website betreibt. Ersetzen Sie das durch Ihre eigenen."
+
+#: demos/trades.php:219
+msgid "Privacy"
+msgstr "Datenschutz"
+
+#: demos/trades.php:220
+msgid "What this site stores, why, and for how long. Replace this with yours."
+msgstr "Was diese Website speichert, warum und wie lange. Ersetzen Sie das durch Ihre eigenen Angaben."
+
+#: demos/trades.php:226
+msgid "Choosing a hoist by load, not by price"
+msgstr "Einen Aufzug nach Last auswählen, nicht nach Preis"
+
+#: demos/trades.php:227
+msgid "The cheapest machine that fits the load is rarely the cheapest machine for the job."
+msgstr "Die günstigste Maschine, die die Last schafft, ist selten die günstigste Maschine für die Aufgabe."
+
+#: demos/trades.php:230
+msgid "Load capacity is the first number everyone looks at and the last one that should decide the hire. A machine running at its limit all day wears faster, runs slower and fails sooner than a larger one at two thirds load."
+msgstr "Die Tragfähigkeit ist die erste Zahl, auf die alle schauen, und die letzte, die über die Miete entscheiden sollte. Eine Maschine, die den ganzen Tag am Limit läuft, verschleißt schneller, arbeitet langsamer und fällt früher aus als eine größere bei zwei Dritteln Last."
+
+#: demos/trades.php:231
+msgid "Work out the real load"
+msgstr "Die tatsächliche Last ausrechnen"
+
+#: demos/trades.php:232
+msgid "Take the heaviest single item, add the carrier, then add a third. That last third is what stops the machine running at its limit."
+msgstr "Nehmen Sie das schwerste Einzelteil, rechnen Sie den Träger dazu und addieren Sie ein Drittel. Dieses letzte Drittel verhindert, dass die Maschine am Limit läuft."
+
+#: demos/trades.php:237
+msgid "What we check between hires"
+msgstr "Was wir zwischen zwei Mieten prüfen"
+
+#: demos/trades.php:238
+msgid "Every machine goes through the workshop before it goes out again. Here is the list."
+msgstr "Jede Maschine geht durch die Werkstatt, bevor sie wieder hinausgeht. Hier ist die Liste."
+
+#: demos/trades.php:241
+msgid "Between every hire a machine goes through the workshop. It is slower than the industry average and it is the reason our failure rate is a third of it."
+msgstr "Zwischen zwei Mieten geht jede Maschine durch die Werkstatt. Das ist langsamer als der Branchendurchschnitt und der Grund, warum unsere Ausfallquote ein Drittel davon beträgt."
+
+#: demos/trades.php:243
+msgid "Rope and hook inspected over the full length"
+msgstr "Seil und Haken auf voller Länge geprüft"
+
+#: demos/trades.php:244
+msgid "Brake tested under load"
+msgstr "Bremse unter Last getestet"
+
+#: demos/trades.php:245
+msgid "Limit switches triggered in both directions"
+msgstr "Endschalter in beide Richtungen ausgelöst"
+
+#: demos/trades.php:251
+msgid "Site power: what a 230 volt machine really needs"
+msgstr "Baustrom: was eine 230-Volt-Maschine wirklich braucht"
+
+#: demos/trades.php:252
+msgid "A machine rated at 230 volts still trips the site supply if the run is long enough."
+msgstr "Eine Maschine für 230 Volt bringt die Baustromversorgung trotzdem zum Auslösen, wenn die Leitung lang genug ist."
+
+#: demos/trades.php:255
+msgid "The rating on the plate assumes the supply is at the machine. On a site it rarely is, and sixty metres of extension is enough to drop the voltage below what the motor needs to start under load."
+msgstr "Die Angabe auf dem Typenschild geht davon aus, dass der Anschluss an der Maschine liegt. Auf einer Baustelle ist er das selten, und sechzig Meter Verlängerung genügen, damit die Spannung unter das fällt, was der Motor zum Anlaufen unter Last braucht."
+
+#: demos/trades.php:268
+msgid "The workhorse of the fleet. 200 kg to 30 metres on a single phase supply, light enough for two people to position."
+msgstr "Das Arbeitstier des Fuhrparks. 200 kg auf 30 Meter mit Wechselstrom, leicht genug, dass zwei Personen ihn stellen können."
+
+#: demos/trades.php:282
+#: demos/trades.php:302
+#: demos/trades.php:322
+msgid "Delivered on a trailer, set up by our crew and handed over tested. Collection is included in the hire price."
+msgstr "Auf dem Anhänger geliefert, von unserer Mannschaft aufgebaut und geprüft übergeben. Die Abholung ist im Mietpreis enthalten."
+
+#: demos/trades.php:288
+msgid "An inclined lift for tile and membrane. Sets up against the eaves in under twenty minutes."
+msgstr "Ein Schrägaufzug für Ziegel und Bahnen. In weniger als zwanzig Minuten an der Traufe aufgestellt."
+
+#: demos/trades.php:308
+msgid "Five hundred kilos to 45 metres. Needs a 400 volt supply and a crew of two to rig."
+msgstr "Fünfhundert Kilo auf 45 Meter. Braucht einen 400-Volt-Anschluss und zwei Personen zum Aufbau."
+
+#: inc/accessibility.php:83
+msgid "Menu"
+msgstr "Menü"
+
+#. translators: 1: navigation name, 2: how many of that name are on the page so far.
+#: inc/accessibility.php:91
+msgctxt "navigation landmark"
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: inc/accessibility.php:118
+msgid "Search"
+msgstr "Suche"
+
+#: inc/accessibility.php:183
+msgid "Pagination"
+msgstr "Seitennummerierung"
+
+#. translators: %s: the search term.
+#: inc/breadcrumbs.php:114
+msgid "Search results for %s"
+msgstr "Suchergebnisse für %s"
+
+#: inc/breadcrumbs.php:121
+msgid "Page not found"
+msgstr "Seite nicht gefunden"
+
+#: inc/breadcrumbs.php:224
+#: inc/breadcrumbs.php:262
+msgid "Breadcrumb"
+msgstr "Brotkrume"
+
+#: inc/demos.php:287
+msgid "That demo does not exist."
+msgstr "Diese Demo gibt es nicht."
+
+#: inc/demos.php:303
+msgid "Images could not be drawn, so the demo was imported without them. The GD extension is what draws them."
+msgstr "Die Bilder konnten nicht gezeichnet werden, deshalb wurde die Demo ohne sie importiert. Gezeichnet werden sie von der GD-Erweiterung."
+
+#: inc/demos.php:507
+#: inc/demos.php:567
+msgid "Basalt demo content"
+msgstr "Basalt-Demoinhalte"
+
+#: inc/demos.php:508
+msgid "Basalt demos"
+msgstr "Basalt-Demos"
+
+#: inc/demos.php:531
+msgid "You are not allowed to import content."
+msgstr "Sie dürfen keine Inhalte importieren."
+
+#. translators: %s: demo name.
+#: inc/demos.php:575
+msgid "%s was imported. Nothing that was already here was changed."
+msgstr "%s wurde importiert. Nichts von dem, was schon da war, wurde verändert."
+
+#: inc/demos.php:579
+msgid "Look at the site"
+msgstr "Website ansehen"
+
+#: inc/demos.php:585
+msgid "A demo fills an empty site with pages, posts and pictures so that you can see how the pieces fit together, and then edit them into your own. The pages are built from the theme patterns, so what you get is what is in the inserter."
+msgstr "Eine Demo füllt eine leere Website mit Seiten, Beiträgen und Bildern, damit Sie sehen, wie die Teile zusammenpassen, und sie dann zu Ihren eigenen umbauen können. Die Seiten bestehen aus den Vorlagen des Themes, Sie bekommen also genau das, was auch im Einfügen-Menü steht."
+
+#: inc/demos.php:588
+msgid "Nothing is ever deleted."
+msgstr "Es wird nie etwas gelöscht."
+
+#: inc/demos.php:589
+msgid "Importing only creates. A page whose address is already taken is left alone and reported, so a demo cannot overwrite work you have already done."
+msgstr "Der Import legt nur an. Eine Seite, deren Adresse schon vergeben ist, bleibt unangetastet und wird gemeldet, damit eine Demo keine bereits geleistete Arbeit überschreibt."
+
+#: inc/demos.php:593
+msgid "No demos are installed."
+msgstr "Es sind keine Demos installiert."
+
+#. translators: %s: date the demo was imported.
+#: inc/demos.php:608
+msgid "Imported on %s. Importing it again would create a second copy of anything you have since renamed, so it is not offered twice."
+msgstr "Importiert am %s. Ein zweiter Import würde von allem, was Sie seither umbenannt haben, eine zweite Kopie anlegen, deshalb wird er nicht noch einmal angeboten."
+
+#: inc/demos.php:620
+msgid "Import this demo"
+msgstr "Diese Demo importieren"
+
+#: inc/feedback.php:172
+msgid "Was this helpful?"
+msgstr "War das hilfreich?"
+
+#: inc/feedback.php:173
+msgid "Yes"
+msgstr "Ja"
+
+#: inc/feedback.php:174
+msgid "No"
+msgstr "Nein"
+
+#: inc/feedback.php:175
+msgid "Thank you. What was missing?"
+msgstr "Danke. Was hat gefehlt?"
+
+#: inc/feedback.php:176
+msgid "Send"
+msgstr "Absenden"
+
+#: inc/feedback.php:218
+msgid "Thank you."
+msgstr "Danke."
+
+#: inc/feedback.php:255
+msgid "Nothing yet. The Feedback block collects answers here."
+msgstr "Noch nichts. Der Feedback-Block sammelt die Antworten hier."
+
+#: inc/feedback.php:260
+msgid "Topic"
+msgstr "Thema"
+
+#: inc/feedback.php:261
+msgid "Helpful"
+msgstr "Hilfreich"
+
+#: inc/feedback.php:262
+msgid "Not helpful"
+msgstr "Nicht hilfreich"
+
+#: inc/feedback.php:263
+msgid "Latest notes"
+msgstr "Neueste Hinweise"
+
+#: inc/feedback.php:283
+msgid "none"
+msgstr "keine"
+
+#: inc/indexing.php:68
+msgid "Search engines"
+msgstr "Suchmaschinen"
+
+#: inc/indexing.php:90
+msgid "Hide from search engines"
+msgstr "Vor Suchmaschinen verbergen"
+
+#: inc/indexing.php:94
+msgid "Adds a noindex tag and takes the page out of the sitemap and out of llms.txt. The page stays reachable for anybody with the link."
+msgstr "Fügt ein noindex-Tag hinzu und nimmt die Seite aus der Sitemap und aus der llms.txt. Wer den Link hat, erreicht die Seite weiterhin."
+
+#: inc/login.php:250
+msgid "The username or password is not correct."
+msgstr "Benutzername oder Passwort stimmt nicht."
+
+#. translators: %s: contrast ratio, for example 3.2.
+#: inc/login.php:342
+msgid "Form text against the form background is %s to 1. WCAG AA asks for at least 4.5."
+msgstr "Der Formulartext auf dem Formularhintergrund liegt bei %s zu 1. WCAG AA verlangt mindestens 4,5."
+
+#. translators: %s: contrast ratio.
+#: inc/login.php:353
+msgid "White button text on the accent colour is %s to 1. WCAG AA asks for at least 4.5."
+msgstr "Weißer Buttontext auf der Akzentfarbe liegt bei %s zu 1. WCAG AA verlangt mindestens 4,5."
+
+#. translators: %s: contrast ratio.
+#: inc/login.php:364
+msgid "The focus ring against the form background is %s to 1. WCAG AA asks for at least 3, and a focus ring nobody can see is the one that strands keyboard users on the login form."
+msgstr "Der Fokusrahmen auf dem Formularhintergrund liegt bei %s zu 1. WCAG AA verlangt mindestens 3, und ein Fokusrahmen, den niemand sieht, ist genau der, der Tastaturnutzer im Anmeldeformular stranden lässt."
+
+#. translators: %s: contrast ratio.
+#: inc/login.php:374
+msgid "The links below the form against the page background are %s to 1. WCAG AA asks for at least 4.5."
+msgstr "Die Links unter dem Formular liegen auf dem Seitenhintergrund bei %s zu 1. WCAG AA verlangt mindestens 4,5."
+
+#: inc/login.php:384
+msgid "These login colours do not meet WCAG AA:"
+msgstr "Diese Anmeldefarben erfüllen WCAG AA nicht:"
+
+#: inc/maintenance.php:121
+msgid "We will be back shortly"
+msgstr "Wir sind gleich zurück"
+
+#. translators: %s: time of day.
+#: inc/maintenance.php:208
+msgid "Expected back at %s."
+msgstr "Voraussichtlich zurück um %s."
+
+#: inc/maintenance.php:269
+msgid "Maintenance mode is on. Visitors get the maintenance page and a 503 status; you and anyone who can edit posts see the real site."
+msgstr "Der Wartungsmodus ist an. Besucher sehen die Wartungsseite und bekommen den Status 503; Sie und alle, die Beiträge bearbeiten dürfen, sehen die echte Website."
+
+#: inc/maintenance.php:271
+msgid "Turn it off"
+msgstr "Ausschalten"
+
+#. translators: %s: closing time
+#: inc/opening-hours.php:176
+msgid "Open today until %s"
+msgstr "Heute geöffnet bis %s"
+
+#. translators: %s: opening time
+#: inc/opening-hours.php:185
+msgid "Opens today at %s"
+msgstr "Öffnet heute um %s"
+
+#: inc/opening-hours.php:194
+msgid "Closed today"
+msgstr "Heute geschlossen"
+
+#. translators: 1: weekday name, 2: opening time
+#: inc/opening-hours.php:203
+msgid "Closed, opens %1$s at %2$s"
+msgstr "Geschlossen, öffnet %1$s um %2$s"
+
+#: inc/opening-hours.php:204
+msgid "tomorrow"
+msgstr "morgen"
+
+#. translators: 1: opening time, 2: closing time
+#: inc/opening-hours.php:310
+msgctxt "time range"
+msgid "%1$s to %2$s"
+msgstr "%1$s bis %2$s"
+
+#: inc/opening-hours.php:315
+msgid "Closed"
+msgstr "Geschlossen"
+
+#: inc/opening-hours.php:315
+msgctxt "time range separator"
+msgid ", "
+msgstr ", "
+
+#. translators: %s: closing time
+#: inc/opening-hours.php:323
+msgctxt "closing time only"
+msgid "until %s"
+msgstr "bis %s"
+
+#. translators: 1: first weekday, 2: last weekday
+#: inc/opening-hours.php:351
+msgctxt "weekday range"
+msgid "%1$s to %2$s"
+msgstr "%1$s bis %2$s"
+
+#: inc/opening-hours.php:354
+msgctxt "weekday list separator"
+msgid ", "
+msgstr ", "
+
+#: inc/preferences.php:52
+msgid "Text size"
+msgstr "Textgröße"
+
+#: inc/preferences.php:55
+msgid "Normal"
+msgstr "Normal"
+
+#: inc/preferences.php:56
+msgid "Large"
+msgstr "Groß"
+
+#: inc/preferences.php:57
+msgid "Larger"
+msgstr "Größer"
+
+#: inc/preferences.php:58
+msgid "Largest"
+msgstr "Am größten"
+
+#: inc/preferences.php:63
+msgid "More space between lines"
+msgstr "Mehr Abstand zwischen den Zeilen"
+
+#: inc/preferences.php:64
+msgid "Increases line height and paragraph spacing."
+msgstr "Erhöht Zeilenhöhe und Absatzabstand."
+
+#: inc/preferences.php:69
+msgid "More space between letters and words"
+msgstr "Mehr Abstand zwischen Buchstaben und Wörtern"
+
+#: inc/preferences.php:70
+msgid "Helps if letters appear to run together."
+msgstr "Hilft, wenn Buchstaben ineinanderzulaufen scheinen."
+
+#: inc/preferences.php:75
+msgid "Underline every link"
+msgstr "Jeden Link unterstreichen"
+
+#: inc/preferences.php:76
+msgid "Makes links identifiable without relying on colour."
+msgstr "Macht Links erkennbar, ohne sich auf Farbe zu verlassen."
+
+#: inc/preferences.php:81
+msgid "Higher contrast"
+msgstr "Höherer Kontrast"
+
+#: inc/preferences.php:82
+msgid "Darkens text and borders. Follows your system setting until you change it here."
+msgstr "Verdunkelt Text und Rahmen. Folgt Ihrer Systemeinstellung, bis Sie es hier ändern."
+
+#: inc/preferences.php:87
+msgid "Reduce motion"
+msgstr "Bewegung reduzieren"
+
+#: inc/preferences.php:88
+msgid "Stops transitions and animations. Follows your system setting until you change it here."
+msgstr "Stoppt Übergänge und Animationen. Folgt Ihrer Systemeinstellung, bis Sie es hier ändern."
+
+#: inc/preferences.php:93
+msgid "Do not keep the header on screen"
+msgstr "Kopfbereich nicht mitscrollen lassen"
+
+#: inc/preferences.php:94
+msgid "Frees vertical space, which matters when the page is magnified."
+msgstr "Schafft senkrechten Platz, was bei vergrößerter Darstellung zählt."
+
+#: inc/preferences.php:260
+#: inc/preferences.php:267
+msgid "Display settings"
+msgstr "Darstellung"
+
+#: inc/preferences.php:271
+msgid "Close"
+msgstr "Schließen"
+
+#: inc/preferences.php:276
+msgid "These settings change how this site looks for you. They are stored in this browser, on this device, and are not sent anywhere."
+msgstr "Diese Einstellungen ändern, wie diese Website für Sie aussieht. Sie werden in diesem Browser auf diesem Gerät gespeichert und nirgendwohin übertragen."
+
+#: inc/preferences.php:319
+msgid "Reset to defaults"
+msgstr "Auf Standard zurücksetzen"
+
+#: inc/preferences.php:326
+msgid "Display settings reset."
+msgstr "Darstellung zurückgesetzt."
+
+#: inc/preferences.php:327
+msgid "Saved."
+msgstr "Gespeichert."
+
+#: inc/settings.php:105
+msgid "Organization"
+msgstr "Organisation"
+
+#: inc/settings.php:106
+msgid "Local business"
+msgstr "Lokales Unternehmen"
+
+#: inc/settings.php:107
+msgid "Construction or trade business"
+msgstr "Bau- oder Handwerksbetrieb"
+
+#: inc/settings.php:108
+msgid "Professional service"
+msgstr "Dienstleister"
+
+#: inc/settings.php:109
+msgid "Store"
+msgstr "Ladengeschäft"
+
+#: inc/settings.php:110
+msgid "Clothing or fashion store"
+msgstr "Bekleidungs- oder Modegeschäft"
+
+#: inc/settings.php:111
+msgid "Person"
+msgstr "Person"
+
+#: inc/settings.php:252
+#: inc/settings.php:316
+msgid "Search engines and structured data"
+msgstr "Suchmaschinen und strukturierte Daten"
+
+#: inc/settings.php:253
+msgid "Search & Schema"
+msgstr "Suche & Schema"
+
+#. translators: %s: name of the detected SEO plugin.
+#: inc/settings.php:324
+msgid "%s is active and owns meta tags, structured data and breadcrumbs. Basalt Core stays silent so nothing is emitted twice. The business details below are still worth filling in: they are used by the breadcrumb block and are ready if you ever remove the plugin."
+msgstr "%s ist aktiv und übernimmt Meta-Tags, strukturierte Daten und Brotkrumen. Basalt Core hält sich zurück, damit nichts doppelt ausgegeben wird. Die Angaben zum Unternehmen unten lohnen sich trotzdem: der Brotkrumen-Block nutzt sie, und sie stehen bereit, falls Sie das Plugin je entfernen."
+
+#: inc/settings.php:335
+msgid "Search engines are blocked."
+msgstr "Suchmaschinen sind ausgesperrt."
+
+#: inc/settings.php:336
+msgid "This site discourages indexing, so none of this has any effect."
+msgstr "Diese Website bittet Suchmaschinen, sie nicht zu indexieren, deshalb hat nichts davon eine Wirkung."
+
+#: inc/settings.php:337
+msgid "Reading settings"
+msgstr "Lese-Einstellungen"
+
+#: inc/settings.php:345
+msgid "Who is behind this site"
+msgstr "Wer hinter dieser Website steht"
+
+#: inc/settings.php:347
+msgid "This produces the knowledge panel and local results. Leave a field empty rather than guessing; wrong structured data is worse than none."
+msgstr "Daraus entstehen der Wissenspanel und die lokalen Ergebnisse. Lassen Sie ein Feld lieber leer, als zu raten: falsche strukturierte Daten sind schlechter als gar keine."
+
+#: inc/settings.php:351
+msgid "Emit structured data"
+msgstr "Strukturierte Daten ausgeben"
+
+#: inc/settings.php:354
+msgid "The site represents"
+msgstr "Die Website steht für"
+
+#: inc/settings.php:358
+msgid "Legal or business name"
+msgstr "Rechtlicher Name oder Firmenname"
+
+#: inc/settings.php:358
+msgid "Leave empty to use the site title."
+msgstr "Leer lassen, um den Titel der Website zu verwenden."
+
+#: inc/settings.php:359
+msgid "Phone"
+msgstr "Telefon"
+
+#: inc/settings.php:360
+msgid "Email"
+msgstr "E-Mail"
+
+#: inc/settings.php:361
+msgid "Street and number"
+msgstr "Straße und Hausnummer"
+
+#: inc/settings.php:362
+msgid "Postal code"
+msgstr "Postleitzahl"
+
+#: inc/settings.php:363
+msgid "City"
+msgstr "Ort"
+
+#: inc/settings.php:364
+msgid "Region or state"
+msgstr "Region oder Bundesland"
+
+#: inc/settings.php:365
+msgid "Country code"
+msgstr "Ländercode"
+
+#: inc/settings.php:365
+msgid "Two letters, for example DE."
+msgstr "Zwei Buchstaben, zum Beispiel DE."
+
+#: inc/settings.php:366
+#: blocks/opening-hours/editor.js:43
+#: blocks/opening-hours/editor.js:76
+msgid "Opening hours"
+msgstr "Öffnungszeiten"
+
+#: inc/settings.php:366
+msgid "One rule per line in Schema.org notation: Mo-Fr 08:00-18:00"
+msgstr "Eine Regel pro Zeile in der Schreibweise von Schema.org: Mo-Fr 08:00-18:00"
+
+#: inc/settings.php:367
+msgid "Price range"
+msgstr "Preisniveau"
+
+#: inc/settings.php:367
+msgid "For example €€. Ignored for Organization and Person."
+msgstr "Zum Beispiel €€. Wird bei Organisation und Person ignoriert."
+
+#: inc/settings.php:368
+msgid "Profile URLs"
+msgstr "Profil-Adressen"
+
+#: inc/settings.php:368
+msgid "One per line. Emitted as sameAs, which connects the site to its social profiles."
+msgstr "Eine pro Zeile. Wird als sameAs ausgegeben und verbindet die Website mit ihren Profilen."
+
+#: inc/settings.php:372
+msgid "Crawling, robots.txt and AI"
+msgstr "Crawling, robots.txt und KI"
+
+#: inc/settings.php:376
+msgid "There is a robots.txt file in the site root. A real file wins over the one WordPress builds, so nothing below has any effect until it is deleted."
+msgstr "Im Wurzelverzeichnis liegt eine robots.txt. Eine echte Datei gewinnt gegen die, die WordPress erzeugt, deshalb hat nichts hier unten eine Wirkung, solange sie existiert."
+
+#: inc/settings.php:382
+msgid "Keep crawlers out of search results"
+msgstr "Crawler aus den Suchergebnissen heraushalten"
+
+#: inc/settings.php:382
+msgid "Internal search pages carry no ranking value and use up the crawl budget."
+msgstr "Interne Suchseiten bringen kein Ranking und verbrauchen nur das Crawl-Budget."
+
+#: inc/settings.php:385
+msgid "AI crawlers"
+msgstr "KI-Crawler"
+
+#: inc/settings.php:389
+msgid "Let all of them read the site"
+msgstr "Alle dürfen die Website lesen"
+
+#: inc/settings.php:390
+msgid "Only the ones that cite the source"
+msgstr "Nur die, die die Quelle nennen"
+
+#: inc/settings.php:391
+msgid "Keep all of them out"
+msgstr "Alle aussperren"
+
+#: inc/settings.php:393
+msgid "Two kinds of crawler share the label. Some collect text to train on and give nothing back; others fetch a page because somebody asked a question and then name the source, which sends visitors. The middle option is what most small businesses want."
+msgstr "Hinter dem Wort stecken zwei verschiedene Dinge. Die einen sammeln Text zum Trainieren und geben nichts zurück, die anderen holen eine Seite, weil jemand eine Frage gestellt hat, und nennen die Quelle, was Besucher bringt. Die mittlere Einstellung ist das, was die meisten kleinen Betriebe wollen."
+
+#: inc/settings.php:396
+msgid "Extra robots.txt lines"
+msgstr "Zusätzliche Zeilen für die robots.txt"
+
+#: inc/settings.php:396
+msgid "Added at the end, exactly as written. Leave empty unless you know why."
+msgstr "Werden unverändert ans Ende gehängt. Leer lassen, wenn Sie keinen Grund haben."
+
+#: inc/settings.php:397
+msgid "Serve llms.txt"
+msgstr "llms.txt ausliefern"
+
+#: inc/settings.php:397
+msgid "A short plain text summary of the site for language models, built from the title, the pages and the business details below. Nothing to maintain twice."
+msgstr "Eine kurze Zusammenfassung der Website als reiner Text für Sprachmodelle, gebaut aus dem Titel, den Seiten und den Angaben unten. Nichts, was zweimal gepflegt werden muss."
+
+#: inc/settings.php:398
+msgid "What this site is, in two sentences"
+msgstr "Was diese Website ist, in zwei Sätzen"
+
+#: inc/settings.php:398
+msgid "Goes at the top of llms.txt. This is the one place where the site says in its own words what it wants to be quoted as."
+msgstr "Steht oben in der llms.txt. Das ist die eine Stelle, an der die Website mit eigenen Worten sagt, wie sie zitiert werden möchte."
+
+#: inc/settings.php:402
+msgid "Indexing"
+msgstr "Indexierung"
+
+#: inc/settings.php:406
+msgid "Hide date archives"
+msgstr "Datumsarchive verbergen"
+
+#: inc/settings.php:406
+msgid "On most sites they are the same posts listed a third time."
+msgstr "Auf den meisten Websites sind das dieselben Beiträge, ein drittes Mal aufgelistet."
+
+#: inc/settings.php:407
+msgid "Hide author archives"
+msgstr "Autorenarchive verbergen"
+
+#: inc/settings.php:407
+msgid "Worth switching on when one person writes everything."
+msgstr "Lohnt sich, wenn eine Person alles schreibt."
+
+#: inc/settings.php:408
+msgid "Send attachment pages to the post"
+msgstr "Anhangseiten zum Beitrag schicken"
+
+#: inc/settings.php:408
+msgid "Every upload otherwise gets a page of its own with a title, an image and nothing else."
+msgstr "Sonst bekommt jeder Upload eine eigene Seite mit einem Titel, einem Bild und sonst nichts."
+
+#: inc/settings.php:409
+msgid "Google Search Console code"
+msgstr "Code der Google Search Console"
+
+#: inc/settings.php:409
+msgid "Paste the code or the whole meta tag; the code is taken out of it."
+msgstr "Fügen Sie den Code oder das ganze Meta-Tag ein, der Code wird herausgelesen."
+
+#: inc/settings.php:410
+msgid "Bing Webmaster Tools code"
+msgstr "Code der Bing Webmaster Tools"
+
+#: inc/settings.php:415
+msgid "A single page or post can be hidden from search engines in the editor, in the box called Search engines in the sidebar. That also keeps it out of the sitemap and out of llms.txt."
+msgstr "Eine einzelne Seite oder einen Beitrag verbergen Sie im Editor, in der Box Suchmaschinen in der Seitenleiste. Damit fällt die Seite auch aus der Sitemap und aus der llms.txt."
+
+#: inc/settings.php:418
+msgid "Meta tags"
+msgstr "Meta-Tags"
+
+#: inc/settings.php:421
+msgid "Emit description, Open Graph and Twitter tags"
+msgstr "Beschreibung, Open-Graph- und Twitter-Tags ausgeben"
+
+#: inc/settings.php:422
+msgid "X / Twitter handle"
+msgstr "X- / Twitter-Name"
+
+#: inc/settings.php:422
+msgid "Without the @."
+msgstr "Ohne das @."
+
+#: inc/settings.php:423
+msgid "Fallback sharing image ID"
+msgstr "ID des Ersatz-Vorschaubilds"
+
+#: inc/settings.php:423
+msgid "Attachment ID of the image used when a page has no featured image. 1200 by 630 pixels works everywhere."
+msgstr "Anhang-ID des Bildes, das genommen wird, wenn eine Seite kein Beitragsbild hat. 1200 mal 630 Pixel funktioniert überall."
+
+#: inc/settings.php:427
+msgid "Visitor display settings"
+msgstr "Darstellung für Besucher"
+
+#: inc/settings.php:429
+msgid "Adds a small button to the front end that lets a visitor adjust text size, spacing, contrast and motion for themselves. The choice is stored in their browser and applies on their next visit."
+msgstr "Fügt der Website einen kleinen Button hinzu, mit dem Besucher Textgröße, Abstände, Kontrast und Bewegung selbst einstellen. Die Wahl liegt in ihrem Browser und gilt auch beim nächsten Besuch."
+
+#: inc/settings.php:432
+msgid "This is not an accessibility overlay."
+msgstr "Das ist kein Barrierefreiheits-Overlay."
+
+#: inc/settings.php:433
+msgid "It changes presentation only. It adds no ARIA, rewrites no markup, and does not make a site conformant. Overlays that claim otherwise are rejected by the accessibility community, and rightly so."
+msgstr "Es ändert nur die Darstellung. Es ergänzt kein ARIA, schreibt kein Markup um und macht eine Website nicht konform. Overlays, die etwas anderes behaupten, werden von der Barrierefreiheits-Gemeinschaft abgelehnt, und das zu Recht."
+
+#: inc/settings.php:437
+msgid "Show the display settings button"
+msgstr "Button für die Darstellung zeigen"
+
+#: inc/settings.php:440
+msgid "Button position"
+msgstr "Position des Buttons"
+
+#: inc/settings.php:444
+msgid "Bottom right"
+msgstr "Unten rechts"
+
+#: inc/settings.php:445
+msgid "Bottom left"
+msgstr "Unten links"
+
+#: inc/settings.php:447
+msgid "Move it to the side that does not collide with a cookie banner or a chat widget."
+msgstr "Auf die Seite legen, auf der er nicht mit einem Cookie-Banner oder einem Chat-Fenster zusammenstößt."
+
+#: inc/settings.php:453
+#: blocks/feedback/editor.js:40
+msgid "Feedback"
+msgstr "Feedback"
+
+#: inc/settings.php:456
+msgid "What visitors answered to the Feedback block. Counted without cookies and without an external service, so the same person can answer twice: read the trend, not the exact number."
+msgstr "Was Besucher im Feedback-Block geantwortet haben. Gezählt ohne Cookies und ohne externen Dienst, dieselbe Person kann also zweimal antworten: lesen Sie die Tendenz, nicht die genaue Zahl."
+
+#: inc/settings.php:461
+msgid "Maintenance mode"
+msgstr "Wartungsmodus"
+
+#: inc/settings.php:464
+msgid "While this is on, visitors get the maintenance page and a 503 status, which tells search engines the outage is temporary. Anyone who can edit posts keeps seeing the real site. The page itself is the template named \"maintenance\" in the theme; without one, a plain readable page is printed."
+msgstr "Solange das an ist, sehen Besucher die Wartungsseite und bekommen den Status 503, der Suchmaschinen sagt, dass die Störung vorübergehend ist. Wer Beiträge bearbeiten darf, sieht weiter die echte Website. Die Seite selbst ist das Template namens \"maintenance\" im Theme; gibt es keines, wird eine schlichte, lesbare Seite ausgegeben."
+
+#: inc/settings.php:469
+msgid "Turn on maintenance mode"
+msgstr "Wartungsmodus einschalten"
+
+#: inc/settings.php:470
+#: blocks/maintenance-text/editor.js:37
+msgid "Headline"
+msgstr "Überschrift"
+
+#: inc/settings.php:470
+msgid "What the page says in large type."
+msgstr "Was die Seite in großer Schrift sagt."
+
+#: inc/settings.php:471
+#: blocks/maintenance-text/editor.js:38
+msgid "Message"
+msgstr "Nachricht"
+
+#: inc/settings.php:471
+msgid "Two sentences at most: what is happening, and how to reach you meanwhile."
+msgstr "Höchstens zwei Sätze: was los ist und wie man Sie in der Zwischenzeit erreicht."
+
+#: inc/settings.php:472
+msgid "Back at"
+msgstr "Zurück um"
+
+#: inc/settings.php:472
+msgid "Time of day, for example 18:00. Also sets the Retry-After header. Leave empty if you cannot say."
+msgstr "Uhrzeit, zum Beispiel 18:00. Setzt zugleich den Retry-After-Header. Leer lassen, wenn Sie es nicht sagen können."
+
+#: inc/settings.php:476
+msgid "Login screen"
+msgstr "Anmeldeseite"
+
+#: inc/settings.php:478
+msgid "Replaces the WordPress logo and the default colours on the login page with the site's own."
+msgstr "Ersetzt das WordPress-Logo und die Standardfarben auf der Anmeldeseite durch die der Website."
+
+#: inc/settings.php:483
+msgid "Brand the login screen"
+msgstr "Anmeldeseite im eigenen Auftritt"
+
+#: inc/settings.php:484
+msgid "Logo, attachment ID"
+msgstr "Logo, Anhang-ID"
+
+#: inc/settings.php:484
+msgid "Leave at 0 to keep the WordPress logo. A wide logo on a transparent background works best."
+msgstr "Auf 0 lassen, um das WordPress-Logo zu behalten. Ein breites Logo auf transparentem Grund wirkt am besten."
+
+#: inc/settings.php:485
+msgid "Logo width in pixels"
+msgstr "Logobreite in Pixeln"
+
+#: inc/settings.php:485
+msgid "Between 80 and 480."
+msgstr "Zwischen 80 und 480."
+
+#: inc/settings.php:486
+msgid "Page background"
+msgstr "Seitenhintergrund"
+
+#: inc/settings.php:486
+msgid "Hex colour, for example #f4f5f7. Anything else is ignored."
+msgstr "Hex-Farbe, zum Beispiel #f4f5f7. Alles andere wird ignoriert."
+
+#: inc/settings.php:487
+msgid "Form background"
+msgstr "Formularhintergrund"
+
+#: inc/settings.php:487
+msgid "Hex colour. The label and field text switches between dark and light automatically, whichever reads better on it."
+msgstr "Hex-Farbe. Beschriftungen und Feldtext wechseln automatisch zwischen dunkel und hell, je nachdem, was sich darauf besser liest."
+
+#: inc/settings.php:488
+msgid "Button and focus colour"
+msgstr "Farbe für Button und Fokus"
+
+#: inc/settings.php:488
+msgid "Hex colour. Also used for the focus ring."
+msgstr "Hex-Farbe. Wird auch für den Fokusrahmen verwendet."
+
+#: inc/settings.php:489
+msgid "Background image, attachment ID"
+msgstr "Hintergrundbild, Anhang-ID"
+
+#: inc/settings.php:489
+msgid "Optional. Covers the page behind the form."
+msgstr "Optional. Füllt die Seite hinter dem Formular."
+
+#: inc/settings.php:492
+msgid "Do not reveal whether a username exists"
+msgstr "Nicht verraten, ob es einen Benutzernamen gibt"
+
+#: inc/settings.php:494
+msgid "Recommended. The default messages say whether the account exists, which lets an attacker confirm real usernames before trying any passwords. The cost: someone who mistypes their username no longer learns that it was the username."
+msgstr "Empfohlen. Die Standardmeldungen sagen, ob das Konto existiert, und ein Angreifer kann damit echte Benutzernamen bestätigen, bevor er ein einziges Passwort probiert. Der Preis: wer sich beim Benutzernamen vertippt, erfährt nicht mehr, dass es am Benutzernamen lag."
+
+#: inc/settings.php:499
+msgid "There is deliberately no custom CSS box and no option to move the login URL. Moving wp-login.php stops some automated noise and no actual attacker, and it breaks integrations that post to the known address; a site that needs it needs a plugin dedicated to that job."
+msgstr "Es gibt bewusst kein Feld für eigenes CSS und keine Möglichkeit, die Anmelde-Adresse zu verschieben. Ein Umzug von wp-login.php beendet etwas automatisches Rauschen und keinen einzigen echten Angreifer, und er zerlegt Anbindungen, die an die bekannte Adresse senden; eine Website, die das braucht, braucht ein Plugin, das genau dafür da ist."
+
+#: blocks/breadcrumbs/editor.js:30
+#: blocks/breadcrumbs/editor.js:54
+msgid "Breadcrumbs"
+msgstr "Brotkrumen"
+
+#: blocks/breadcrumbs/editor.js:33
+msgid "Let an SEO plugin render the trail"
+msgstr "Den Pfad von einem SEO-Plugin ausgeben lassen"
+
+#: blocks/breadcrumbs/editor.js:34
+msgid "When Rank Math or Yoast is active, use its breadcrumb instead of this one so the page carries only one BreadcrumbList."
+msgstr "Wenn Rank Math oder Yoast aktiv ist, deren Brotkrume statt dieser verwenden, damit die Seite nur eine BreadcrumbList trägt."
+
+#: blocks/breadcrumbs/editor.js:55
+msgid "Nothing to show here. The front page is the root of the trail, so it has none."
+msgstr "Hier gibt es nichts zu zeigen. Die Startseite ist der Anfang des Pfads und hat deshalb keinen."
+
+#: blocks/feedback/editor.js:41
+msgid "Topic key"
+msgstr "Themen-Kennung"
+
+#: blocks/feedback/editor.js:41
+msgid "Groups the answers in the report. Empty uses the page slug."
+msgstr "Fasst die Antworten in der Auswertung zusammen. Leer nimmt die Seitenadresse."
+
+#: blocks/feedback/editor.js:42
+msgid "Question"
+msgstr "Frage"
+
+#: blocks/feedback/editor.js:43
+msgid "Yes button"
+msgstr "Ja-Button"
+
+#: blocks/feedback/editor.js:44
+msgid "No button"
+msgstr "Nein-Button"
+
+#: blocks/feedback/editor.js:45
+msgid "Follow-up question after a no"
+msgstr "Rückfrage nach einem Nein"
+
+#: blocks/feedback/editor.js:46
+msgid "Send button"
+msgstr "Absenden-Button"
+
+#: blocks/feedback/editor.js:47
+msgid "Second link after a no"
+msgstr "Zweiter Link nach einem Nein"
+
+#: blocks/feedback/editor.js:47
+msgid "Optional, for example \"Rather call us\"."
+msgstr "Optional, zum Beispiel \"Lieber anrufen\"."
+
+#: blocks/feedback/editor.js:48
+msgid "Where that link goes"
+msgstr "Wohin dieser Link führt"
+
+#: blocks/maintenance-text/editor.js:30
+#: blocks/maintenance-text/editor.js:95
+msgid "Maintenance text"
+msgstr "Wartungstext"
+
+#: blocks/maintenance-text/editor.js:34
+msgid "Which text"
+msgstr "Welcher Text"
+
+#: blocks/maintenance-text/editor.js:39
+msgid "Back at, time"
+msgstr "Zurück um, Uhrzeit"
+
+#: blocks/maintenance-text/editor.js:48
+msgid "Render as"
+msgstr "Ausgeben als"
+
+#: blocks/maintenance-text/editor.js:51
+msgid "Paragraph"
+msgstr "Absatz"
+
+#: blocks/maintenance-text/editor.js:52
+msgid "Heading 1"
+msgstr "Überschrift 1"
+
+#: blocks/maintenance-text/editor.js:53
+msgid "Heading 2"
+msgstr "Überschrift 2"
+
+#: blocks/maintenance-text/editor.js:54
+msgid "Heading 3"
+msgstr "Überschrift 3"
+
+#: blocks/maintenance-text/editor.js:63
+msgid "Text before"
+msgstr "Text davor"
+
+#: blocks/maintenance-text/editor.js:64
+msgid "Optional, for example \"back at \"."
+msgstr "Optional, zum Beispiel \"zurück um \"."
+
+#: blocks/maintenance-text/editor.js:73
+msgid "Text after"
+msgstr "Text danach"
+
+#: blocks/maintenance-text/editor.js:82
+msgid "The wording is edited under Settings, Search and schema, Maintenance mode."
+msgstr "Der Wortlaut wird unter Einstellungen, Suche und Schema, Wartungsmodus bearbeitet."
+
+#: blocks/maintenance-text/editor.js:96
+msgid "Nothing entered for this text yet. Fill it in under Settings, Search and schema, Maintenance mode."
+msgstr "Für diesen Text ist noch nichts eingetragen. Tragen Sie ihn unter Einstellungen, Suche und Schema, Wartungsmodus ein."
+
+#: blocks/opening-hours/editor.js:44
+msgid "Show today's status"
+msgstr "Heutigen Status zeigen"
+
+#: blocks/opening-hours/editor.js:44
+msgid "A line such as \"Open today until 18:00\", computed in the site's time zone."
+msgstr "Eine Zeile wie \"Heute geöffnet bis 18:00\", berechnet in der Zeitzone der Website."
+
+#: blocks/opening-hours/editor.js:45
+msgid "Show the table"
+msgstr "Tabelle zeigen"
+
+#: blocks/opening-hours/editor.js:46
+msgid "List closed days"
+msgstr "Geschlossene Tage auflisten"
+
+#: blocks/opening-hours/editor.js:46
+msgid "Adds a row for the days you are closed, so nobody has to infer it."
+msgstr "Fügt eine Zeile für die Tage hinzu, an denen geschlossen ist, damit niemand es sich zusammenreimen muss."
+
+#: blocks/opening-hours/editor.js:50
+msgid "Layout"
+msgstr "Anordnung"
+
+#: blocks/opening-hours/editor.js:53
+msgid "Table, one row per group of days"
+msgstr "Tabelle, eine Zeile je Gruppe von Tagen"
+
+#: blocks/opening-hours/editor.js:54
+msgid "One line with short day names, for a header"
+msgstr "Eine Zeile mit kurzen Tagesnamen, für den Kopfbereich"
+
+#: blocks/opening-hours/editor.js:63
+msgid "The hours themselves are edited under Settings, Search and schema."
+msgstr "Die Zeiten selbst werden unter Einstellungen, Suche und Schema bearbeitet."
+
+#: blocks/opening-hours/editor.js:77
+msgid "No opening hours entered yet. Add them under Settings, Search and schema, one rule per line, for example Mo-Fr 10:00-18:00."
+msgstr "Es sind noch keine Öffnungszeiten eingetragen. Tragen Sie sie unter Einstellungen, Suche und Schema ein, eine Regel pro Zeile, zum Beispiel Mo-Fr 10:00-18:00."
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block title"
+msgid "Breadcrumbs"
+msgstr "Brotkrumen"
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block description"
+msgid "The trail from the home page to this one. Renders nothing on the front page, and reads from the same data as the BreadcrumbList structured data so the two cannot disagree."
+msgstr "Der Pfad von der Startseite hierher. Auf der Startseite wird nichts ausgegeben, und die Daten sind dieselben wie in der BreadcrumbList der strukturierten Daten, damit beide nicht auseinanderlaufen können."
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "breadcrumb"
+msgstr "Brotkrume"
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "trail"
+msgstr "Pfad"
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "navigation"
+msgstr "Navigation"
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "schema"
+msgstr "Schema"
+
+#: blocks/feedback/block.json
+msgctxt "block title"
+msgid "Feedback"
+msgstr "Feedback"
+
+#: blocks/feedback/block.json
+msgctxt "block description"
+msgid "One question at the end of a page that explains something: was this helpful, yes or no. A no opens a small text field. No cookies, no script, no external service; the answers are counted under Settings, Search and schema."
+msgstr "Eine Frage am Ende einer Seite, die etwas erklärt: War das hilfreich, ja oder nein. Ein Nein öffnet ein kleines Textfeld. Keine Cookies, kein Skript, kein externer Dienst; die Antworten werden unter Einstellungen, Suche und Schema gezählt."
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "feedback"
+msgstr "Feedback"
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "helpful"
+msgstr "hilfreich"
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "rating"
+msgstr "Bewertung"
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "survey"
+msgstr "Umfrage"
+
+#: blocks/maintenance-text/block.json
+msgctxt "block title"
+msgid "Maintenance text"
+msgstr "Wartungstext"
+
+#: blocks/maintenance-text/block.json
+msgctxt "block description"
+msgid "One of the three maintenance texts: the headline, the message, or the time you expect to be back. Edited under Settings, Search and schema, so the page can be updated without opening the editor."
+msgstr "Einer der drei Wartungstexte: die Überschrift, die Nachricht oder die Uhrzeit, zu der Sie zurück sind. Bearbeitet wird unter Einstellungen, Suche und Schema, damit die Seite aktualisiert werden kann, ohne den Editor zu öffnen."
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "maintenance"
+msgstr "Wartung"
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "downtime"
+msgstr "Ausfall"
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "offline"
+msgstr "offline"
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "back soon"
+msgstr "gleich zurück"
+
+#: blocks/opening-hours/block.json
+msgctxt "block title"
+msgid "Opening hours"
+msgstr "Öffnungszeiten"
+
+#: blocks/opening-hours/block.json
+msgctxt "block description"
+msgid "Whether you are open right now and until when, plus a table of your hours. Reads the hours entered under Settings, Search and schema, so the visitor and the structured data are told the same thing."
+msgstr "Ob gerade geöffnet ist und bis wann, dazu eine Tabelle der Zeiten. Liest die Zeiten, die unter Einstellungen, Suche und Schema eingetragen sind, damit Besucher und strukturierte Daten dasselbe erfahren."
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "opening hours"
+msgstr "Öffnungszeiten"
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "open"
+msgstr "geöffnet"
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "closed"
+msgstr "geschlossen"
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "business hours"
+msgstr "Geschäftszeiten"
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "shop"
+msgstr "Laden"

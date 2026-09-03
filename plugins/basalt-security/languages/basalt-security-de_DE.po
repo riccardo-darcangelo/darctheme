@@ -1,0 +1,584 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://darcdesign.de/themes/basalt/\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: tools/make-po.mjs\n"
+
+#. Plugin Name of the plugin
+#: basalt-security.php
+msgid "Basalt Security"
+msgstr ""
+
+#. Description of the plugin
+#: basalt-security.php
+msgid "The security a small site actually needs, and nothing that slows it down: a login page at an address only you know, brute force lockout, a small request filter, security headers, and the hardening WordPress leaves switched off. No database tables, no cron, no external service, no dashboard widgets."
+msgstr "Die Sicherheit, die eine kleine Website wirklich braucht, und nichts, was sie ausbremst: eine Anmeldeseite unter einer Adresse, die nur Sie kennen, eine Sperre nach zu vielen Fehlversuchen, ein kleiner Anfragenfilter, Sicherheits-Header und die Härtung, die WordPress ausgeschaltet lässt. Keine Datenbanktabellen, kein Cron, kein externer Dienst, keine Dashboard-Widgets."
+
+#. Author of the plugin
+#: basalt-security.php
+msgid "Riccardo D'Arcangelo"
+msgstr ""
+
+#. Author URI of the plugin
+#: basalt-security.php
+msgid "https://darcdesign.de/"
+msgstr ""
+
+#: inc/accounts.php:85
+msgid "<strong>Too many requests.</strong> Please wait an hour before asking for another password mail."
+msgstr "<strong>Zu viele Anfragen.</strong> Bitte warten Sie eine Stunde, bevor Sie eine weitere Passwort-Mail anfordern."
+
+#: inc/accounts.php:129
+msgid "Leave this field empty"
+msgstr "Dieses Feld bitte leer lassen"
+
+#: inc/accounts.php:156
+msgid "<strong>Error:</strong> Registration could not be completed."
+msgstr "<strong>Fehler:</strong> Die Registrierung konnte nicht abgeschlossen werden."
+
+#: inc/accounts.php:166
+msgid "<strong>Too many attempts.</strong> Please try again in an hour."
+msgstr "<strong>Zu viele Versuche.</strong> Bitte versuchen Sie es in einer Stunde noch einmal."
+
+#. translators: 1: sign in URL, 2: lost password URL
+#: inc/accounts.php:182
+msgid "<strong>Error:</strong> An account could not be created with these details. If you already have one, <a href=\"%1$s\">sign in</a> or <a href=\"%2$s\">request a new password</a>."
+msgstr "<strong>Fehler:</strong> Mit diesen Angaben konnte kein Konto angelegt werden. Falls Sie schon eines haben, <a href=\"%1$s\">melden Sie sich an</a> oder <a href=\"%2$s\">fordern Sie ein neues Passwort an</a>."
+
+#. translators: %d: minimum number of characters
+#: inc/accounts.php:263
+msgid "Please use at least %d characters. A short sentence is easier to remember than a short password and much harder to guess."
+msgstr "Bitte verwenden Sie mindestens %d Zeichen. Ein kurzer Satz ist leichter zu merken als ein kurzes Passwort und sehr viel schwerer zu erraten."
+
+#: inc/accounts.php:273
+msgid "That password is one of the first anybody tries. Please pick something that has nothing to do with this site or your name."
+msgstr "Dieses Passwort gehört zu den ersten, die jeder ausprobiert. Bitte wählen Sie etwas, das nichts mit dieser Website oder Ihrem Namen zu tun hat."
+
+#: inc/accounts.php:302
+#: inc/accounts.php:336
+msgid "Error:"
+msgstr "Fehler:"
+
+#. translators: %s: human readable time, for example "15 minutes".
+#: inc/brute-force.php:106
+msgid "Too many failed attempts from this address. Please try again in %s."
+msgstr "Zu viele Fehlversuche von dieser Adresse. Bitte versuchen Sie es in %s noch einmal."
+
+#. translators: 1: number of minutes, 2: the user name that was tried.
+#: inc/brute-force.php:164
+msgid "Locked out for %1$d minutes after failed logins as \"%2$s\""
+msgstr "Für %1$d Minuten gesperrt nach Fehlversuchen als \"%2$s\""
+
+#. translators: %s: site name.
+#: inc/brute-force.php:215
+msgid "[%s] Login attempts blocked"
+msgstr "[%s] Anmeldeversuche blockiert"
+
+#. translators: 1: IP address, 2: user name, 3: minutes.
+#: inc/brute-force.php:218
+msgid ""
+"The address %1$s was locked out after repeated failed logins as \"%2$s\".\n"
+"\n"
+"The lockout lasts %3$d minutes and gets longer if it happens again. Further lockouts in the next hour are not mailed.\n"
+msgstr ""
+"Die Adresse %1$s wurde nach wiederholten Fehlversuchen als \"%2$s\" gesperrt.\n"
+"\n"
+"Die Sperre dauert %3$d Minuten und verlängert sich, wenn es noch einmal passiert. Über weitere Sperren in der nächsten Stunde wird nicht gemailt.\n"
+
+#: inc/brute-force.php:244
+msgid "<strong>Error:</strong> Those details are not correct."
+msgstr "<strong>Fehler:</strong> Diese Angaben stimmen nicht."
+
+#. translators: 1: user name, 2: role.
+#: inc/hardening.php:150
+msgid "Signed in as \"%1$s\" (%2$s)"
+msgstr "Angemeldet als \"%1$s\" (%2$s)"
+
+#: inc/magic-link.php:107
+#: inc/magic-link.php:125
+msgid "Sign in with a link by email instead"
+msgstr "Stattdessen mit einem Link per E-Mail anmelden"
+
+#: inc/magic-link.php:183
+msgid "That form had gone stale. Please try again."
+msgstr "Dieses Formular war nicht mehr aktuell. Bitte versuchen Sie es noch einmal."
+
+#: inc/magic-link.php:188
+msgid "Please enter the email address your account uses."
+msgstr "Bitte geben Sie die E-Mail-Adresse Ihres Kontos ein."
+
+#: inc/magic-link.php:191
+msgid "Too many requests. Please wait an hour, or sign in with your password."
+msgstr "Zu viele Anfragen. Bitte warten Sie eine Stunde oder melden Sie sich mit Ihrem Passwort an."
+
+#. translators: 1: site name, 2: the link, 3: number of minutes
+#: inc/magic-link.php:237
+msgid ""
+"Somebody asked to sign in to %1$s with this address.\n"
+"\n"
+"Open this link and press the button on the page:\n"
+"\n"
+"%2$s\n"
+"\n"
+"The link works once and stops working after %3$d minutes. If this was not you, nothing has happened and you can ignore this message."
+msgstr ""
+"Jemand möchte sich mit dieser Adresse bei %1$s anmelden.\n"
+"\n"
+"Öffnen Sie diesen Link und drücken Sie auf der Seite den Button:\n"
+"\n"
+"%2$s\n"
+"\n"
+"Der Link funktioniert einmal und läuft nach %3$d Minuten ab. Waren Sie das nicht, ist nichts passiert und Sie können diese Nachricht ignorieren."
+
+#. translators: %s: site name
+#: inc/magic-link.php:256
+msgid "Your sign in link for %s"
+msgstr "Ihr Anmeldelink für %s"
+
+#: inc/magic-link.php:283
+msgid "That link has been used already, or it has expired. Ask for a new one."
+msgstr "Dieser Link wurde bereits benutzt oder ist abgelaufen. Fordern Sie einen neuen an."
+
+#: inc/magic-link.php:293
+msgid "That page had gone stale. Open the link from the email again."
+msgstr "Diese Seite war nicht mehr aktuell. Öffnen Sie den Link aus der E-Mail noch einmal."
+
+#: inc/magic-link.php:345
+msgid "Sign in with a link"
+msgstr "Mit einem Link anmelden"
+
+#: inc/magic-link.php:354
+msgid "If that address has an account, a sign in link is on its way. It works once and expires in fifteen minutes."
+msgstr "Falls es zu dieser Adresse ein Konto gibt, ist ein Anmeldelink unterwegs. Er funktioniert einmal und läuft nach fünfzehn Minuten ab."
+
+#: inc/magic-link.php:360
+msgid "Email address"
+msgstr "E-Mail-Adresse"
+
+#: inc/magic-link.php:366
+msgid "Send me a link"
+msgstr "Link schicken"
+
+#: inc/magic-link.php:376
+msgid "Sign in with a password instead"
+msgstr "Stattdessen mit Passwort anmelden"
+
+#: inc/magic-link.php:390
+msgid "Sign in"
+msgstr "Anmelden"
+
+#. translators: %s: the account's display name
+#: inc/magic-link.php:397
+msgid "Signing in as %s."
+msgstr "Anmeldung als %s."
+
+#: inc/magic-link.php:406
+msgid "Sign me in"
+msgstr "Jetzt anmelden"
+
+#: inc/review.php:30
+msgid "The site runs on HTTPS"
+msgstr "Die Website läuft über HTTPS"
+
+#: inc/review.php:31
+msgid "Without it every password and every session cookie travels in plain text. Certificates are free and every host offers them."
+msgstr "Ohne HTTPS wandern jedes Passwort und jedes Sitzungs-Cookie im Klartext durchs Netz. Zertifikate sind kostenlos, jeder Hoster bietet sie an."
+
+#: inc/review.php:36
+msgid "The admin area requires HTTPS"
+msgstr "Der Adminbereich verlangt HTTPS"
+
+#: inc/review.php:37
+msgid "Add <code>define( 'FORCE_SSL_ADMIN', true );</code> to wp-config.php once the certificate works."
+msgstr "Tragen Sie <code>define( 'FORCE_SSL_ADMIN', true );</code> in die wp-config.php ein, sobald das Zertifikat funktioniert."
+
+#: inc/review.php:44
+msgid "PHP notices are not printed into the page"
+msgstr "PHP-Hinweise landen nicht in der Seite"
+
+#: inc/review.php:45
+msgid "An error message names file paths, table prefixes and plugin versions. On a live site set <code>WP_DEBUG_DISPLAY</code> to false and log to a file instead."
+msgstr "Eine Fehlermeldung nennt Dateipfade, Tabellenpräfixe und Plugin-Versionen. Setzen Sie <code>WP_DEBUG_DISPLAY</code> auf einer Live-Seite auf false und schreiben Sie stattdessen in eine Datei."
+
+#: inc/review.php:52
+msgid "No debug log in a public folder"
+msgstr "Kein Debug-Protokoll in einem öffentlichen Verzeichnis"
+
+#: inc/review.php:53
+msgid "wp-content/debug.log can be downloaded by anybody who guesses the name, and it is full of paths and queries. Delete it, or move the log outside the web root."
+msgstr "wp-content/debug.log kann jeder herunterladen, der den Namen errät, und es steckt voller Pfade und Abfragen. Löschen Sie die Datei oder legen Sie das Protokoll außerhalb des Web-Verzeichnisses ab."
+
+#: inc/review.php:58
+msgid "No account called admin"
+msgstr "Kein Konto mit dem Namen admin"
+
+#: inc/review.php:59
+msgid "It is the name every script tries first, which halves the work of guessing. Create a second administrator with a different name, sign in as that one and delete this account, handing its content over."
+msgstr "Das ist der Name, den jedes Skript zuerst probiert, und er halbiert die Arbeit beim Raten. Legen Sie einen zweiten Administrator mit anderem Namen an, melden Sie sich damit an und löschen Sie dieses Konto, wobei Sie seine Inhalte übertragen."
+
+#: inc/review.php:64
+msgid "wp-config.php cannot be written to"
+msgstr "wp-config.php ist nicht beschreibbar"
+
+#: inc/review.php:65
+msgid "It holds the database password and the keys that sign every session. 0444 or 0440 is enough for WordPress to read it."
+msgstr "Dort stehen das Datenbankpasswort und die Schlüssel, mit denen jede Sitzung signiert wird. 0444 oder 0440 reicht WordPress zum Lesen."
+
+#: inc/review.php:70
+msgid "The file editor is off"
+msgstr "Der Dateieditor ist aus"
+
+#: inc/review.php:71
+msgid "The Hardening switch above does this for you. Setting it in wp-config.php as well means it also holds while this plugin is being updated."
+msgstr "Der Schalter unter Härtung erledigt das. Zusätzlich in der wp-config.php gesetzt, gilt es auch während dieses Plugin aktualisiert wird."
+
+#: inc/review.php:80
+msgid "Anybody can register"
+msgstr "Jeder kann sich registrieren"
+
+#: inc/review.php:82
+msgid "And new accounts may write posts or upload files. Set the default role to Subscriber, or switch registration off, under Settings, General."
+msgstr "Und neue Konten dürfen Beiträge schreiben oder Dateien hochladen. Stellen Sie die Standardrolle unter Einstellungen, Allgemein auf Abonnent oder schalten Sie die Registrierung ab."
+
+#: inc/review.php:83
+msgid "That is normal for a shop. The registration form is rate limited and does not confirm which addresses already exist. Switch it off under Settings, General if the site does not need accounts."
+msgstr "Für einen Shop ist das normal. Das Registrierungsformular ist begrenzt und verrät nicht, welche Adressen es schon gibt. Schalten Sie es unter Einstellungen, Allgemein ab, wenn die Website keine Konten braucht."
+
+#. translators: %s: PHP version
+#: inc/review.php:91
+msgid "PHP is still receiving security fixes (running %s)"
+msgstr "PHP bekommt noch Sicherheitsupdates (läuft mit %s)"
+
+#: inc/review.php:94
+msgid "Older versions get no fixes at all, whatever the host says. Every host has a switch for this in its panel."
+msgstr "Ältere Versionen bekommen überhaupt keine Updates mehr, was der Hoster auch sagt. Jeder Hoster hat dafür einen Schalter im Kundenbereich."
+
+#: inc/review.php:101
+msgid "The login page is not at wp-login.php"
+msgstr "Die Anmeldeseite liegt nicht unter wp-login.php"
+
+#: inc/review.php:102
+msgid "Optional, and it is not a lock: it is the doormat the bots stand on. Almost all of them only ever try the one address."
+msgstr "Freiwillig, und es ist kein Schloss, sondern die Fußmatte, auf der die Bots stehen. Fast alle probieren nur diese eine Adresse."
+
+#. translators: %d: number of open points
+#: inc/review.php:132
+msgid "%d point is worth looking at. None of it is changed automatically."
+msgid_plural "%d points are worth looking at. None of it is changed automatically."
+msgstr[0] "%d Punkt lohnt einen Blick. Nichts davon wird automatisch geändert."
+msgstr[1] "%d Punkte lohnen einen Blick. Nichts davon wird automatisch geändert."
+
+#: inc/review.php:133
+msgid "Nothing open. This list is checked when the page loads, so it stays honest."
+msgstr "Nichts offen. Diese Liste wird beim Laden der Seite geprüft und bleibt damit ehrlich."
+
+#: inc/settings.php:53
+msgid "That login address is one of the ones scanners already try. Pick another."
+msgstr "Diese Anmeldeadresse gehört zu denen, die Scanner ohnehin probieren. Bitte wählen Sie eine andere."
+
+#: inc/settings.php:98
+#: inc/settings.php:99
+#: inc/settings.php:159
+msgid "Security"
+msgstr "Sicherheit"
+
+#: inc/settings.php:164
+msgid "Your login page:"
+msgstr "Ihre Anmeldeseite:"
+
+#: inc/settings.php:168
+msgid "Bookmark it. The old address answers with a 404 for everybody, including you. If you ever lose it, put this line in wp-config.php and the usual address comes back:"
+msgstr "Legen Sie ein Lesezeichen an. Die alte Adresse antwortet für alle mit 404, auch für Sie. Falls Sie die neue verlieren, holt diese Zeile in der wp-config.php die übliche Adresse zurück:"
+
+#: inc/settings.php:177
+msgid "Login page"
+msgstr "Anmeldeseite"
+
+#: inc/settings.php:178
+msgid "Almost all login traffic on a small site is a bot posting to wp-login.php. Moving the page ends most of it, and what remains is worth reading."
+msgstr "Fast der gesamte Anmeldeverkehr einer kleinen Website sind Bots, die an wp-login.php senden. Ein Umzug beendet das meiste davon, und was übrig bleibt, ist lesenswert."
+
+#: inc/settings.php:183
+msgid "Login address"
+msgstr "Anmeldeadresse"
+
+#: inc/settings.php:185
+msgid "One word, no slashes, for example <code>tueröffner</code>. Empty leaves the login page where it is."
+msgstr "Ein Wort, keine Schrägstriche, zum Beispiel <code>tueröffner</code>. Leer lässt die Anmeldeseite, wo sie ist."
+
+#: inc/settings.php:189
+msgid "Hide wp-admin from visitors who are not signed in"
+msgstr "wp-admin vor nicht angemeldeten Besuchern verbergen"
+
+#: inc/settings.php:191
+msgid "Answers 404 instead of redirecting to the login page, which would give the new address away. Only applies when a login address is set. admin-ajax.php and admin-post.php stay reachable."
+msgstr "Antwortet mit 404, statt zur Anmeldeseite weiterzuleiten, was die neue Adresse verraten würde. Gilt nur, wenn eine Anmeldeadresse gesetzt ist. admin-ajax.php und admin-post.php bleiben erreichbar."
+
+#: inc/settings.php:196
+msgid "Failed logins"
+msgstr "Fehlgeschlagene Anmeldungen"
+
+#: inc/settings.php:199
+msgid "Lock out after repeated failures"
+msgstr "Nach wiederholten Fehlversuchen sperren"
+
+#: inc/settings.php:200
+msgid "Attempts allowed"
+msgstr "Erlaubte Versuche"
+
+#: inc/settings.php:200
+msgid "Per address, not per account: locking an account is what an attacker wants."
+msgstr "Pro Adresse, nicht pro Konto: ein gesperrtes Konto ist genau das, was ein Angreifer erreichen will."
+
+#: inc/settings.php:201
+msgid "First lockout in minutes"
+msgstr "Erste Sperre in Minuten"
+
+#: inc/settings.php:201
+msgid "Doubles with every further lockout from the same address, up to a day."
+msgstr "Verdoppelt sich mit jeder weiteren Sperre derselben Adresse, bis zu einem Tag."
+
+#: inc/settings.php:202
+msgid "Email me about lockouts"
+msgstr "Über Sperren per E-Mail informieren"
+
+#: inc/settings.php:202
+msgid "At most one message an hour, so an attacker cannot decide how much mail the site sends."
+msgstr "Höchstens eine Nachricht pro Stunde, damit nicht ein Angreifer bestimmt, wie viel Post die Website verschickt."
+
+#: inc/settings.php:206
+msgid "Accounts"
+msgstr "Konten"
+
+#: inc/settings.php:207
+msgid "The login form is watched above. These are the other three ways into an account: the password mail, the registration form, and whatever password somebody picks at the end of it."
+msgstr "Das Anmeldeformular wird oben bewacht. Hier sind die drei anderen Wege in ein Konto: die Passwort-Mail, das Registrierungsformular und das Passwort, das am Ende dabei herauskommt."
+
+#: inc/settings.php:210
+msgid "Limit password reset requests"
+msgstr "Passwort-Anfragen begrenzen"
+
+#: inc/settings.php:210
+msgid "Every request sends mail to an address a stranger typed. Without a limit the form is a way to send a hundred messages from your site."
+msgstr "Jede Anfrage schickt Post an eine Adresse, die ein Fremder eingetippt hat. Ohne Grenze ist das Formular ein Weg, hundert Nachrichten über Ihre Website zu verschicken."
+
+#: inc/settings.php:211
+msgid "Reset requests per hour"
+msgstr "Passwort-Anfragen pro Stunde"
+
+#: inc/settings.php:211
+msgid "Per address. Three is plenty for somebody who mistyped their email."
+msgstr "Pro Adresse. Drei reichen auch, wenn sich jemand bei der E-Mail vertippt hat."
+
+#: inc/settings.php:212
+msgid "Guard the registration form"
+msgstr "Registrierungsformular absichern"
+
+#: inc/settings.php:212
+msgid "A hidden field no person fills in, a limit per address, and an answer that does not confirm which addresses already have an account. Covers the WooCommerce form as well."
+msgstr "Ein verstecktes Feld, das kein Mensch ausfüllt, eine Grenze pro Adresse und eine Antwort, die nicht verrät, welche Adressen bereits ein Konto haben. Gilt auch für das WooCommerce-Formular."
+
+#: inc/settings.php:213
+msgid "Registrations per hour"
+msgstr "Registrierungen pro Stunde"
+
+#: inc/settings.php:213
+msgid "Per address. A household behind one connection rarely needs more than a handful."
+msgstr "Pro Adresse. Ein Haushalt hinter einem Anschluss braucht selten mehr als eine Handvoll."
+
+#: inc/settings.php:214
+msgid "Refuse obvious passwords"
+msgstr "Offensichtliche Passwörter ablehnen"
+
+#: inc/settings.php:214
+msgid "Length, and nothing built around the site name or the account name. No rule about capitals and digits: that produces Sommer2026! and nothing safer."
+msgstr "Länge, und nichts, was um den Namen der Website oder des Kontos herum gebaut ist. Keine Regel über Großbuchstaben und Ziffern: die bringt Sommer2026! hervor und sonst nichts Sichereres."
+
+#: inc/settings.php:215
+msgid "Offer a sign in link by email"
+msgstr "Anmeldung per Link anbieten"
+
+#: inc/settings.php:215
+msgid "A customer who signs in twice a year does not remember a password, resets it, and picks a worse one. A link proves the same thing the reset proves, in one step instead of four. Off by default, because it changes how people sign in."
+msgstr "Wer sich zweimal im Jahr anmeldet, erinnert sich an kein Passwort, setzt es zurück und wählt ein schlechteres. Ein Link beweist dasselbe wie das Zurücksetzen, in einem Schritt statt in vier. Standardmäßig aus, weil es die Art der Anmeldung verändert."
+
+#: inc/settings.php:216
+msgid "Links for accounts that can edit the site too"
+msgstr "Links auch für Konten, die die Website bearbeiten dürfen"
+
+#: inc/settings.php:216
+msgid "A link is exactly as strong as the inbox it lands in. That is the right trade for a customer and the wrong one for an editor."
+msgstr "Ein Link ist genau so sicher wie das Postfach, in dem er landet. Für Kundschaft ist das der richtige Tausch, für Redaktionskonten der falsche."
+
+#: inc/settings.php:217
+msgid "Links per hour"
+msgstr "Links pro Stunde"
+
+#: inc/settings.php:217
+msgid "Per address, like the other two."
+msgstr "Pro Adresse, wie die anderen beiden."
+
+#: inc/settings.php:218
+msgid "Shortest password allowed"
+msgstr "Kürzestes erlaubtes Passwort"
+
+#: inc/settings.php:218
+msgid "Twelve characters. A short sentence is easier to remember and much harder to guess than eight characters of noise."
+msgstr "Zwölf Zeichen. Ein kurzer Satz ist leichter zu merken und viel schwerer zu erraten als acht Zeichen Kauderwelsch."
+
+#: inc/settings.php:222
+msgid "Requests"
+msgstr "Anfragen"
+
+#: inc/settings.php:227
+msgid "Block obvious probes"
+msgstr "Offensichtliche Sondierungen blockieren"
+
+#: inc/settings.php:229
+msgid "A short list of patterns: traversal, union select, script tags in a URL, requests for .env or an old phpunit runner. The URL is always checked, a submitted form only for visitors who are not signed in."
+msgstr "Eine kurze Liste von Mustern: Verzeichniswechsel, union select, Script-Tags in einer URL, Anfragen nach .env oder einem alten phpunit-Runner. Die URL wird immer geprüft, ein abgesendetes Formular nur bei nicht angemeldeten Besuchern."
+
+#: inc/settings.php:233
+msgid "Addresses that skip all of this"
+msgstr "Adressen, für die nichts davon gilt"
+
+#: inc/settings.php:235
+msgid "One per line. Your office, a monitoring service. Anything that is not a valid address is dropped when you save."
+msgstr "Eine pro Zeile. Ihr Büro, ein Überwachungsdienst. Was keine gültige Adresse ist, fällt beim Speichern weg."
+
+#: inc/settings.php:240
+msgid "Headers"
+msgstr "Header"
+
+#: inc/settings.php:243
+msgid "Send security headers"
+msgstr "Sicherheits-Header senden"
+
+#: inc/settings.php:243
+msgid "nosniff, a referrer policy, and a permissions policy that switches off camera, microphone and location."
+msgstr "nosniff, eine Referrer-Richtlinie und eine Berechtigungsrichtlinie, die Kamera, Mikrofon und Standort abschaltet."
+
+#: inc/settings.php:246
+msgid "Allow the site in a frame"
+msgstr "Website in einem Frame erlauben"
+
+#: inc/settings.php:250
+msgid "Only on this site"
+msgstr "Nur auf dieser Website"
+
+#: inc/settings.php:251
+msgid "Nowhere"
+msgstr "Nirgends"
+
+#: inc/settings.php:252
+msgid "Anywhere, send no header"
+msgstr "Überall, keinen Header senden"
+
+#: inc/settings.php:254
+msgid "Stops another site loading yours invisibly and collecting clicks."
+msgstr "Verhindert, dass eine fremde Seite Ihre unsichtbar lädt und Klicks abgreift."
+
+#: inc/settings.php:259
+msgid "Content security policy"
+msgstr "Content Security Policy"
+
+#: inc/settings.php:261
+msgid "A narrow one: no plugins, no rewritten base URL, forms only to this site. Deliberately says nothing about scripts, because a script policy needs a nonce per response and breaks the moment a page is cached."
+msgstr "Eine schmale: keine Plugins, keine umgeschriebene Basis-URL, Formulare nur an diese Website. Zu Skripten sagt sie bewusst nichts, denn eine Skript-Richtlinie braucht pro Antwort einen Nonce und zerbricht, sobald eine Seite zwischengespeichert wird."
+
+#: inc/settings.php:265
+msgid "Require HTTPS in the browser (HSTS)"
+msgstr "HTTPS im Browser erzwingen (HSTS)"
+
+#: inc/settings.php:267
+msgid "Only switch this on once HTTPS works everywhere: a browser that has seen the header refuses plain HTTP for six months, whatever the site says afterwards."
+msgstr "Erst einschalten, wenn HTTPS überall funktioniert: ein Browser, der den Header einmal gesehen hat, verweigert sechs Monate lang einfaches HTTP, was die Website danach auch sagt."
+
+#: inc/settings.php:272
+msgid "Hardening"
+msgstr "Härtung"
+
+#: inc/settings.php:275
+msgid "Switch off XML-RPC"
+msgstr "XML-RPC abschalten"
+
+#: inc/settings.php:275
+msgid "It answers before authentication and lets one request try hundreds of passwords. Leave it on only if an app still posts through it."
+msgstr "Es antwortet vor der Anmeldung und lässt eine einzige Anfrage hunderte Passwörter probieren. Lassen Sie es nur an, wenn eine App darüber noch veröffentlicht."
+
+#: inc/settings.php:276
+msgid "Do not list user names"
+msgstr "Benutzernamen nicht auflisten"
+
+#: inc/settings.php:276
+msgid "Closes ?author=1, the REST users endpoint and the users sitemap for visitors who are not signed in."
+msgstr "Schließt ?author=1, den REST-Endpunkt für Benutzer und die Benutzer-Sitemap für nicht angemeldete Besucher."
+
+#: inc/settings.php:277
+msgid "No theme and plugin editor"
+msgstr "Kein Theme- und Plugin-Editor"
+
+#: inc/settings.php:277
+msgid "A stolen password should not come with a code editor."
+msgstr "Zu einem gestohlenen Passwort sollte kein Code-Editor gehören."
+
+#: inc/settings.php:278
+msgid "Keep the version out of the markup"
+msgstr "Versionsnummer aus dem Quelltext heraushalten"
+
+#: inc/settings.php:279
+msgid "Application passwords for administrators only"
+msgstr "Anwendungspasswörter nur für Administratoren"
+
+#: inc/settings.php:279
+msgid "On a shop, every customer account would otherwise be a possible long lived token."
+msgstr "In einem Shop wäre sonst jedes Kundenkonto ein möglicher langlebiger Zugangsschlüssel."
+
+#: inc/settings.php:286
+msgid "What this installation still leaves open"
+msgstr "Was diese Installation noch offen lässt"
+
+#: inc/settings.php:289
+msgid "What happened"
+msgstr "Was passiert ist"
+
+#: inc/settings.php:304
+msgid "Nothing yet. Lockouts, blocked requests and sign-ins show up here."
+msgstr "Noch nichts. Sperren, blockierte Anfragen und Anmeldungen erscheinen hier."
+
+#: inc/settings.php:309
+msgid "When"
+msgstr "Wann"
+
+#: inc/settings.php:310
+msgid "What"
+msgstr "Was"
+
+#: inc/settings.php:311
+msgid "Address"
+msgstr "Adresse"
+
+#: inc/settings.php:312
+msgid "Detail"
+msgstr "Einzelheit"
+
+#: inc/settings.php:331
+msgid "Clear the log"
+msgstr "Protokoll leeren"
+
+#: inc/settings.php:342
+msgid "You cannot do that."
+msgstr "Das dürfen Sie nicht."
+
+#: inc/settings.php:362
+msgid "Settings"
+msgstr "Einstellungen"

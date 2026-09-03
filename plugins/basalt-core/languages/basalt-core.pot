@@ -1,0 +1,1335 @@
+# Copyright (C) 2026 Riccardo D'Arcangelo
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Basalt Core 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/basalt-core\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-03T08:54:31+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: basalt-core\n"
+
+#. Plugin Name of the plugin
+#: basalt-core.php
+msgid "Basalt Core"
+msgstr ""
+
+#. Description of the plugin
+#: basalt-core.php
+msgid "Structured data, meta tags, breadcrumbs and accessibility corrections. The part of a Basalt site that must survive a theme change."
+msgstr ""
+
+#. Author of the plugin
+#: basalt-core.php
+msgid "Riccardo D'Arcangelo"
+msgstr ""
+
+#: demos/trades.php:19
+msgid "Trades and equipment"
+msgstr ""
+
+#: demos/trades.php:20
+msgid "A firm that hires out machines: a landing page, a catalog with technical data, three articles and the usual legal pages. The closest fit for construction, plant hire, workshops and anything sold on specifications."
+msgstr ""
+
+#: demos/trades.php:27
+msgid "Hoists, lifts and site equipment for hire across Bavaria"
+msgstr ""
+
+#: demos/trades.php:39
+msgid "Augsburger Hebetechnik"
+msgstr ""
+
+#: demos/trades.php:48
+msgid "Site mark"
+msgstr ""
+
+#: demos/trades.php:49
+msgid "Placeholder graphic: a pattern of basalt columns, standing in for a logo"
+msgstr ""
+
+#: demos/trades.php:55
+msgid "The fleet"
+msgstr ""
+
+#: demos/trades.php:56
+#: demos/trades.php:171
+msgid "Placeholder graphic: a pattern of basalt columns, where a photograph of the fleet would go"
+msgstr ""
+
+#: demos/trades.php:62
+msgid "Social preview"
+msgstr ""
+
+#: demos/trades.php:63
+msgid "Placeholder graphic: a pattern of basalt columns"
+msgstr ""
+
+#: demos/trades.php:69
+msgid "The yard"
+msgstr ""
+
+#: demos/trades.php:70
+msgid "Placeholder graphic: a pattern of basalt columns, where a photograph of the yard would go"
+msgstr ""
+
+#: demos/trades.php:76
+#: demos/trades.php:267
+msgid "Hoist GL 200"
+msgstr ""
+
+#: demos/trades.php:77
+#: demos/trades.php:84
+#: demos/trades.php:91
+msgid "Placeholder graphic: a pattern of basalt columns, where a photograph of the machine would go"
+msgstr ""
+
+#: demos/trades.php:83
+#: demos/trades.php:287
+msgid "Roof lift RL 250"
+msgstr ""
+
+#: demos/trades.php:90
+#: demos/trades.php:307
+msgid "Heavy hoist HH 500"
+msgstr ""
+
+#: demos/trades.php:97
+msgid "Article image"
+msgstr ""
+
+#: demos/trades.php:98
+msgid "Placeholder graphic: a pattern of basalt columns, where the article image would go"
+msgstr ""
+
+#: demos/trades.php:105
+msgid "Equipment"
+msgstr ""
+
+#: demos/trades.php:110
+msgid "Up to 200 kg"
+msgstr ""
+
+#: demos/trades.php:115
+msgid "Above 300 kg"
+msgstr ""
+
+#: demos/trades.php:120
+msgid "Facade work"
+msgstr ""
+
+#: demos/trades.php:125
+msgid "Roofing"
+msgstr ""
+
+#: demos/trades.php:131
+#: inc/demos.php:448
+msgid "Main"
+msgstr ""
+
+#: demos/trades.php:133
+#: demos/trades.php:145
+#: inc/breadcrumbs.php:23
+msgid "Home"
+msgstr ""
+
+#: demos/trades.php:134
+#: demos/trades.php:184
+msgid "Services"
+msgstr ""
+
+#: demos/trades.php:135
+#: demos/trades.php:191
+msgid "About"
+msgstr ""
+
+#: demos/trades.php:136
+#: demos/trades.php:206
+msgid "Journal"
+msgstr ""
+
+#: demos/trades.php:137
+#: demos/trades.php:199
+msgid "Contact"
+msgstr ""
+
+#: demos/trades.php:162
+msgid "Since 1998"
+msgstr ""
+
+#: demos/trades.php:163
+msgid "Equipment that arrives on time and works on site"
+msgstr ""
+
+#: demos/trades.php:164
+msgid "Hoists, lifts and scaffolding equipment for hire. Delivered, set up and collected, anywhere in Bavaria, usually within two working days."
+msgstr ""
+
+#: demos/trades.php:166
+msgid "Request a quote"
+msgstr ""
+
+#: demos/trades.php:167
+msgid "See the range"
+msgstr ""
+
+#: demos/trades.php:185
+msgid "What we hire out, how it works and what it costs."
+msgstr ""
+
+#: demos/trades.php:192
+msgid "Twenty eight years of hiring out site equipment from a yard in Augsburg."
+msgstr ""
+
+#: demos/trades.php:200
+msgid "Where to find us, and what happens after an enquiry."
+msgstr ""
+
+#: demos/trades.php:207
+msgid "Notes from the workshop and the yard."
+msgstr ""
+
+#: demos/trades.php:213
+msgid "Imprint"
+msgstr ""
+
+#: demos/trades.php:214
+msgid "The legally required details of who runs this site. Replace this with yours."
+msgstr ""
+
+#: demos/trades.php:219
+msgid "Privacy"
+msgstr ""
+
+#: demos/trades.php:220
+msgid "What this site stores, why, and for how long. Replace this with yours."
+msgstr ""
+
+#: demos/trades.php:226
+msgid "Choosing a hoist by load, not by price"
+msgstr ""
+
+#: demos/trades.php:227
+msgid "The cheapest machine that fits the load is rarely the cheapest machine for the job."
+msgstr ""
+
+#: demos/trades.php:230
+msgid "Load capacity is the first number everyone looks at and the last one that should decide the hire. A machine running at its limit all day wears faster, runs slower and fails sooner than a larger one at two thirds load."
+msgstr ""
+
+#: demos/trades.php:231
+msgid "Work out the real load"
+msgstr ""
+
+#: demos/trades.php:232
+msgid "Take the heaviest single item, add the carrier, then add a third. That last third is what stops the machine running at its limit."
+msgstr ""
+
+#: demos/trades.php:237
+msgid "What we check between hires"
+msgstr ""
+
+#: demos/trades.php:238
+msgid "Every machine goes through the workshop before it goes out again. Here is the list."
+msgstr ""
+
+#: demos/trades.php:241
+msgid "Between every hire a machine goes through the workshop. It is slower than the industry average and it is the reason our failure rate is a third of it."
+msgstr ""
+
+#: demos/trades.php:243
+msgid "Rope and hook inspected over the full length"
+msgstr ""
+
+#: demos/trades.php:244
+msgid "Brake tested under load"
+msgstr ""
+
+#: demos/trades.php:245
+msgid "Limit switches triggered in both directions"
+msgstr ""
+
+#: demos/trades.php:251
+msgid "Site power: what a 230 volt machine really needs"
+msgstr ""
+
+#: demos/trades.php:252
+msgid "A machine rated at 230 volts still trips the site supply if the run is long enough."
+msgstr ""
+
+#: demos/trades.php:255
+msgid "The rating on the plate assumes the supply is at the machine. On a site it rarely is, and sixty metres of extension is enough to drop the voltage below what the motor needs to start under load."
+msgstr ""
+
+#: demos/trades.php:268
+msgid "The workhorse of the fleet. 200 kg to 30 metres on a single phase supply, light enough for two people to position."
+msgstr ""
+
+#: demos/trades.php:282
+#: demos/trades.php:302
+#: demos/trades.php:322
+msgid "Delivered on a trailer, set up by our crew and handed over tested. Collection is included in the hire price."
+msgstr ""
+
+#: demos/trades.php:288
+msgid "An inclined lift for tile and membrane. Sets up against the eaves in under twenty minutes."
+msgstr ""
+
+#: demos/trades.php:308
+msgid "Five hundred kilos to 45 metres. Needs a 400 volt supply and a crew of two to rig."
+msgstr ""
+
+#: inc/accessibility.php:83
+msgid "Menu"
+msgstr ""
+
+#. translators: 1: navigation name, 2: how many of that name are on the page so far.
+#: inc/accessibility.php:91
+#, php-format
+msgctxt "navigation landmark"
+msgid "%1$s %2$d"
+msgstr ""
+
+#: inc/accessibility.php:118
+msgid "Search"
+msgstr ""
+
+#: inc/accessibility.php:183
+msgid "Pagination"
+msgstr ""
+
+#. translators: %s: the search term.
+#: inc/breadcrumbs.php:114
+#, php-format
+msgid "Search results for %s"
+msgstr ""
+
+#: inc/breadcrumbs.php:121
+msgid "Page not found"
+msgstr ""
+
+#: inc/breadcrumbs.php:224
+#: inc/breadcrumbs.php:262
+msgid "Breadcrumb"
+msgstr ""
+
+#: inc/demos.php:287
+msgid "That demo does not exist."
+msgstr ""
+
+#: inc/demos.php:303
+msgid "Images could not be drawn, so the demo was imported without them. The GD extension is what draws them."
+msgstr ""
+
+#: inc/demos.php:507
+#: inc/demos.php:567
+msgid "Basalt demo content"
+msgstr ""
+
+#: inc/demos.php:508
+msgid "Basalt demos"
+msgstr ""
+
+#: inc/demos.php:531
+msgid "You are not allowed to import content."
+msgstr ""
+
+#. translators: %s: demo name.
+#: inc/demos.php:575
+#, php-format
+msgid "%s was imported. Nothing that was already here was changed."
+msgstr ""
+
+#: inc/demos.php:579
+msgid "Look at the site"
+msgstr ""
+
+#: inc/demos.php:585
+msgid "A demo fills an empty site with pages, posts and pictures so that you can see how the pieces fit together, and then edit them into your own. The pages are built from the theme patterns, so what you get is what is in the inserter."
+msgstr ""
+
+#: inc/demos.php:588
+msgid "Nothing is ever deleted."
+msgstr ""
+
+#: inc/demos.php:589
+msgid "Importing only creates. A page whose address is already taken is left alone and reported, so a demo cannot overwrite work you have already done."
+msgstr ""
+
+#: inc/demos.php:593
+msgid "No demos are installed."
+msgstr ""
+
+#. translators: %s: date the demo was imported.
+#: inc/demos.php:608
+#, php-format
+msgid "Imported on %s. Importing it again would create a second copy of anything you have since renamed, so it is not offered twice."
+msgstr ""
+
+#: inc/demos.php:620
+msgid "Import this demo"
+msgstr ""
+
+#: inc/feedback.php:172
+msgid "Was this helpful?"
+msgstr ""
+
+#: inc/feedback.php:173
+msgid "Yes"
+msgstr ""
+
+#: inc/feedback.php:174
+msgid "No"
+msgstr ""
+
+#: inc/feedback.php:175
+msgid "Thank you. What was missing?"
+msgstr ""
+
+#: inc/feedback.php:176
+msgid "Send"
+msgstr ""
+
+#: inc/feedback.php:218
+msgid "Thank you."
+msgstr ""
+
+#: inc/feedback.php:255
+msgid "Nothing yet. The Feedback block collects answers here."
+msgstr ""
+
+#: inc/feedback.php:260
+msgid "Topic"
+msgstr ""
+
+#: inc/feedback.php:261
+msgid "Helpful"
+msgstr ""
+
+#: inc/feedback.php:262
+msgid "Not helpful"
+msgstr ""
+
+#: inc/feedback.php:263
+msgid "Latest notes"
+msgstr ""
+
+#: inc/feedback.php:283
+msgid "none"
+msgstr ""
+
+#: inc/indexing.php:68
+msgid "Search engines"
+msgstr ""
+
+#: inc/indexing.php:90
+msgid "Hide from search engines"
+msgstr ""
+
+#: inc/indexing.php:94
+msgid "Adds a noindex tag and takes the page out of the sitemap and out of llms.txt. The page stays reachable for anybody with the link."
+msgstr ""
+
+#: inc/login.php:250
+msgid "The username or password is not correct."
+msgstr ""
+
+#. translators: %s: contrast ratio, for example 3.2.
+#: inc/login.php:342
+#, php-format
+msgid "Form text against the form background is %s to 1. WCAG AA asks for at least 4.5."
+msgstr ""
+
+#. translators: %s: contrast ratio.
+#: inc/login.php:353
+#, php-format
+msgid "White button text on the accent colour is %s to 1. WCAG AA asks for at least 4.5."
+msgstr ""
+
+#. translators: %s: contrast ratio.
+#: inc/login.php:364
+#, php-format
+msgid "The focus ring against the form background is %s to 1. WCAG AA asks for at least 3, and a focus ring nobody can see is the one that strands keyboard users on the login form."
+msgstr ""
+
+#. translators: %s: contrast ratio.
+#: inc/login.php:374
+#, php-format
+msgid "The links below the form against the page background are %s to 1. WCAG AA asks for at least 4.5."
+msgstr ""
+
+#: inc/login.php:384
+msgid "These login colours do not meet WCAG AA:"
+msgstr ""
+
+#: inc/maintenance.php:121
+msgid "We will be back shortly"
+msgstr ""
+
+#. translators: %s: time of day.
+#: inc/maintenance.php:208
+#, php-format
+msgid "Expected back at %s."
+msgstr ""
+
+#: inc/maintenance.php:269
+msgid "Maintenance mode is on. Visitors get the maintenance page and a 503 status; you and anyone who can edit posts see the real site."
+msgstr ""
+
+#: inc/maintenance.php:271
+msgid "Turn it off"
+msgstr ""
+
+#. translators: %s: closing time
+#: inc/opening-hours.php:176
+#, php-format
+msgid "Open today until %s"
+msgstr ""
+
+#. translators: %s: opening time
+#: inc/opening-hours.php:185
+#, php-format
+msgid "Opens today at %s"
+msgstr ""
+
+#: inc/opening-hours.php:194
+msgid "Closed today"
+msgstr ""
+
+#. translators: 1: weekday name, 2: opening time
+#: inc/opening-hours.php:203
+#, php-format
+msgid "Closed, opens %1$s at %2$s"
+msgstr ""
+
+#: inc/opening-hours.php:204
+msgid "tomorrow"
+msgstr ""
+
+#. translators: 1: opening time, 2: closing time
+#: inc/opening-hours.php:310
+#, php-format
+msgctxt "time range"
+msgid "%1$s to %2$s"
+msgstr ""
+
+#: inc/opening-hours.php:315
+msgid "Closed"
+msgstr ""
+
+#: inc/opening-hours.php:315
+msgctxt "time range separator"
+msgid ", "
+msgstr ""
+
+#. translators: %s: closing time
+#: inc/opening-hours.php:323
+#, php-format
+msgctxt "closing time only"
+msgid "until %s"
+msgstr ""
+
+#. translators: 1: first weekday, 2: last weekday
+#: inc/opening-hours.php:351
+#, php-format
+msgctxt "weekday range"
+msgid "%1$s to %2$s"
+msgstr ""
+
+#: inc/opening-hours.php:354
+msgctxt "weekday list separator"
+msgid ", "
+msgstr ""
+
+#: inc/preferences.php:52
+msgid "Text size"
+msgstr ""
+
+#: inc/preferences.php:55
+msgid "Normal"
+msgstr ""
+
+#: inc/preferences.php:56
+msgid "Large"
+msgstr ""
+
+#: inc/preferences.php:57
+msgid "Larger"
+msgstr ""
+
+#: inc/preferences.php:58
+msgid "Largest"
+msgstr ""
+
+#: inc/preferences.php:63
+msgid "More space between lines"
+msgstr ""
+
+#: inc/preferences.php:64
+msgid "Increases line height and paragraph spacing."
+msgstr ""
+
+#: inc/preferences.php:69
+msgid "More space between letters and words"
+msgstr ""
+
+#: inc/preferences.php:70
+msgid "Helps if letters appear to run together."
+msgstr ""
+
+#: inc/preferences.php:75
+msgid "Underline every link"
+msgstr ""
+
+#: inc/preferences.php:76
+msgid "Makes links identifiable without relying on colour."
+msgstr ""
+
+#: inc/preferences.php:81
+msgid "Higher contrast"
+msgstr ""
+
+#: inc/preferences.php:82
+msgid "Darkens text and borders. Follows your system setting until you change it here."
+msgstr ""
+
+#: inc/preferences.php:87
+msgid "Reduce motion"
+msgstr ""
+
+#: inc/preferences.php:88
+msgid "Stops transitions and animations. Follows your system setting until you change it here."
+msgstr ""
+
+#: inc/preferences.php:93
+msgid "Do not keep the header on screen"
+msgstr ""
+
+#: inc/preferences.php:94
+msgid "Frees vertical space, which matters when the page is magnified."
+msgstr ""
+
+#: inc/preferences.php:260
+#: inc/preferences.php:267
+msgid "Display settings"
+msgstr ""
+
+#: inc/preferences.php:271
+msgid "Close"
+msgstr ""
+
+#: inc/preferences.php:276
+msgid "These settings change how this site looks for you. They are stored in this browser, on this device, and are not sent anywhere."
+msgstr ""
+
+#: inc/preferences.php:319
+msgid "Reset to defaults"
+msgstr ""
+
+#: inc/preferences.php:326
+msgid "Display settings reset."
+msgstr ""
+
+#: inc/preferences.php:327
+msgid "Saved."
+msgstr ""
+
+#: inc/settings.php:105
+msgid "Organization"
+msgstr ""
+
+#: inc/settings.php:106
+msgid "Local business"
+msgstr ""
+
+#: inc/settings.php:107
+msgid "Construction or trade business"
+msgstr ""
+
+#: inc/settings.php:108
+msgid "Professional service"
+msgstr ""
+
+#: inc/settings.php:109
+msgid "Store"
+msgstr ""
+
+#: inc/settings.php:110
+msgid "Clothing or fashion store"
+msgstr ""
+
+#: inc/settings.php:111
+msgid "Person"
+msgstr ""
+
+#: inc/settings.php:252
+#: inc/settings.php:316
+msgid "Search engines and structured data"
+msgstr ""
+
+#: inc/settings.php:253
+msgid "Search & Schema"
+msgstr ""
+
+#. translators: %s: name of the detected SEO plugin.
+#: inc/settings.php:324
+#, php-format
+msgid "%s is active and owns meta tags, structured data and breadcrumbs. Basalt Core stays silent so nothing is emitted twice. The business details below are still worth filling in: they are used by the breadcrumb block and are ready if you ever remove the plugin."
+msgstr ""
+
+#: inc/settings.php:335
+msgid "Search engines are blocked."
+msgstr ""
+
+#: inc/settings.php:336
+msgid "This site discourages indexing, so none of this has any effect."
+msgstr ""
+
+#: inc/settings.php:337
+msgid "Reading settings"
+msgstr ""
+
+#: inc/settings.php:345
+msgid "Who is behind this site"
+msgstr ""
+
+#: inc/settings.php:347
+msgid "This produces the knowledge panel and local results. Leave a field empty rather than guessing; wrong structured data is worse than none."
+msgstr ""
+
+#: inc/settings.php:351
+msgid "Emit structured data"
+msgstr ""
+
+#: inc/settings.php:354
+msgid "The site represents"
+msgstr ""
+
+#: inc/settings.php:358
+msgid "Legal or business name"
+msgstr ""
+
+#: inc/settings.php:358
+msgid "Leave empty to use the site title."
+msgstr ""
+
+#: inc/settings.php:359
+msgid "Phone"
+msgstr ""
+
+#: inc/settings.php:360
+msgid "Email"
+msgstr ""
+
+#: inc/settings.php:361
+msgid "Street and number"
+msgstr ""
+
+#: inc/settings.php:362
+msgid "Postal code"
+msgstr ""
+
+#: inc/settings.php:363
+msgid "City"
+msgstr ""
+
+#: inc/settings.php:364
+msgid "Region or state"
+msgstr ""
+
+#: inc/settings.php:365
+msgid "Country code"
+msgstr ""
+
+#: inc/settings.php:365
+msgid "Two letters, for example DE."
+msgstr ""
+
+#: inc/settings.php:366
+#: blocks/opening-hours/editor.js:43
+#: blocks/opening-hours/editor.js:76
+msgid "Opening hours"
+msgstr ""
+
+#: inc/settings.php:366
+msgid "One rule per line in Schema.org notation: Mo-Fr 08:00-18:00"
+msgstr ""
+
+#: inc/settings.php:367
+msgid "Price range"
+msgstr ""
+
+#: inc/settings.php:367
+msgid "For example €€. Ignored for Organization and Person."
+msgstr ""
+
+#: inc/settings.php:368
+msgid "Profile URLs"
+msgstr ""
+
+#: inc/settings.php:368
+msgid "One per line. Emitted as sameAs, which connects the site to its social profiles."
+msgstr ""
+
+#: inc/settings.php:372
+msgid "Crawling, robots.txt and AI"
+msgstr ""
+
+#: inc/settings.php:376
+msgid "There is a robots.txt file in the site root. A real file wins over the one WordPress builds, so nothing below has any effect until it is deleted."
+msgstr ""
+
+#: inc/settings.php:382
+msgid "Keep crawlers out of search results"
+msgstr ""
+
+#: inc/settings.php:382
+msgid "Internal search pages carry no ranking value and use up the crawl budget."
+msgstr ""
+
+#: inc/settings.php:385
+msgid "AI crawlers"
+msgstr ""
+
+#: inc/settings.php:389
+msgid "Let all of them read the site"
+msgstr ""
+
+#: inc/settings.php:390
+msgid "Only the ones that cite the source"
+msgstr ""
+
+#: inc/settings.php:391
+msgid "Keep all of them out"
+msgstr ""
+
+#: inc/settings.php:393
+msgid "Two kinds of crawler share the label. Some collect text to train on and give nothing back; others fetch a page because somebody asked a question and then name the source, which sends visitors. The middle option is what most small businesses want."
+msgstr ""
+
+#: inc/settings.php:396
+msgid "Extra robots.txt lines"
+msgstr ""
+
+#: inc/settings.php:396
+msgid "Added at the end, exactly as written. Leave empty unless you know why."
+msgstr ""
+
+#: inc/settings.php:397
+msgid "Serve llms.txt"
+msgstr ""
+
+#: inc/settings.php:397
+msgid "A short plain text summary of the site for language models, built from the title, the pages and the business details below. Nothing to maintain twice."
+msgstr ""
+
+#: inc/settings.php:398
+msgid "What this site is, in two sentences"
+msgstr ""
+
+#: inc/settings.php:398
+msgid "Goes at the top of llms.txt. This is the one place where the site says in its own words what it wants to be quoted as."
+msgstr ""
+
+#: inc/settings.php:402
+msgid "Indexing"
+msgstr ""
+
+#: inc/settings.php:406
+msgid "Hide date archives"
+msgstr ""
+
+#: inc/settings.php:406
+msgid "On most sites they are the same posts listed a third time."
+msgstr ""
+
+#: inc/settings.php:407
+msgid "Hide author archives"
+msgstr ""
+
+#: inc/settings.php:407
+msgid "Worth switching on when one person writes everything."
+msgstr ""
+
+#: inc/settings.php:408
+msgid "Send attachment pages to the post"
+msgstr ""
+
+#: inc/settings.php:408
+msgid "Every upload otherwise gets a page of its own with a title, an image and nothing else."
+msgstr ""
+
+#: inc/settings.php:409
+msgid "Google Search Console code"
+msgstr ""
+
+#: inc/settings.php:409
+msgid "Paste the code or the whole meta tag; the code is taken out of it."
+msgstr ""
+
+#: inc/settings.php:410
+msgid "Bing Webmaster Tools code"
+msgstr ""
+
+#: inc/settings.php:415
+msgid "A single page or post can be hidden from search engines in the editor, in the box called Search engines in the sidebar. That also keeps it out of the sitemap and out of llms.txt."
+msgstr ""
+
+#: inc/settings.php:418
+msgid "Meta tags"
+msgstr ""
+
+#: inc/settings.php:421
+msgid "Emit description, Open Graph and Twitter tags"
+msgstr ""
+
+#: inc/settings.php:422
+msgid "X / Twitter handle"
+msgstr ""
+
+#: inc/settings.php:422
+msgid "Without the @."
+msgstr ""
+
+#: inc/settings.php:423
+msgid "Fallback sharing image ID"
+msgstr ""
+
+#: inc/settings.php:423
+msgid "Attachment ID of the image used when a page has no featured image. 1200 by 630 pixels works everywhere."
+msgstr ""
+
+#: inc/settings.php:427
+msgid "Visitor display settings"
+msgstr ""
+
+#: inc/settings.php:429
+msgid "Adds a small button to the front end that lets a visitor adjust text size, spacing, contrast and motion for themselves. The choice is stored in their browser and applies on their next visit."
+msgstr ""
+
+#: inc/settings.php:432
+msgid "This is not an accessibility overlay."
+msgstr ""
+
+#: inc/settings.php:433
+msgid "It changes presentation only. It adds no ARIA, rewrites no markup, and does not make a site conformant. Overlays that claim otherwise are rejected by the accessibility community, and rightly so."
+msgstr ""
+
+#: inc/settings.php:437
+msgid "Show the display settings button"
+msgstr ""
+
+#: inc/settings.php:440
+msgid "Button position"
+msgstr ""
+
+#: inc/settings.php:444
+msgid "Bottom right"
+msgstr ""
+
+#: inc/settings.php:445
+msgid "Bottom left"
+msgstr ""
+
+#: inc/settings.php:447
+msgid "Move it to the side that does not collide with a cookie banner or a chat widget."
+msgstr ""
+
+#: inc/settings.php:453
+#: blocks/feedback/editor.js:40
+msgid "Feedback"
+msgstr ""
+
+#: inc/settings.php:456
+msgid "What visitors answered to the Feedback block. Counted without cookies and without an external service, so the same person can answer twice: read the trend, not the exact number."
+msgstr ""
+
+#: inc/settings.php:461
+msgid "Maintenance mode"
+msgstr ""
+
+#: inc/settings.php:464
+msgid "While this is on, visitors get the maintenance page and a 503 status, which tells search engines the outage is temporary. Anyone who can edit posts keeps seeing the real site. The page itself is the template named \"maintenance\" in the theme; without one, a plain readable page is printed."
+msgstr ""
+
+#: inc/settings.php:469
+msgid "Turn on maintenance mode"
+msgstr ""
+
+#: inc/settings.php:470
+#: blocks/maintenance-text/editor.js:37
+msgid "Headline"
+msgstr ""
+
+#: inc/settings.php:470
+msgid "What the page says in large type."
+msgstr ""
+
+#: inc/settings.php:471
+#: blocks/maintenance-text/editor.js:38
+msgid "Message"
+msgstr ""
+
+#: inc/settings.php:471
+msgid "Two sentences at most: what is happening, and how to reach you meanwhile."
+msgstr ""
+
+#: inc/settings.php:472
+msgid "Back at"
+msgstr ""
+
+#: inc/settings.php:472
+msgid "Time of day, for example 18:00. Also sets the Retry-After header. Leave empty if you cannot say."
+msgstr ""
+
+#: inc/settings.php:476
+msgid "Login screen"
+msgstr ""
+
+#: inc/settings.php:478
+msgid "Replaces the WordPress logo and the default colours on the login page with the site's own."
+msgstr ""
+
+#: inc/settings.php:483
+msgid "Brand the login screen"
+msgstr ""
+
+#: inc/settings.php:484
+msgid "Logo, attachment ID"
+msgstr ""
+
+#: inc/settings.php:484
+msgid "Leave at 0 to keep the WordPress logo. A wide logo on a transparent background works best."
+msgstr ""
+
+#: inc/settings.php:485
+msgid "Logo width in pixels"
+msgstr ""
+
+#: inc/settings.php:485
+msgid "Between 80 and 480."
+msgstr ""
+
+#: inc/settings.php:486
+msgid "Page background"
+msgstr ""
+
+#: inc/settings.php:486
+msgid "Hex colour, for example #f4f5f7. Anything else is ignored."
+msgstr ""
+
+#: inc/settings.php:487
+msgid "Form background"
+msgstr ""
+
+#: inc/settings.php:487
+msgid "Hex colour. The label and field text switches between dark and light automatically, whichever reads better on it."
+msgstr ""
+
+#: inc/settings.php:488
+msgid "Button and focus colour"
+msgstr ""
+
+#: inc/settings.php:488
+msgid "Hex colour. Also used for the focus ring."
+msgstr ""
+
+#: inc/settings.php:489
+msgid "Background image, attachment ID"
+msgstr ""
+
+#: inc/settings.php:489
+msgid "Optional. Covers the page behind the form."
+msgstr ""
+
+#: inc/settings.php:492
+msgid "Do not reveal whether a username exists"
+msgstr ""
+
+#: inc/settings.php:494
+msgid "Recommended. The default messages say whether the account exists, which lets an attacker confirm real usernames before trying any passwords. The cost: someone who mistypes their username no longer learns that it was the username."
+msgstr ""
+
+#: inc/settings.php:499
+msgid "There is deliberately no custom CSS box and no option to move the login URL. Moving wp-login.php stops some automated noise and no actual attacker, and it breaks integrations that post to the known address; a site that needs it needs a plugin dedicated to that job."
+msgstr ""
+
+#: blocks/breadcrumbs/editor.js:30
+#: blocks/breadcrumbs/editor.js:54
+msgid "Breadcrumbs"
+msgstr ""
+
+#: blocks/breadcrumbs/editor.js:33
+msgid "Let an SEO plugin render the trail"
+msgstr ""
+
+#: blocks/breadcrumbs/editor.js:34
+msgid "When Rank Math or Yoast is active, use its breadcrumb instead of this one so the page carries only one BreadcrumbList."
+msgstr ""
+
+#: blocks/breadcrumbs/editor.js:55
+msgid "Nothing to show here. The front page is the root of the trail, so it has none."
+msgstr ""
+
+#: blocks/feedback/editor.js:41
+msgid "Topic key"
+msgstr ""
+
+#: blocks/feedback/editor.js:41
+msgid "Groups the answers in the report. Empty uses the page slug."
+msgstr ""
+
+#: blocks/feedback/editor.js:42
+msgid "Question"
+msgstr ""
+
+#: blocks/feedback/editor.js:43
+msgid "Yes button"
+msgstr ""
+
+#: blocks/feedback/editor.js:44
+msgid "No button"
+msgstr ""
+
+#: blocks/feedback/editor.js:45
+msgid "Follow-up question after a no"
+msgstr ""
+
+#: blocks/feedback/editor.js:46
+msgid "Send button"
+msgstr ""
+
+#: blocks/feedback/editor.js:47
+msgid "Second link after a no"
+msgstr ""
+
+#: blocks/feedback/editor.js:47
+msgid "Optional, for example \"Rather call us\"."
+msgstr ""
+
+#: blocks/feedback/editor.js:48
+msgid "Where that link goes"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:30
+#: blocks/maintenance-text/editor.js:95
+msgid "Maintenance text"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:34
+msgid "Which text"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:39
+msgid "Back at, time"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:48
+msgid "Render as"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:51
+msgid "Paragraph"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:52
+msgid "Heading 1"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:53
+msgid "Heading 2"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:54
+msgid "Heading 3"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:63
+msgid "Text before"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:64
+msgid "Optional, for example \"back at \"."
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:73
+msgid "Text after"
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:82
+msgid "The wording is edited under Settings, Search and schema, Maintenance mode."
+msgstr ""
+
+#: blocks/maintenance-text/editor.js:96
+msgid "Nothing entered for this text yet. Fill it in under Settings, Search and schema, Maintenance mode."
+msgstr ""
+
+#: blocks/opening-hours/editor.js:44
+msgid "Show today's status"
+msgstr ""
+
+#: blocks/opening-hours/editor.js:44
+msgid "A line such as \"Open today until 18:00\", computed in the site's time zone."
+msgstr ""
+
+#: blocks/opening-hours/editor.js:45
+msgid "Show the table"
+msgstr ""
+
+#: blocks/opening-hours/editor.js:46
+msgid "List closed days"
+msgstr ""
+
+#: blocks/opening-hours/editor.js:46
+msgid "Adds a row for the days you are closed, so nobody has to infer it."
+msgstr ""
+
+#: blocks/opening-hours/editor.js:50
+msgid "Layout"
+msgstr ""
+
+#: blocks/opening-hours/editor.js:53
+msgid "Table, one row per group of days"
+msgstr ""
+
+#: blocks/opening-hours/editor.js:54
+msgid "One line with short day names, for a header"
+msgstr ""
+
+#: blocks/opening-hours/editor.js:63
+msgid "The hours themselves are edited under Settings, Search and schema."
+msgstr ""
+
+#: blocks/opening-hours/editor.js:77
+msgid "No opening hours entered yet. Add them under Settings, Search and schema, one rule per line, for example Mo-Fr 10:00-18:00."
+msgstr ""
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block title"
+msgid "Breadcrumbs"
+msgstr ""
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block description"
+msgid "The trail from the home page to this one. Renders nothing on the front page, and reads from the same data as the BreadcrumbList structured data so the two cannot disagree."
+msgstr ""
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "breadcrumb"
+msgstr ""
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "trail"
+msgstr ""
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "navigation"
+msgstr ""
+
+#: blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "schema"
+msgstr ""
+
+#: blocks/feedback/block.json
+msgctxt "block title"
+msgid "Feedback"
+msgstr ""
+
+#: blocks/feedback/block.json
+msgctxt "block description"
+msgid "One question at the end of a page that explains something: was this helpful, yes or no. A no opens a small text field. No cookies, no script, no external service; the answers are counted under Settings, Search and schema."
+msgstr ""
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "feedback"
+msgstr ""
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "helpful"
+msgstr ""
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "rating"
+msgstr ""
+
+#: blocks/feedback/block.json
+msgctxt "block keyword"
+msgid "survey"
+msgstr ""
+
+#: blocks/maintenance-text/block.json
+msgctxt "block title"
+msgid "Maintenance text"
+msgstr ""
+
+#: blocks/maintenance-text/block.json
+msgctxt "block description"
+msgid "One of the three maintenance texts: the headline, the message, or the time you expect to be back. Edited under Settings, Search and schema, so the page can be updated without opening the editor."
+msgstr ""
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "maintenance"
+msgstr ""
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "downtime"
+msgstr ""
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "offline"
+msgstr ""
+
+#: blocks/maintenance-text/block.json
+msgctxt "block keyword"
+msgid "back soon"
+msgstr ""
+
+#: blocks/opening-hours/block.json
+msgctxt "block title"
+msgid "Opening hours"
+msgstr ""
+
+#: blocks/opening-hours/block.json
+msgctxt "block description"
+msgid "Whether you are open right now and until when, plus a table of your hours. Reads the hours entered under Settings, Search and schema, so the visitor and the structured data are told the same thing."
+msgstr ""
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "opening hours"
+msgstr ""
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "open"
+msgstr ""
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "closed"
+msgstr ""
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "business hours"
+msgstr ""
+
+#: blocks/opening-hours/block.json
+msgctxt "block keyword"
+msgid "shop"
+msgstr ""

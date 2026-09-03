@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basalt/review-filter",
+	"title": "Review filter",
+	"category": "woocommerce",
+	"icon": "filter",
+	"description": "Filter the reviews of this product by the size the reviewer wears and by how the size came out. Links rather than a script, so a filtered view has its own address. Renders nothing until two different sizes have been reviewed.",
+	"keywords": [ "reviews", "filter", "size", "fit" ],
+	"textdomain": "basalt-shop",
+	"editorScript": "file:./editor.js",
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"spacing": { "margin": true },
+		"typography": { "fontSize": true },
+		"color": { "text": true }
+	},
+	"attributes": {
+		"showFit": { "type": "boolean", "default": true },
+		"sizeLabel": { "type": "string", "default": "Size worn" },
+		"fitLabel": { "type": "string", "default": "How it came out" }
+	}
+}

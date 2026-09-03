@@ -1,0 +1,250 @@
+# Copyright (C) 2026 Riccardo D'Arcangelo
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Basalt Forms 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/basalt-forms\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-03T08:54:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: basalt-forms\n"
+
+#. Plugin Name of the plugin
+#: basalt-forms.php
+msgid "Basalt Forms"
+msgstr ""
+
+#. Description of the plugin
+#: basalt-forms.php
+msgid "One accessible form block for contact and appointment requests. Server side validation with the error at the field, a honeypot, a rate limit, delivery by email and a copy of every submission in the admin. No JavaScript, no external service, nothing to configure before it works."
+msgstr ""
+
+#. Author of the plugin
+#: basalt-forms.php
+msgid "Riccardo D'Arcangelo"
+msgstr ""
+
+#: inc/entries.php:28
+msgid "Form entries"
+msgstr ""
+
+#: inc/entries.php:29
+msgid "Form entry"
+msgstr ""
+
+#: inc/entries.php:30
+msgid "Search entries"
+msgstr ""
+
+#: inc/entries.php:31
+msgid "No entries yet"
+msgstr ""
+
+#. translators: 1: sender name, 2: date
+#: inc/entries.php:72
+#, php-format
+msgid "%1$s, %2$s"
+msgstr ""
+
+#: inc/entries.php:73
+msgid "Unknown"
+msgstr ""
+
+#: inc/handler.php:280
+msgid "Too many attempts in a short time. Please try again in an hour, or call us."
+msgstr ""
+
+#: inc/handler.php:297
+msgid "This form could not be verified. Please reload the page and try again."
+msgstr ""
+
+#: inc/handler.php:302
+msgid "Your message could not be sent."
+msgstr ""
+
+#: inc/handler.php:310
+msgid "This entry is too long."
+msgstr ""
+
+#: inc/handler.php:315
+msgid "Please fill in this field."
+msgstr ""
+
+#: inc/handler.php:318
+msgid "Please enter a complete email address, so that we can reply."
+msgstr ""
+
+#: inc/handler.php:320
+msgid "Please enter a phone number with digits only."
+msgstr ""
+
+#: inc/handler.php:325
+msgid "Please enter a valid date."
+msgstr ""
+
+#: inc/handler.php:327
+msgid "Please pick a date that is not in the past."
+msgstr ""
+
+#: inc/handler.php:332
+msgid "Please choose one of the options."
+msgstr ""
+
+#: inc/handler.php:339
+msgid "Please confirm that you have read the privacy policy."
+msgstr ""
+
+#: inc/handler.php:343
+msgid "Too many messages in a short time. Please try again in an hour, or call us."
+msgstr ""
+
+#. translators: %s: page URL
+#: inc/handler.php:426
+#, php-format
+msgid "Sent from %s"
+msgstr ""
+
+#: inc/render.php:59
+msgid "Please check the highlighted fields."
+msgstr ""
+
+#: inc/render.php:71
+msgid "Leave this field empty"
+msgstr ""
+
+#: inc/render.php:130
+msgid "(optional)"
+msgstr ""
+
+#: inc/render.php:139
+msgid "Please choose"
+msgstr ""
+
+#: blocks/form/editor.js:67
+msgid "Delivery"
+msgstr ""
+
+#: blocks/form/editor.js:68
+msgid "Send to"
+msgstr ""
+
+#: blocks/form/editor.js:68
+msgid "Leave empty for the site administration address."
+msgstr ""
+
+#: blocks/form/editor.js:69
+msgid "Email subject"
+msgstr ""
+
+#: blocks/form/editor.js:69
+#, js-format
+msgid "%name% and %site% are replaced."
+msgstr ""
+
+#: blocks/form/editor.js:70
+msgid "Message after sending"
+msgstr ""
+
+#: blocks/form/editor.js:74
+msgid "Fields"
+msgstr ""
+
+#: blocks/form/editor.js:75
+msgid "Name label"
+msgstr ""
+
+#: blocks/form/editor.js:76
+msgid "Email label"
+msgstr ""
+
+#: blocks/form/editor.js:77
+msgid "Ask for a phone number"
+msgstr ""
+
+#: blocks/form/editor.js:78
+msgid "Phone label"
+msgstr ""
+
+#: blocks/form/editor.js:79
+msgid "Ask what it is about"
+msgstr ""
+
+#: blocks/form/editor.js:80
+msgid "Topic label"
+msgstr ""
+
+#: blocks/form/editor.js:84
+msgid "Topic options, one per line"
+msgstr ""
+
+#: blocks/form/editor.js:91
+msgid "Ask for a preferred date"
+msgstr ""
+
+#: blocks/form/editor.js:92
+msgid "Date label"
+msgstr ""
+
+#: blocks/form/editor.js:93
+msgid "Message field"
+msgstr ""
+
+#: blocks/form/editor.js:94
+msgid "Message label"
+msgstr ""
+
+#: blocks/form/editor.js:95
+msgid "Message is required"
+msgstr ""
+
+#: blocks/form/editor.js:96
+msgid "Consent text"
+msgstr ""
+
+#: blocks/form/editor.js:96
+msgid "Always required. A link is allowed, for example <a href=\"/privacy/\">privacy policy</a>."
+msgstr ""
+
+#: blocks/form/editor.js:97
+msgid "Button label"
+msgstr ""
+
+#: blocks/form/block.json
+msgctxt "block title"
+msgid "Contact form"
+msgstr ""
+
+#: blocks/form/block.json
+msgctxt "block description"
+msgid "A contact or appointment request form. Name and email always, phone, topic, preferred date and message as you need them. Validated on the server, the error shown at the field, delivered by email and kept under Form entries."
+msgstr ""
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "form"
+msgstr ""
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "contact"
+msgstr ""
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "appointment"
+msgstr ""
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "request"
+msgstr ""
+
+#: blocks/form/block.json
+msgctxt "block keyword"
+msgid "enquiry"
+msgstr ""
