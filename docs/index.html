@@ -59,6 +59,7 @@
 	h1 { font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
 	h2 { font-size: 1.625rem; letter-spacing: -0.015em; margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
 	h3 { font-size: 1.125rem; margin: 2rem 0 0.5rem; }
+	h4 { font-size: 1rem; margin: 1.5rem 0 0.5rem; }
 	p, li { max-width: 68ch; }
 	a { color: var(--accent); }
 
@@ -1080,6 +1081,8 @@
 		<li><strong>Lockout after repeated failures.</strong> Per address, not per account, because locking an account is what an attacker wants. Each further lockout doubles, up to a day. No artificial delay: a sleep() holds a PHP worker, and a handful of attackers could then take the site down with the protection itself.</li>
 		<li><strong>A short list of patterns.</strong> Traversal, union select, script tags in a URL, requests for .env or an old phpunit runner. The URL is always checked; a submitted form only for visitors who are not signed in, so an editor pasting a code sample is never blocked.</li>
 		<li><strong>Headers.</strong> nosniff, a referrer policy, a permissions policy, X-Frame-Options and a narrow content policy. The policy deliberately says nothing about scripts: a script policy needs a nonce per response and breaks the moment a page is cached at the edge.</li>
+		<li><strong>The other three doors into an account.</strong> The password reset form is limited per address, because every request sends mail to an inbox a stranger typed. The registration form gets a hidden field no person fills in, a limit per address, and an answer that does not confirm which addresses already have an account. Both cover the WooCommerce forms as well, which run their own registration and never reach the WordPress hooks. Resetting a password ends every session on the account, which is the point of resetting it.</li>
+		<li><strong>Passwords that are not obvious.</strong> Length, and nothing built around the site name or the account name. No rule about capitals and digits: that rule produces Sommer2026! and nothing safer. Twelve characters by default, and the message says why a short sentence beats a short password.</li>
 		<li><strong>Hardening.</strong> XML-RPC off (and /xmlrpc.php answers nothing at all), no user enumeration through ?author=1, the REST users endpoint or the sitemap, no theme and plugin editor, no version number in the markup, application passwords for administrators only.</li>
 	</ul>
 	<p>
@@ -1088,6 +1091,50 @@
 		<code>define( 'BASALT_SECURITY_OFF', true );</code> switches the whole
 		plugin off without touching the database.
 	</p>
+
+	<h4>What this installation still leaves open</h4>
+	<p>
+		Below the settings the same screen lists what is wrong before the
+		plugin is involved: a site still on plain HTTP, PHP notices printed
+		into the page, a debug log sitting in a public folder, an account
+		actually called admin, a writable wp-config.php, a PHP version past
+		its last security fix. Nothing on that list is changed for you. Half
+		of it belongs to the host or to wp-config.php, and a plugin that
+		silently changes those is a plugin that breaks a site at three in the
+		morning. It says what, why and where, and then gets out of the way.
+	</p>
+
+	<h4>The OWASP Top Ten, and where each one is handled</h4>
+	<p>
+		The theme and its plugins were gone through against the list. Most of
+		it is not a feature but an absence: no direct database queries, no
+		unescaped output, no remote requests, no file uploads, no third party
+		code to keep patched.
+	</p>
+	<table>
+		<tr><th>Risk</th><th>Where it is answered</th></tr>
+		<tr><td>A01 Broken access control</td><td>Every admin screen behind a capability, every form behind a nonce, saved data always written for the current user rather than a user id from the request. The account pages read <code>get_current_user_id()</code> and nothing else.</td></tr>
+		<tr><td>A02 Cryptographic failures</td><td>Nothing is encrypted or hashed by the theme. Form tokens are HMACs over the WordPress salts; the review screen flags a site that is not on HTTPS and an admin area that does not require it.</td></tr>
+		<tr><td>A03 Injection</td><td>No SQL is written anywhere: everything goes through <code>WP_Query</code> and the meta API. Output is escaped at the point of output. Mail headers are built from a validated address, and the name in front of it cannot become a second header.</td></tr>
+		<tr><td>A04 Insecure design</td><td>Rate limits on every public form (contact, feedback, registration, password reset), a honeypot instead of a captcha, a depth limit where a reusable block could otherwise contain itself, and a size limit on everything written to user meta.</td></tr>
+		<tr><td>A05 Security misconfiguration</td><td>The headers, the hardening switches, and the review list for the parts a plugin should not change on its own.</td></tr>
+		<tr><td>A06 Vulnerable components</td><td>No bundled libraries, no build output, no vendor directory. The only dependency is WordPress.</td></tr>
+		<tr><td>A07 Authentication failures</td><td>Lockout per address, the login page moved off the address the bots know, generic answers on login and password reset, no enumeration through <code>?author=</code> or the REST users endpoint, password quality on every form that sets one, all sessions ended on reset, application passwords for administrators only.</td></tr>
+		<tr><td>A08 Integrity failures</td><td>No <code>unserialize</code>, no <code>eval</code>, no code downloaded at runtime. The demo importer is behind a capability and a nonce and only ever reads files that ship with the plugin.</td></tr>
+		<tr><td>A09 Logging failures</td><td>Lockouts, blocked requests, sign-ins, rate limited resets and registrations are written to a short log on the settings screen. A hundred lines, not autoloaded, no personal data beyond the address that made the request.</td></tr>
+		<tr><td>A10 Server side request forgery</td><td>Nothing here fetches a URL. Redirects go through <code>wp_safe_redirect</code>, so a redirect target from a request cannot leave the site.</td></tr>
+	</table>
+	<div class="note">
+		<p><strong>What this is not</strong></p>
+		<p>
+			There is no malware scanner, no firewall with a rule feed and no two
+			factor authentication. A scanner that runs on the same server as the
+			thing it is scanning finds what it is told to look for; two factor
+			authentication is worth having and belongs in a plugin that can also
+			handle recovery codes and a lost phone. Both are honest gaps rather
+			than oversights.
+		</p>
+	</div>
 
 	<h3>WooCommerce</h3>
 	<p>

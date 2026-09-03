@@ -119,7 +119,11 @@ function basalt_forms_topics( array $attributes ): array {
  * @param string                           $form_id Form identifier.
  * @return array<string, mixed>|null Attributes, or null.
  */
-function basalt_forms_find_block( array $blocks, string $form_id ): ?array {
+function basalt_forms_find_block( array $blocks, string $form_id, int $depth = 0 ): ?array {
+	if ( $depth > 10 ) {
+		return null;
+	}
+
 	foreach ( $blocks as $block ) {
 		if ( 'basalt/form' === ( $block['blockName'] ?? '' ) && ( $block['attrs']['formId'] ?? '' ) === $form_id ) {
 			return (array) $block['attrs'];
@@ -128,8 +132,14 @@ function basalt_forms_find_block( array $blocks, string $form_id ): ?array {
 		if ( 'core/block' === ( $block['blockName'] ?? '' ) && ! empty( $block['attrs']['ref'] ) ) {
 			$reusable = get_post( (int) $block['attrs']['ref'] );
 
-			if ( $reusable ) {
-				$found = basalt_forms_find_block( parse_blocks( $reusable->post_content ), $form_id );
+			/*
+			 * A reusable block that contains itself is a loop, and following it
+			 * would spend the whole request on it. The depth limit above ends
+			 * that; the type and status check keeps a draft, or a post of some
+			 * other type with the same id, from being parsed here at all.
+			 */
+			if ( $reusable && 'wp_block' === $reusable->post_type && 'publish' === $reusable->post_status ) {
+				$found = basalt_forms_find_block( parse_blocks( $reusable->post_content ), $form_id, $depth + 1 );
 
 				if ( $found ) {
 					return $found;
@@ -138,7 +148,7 @@ function basalt_forms_find_block( array $blocks, string $form_id ): ?array {
 		}
 
 		if ( ! empty( $block['innerBlocks'] ) ) {
-			$found = basalt_forms_find_block( (array) $block['innerBlocks'], $form_id );
+			$found = basalt_forms_find_block( (array) $block['innerBlocks'], $form_id, $depth + 1 );
 
 			if ( $found ) {
 				return $found;
@@ -170,6 +180,79 @@ function basalt_forms_attributes( array $attributes ): array {
 }
 
 /**
+ * The flat string values of a submitted field array.
+ *
+ * A form posts bf[name]=…, but nothing stops anybody from posting
+ * bf[name][]=… instead. Everything downstream expects a string, and casting
+ * an array to one is a warning and the word "Array" in an email. Anything
+ * that is not a scalar was not a submitted value.
+ *
+ * @param array<string|int, mixed> $raw The posted array.
+ * @return array<string, string>
+ */
+function basalt_forms_scalars( array $raw ): array {
+	$out = array();
+
+	foreach ( $raw as $key => $value ) {
+		if ( is_scalar( $value ) ) {
+			$out[ (string) $key ] = (string) $value;
+		}
+	}
+
+	return $out;
+}
+
+/**
+ * A header line that cannot become two.
+ *
+ * sanitize_text_field already takes the line breaks out, which is what a
+ * header injection needs, so this is the second lock rather than the first.
+ * It also removes the characters that would end the display name early and
+ * keeps the line short enough to stay one line.
+ *
+ * @param string $value The value.
+ * @return string
+ */
+function basalt_forms_header_safe( string $value ): string {
+	$value = str_replace( array( "\r", "\n", "\0", '"', '<', '>', ',', ';', ':' ), ' ', $value );
+	$value = preg_replace( '/\s+/', ' ', $value ) ?? '';
+
+	return trim( mb_substr( $value, 0, 100 ) );
+}
+
+/**
+ * At most twenty submission attempts per address and hour.
+ *
+ * The limit further down counts messages that were actually sent, which is
+ * the number the site owner cares about. This one counts attempts, the failed
+ * ones included, because otherwise a script can post a broken form as often
+ * as it likes and every attempt parses the whole page content.
+ *
+ * @return bool
+ */
+function basalt_forms_attempt_ok(): bool {
+	$ip = (string) ( $_SERVER['REMOTE_ADDR'] ?? '' );
+
+	if ( '' === $ip ) {
+		return true;
+	}
+
+	$key   = 'basalt_forms_try_' . md5( $ip );
+	$count = (int) get_transient( $key );
+
+	/**
+	 * Filter the number of submission attempts allowed per address and hour.
+	 *
+	 * @param int $limit The limit.
+	 */
+	$limit = (int) apply_filters( 'basalt_forms_attempt_limit', 20 );
+
+	set_transient( $key, $count + 1, HOUR_IN_SECONDS );
+
+	return $count < $limit;
+}
+
+/**
  * Handle a submission, if there is one.
  *
  * @return void
@@ -192,14 +275,22 @@ function basalt_forms_handle(): void {
 		return;
 	}
 
+	if ( ! basalt_forms_attempt_ok() ) {
+		$GLOBALS['basalt_forms_state'][ $form_id ] = array(
+			'errors' => array( '_form' => __( 'Too many attempts in a short time. Please try again in an hour, or call us.', 'basalt-forms' ) ),
+			'values' => array(),
+		);
+		return;
+	}
+
 	$attributes = basalt_forms_attributes( $attributes );
 	$fields     = basalt_forms_fields( $attributes );
 	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- the token below replaces the nonce, see basalt_forms_token().
-	$raw    = isset( $_POST['bf'] ) && is_array( $_POST['bf'] ) ? wp_unslash( $_POST['bf'] ) : array();
+	$raw    = isset( $_POST['bf'] ) && is_array( $_POST['bf'] ) ? basalt_forms_scalars( wp_unslash( $_POST['bf'] ) ) : array();
 	$values = array();
 	$errors = array();
 
-	// phpcs:ignore WordWordPress.Security.NonceVerification.Missing
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- the token below replaces the nonce, see basalt_forms_token().
 	$token = isset( $_POST['basalt_form_token'] ) ? (string) wp_unslash( $_POST['basalt_form_token'] ) : '';
 
 	if ( ! hash_equals( basalt_forms_token( $form_id ), $token ) ) {
@@ -321,7 +412,7 @@ function basalt_forms_deliver( string $form_id, array $attributes, array $fields
 
 	$subject = str_replace(
 		array( '%name%', '%site%' ),
-		array( $values['name'], wp_specialchars_decode( (string) get_bloginfo( 'name' ), ENT_QUOTES ) ),
+		array( basalt_forms_header_safe( $values['name'] ), wp_specialchars_decode( (string) get_bloginfo( 'name' ), ENT_QUOTES ) ),
 		(string) $attributes['subject']
 	);
 
@@ -334,7 +425,20 @@ function basalt_forms_deliver( string $form_id, array $attributes, array $fields
 	/* translators: %s: page URL */
 	$body .= sprintf( __( 'Sent from %s', 'basalt-forms' ), $source ) . "\n";
 
-	$headers = array( 'Reply-To: ' . $values['name'] . ' <' . $values['email'] . '>' );
+	/*
+	 * The reply address is the one part of this mail a stranger chooses, so it
+	 * is validated as an address before it becomes a header and the name in
+	 * front of it loses anything that could end the line early.
+	 */
+	$reply   = is_email( $values['email'] ) ? sanitize_email( $values['email'] ) : '';
+	$headers = array();
+
+	if ( '' !== $reply ) {
+		$name      = basalt_forms_header_safe( $values['name'] );
+		$headers[] = '' !== $name
+			? 'Reply-To: "' . $name . '" <' . $reply . '>'
+			: 'Reply-To: ' . $reply;
+	}
 
 	/**
 	 * Fires before a submission is mailed and stored.

@@ -38,7 +38,7 @@ function basalt_security_sanitize( $input ): array {
 	$input = (array) $input;
 	$out   = basalt_security_defaults();
 
-	foreach ( array( 'block_wp_admin', 'brute_force', 'brute_notify', 'firewall', 'headers', 'content_policy', 'hsts', 'disable_xmlrpc', 'disable_enumeration', 'disable_file_edit', 'hide_version', 'limit_app_passwords' ) as $flag ) {
+	foreach ( array( 'block_wp_admin', 'brute_force', 'brute_notify', 'firewall', 'headers', 'content_policy', 'hsts', 'disable_xmlrpc', 'disable_enumeration', 'disable_file_edit', 'hide_version', 'limit_app_passwords', 'limit_resets', 'guard_registration', 'strong_passwords' ) as $flag ) {
 		$out[ $flag ] = ! empty( $input[ $flag ] );
 	}
 
@@ -58,6 +58,16 @@ function basalt_security_sanitize( $input ): array {
 
 	$out['brute_limit']   = min( 20, max( 2, (int) ( $input['brute_limit'] ?? 5 ) ) );
 	$out['brute_minutes'] = min( 1440, max( 1, (int) ( $input['brute_minutes'] ?? 15 ) ) );
+
+	$out['reset_limit']        = min( 20, max( 1, (int) ( $input['reset_limit'] ?? 3 ) ) );
+	$out['registration_limit'] = min( 50, max( 1, (int) ( $input['registration_limit'] ?? 5 ) ) );
+
+	/*
+	 * Eight is the floor rather than the default: below that a password is
+	 * guessable offline in an afternoon, and a setting that allows it only
+	 * looks like a decision somebody made on purpose.
+	 */
+	$out['password_min'] = min( 64, max( 8, (int) ( $input['password_min'] ?? 12 ) ) );
 
 	$frame                 = (string) ( $input['frame_options'] ?? 'SAMEORIGIN' );
 	$out['frame_options']  = in_array( $frame, array( 'SAMEORIGIN', 'DENY', 'off' ), true ) ? $frame : 'SAMEORIGIN';
@@ -192,6 +202,19 @@ function basalt_security_render_settings(): void {
 				?>
 			</table>
 
+			<h2><?php esc_html_e( 'Accounts', 'basalt-security' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'The login form is watched above. These are the other three ways into an account: the password mail, the registration form, and whatever password somebody picks at the end of it.', 'basalt-security' ); ?></p>
+			<table class="form-table" role="presentation">
+				<?php
+				basalt_security_field( 'limit_resets', __( 'Limit password reset requests', 'basalt-security' ), 'checkbox', array( 'description' => __( 'Every request sends mail to an address a stranger typed. Without a limit the form is a way to send a hundred messages from your site.', 'basalt-security' ) ) );
+				basalt_security_field( 'reset_limit', __( 'Reset requests per hour', 'basalt-security' ), 'number', array( 'description' => __( 'Per address. Three is plenty for somebody who mistyped their email.', 'basalt-security' ) ) );
+				basalt_security_field( 'guard_registration', __( 'Guard the registration form', 'basalt-security' ), 'checkbox', array( 'description' => __( 'A hidden field no person fills in, a limit per address, and an answer that does not confirm which addresses already have an account. Covers the WooCommerce form as well.', 'basalt-security' ) ) );
+				basalt_security_field( 'registration_limit', __( 'Registrations per hour', 'basalt-security' ), 'number', array( 'description' => __( 'Per address. A household behind one connection rarely needs more than a handful.', 'basalt-security' ) ) );
+				basalt_security_field( 'strong_passwords', __( 'Refuse obvious passwords', 'basalt-security' ), 'checkbox', array( 'description' => __( 'Length, and nothing built around the site name or the account name. No rule about capitals and digits: that produces Sommer2026! and nothing safer.', 'basalt-security' ) ) );
+				basalt_security_field( 'password_min', __( 'Shortest password allowed', 'basalt-security' ), 'number', array( 'description' => __( 'Twelve characters. A short sentence is easier to remember and much harder to guess than eight characters of noise.', 'basalt-security' ) ) );
+				?>
+			</table>
+
 			<h2><?php esc_html_e( 'Requests', 'basalt-security' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<?php
@@ -255,6 +278,9 @@ function basalt_security_render_settings(): void {
 
 			<?php submit_button(); ?>
 		</form>
+
+		<h2><?php esc_html_e( 'What this installation still leaves open', 'basalt-security' ); ?></h2>
+		<?php basalt_security_render_review(); ?>
 
 		<h2><?php esc_html_e( 'What happened', 'basalt-security' ); ?></h2>
 		<?php basalt_security_render_log(); ?>

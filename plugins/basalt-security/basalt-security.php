@@ -85,6 +85,14 @@ function basalt_security_defaults(): array {
 		'content_policy'     => true,
 		'hsts'               => false,
 
+		// Accounts.
+		'limit_resets'       => true,
+		'reset_limit'        => 3,
+		'guard_registration' => true,
+		'registration_limit' => 5,
+		'strong_passwords'   => true,
+		'password_min'       => 12,
+
 		// Hardening.
 		'disable_xmlrpc'     => true,
 		'disable_enumeration' => true,
@@ -207,7 +215,7 @@ function basalt_security_not_found(): void {
 	exit;
 }
 
-foreach ( array( 'log', 'login-path', 'brute-force', 'firewall', 'headers', 'hardening', 'settings' ) as $basalt_security_module ) {
+foreach ( array( 'log', 'login-path', 'brute-force', 'firewall', 'headers', 'hardening', 'accounts', 'review', 'settings' ) as $basalt_security_module ) {
 	require_once BASALT_SECURITY_DIR . 'inc/' . $basalt_security_module . '.php';
 }
 

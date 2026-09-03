@@ -20,7 +20,7 @@ to a block theme.
 | `plugins/basalt-core/` | Companion plugin: Schema.org graph, meta tags, robots.txt and AI crawler policy, llms.txt, per page indexing switch, breadcrumb block, accessibility corrections for core blocks. |
 | `plugins/basalt-catalog/` | Companion plugin registering a catalog post type, taxonomies and specification fields. |
 | `plugins/basalt-forms/` | Companion plugin: one accessible contact and appointment form block, server validated, no JavaScript, submissions kept in the admin. |
-| `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, a small request filter, security headers and the hardening WordPress leaves off. |
+| `plugins/basalt-security/` | Companion plugin: login page at an address of your choosing, brute force lockout, guarded password reset and registration, password quality, a small request filter, security headers and the hardening WordPress leaves off. |
 | `plugins/basalt-shop/` | Companion plugin for WooCommerce: products sold in store only get an appointment button instead of a cart button, and an InStoreOnly offer. |
 | `examples/basalt-child/` | Child theme starter: token overrides, custom post type templates, structured data mapping. |
 | `docs/` | Buyer documentation, shipped with the marketplace bundle. |
@@ -122,6 +122,13 @@ content and their search presence with it when they switch.
 The settings are options rather than theme mods, and that fixes a real defect:
 WordPress stores theme mods per stylesheet, so under 2.x switching from the
 parent to the child theme silently wiped every business detail.
+
+**Security is mostly what is not there.** The theme and its plugins were gone
+through against the OWASP Top Ten: no direct database queries, no unescaped
+output, no remote requests, no uploads, no bundled third party code. What is
+actively added is rate limits on every public form, a capability and a nonce on
+every admin action, and answers that do not confirm which accounts exist. The
+full table is in `docs/index.html`.
 
 **Crawling policy is a setting, not an opinion.** The AI crawler switch ships
 on "allow": a theme that quietly blocks crawlers on activation makes a decision
